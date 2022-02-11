@@ -24,7 +24,6 @@ namespace QLKS
         public MainWindow()
         {
             InitializeComponent();
-            MessageBox.Show(DataProvider.Ins.DB.USERS.First().UserName);
         }
     }
 }
