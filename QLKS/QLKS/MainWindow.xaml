@@ -4,9 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLKS"
+        xmlns:uc="clr-namespace:QLKS.UserControlss"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Name="mainwindow"
+        WindowStyle="None"
+        Title="Phần mềm quản lý khách sạn"
+        Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <uc:ControlBar Tag="{Binding Title,ElementName=mainwindow}"></uc:ControlBar>
+        </Grid>
     </Grid>
 </Window>
