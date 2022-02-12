@@ -1,4 +1,5 @@
 ﻿using QLKS.Model;
+using QLKS.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,12 @@ namespace QLKS
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainViewModel mainViewModel { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = (mainViewModel = new MainViewModel());
+           
         }
     }
 }

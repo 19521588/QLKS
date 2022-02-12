@@ -57,7 +57,7 @@
                         CommandParameter="{Binding ElementName=controlbar }"
                         Style="{StaticResource MaterialDesignFloatingActionButton}"
                         ToolTip="Minimize"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" >
                     </Button>
 
                     <Button
@@ -70,7 +70,7 @@
                         CommandParameter="{Binding ElementName=controlbar }"
                         Style="{StaticResource MaterialDesignFloatingActionButton}"
                         ToolTip="Maximize"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="btn_maximize_Click">
                     </Button>
 
                     <Button

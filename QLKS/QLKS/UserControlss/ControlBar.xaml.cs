@@ -27,5 +27,7 @@ namespace QLKS.UserControlss
             InitializeComponent();
             this.DataContext=Viewmodel=new ControlBarViewModel();    
         }
+
+        
     }
 }

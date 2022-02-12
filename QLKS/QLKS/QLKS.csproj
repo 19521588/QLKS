@@ -81,8 +81,17 @@
     <Compile Include="UserControlss\ControlBar.xaml.cs">
       <DependentUpon>ControlBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlss\ControlBar2.xaml.cs">
+      <DependentUpon>ControlBar2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlss\DialogCustoms.xaml.cs">
+      <DependentUpon>DialogCustoms.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ControlBar2ViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
+    <Compile Include="ViewModel\DialogCustomsViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -100,6 +109,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlss\ControlBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlss\ControlBar2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlss\DialogCustoms.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -207,6 +224,23 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Res\add.png" />
+    <Resource Include="Res\backGround_DN.png" />
+    <Resource Include="Res\delete_vs2.png" />
+    <Resource Include="Res\edit.png" />
+    <Resource Include="Res\FieldCornerIcon.png" />
+    <Resource Include="Res\Home0.png" />
+    <Resource Include="Res\Home1.png" />
+    <Resource Include="Res\Home2.png" />
+    <Resource Include="Res\Home3.png" />
+    <Resource Include="Res\ic_more.png" />
+    <Resource Include="Res\IncomeIcon.png" />
+    <Resource Include="Res\IncreaseIcon.png" />
+    <Resource Include="Res\Light 010.png" />
+    <Resource Include="Res\logoKhachSan.png" />
+    <Resource Include="Res\logoKS.png" />
+    <Resource Include="Res\MenuHeader.png" />
+    <Resource Include="Res\mountains.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
