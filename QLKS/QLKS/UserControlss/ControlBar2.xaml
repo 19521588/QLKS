@@ -8,20 +8,29 @@
              x:Name="controlbar2"
              Tag="Title"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              TextElement.FontWeight="Regular"
              TextElement.FontSize="13"
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
              Background="Transparent"
+            
              FontFamily="{DynamicResource MaterialDesignFont}"  MinHeight="0">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseLeftButtonDown">
+            <i:InvokeCommandAction Command="{Binding MouseMoveWindowCommand}"
+                                   CommandParameter="{Binding ElementName=controlbar2}" />
+
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <materialDesign:ColorZone x:Name="backGroum"
             Background="White"
             Padding="2"
             CornerRadius="10 10 0 0"
             Margin="0 2 0 0">
-            <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Grid>
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition ></ColumnDefinition>
@@ -31,32 +40,39 @@
                 <TextBlock  Grid.Column="0"
                             VerticalAlignment="Center"
                             Margin="20 0 0 0"
-                            Text="{Binding Tag , ElementName = controlbar2}" />
+                            Text="{Binding Tag, ElementName=controlbar2}" />
 
-                <StackPanel Orientation="Horizontal" 
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
                             Width="auto"
                             Grid.Column="1"
-                            Background="Transparent" FlowDirection="RightToLeft"
+                            Background="Transparent"
                             >
-                    <Button
-                        Width="20"
-                        Height="20"
-                        Margin="15 0 10 0"
-                        Background="#FFE17365"
-                        Command="{Binding CloseWindowCommand}"
-                        CommandParameter="{Binding ElementName=controlbar }"
-                        Style="{StaticResource MaterialDesignFloatingActionButton}"
-                        ToolTip="Close">
-                    </Button>
+
                     <Button
                         Margin="7 0 7 0"
                         Width="20"
                         Height="20"
                         Background="#FF2BD655"
                         Command="{Binding MinimizeWindowCommand}"
-                        CommandParameter="{Binding ElementName=controlbar }"
+                        CommandParameter="{Binding ElementName=controlbar2 }"
                         Style="{StaticResource MaterialDesignFloatingActionButton}"
-                        ToolTip="Minimize">
+                        ToolTip="Minimize"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" >
+                    </Button>
+
+                  
+
+                    <Button
+                        Width="20"
+                        Height="20"
+                        Margin="7 0 7 0"
+                        Background="#FFE17365"
+                        Command="{Binding CloseWindowCommand}"
+                        CommandParameter="{Binding ElementName=controlbar2 }"
+                        Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        ToolTip="Close"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                     </Button>
 
                 </StackPanel>

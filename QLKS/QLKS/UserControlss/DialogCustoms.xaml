@@ -10,10 +10,10 @@
         WindowStyle="None"
         AllowsTransparency="True" 
         WindowStartupLocation="CenterScreen"
-        Title="DialogCustoms" Height="180" Width="400"
+        Title="Thông báo" Height="180" Width="400"
         >
     <Window.Background>
-        <ImageBrush ImageSource="/GUI;component/Res/Light 010.png" Stretch="None"/>
+        <ImageBrush ImageSource="/QLKS;component/Res/Light 010.png" Stretch="None"/>
     </Window.Background>
     <Window.Clip>
         <RectangleGeometry Rect="0,0,400,180" RadiusX="10" RadiusY="10"/>
@@ -25,7 +25,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <uc:ControlBar2 Grid.Row="0" MinHeight="{Binding MinHeight_ucControlbar, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
-                          Tag="{Binding Title, ElementName=dialogcustom}"  Opacity="0.8" VerticalAlignment="Center" Height="26">
+                          Tag="{Binding Title, ElementName=dialogcustom}"  VerticalAlignment="Center" Height="26">
             </uc:ControlBar2>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
@@ -33,23 +33,32 @@
                     <RowDefinition Height="50"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock x:Name="txblMess" FontSize="12" TextAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold" TextWrapping="WrapWithOverflow"></TextBlock>
+                    <TextBlock x:Name="txblMess" FontSize="12" TextAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold" TextWrapping="WrapWithOverflow" Text="{Binding MESS}"></TextBlock>
                 </Grid>
                 <Grid Grid.Row="1">
                     <Button x:Name="btnYes" Width="70" Height="30" Background="#FF49886C" Content="Yes"
-                        HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80 0 0 0" FontSize="12"  >
+                        HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80 0 0 0" FontSize="12"  
+                        Command="{Binding BtnYesCommand}"
+                        CommandParameter="{Binding ElementName=dialogcustom}"
+                        Visibility="{Binding VisBtnYes, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Button.Clip>
                             <RectangleGeometry Rect="0,0,70,30" RadiusX="10" RadiusY="10"/>
                         </Button.Clip>
                     </Button>
                     <Button x:Name="btnNo" Width="70" Height="30" Background="#FF6D7764" Content="No"
-                        HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 80 0" FontSize="12" BorderBrush="White"  >
+                        HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 80 0" FontSize="12" BorderBrush="White"  
+                            Command="{Binding BtnNoCommand}"
+                            CommandParameter="{Binding ElementName=dialogcustom}"
+                            Visibility="{Binding VisBtnNo, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Button.Clip>
                             <RectangleGeometry Rect="0,0,70,30" RadiusX="10" RadiusY="10"/>
                         </Button.Clip>
                     </Button>
                     <Button x:Name="btnOK" Width="70" Height="30" Background="#FF49886C" Content="OK"
-                        HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"  >
+                        HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"  
+                            Command="{Binding BtnOkCommand}"
+                            CommandParameter="{Binding ElementName=dialogcustom}"
+                            Visibility="{Binding VisBtnOK, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Button.Clip>
                             <RectangleGeometry Rect="0,0,70,30" RadiusX="10" RadiusY="10"/>
                         </Button.Clip>

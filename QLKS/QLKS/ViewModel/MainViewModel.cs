@@ -46,13 +46,10 @@ namespace QLKS.ViewModel
             {
                 DoStuff(p);
             });
-            LogOutCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
+            LogOutCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                DialogCustoms dialog = new DialogCustoms("Bạn có muốn đăng xuất ?", "Thông báo", DialogCustoms.YesNo);
-                if (dialog.ShowDialog() == true)
-                {
-                    dialog.Close();
-                }
+                DialogCustoms wd = new DialogCustoms("Bạn có muốn đăng xuất ?", "Thông báo",1);
+                wd.ShowDialog();
             });
             
 

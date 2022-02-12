@@ -21,10 +21,10 @@ namespace QLKS.UserControlss
     public partial class DialogCustoms : Window
     {
         public DialogCustomsViewModel viewModel { get; set; }
-        public DialogCustoms()
+        public DialogCustoms(string mess, string title, int mode)
         {
             InitializeComponent();
-            this.DataContext = viewModel=new DialogCustomsViewModel();
+            this.DataContext = viewModel=new DialogCustomsViewModel(mess,title,mode);
         }
     }
 }
