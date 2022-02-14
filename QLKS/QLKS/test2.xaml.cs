@@ -11,21 +11,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QLKS.UserControlss
+namespace QLKS
 {
     /// <summary>
-    /// Interaction logic for uc_QuanLyDichVu.xaml
+    /// Interaction logic for test2.xaml
     /// </summary>
-    public partial class uc_QuanLyDichVu : UserControl
+    public partial class test2 : Window
     {
-        private ServiceViewModel serviceViewModel { get; set; }
-        public uc_QuanLyDichVu()
+        private CategoryServiceViewModel categoryServiceViewModel { get; set; }
+        public test2()
         {
             InitializeComponent();
-            this.DataContext = serviceViewModel = new ServiceViewModel();
+            this.DataContext = categoryServiceViewModel = new CategoryServiceViewModel();
         }
     }
 }

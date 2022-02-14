@@ -87,6 +87,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="test.xaml.cs">
+      <DependentUpon>test.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="test2.xaml.cs">
+      <DependentUpon>test2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControlss\ControlBar.xaml.cs">
       <DependentUpon>ControlBar.xaml</DependentUpon>
     </Compile>
@@ -134,6 +140,8 @@
     <Compile Include="ViewModel\EditRoomViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\RoomViewModel.cs" />
+    <Compile Include="ViewModel\CategoryServiceViewModel.cs" />
+    <Compile Include="ViewModel\ServiceViewModel.cs" />
     <Compile Include="wd_AddNewRoom.xaml.cs">
       <DependentUpon>wd_AddNewRoom.xaml</DependentUpon>
     </Compile>
@@ -153,6 +161,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="test2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -58,52 +58,9 @@
                     </RectangleGeometry>
                 </Grid.Clip>
 
-                <!--<Grid.Resources>
-                    <DataTemplate x:Key="dtpMaHoaDon">
-                        <Grid>
-                            <TextBlock HorizontalAlignment="Center"  Text="{Binding MaHD}"></TextBlock>
-                        </Grid>
-                    </DataTemplate>
 
-                    <DataTemplate x:Key="dtpMaDV">
-                        <TextBlock Text="{Binding MaDichVu}"></TextBlock>
-                    </DataTemplate>
-
-                    <DataTemplate x:Key="dtpTenDV">
-                        <TextBlock Text="{Binding TenDichVu}"></TextBlock>
-                    </DataTemplate>
-
-                    <DataTemplate x:Key="dtpMaLoaiDV">
-                        <TextBlock Text="{Binding LoaiDichVu}"></TextBlock>
-                    </DataTemplate>
-
-                    <DataTemplate x:Key="dtpDonGia">
-                        <TextBlock Text="{Binding Gia}"></TextBlock>
-                    </DataTemplate>
-
-                    <DataTemplate x:Key="dtpNutSua">
-                        <Button x:Name="btnCapNhat" Click="btnCapNhat_Click" BorderThickness="0">
-                            <Button.Background>
-                                <ImageBrush ImageSource="/GUI;component/Res/edit.png"/>
-                            </Button.Background>
-                        </Button>
-                    </DataTemplate>
-
-                    <DataTemplate x:Key="dtpNutXoa">
-                        <Button x:Name="btnXoa" Click="btnXoa_Click" BorderThickness="0">
-                            <Button.Background>
-                                <ImageBrush ImageSource="/GUI;component/Res/delete_vs2.png"/>
-                            </Button.Background>
-                        </Button>
-                    </DataTemplate>
-                </Grid.Resources>-->
-
-                <ListView Name="lsvDichVu" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  >
-                    <!--căn giữa-->
-                    <!--<ListView.Resources>
-                        <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">10</sys:Double>
-                    </ListView.Resources>-->
-
+                <ListView Name="lsvDichVu" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  
+                          >
                     <ListView.View>
 
                         <GridView>
