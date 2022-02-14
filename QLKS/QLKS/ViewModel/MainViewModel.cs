@@ -33,7 +33,8 @@ namespace QLKS.ViewModel
         public static MainWindow mainWindow { get; set; }
         private ObservableCollection<ItemMenuMainWindow> _myListItems;
 
-       
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
 
         public ObservableCollection<ItemMenuMainWindow> MyListItems
         {
@@ -72,6 +73,8 @@ namespace QLKS.ViewModel
             LoadedWindowCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
                 initListViewMenu();
+                //LoadLoginWindow(p);
+               
             });
          
             ItemClickCommand = new RelayCommand<ItemMenuMainWindow>((p) => { return true; }, (p) =>
@@ -85,6 +88,28 @@ namespace QLKS.ViewModel
             });
            
 
+        }
+        public void LoadLoginWindow(MainWindow p)
+        {
+            IsLoaded = true;
+            if (p == null)
+                return;
+            p.Hide();
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.ShowDialog();
+            if (loginWindow.DataContext == null)
+                return;
+            var loginVM = loginWindow.DataContext as LoginViewModel;
+            if (loginVM.IsLogin)
+            {
+                p.Show();
+               
+            }
+            else
+            {
+                IsClose = false;
+                p.Close();
+            }
         }
         public void DoStuff(ItemMenuMainWindow item)
         {
