@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Button Name="btnThem" Click="btnThem_Click"
+            <Button Name="btnThem" 
                     Width="150" Content="Thêm dịch vụ" FontSize="15" 
                     FontFamily="Roboto" FontWeight="Bold" Background="#FF478C10"
                     Margin="1050,9,0,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top">

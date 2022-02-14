@@ -163,6 +163,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlss\uc_QuanLyTienNghi.xaml">
+		<SubType>Designer</SubType>
+		<Generator>MSBuild:Compile</Generator>
+	</Page>
     <Page Include="UserControlss\uc_Customer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
