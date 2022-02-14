@@ -17,6 +17,8 @@ namespace QLKS.ViewModel
         public static MainWindow mainWindow { get; set; }
         private ObservableCollection<ItemMenuMainWindow> _myListItems;
 
+        private uc_QuanLyDichVu QuanLyDichVu_UC;
+
         public ObservableCollection<ItemMenuMainWindow> MyListItems
         {
             get => _myListItems;
@@ -34,10 +36,12 @@ namespace QLKS.ViewModel
         public ICommand ItemClickCommand { get; set; }
 
         public ICommand LogOutCommand { get; set; }
+
+
         #endregion
         public MainViewModel()
         {
-                
+            
             LoadedWindowCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
                 initListViewMenu();
@@ -51,12 +55,23 @@ namespace QLKS.ViewModel
                 DialogCustoms wd = new DialogCustoms("Bạn có muốn đăng xuất ?", "Thông báo",1);
                 wd.ShowDialog();
             });
-            
+           
 
         }
         public void DoStuff(ItemMenuMainWindow item)
         {
-            MessageBox.Show(item.name + " element clicked");
+            //MessageBox.Show(item.name + " element clicked");
+            //switch(item.name)
+            //{
+            //    case "QL dịch vụ":
+            //        if (QuanLyDichVu_UC == null)
+            //        {
+            //            QuanLyDichVu_UC = new uc_QuanLyDichVu();
+            //        }
+            //        mainWindow.contenDisplayMain.Content = QuanLyDichVu_UC;
+            //        break;
+
+            //}
         }
         public void initListViewMenu()
         {

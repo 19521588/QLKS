@@ -87,6 +87,18 @@
     <Compile Include="UserControlss\DialogCustoms.xaml.cs">
       <DependentUpon>DialogCustoms.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlss\uc_QuanLyChiTietTienNghi.xaml.cs">
+      <DependentUpon>uc_QuanLyChiTietTienNghi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlss\uc_QuanLyDichVu.xaml.cs">
+      <DependentUpon>uc_QuanLyDichVu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlss\uc_QuanLyLoaiDichVu.xaml.cs">
+      <DependentUpon>uc_QuanLyLoaiDichVu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlss\uc_QuanLyTienNghi.xaml.cs">
+      <DependentUpon>uc_QuanLyTienNghi.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ControlBar2ViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
@@ -117,6 +129,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlss\DialogCustoms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlss\uc_QuanLyChiTietTienNghi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlss\uc_QuanLyDichVu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlss\uc_QuanLyLoaiDichVu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlss\uc_QuanLyTienNghi.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

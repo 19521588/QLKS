@@ -127,9 +127,15 @@
                 <!--Màn hình hiển thị-->
                 <Grid   x:Name="displayMain"
                             Grid.Row="1" >
-                    <ContentControl x:Name="contenDisplayMain"
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition Width="127*"/>
+                    </Grid.ColumnDefinitions>
+                    <ContentControl x:Name="contenDisplayMain" 
                                         Width="auto"
-                                        Height="auto" />
+                                        Height="auto" Grid.ColumnSpan="4" />
                 </Grid>
             </Grid>
             <!--Menu-->
