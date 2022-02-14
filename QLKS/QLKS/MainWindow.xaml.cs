@@ -29,5 +29,13 @@ namespace QLKS
             this.DataContext = (mainViewModel = new MainViewModel());
            
         }
+        private void lisviewMenu_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            
+                btnCloseLVMenu.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            
+        }
+
+
     }
 }

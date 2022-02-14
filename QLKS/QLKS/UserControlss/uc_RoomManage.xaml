@@ -95,7 +95,7 @@
                                         <DataTemplate>
                                             <Button Width="25" Height="25" BorderThickness="0" Click="btnCapNhat_Click">
                                                 <Button.Background>
-                                                    <ImageBrush ImageSource="C:\Users\acer\Desktop\backupnote\flutterB\QLKS\QLKS\QLKS\RES\edit.png"/>
+                                                    <ImageBrush ImageSource="/QLKS;component/Res/edit.png"/>
                                                 </Button.Background>
                                             </Button>
                                         </DataTemplate>

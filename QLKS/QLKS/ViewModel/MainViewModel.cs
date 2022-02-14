@@ -8,16 +8,32 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace QLKS.ViewModel
 {
     public class MainViewModel:BaseViewModel
     {
+        #region uc_view
+
+        private uc_Home Home_UC;
+        private uc_DatPhong DatPhong_UC;
+        private uc_Employee NhanVien_UC;
+        private uc_RoomManage QuanLyPhong_UC;
+        private uc_Customer QuanLyKhachHang_UC;
+        //private uc_QuanLyLoaiPhong QuanLyLoaiPhong_UC;
+        private uc_QuanLyDichVu QuanLyDichVu_UC;
+        private uc_QuanLyTienNghi QuanLyTienNghi_UC;
+        private uc_QuanLyChiTietTienNghi QuanLyChiTietTienNghi_UC;
+        private uc_QuanLyLoaiDichVu QuanLyLoaiDichVu_UC;
+        private uc_Bill HoaDon_UC;
+        //private uc_ThongKe ThongKe_UC;
+        #endregion
         #region
         public static MainWindow mainWindow { get; set; }
         private ObservableCollection<ItemMenuMainWindow> _myListItems;
 
-        private uc_QuanLyDichVu QuanLyDichVu_UC;
+       
 
         public ObservableCollection<ItemMenuMainWindow> MyListItems
         {
@@ -36,7 +52,18 @@ namespace QLKS.ViewModel
         public ICommand ItemClickCommand { get; set; }
 
         public ICommand LogOutCommand { get; set; }
-
+        public ICommand CloseSideBarCommand { get; set; }
+     
+        private object _currentView;
+        public object CurrentView
+        {
+            get { return _currentView; }
+            set
+            {
+                _currentView = value;
+                OnPropertyChanged("CurrentView");
+            }
+        }
 
         #endregion
         public MainViewModel()
@@ -46,6 +73,7 @@ namespace QLKS.ViewModel
             {
                 initListViewMenu();
             });
+         
             ItemClickCommand = new RelayCommand<ItemMenuMainWindow>((p) => { return true; }, (p) =>
             {
                 DoStuff(p);
@@ -60,27 +88,111 @@ namespace QLKS.ViewModel
         }
         public void DoStuff(ItemMenuMainWindow item)
         {
-            //MessageBox.Show(item.name + " element clicked");
-            //switch(item.name)
-            //{
-            //    case "QL dịch vụ":
-            //        if (QuanLyDichVu_UC == null)
-            //        {
-            //            QuanLyDichVu_UC = new uc_QuanLyDichVu();
-            //        }
-            //        mainWindow.contenDisplayMain.Content = QuanLyDichVu_UC;
-            //        break;
-
-            //}
+            if (item != null)
+            {
+                switch (item.name)
+                {
+                    case "Trang Chủ":
+                        //Đang là Home rồi thì không set nữa
+                        if (Title_Main.Equals(item.name))
+                        {
+                            break;
+                        }
+                        CurrentView = Home_UC;
+                        break;
+                    //case "Phòng":
+                    //    if (Phong_UC == null)
+                    //    {
+                    //        Phong_UC = new uc_Phong(MaNV);
+                    //    }
+                    //    contenDisplayMain.Content = Phong_UC;
+                    //    break;
+                    case "Đặt phòng":
+                        if (DatPhong_UC == null)
+                        {
+                            DatPhong_UC = new uc_DatPhong();
+                        }
+                        CurrentView = DatPhong_UC;
+                        break;
+                    case "Hóa đơn":
+                        if (HoaDon_UC == null)
+                        {
+                            HoaDon_UC = new uc_Bill();
+                        }
+                        CurrentView = HoaDon_UC;
+                        break;
+                    case "QL nhân Viên":
+                        if (NhanVien_UC == null)
+                        {
+                            NhanVien_UC = new uc_Employee();
+                        }
+                        CurrentView = NhanVien_UC;
+                        break;
+                    case "QL khách hàng":
+                        if (QuanLyKhachHang_UC == null)
+                        {
+                            QuanLyKhachHang_UC = new uc_Customer();
+                        }
+                        CurrentView = QuanLyKhachHang_UC;
+                        break;
+                    case "QL phòng":
+                        if (QuanLyPhong_UC == null)
+                        {
+                            QuanLyPhong_UC = new uc_RoomManage();
+                        }
+                        CurrentView = QuanLyPhong_UC;
+                        break;
+                    //case 7:
+                    //    if (QuanLyLoaiPhong_UC == null)
+                    //    {
+                    //        QuanLyLoaiPhong_UC = new uc_QuanLyLoaiPhong();
+                    //    }
+                    //    contenDisplayMain.Content = QuanLyLoaiPhong_UC;
+                    //    break;
+                    case "QL dịch vụ":
+                        if (QuanLyDichVu_UC == null)
+                        {
+                            QuanLyDichVu_UC = new uc_QuanLyDichVu();
+                        }
+                        CurrentView = QuanLyDichVu_UC;
+                        break;
+                    case "QL loại dịch vụ":
+                        if (QuanLyLoaiDichVu_UC == null)
+                        {
+                            QuanLyLoaiDichVu_UC = new uc_QuanLyLoaiDichVu();
+                        }
+                        CurrentView = QuanLyLoaiDichVu_UC;
+                        break;
+                    case "QL tiện nghi":
+                        if (QuanLyTienNghi_UC == null)
+                        {
+                            QuanLyTienNghi_UC = new uc_QuanLyTienNghi();
+                        }
+                        CurrentView = QuanLyTienNghi_UC;
+                        break;
+                    case "QL chi tiết tiện nghi":
+                        if (QuanLyChiTietTienNghi_UC == null)
+                        {
+                            QuanLyChiTietTienNghi_UC = new uc_QuanLyChiTietTienNghi();
+                        }
+                        CurrentView = QuanLyChiTietTienNghi_UC;
+                        break;
+                    
+                }
+                Title_Main = item.name;
+                
+            }
         }
         public void initListViewMenu()
         {
+            Home_UC = new uc_Home();
+            CurrentView = Home_UC;
             MyListItems = new ObservableCollection<ItemMenuMainWindow>();
             //Khoi tao Menu
 
             MyListItems.Add(new ItemMenuMainWindow() { name = "Trang Chủ", foreColor = "Gray", kind_Icon = "Home" });
             MyListItems.Add(new ItemMenuMainWindow() { name = "Phòng", foreColor = "#FFF08033", kind_Icon = "HomeCity" });
-            MyListItems.Add(new ItemMenuMainWindow() { name = "Đặt Phòng", foreColor = "Green", kind_Icon = "BookAccount" });
+            MyListItems.Add(new ItemMenuMainWindow() { name = "Đặt phòng", foreColor = "Green", kind_Icon = "BookAccount" });
             MyListItems.Add(new ItemMenuMainWindow() { name = "Hóa đơn", foreColor = "#FFD41515", kind_Icon = "Receipt" });
             MyListItems.Add(new ItemMenuMainWindow() { name = "QL nhân Viên", foreColor = "#FFD41515", kind_Icon = "Account" });
             MyListItems.Add(new ItemMenuMainWindow() { name = "QL khách hàng", foreColor = "#FFD41515", kind_Icon = "Account" });
@@ -90,7 +202,7 @@ namespace QLKS.ViewModel
             MyListItems.Add(new ItemMenuMainWindow() { name = "QL loại dịch vụ", foreColor = "Blue", kind_Icon = "FaceAgent" });
             MyListItems.Add(new ItemMenuMainWindow() { name = "QL tiện nghi", foreColor = "#FFF08033", kind_Icon = "Fridge" });
             MyListItems.Add(new ItemMenuMainWindow() { name = "QL chi tiết tiện nghi", foreColor = "#FFF08033", kind_Icon = "Fridge" });
-            MyListItems.Add(new ItemMenuMainWindow() { name = "Thống kê", foreColor = "#FF0069C1", kind_Icon = "ChartAreaspline" });
+           
           
 
            

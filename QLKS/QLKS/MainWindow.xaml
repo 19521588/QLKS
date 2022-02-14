@@ -134,6 +134,7 @@
                         <ColumnDefinition Width="127*"/>
                     </Grid.ColumnDefinitions>
                     <ContentControl x:Name="contenDisplayMain" 
+                                        Content="{Binding CurrentView}"
                                         Width="auto"
                                         Height="auto" Grid.ColumnSpan="4" />
                 </Grid>
@@ -217,7 +218,7 @@
                             ScrollViewer.VerticalScrollBarVisibility="Hidden" 
                             ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
                             ScrollViewer.CanContentScroll="True" 
-                            
+                             PreviewMouseLeftButtonUp="lisviewMenu_PreviewMouseLeftButtonUp" 
                            >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
