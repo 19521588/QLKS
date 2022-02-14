@@ -66,7 +66,7 @@
                         <RectangleGeometry  Rect="0,0,840,720" RadiusX="10" RadiusY="10" />
                     </Grid.Clip>
 
-                    <ListView ItemsSource="{Binding ListRoom}" SelectedItem="{Binding SelectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Name="lsvPhong" >
+                    <ListView ItemsSource= "{Binding ListRoom}" SelectedItem="{Binding SelectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Name="lsvPhong" >
 
                         <!--<ListView.Resources>
                             <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">10</sys:Double>
