@@ -87,11 +87,29 @@
     <Compile Include="UserControlss\DialogCustoms.xaml.cs">
       <DependentUpon>DialogCustoms.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlss\uc_Customer.xaml.cs">
+      <DependentUpon>uc_Customer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlss\uc_Employee.xaml.cs">
+      <DependentUpon>uc_Employee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlss\uc_RoomManage.xaml.cs">
+      <DependentUpon>uc_RoomManage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\AddRoomViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ControlBar2ViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\DialogCustomsViewModel.cs" />
+    <Compile Include="ViewModel\EditRoomViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\RoomViewModel.cs" />
+    <Compile Include="wd_AddNewRoom.xaml.cs">
+      <DependentUpon>wd_AddNewRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wd_EditRoom.xaml.cs">
+      <DependentUpon>wd_EditRoom.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -117,6 +135,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlss\DialogCustoms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlss\uc_Customer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlss\uc_Employee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlss\uc_RoomManage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wd_AddNewRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wd_EditRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
