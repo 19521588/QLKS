@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="test2.xaml.cs">
       <DependentUpon>test2.xaml</DependentUpon>
+        </Compile>
     <Compile Include="Convert\HashConvert.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
