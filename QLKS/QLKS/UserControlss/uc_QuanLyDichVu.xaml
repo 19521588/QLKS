@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QLKS.UserControlss"
              mc:Ignorable="d" 
-               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"     
+             x:Name="wdService"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"     
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"     
              TextElement.FontWeight="Regular"     
              TextElement.FontSize="13"     
@@ -18,9 +20,10 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-
+        <!--Grid 1-->
         <Grid Grid.Row="0">
             <Button Name="btnThem" 
+                    Command="{Binding OpenAddWindowCommand}"
                     Width="150" Content="Thêm dịch vụ" FontSize="15" 
                     FontFamily="Roboto" FontWeight="Bold" Background="#FF478C10"
                     Margin="1050,9,0,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top">
@@ -50,7 +53,7 @@
                 </Grid>
             </materialDesign:ColorZone>
         </Grid>
-
+        <!--Bảng dữ liệu-->
         <Grid Grid.Row="1" Margin="0 20 0 0">
             <Grid Width="680" Height="500" Background="#F2F1F1">
                 <Grid.Clip>
@@ -58,11 +61,33 @@
                     </RectangleGeometry>
                 </Grid.Clip>
 
+                <Grid.Resources>
+                    <DataTemplate x:Key="dtpNutSua">
+                        <Button x:Name="btnCapNhat" BorderThickness="0"
+                                Command="{Binding OpenEditServiceWindowCommand}"
+                                CommandParameter="{Binding ElementName=wdService}">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/QLKS;component/Res/edit.png"/>
+                            </Button.Background>
+                        </Button>
+                    </DataTemplate>
 
-                <ListView Name="lsvDichVu" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  
-                          >
+                    <DataTemplate x:Key="dtpNutXoa">
+                        <Button x:Name="btnXoa" BorderThickness="0">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/QLKS;component/Res/delete_vs2.png"/>
+                            </Button.Background>
+                        </Button>
+                    </DataTemplate>
+                </Grid.Resources>
+
+                <ListView Name="lsvDichVu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                          ItemsSource="{Binding ListService}" SelectedItem="{Binding SelectedItem}">
+                    <!--căn giữa-->
+                    <ListView.Resources>
+                        <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">10</sys:Double>
+                    </ListView.Resources>
                     <ListView.View>
-
                         <GridView>
                             <!--thay màu cho header-->
                             <GridView.ColumnHeaderContainerStyle>
@@ -72,22 +97,12 @@
                                     <Setter Property="FontWeight" Value="Bold" />
                                 </Style>
                             </GridView.ColumnHeaderContainerStyle>
-
-                            <!--<GridViewColumn  Header="Mã dịch vụ"  Width="100" CellTemplate="{StaticResource dtpMaDV}" />-->
-                            <!--<GridViewColumn Header="Tên dịch vụ" Width="200" CellTemplate="{StaticResource dtpTenDV}" />
-                            <GridViewColumn Header="Loại" Width="140" CellTemplate="{StaticResource dtpMaLoaiDV}" />
-                            <GridViewColumn Header="Đơn giá " Width="120" CellTemplate="{StaticResource dtpDonGia}" />
-                            <GridViewColumn Width="65" Header="Sửa" CellTemplate="{StaticResource dtpNutSua}" />
-                            <GridViewColumn Width="65" Header="Xóa" CellTemplate="{StaticResource dtpNutXoa}" />-->
-
-                            <GridViewColumn Header="Mã dịch vụ" Width="100"/>
-                            <GridViewColumn Header="Tên dịch vụ" Width="200"/>
-                            <GridViewColumn Header="Loại" Width="140"/>
-                            <GridViewColumn Header="Đơn giá" Width="120"/>
-                            <GridViewColumn Header="Sửa" Width="65"/>
-                            <GridViewColumn Header="Xóa" Width="65"/>
-
-
+                            <GridViewColumn Header="Mã dịch vụ" Width="100" DisplayMemberBinding="{Binding IdService}"/>
+                            <GridViewColumn Header="Tên dịch vụ" Width="200" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Loại" Width="140" DisplayMemberBinding="{Binding CATEGORY_SERVICE.Name}"/>
+                            <GridViewColumn Header="Đơn giá" Width="120" DisplayMemberBinding="{Binding Price}"/>
+                            <GridViewColumn Header="Sửa" Width="65" CellTemplate="{StaticResource dtpNutSua}"/>
+                            <GridViewColumn Header="Xóa" Width="65" CellTemplate="{StaticResource dtpNutXoa}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

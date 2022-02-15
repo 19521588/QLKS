@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace QLKS.ViewModel
 {
@@ -12,20 +13,28 @@ namespace QLKS.ViewModel
     {
         private ObservableCollection<CATEGORY_SERVICE> _ListCategoryService { get; set; }
         public ObservableCollection<CATEGORY_SERVICE> ListCategoryService { get => _ListCategoryService; set { _ListCategoryService = value; OnPropertyChanged(); } }
+        public ICommand OpenAddWindowCommand { get; set; }
 
         public CategoryServiceViewModel()
         {
             Load();
+
+            //Mở cửa số để thêm loại dịch vụ
+            OpenAddWindowCommand = new RelayCommand<object>((p) => {
+                return true;
+            },
+            (p) => {
+                wd_AddCategoryService wd = new wd_AddCategoryService();
+                wd.ShowDialog();
+                Load();
+            });
+
+
         }
 
         void Load()
         {
-            ListCategoryService = new ObservableCollection<CATEGORY_SERVICE>();
-            ObservableCollection<CATEGORY_SERVICE> temp = new ObservableCollection<CATEGORY_SERVICE>(DataProvider.Ins.DB.CATEGORY_SERVICE);
-            for (int i = temp.Count() - 1; i >= 0; i--)
-            {
-                ListCategoryService.Add(temp[i]);
-            }
+            ListCategoryService = new ObservableCollection<CATEGORY_SERVICE>(DataProvider.Ins.DB.CATEGORY_SERVICE);
         }
     }
 }

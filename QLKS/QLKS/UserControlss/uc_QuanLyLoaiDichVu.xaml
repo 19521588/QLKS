@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QLKS.UserControlss"
              mc:Ignorable="d" 
+             x:Name="wdCategoryService"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"        
              TextElement.FontFamily="Roboto"   
@@ -40,9 +41,11 @@
 
 
                 <Button HorizontalAlignment="Right"  x:Name="btnThemLoaiDV"                                                    
-                    Width="160" Height="36" Margin="0 0 100 0"
-                    Content="Thêm loại dịch vụ"  VerticalAlignment="Center"                              
-                    Background="#478C10" >
+                        Width="160" Height="36" Margin="0 0 100 0"
+                        Content="Thêm loại dịch vụ"  VerticalAlignment="Center"                              
+                        Background="#478C10" 
+                        Command="{Binding OpenAddWindowCommand}" 
+                    >
                     <Button.Clip>
                         <RectangleGeometry Rect="0,0,160,36" RadiusX="10" RadiusY="10" >
                         </RectangleGeometry>
@@ -59,7 +62,25 @@
                     <RectangleGeometry  Rect="0,0,700,500" RadiusX="10" RadiusY="10" >
                     </RectangleGeometry>
                 </Grid.Clip>
-                <ListView  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="lsvLoaiDV" >
+                <Grid.Resources>
+                    <DataTemplate x:Key="dtpNutSua">
+                        <Button x:Name="btnCapNhat" BorderThickness="0">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/QLKS;component/Res/edit.png"/>
+                            </Button.Background>
+                        </Button>
+                    </DataTemplate>
+
+                    <DataTemplate x:Key="dtpNutXoa">
+                        <Button x:Name="btnXoa" BorderThickness="0">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/QLKS;component/Res/delete_vs2.png"/>
+                            </Button.Background>
+                        </Button>
+                    </DataTemplate>
+                </Grid.Resources>
+                <ListView  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="lsvLoaiDV" 
+                           ItemsSource="{Binding ListCategoryService}" SelectedItem="{Binding SelectedItem}">
 
                     <ListView.Resources>
                         <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">10</sys:Double>
@@ -73,39 +94,11 @@
                                     <Setter Property="FontWeight" Value="Bold" />
                                 </Style>
                             </GridView.ColumnHeaderContainerStyle>
-
-                            <GridViewColumn Width="235" Header="Mã loại dịch vụ"/>
-
-                            <GridViewColumn Width="235" Header="Tên loại dịch vụ"/>
-
-                            <!--<GridViewColumn Width="110" Header="Sửa">
-
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button x:Name="btnSuaLoaiDV"  Width="25" Height="25" BorderThickness="0">
-                                            <Button.Background>
-                                                <ImageBrush ImageSource="/GUI;component/Res/edit.png"/>
-                                            </Button.Background>
-                                        </Button>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-
-                            </GridViewColumn>
-
-                            <GridViewColumn Width="110" Header="Xóa">
-
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button x:Name="btnXoaLoaiDV"  Width="25" Height="25" BorderThickness="0">
-                                            <Button.Background>
-                                                <ImageBrush ImageSource="/GUI;component/Res/delete_vs2.png"/>
-                                            </Button.Background>
-                                        </Button>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>-->
-
-
+                            <GridViewColumn Width="235" Header="Mã loại dịch vụ" DisplayMemberBinding="{Binding IdCategoryService}"/>
+                            <GridViewColumn Width="235" Header="Tên loại dịch vụ" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Width="115" Header="Sửa" CellTemplate="{StaticResource dtpNutSua}"/>
+                            <GridViewColumn Width="115" Header="Xóa" CellTemplate="{StaticResource dtpNutXoa}"/>
+         
                         </GridView>
 
                     </ListView.View>
