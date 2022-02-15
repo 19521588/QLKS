@@ -30,7 +30,7 @@
         </i:EventTrigger>-->
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"
-                                   CommandParameter="{Binding ElementName=mainWindow}"
+                                   CommandParameter="{Binding ElementName=mainwindows}"
                                    >
 
             </i:InvokeCommandAction>

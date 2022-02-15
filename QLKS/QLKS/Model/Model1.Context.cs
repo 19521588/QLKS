@@ -30,7 +30,9 @@ namespace QLKS.Model
         public virtual DbSet<CATEGORY_ROOM> CATEGORY_ROOM { get; set; }
         public virtual DbSet<CATEGORY_SERVICE> CATEGORY_SERVICE { get; set; }
         public virtual DbSet<CATEGORY_USER> CATEGORY_USER { get; set; }
+        public virtual DbSet<CONVINIENT> CONVINIENTs { get; set; }
         public virtual DbSet<CUSTOMER> CUSTOMERs { get; set; }
+        public virtual DbSet<DETAIL_CONVINIENT> DETAIL_CONVINIENT { get; set; }
         public virtual DbSet<EMPLOYEE> EMPLOYEEs { get; set; }
         public virtual DbSet<RENTAL> RENTALs { get; set; }
         public virtual DbSet<RENTALDETAIL> RENTALDETAILs { get; set; }
