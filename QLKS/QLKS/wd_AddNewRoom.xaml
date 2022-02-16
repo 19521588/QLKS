@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QLKS"
         mc:Ignorable="d"
         x:Name="wdAddNewRoom"
-        WindowStyle="None"
+       
         Title="Thêm phòng mới" Height="360" Width="480"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         >
