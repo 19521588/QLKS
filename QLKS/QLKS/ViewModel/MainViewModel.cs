@@ -21,7 +21,7 @@ namespace QLKS.ViewModel
         private uc_Employee NhanVien_UC;
         private uc_RoomManage QuanLyPhong_UC;
         private uc_Customer QuanLyKhachHang_UC;
-        //private uc_QuanLyLoaiPhong QuanLyLoaiPhong_UC;
+        private uc_RoomCategoryManage QuanLyLoaiPhong_UC;
         private uc_QuanLyDichVu QuanLyDichVu_UC;
         private uc_QuanLyTienNghi QuanLyTienNghi_UC;
         private uc_QuanLyChiTietTienNghi QuanLyChiTietTienNghi_UC;
@@ -167,13 +167,13 @@ namespace QLKS.ViewModel
                         }
                         CurrentView = QuanLyPhong_UC;
                         break;
-                    //case 7:
-                    //    if (QuanLyLoaiPhong_UC == null)
-                    //    {
-                    //        QuanLyLoaiPhong_UC = new uc_QuanLyLoaiPhong();
-                    //    }
-                    //    contenDisplayMain.Content = QuanLyLoaiPhong_UC;
-                    //    break;
+                    case "QL loại phòng":
+                        if (QuanLyLoaiPhong_UC == null)
+                        {
+                            QuanLyLoaiPhong_UC = new uc_RoomCategoryManage();
+                        }
+                        CurrentView = QuanLyLoaiPhong_UC;
+                        break;
                     case "QL dịch vụ":
                         if (QuanLyDichVu_UC == null)
                         {
