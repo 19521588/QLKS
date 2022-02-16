@@ -19,6 +19,7 @@ namespace QLKS.Model
         public Nullable<int> Total { get; set; }
         public string Name { get; set; }
         public int IdRental { get; set; }
+        public Nullable<System.DateTime> Date_Bill { get; set; }
     
         public virtual BILLINFO BILLINFO { get; set; }
         public virtual RENTAL RENTAL { get; set; }

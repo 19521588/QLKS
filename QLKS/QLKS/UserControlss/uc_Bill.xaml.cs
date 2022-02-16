@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLKS.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace QLKS.UserControlss
     /// </summary>
     public partial class uc_Bill : UserControl
     {
+        BillViewModel viewmodel { get; set; }
         public uc_Bill()
         {
             InitializeComponent();
+            this.DataContext = viewmodel = new BillViewModel();
         }
     }
 }

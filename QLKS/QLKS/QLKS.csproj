@@ -151,6 +151,7 @@
     <Compile Include="ViewModel\AddRoomViewModel.cs" />
     <Compile Include="ViewModel\AddServiceViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\BillViewModel.cs" />
     <Compile Include="ViewModel\ControlBar2ViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\DialogCustomsViewModel.cs" />

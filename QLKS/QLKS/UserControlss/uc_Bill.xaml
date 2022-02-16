@@ -110,6 +110,7 @@
                         VerticalAlignment="Top">
                     <TextBox
                     x:Name="txbLicensePlate"
+                        Width="auto"
                       materialDesign:HintAssist.Hint="Mã hóa đơn"
                       Style="{StaticResource txbSearch}"
                       Text="{Binding IdBill,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
@@ -117,6 +118,7 @@
 
                     </TextBox>
                     <ComboBox
+                          
                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                     x:Name="cbBrand"
                     ItemsSource="{Binding ListRoomCategory}"
@@ -124,13 +126,14 @@
                     SelectedItem="{Binding SelectedCategory}"
                       materialDesign:HintAssist.Hint="Loại phòng"
                         Margin="10 0 0 0"
-                    Width="100"
+                      Width="120"
                     FontSize="18"
                     
                       VerticalAlignment="Center">
 
                     </ComboBox>
                     <TextBox
+                          Width="160"
                         x:Name="txbCustomerName"
                       materialDesign:HintAssist.Hint="Người thuê"
                       Style="{StaticResource txbSearch}"
@@ -142,7 +145,7 @@
                         x:Name="dpReceptionDate"
                             FontSize="16"
                             materialDesign:HintAssist.Hint="Ngày lập hóa đơn"
-                            Width="auto"
+                            Width="250"
                             Margin="10 5 0 0"
                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                             />

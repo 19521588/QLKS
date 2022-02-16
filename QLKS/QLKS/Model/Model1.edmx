@@ -14,12 +14,13 @@
           <Property Name="Total" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="IdRental" Type="int" Nullable="false" />
+          <Property Name="Date_Bill" Type="date" />
         </EntityType>
         <EntityType Name="BILLINFO">
           <Key>
             <PropertyRef Name="IdBillInfo" />
           </Key>
-          <Property Name="IdBillInfo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdBillInfo" Type="int" Nullable="false" />
           <Property Name="Service" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Amount" Type="int" Nullable="false" />
           <Property Name="Price" Type="int" Nullable="false" />
@@ -158,7 +159,7 @@
           <Property Name="IdEmployee" Type="int" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Bill__IdBillInfo__49C3F6B7">
+        <Association Name="FK__Bill__IdBillInfo__412EB0B6">
           <End Role="BILLINFO" Type="Self.BILLINFO" Multiplicity="1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -170,7 +171,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bill__IdRental__48CFD27E">
+        <Association Name="FK__Bill__IdRental__4222D4EF">
           <End Role="RENTAL" Type="Self.RENTAL" Multiplicity="1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -182,7 +183,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DETAIL_CO__IdCon__5FB337D6">
+        <Association Name="FK__DETAIL_CO__IdCon__4316F928">
           <End Role="CONVINIENT" Type="Self.CONVINIENT" Multiplicity="1" />
           <End Role="DETAIL_CONVINIENT" Type="Self.DETAIL_CONVINIENT" Multiplicity="*" />
           <ReferentialConstraint>
@@ -194,7 +195,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DETAIL_CO__IdRoo__5EBF139D">
+        <Association Name="FK__DETAIL_CO__IdRoo__440B1D61">
           <End Role="ROOM" Type="Self.ROOM" Multiplicity="1" />
           <End Role="DETAIL_CONVINIENT" Type="Self.DETAIL_CONVINIENT" Multiplicity="*" />
           <ReferentialConstraint>
@@ -218,7 +219,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RENTAL__IdReserv__440B1D61">
+        <Association Name="FK__RENTAL__IdReserv__45F365D3">
           <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="1" />
           <End Role="RENTAL" Type="Self.RENTAL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -230,7 +231,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RENTAL__IdRoom__45F365D3">
+        <Association Name="FK__RENTAL__IdRoom__46E78A0C">
           <End Role="ROOM" Type="Self.ROOM" Multiplicity="1" />
           <End Role="RENTAL" Type="Self.RENTAL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -242,7 +243,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RENTALDET__IdSer__412EB0B6">
+        <Association Name="FK__RENTALDET__IdSer__47DBAE45">
           <End Role="SERVICE" Type="Self.SERVICE" Multiplicity="1" />
           <End Role="RENTALDETAIL" Type="Self.RENTALDETAIL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -254,7 +255,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVATI__IdCus__3A81B327">
+        <Association Name="FK__RESERVATI__IdCus__48CFD27E">
           <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
           <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -266,7 +267,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVATI__IdEmp__398D8EEE">
+        <Association Name="FK__RESERVATI__IdEmp__49C3F6B7">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
           <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -278,7 +279,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVATI__IdRes__3B75D760">
+        <Association Name="FK__RESERVATI__IdRes__4AB81AF0">
           <End Role="RESERVATION_DETAIL" Type="Self.RESERVATION_DETAIL" Multiplicity="1" />
           <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -290,7 +291,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVATI__IdRoo__3C69FB99">
+        <Association Name="FK__RESERVATI__IdRoo__4BAC3F29">
           <End Role="ROOM" Type="Self.ROOM" Multiplicity="1" />
           <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -302,7 +303,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ROOM__IdCategory__300424B4">
+        <Association Name="FK__ROOM__IdCategory__4CA06362">
           <End Role="CATEGORY_ROOM" Type="Self.CATEGORY_ROOM" Multiplicity="1" />
           <End Role="ROOM" Type="Self.ROOM" Multiplicity="*" />
           <ReferentialConstraint>
@@ -314,7 +315,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SERVICE__IdCateg__34C8D9D1">
+        <Association Name="FK__SERVICE__IdCateg__4D94879B">
           <End Role="CATEGORY_SERVICE" Type="Self.CATEGORY_SERVICE" Multiplicity="0..1" />
           <End Role="SERVICE" Type="Self.SERVICE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -326,7 +327,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__USERS__IdEmploye__286302EC">
+        <Association Name="FK__USERS__IdEmploye__4E88ABD4">
           <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
           <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -338,7 +339,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__USERS__Type__29572725">
+        <Association Name="FK__USERS__Type__4F7CD00D">
           <End Role="CATEGORY_USER" Type="Self.CATEGORY_USER" Multiplicity="1" />
           <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -367,19 +368,19 @@
           <EntitySet Name="ROOM" EntityType="Self.ROOM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SERVICE" EntityType="Self.SERVICE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Bill__IdBillInfo__49C3F6B7" Association="Self.FK__Bill__IdBillInfo__49C3F6B7">
+          <AssociationSet Name="FK__Bill__IdBillInfo__412EB0B6" Association="Self.FK__Bill__IdBillInfo__412EB0B6">
             <End Role="BILLINFO" EntitySet="BILLINFO" />
             <End Role="Bill" EntitySet="Bill" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bill__IdRental__48CFD27E" Association="Self.FK__Bill__IdRental__48CFD27E">
+          <AssociationSet Name="FK__Bill__IdRental__4222D4EF" Association="Self.FK__Bill__IdRental__4222D4EF">
             <End Role="RENTAL" EntitySet="RENTAL" />
             <End Role="Bill" EntitySet="Bill" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETAIL_CO__IdCon__5FB337D6" Association="Self.FK__DETAIL_CO__IdCon__5FB337D6">
+          <AssociationSet Name="FK__DETAIL_CO__IdCon__4316F928" Association="Self.FK__DETAIL_CO__IdCon__4316F928">
             <End Role="CONVINIENT" EntitySet="CONVINIENT" />
             <End Role="DETAIL_CONVINIENT" EntitySet="DETAIL_CONVINIENT" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETAIL_CO__IdRoo__5EBF139D" Association="Self.FK__DETAIL_CO__IdRoo__5EBF139D">
+          <AssociationSet Name="FK__DETAIL_CO__IdRoo__440B1D61" Association="Self.FK__DETAIL_CO__IdRoo__440B1D61">
             <End Role="ROOM" EntitySet="ROOM" />
             <End Role="DETAIL_CONVINIENT" EntitySet="DETAIL_CONVINIENT" />
           </AssociationSet>
@@ -387,47 +388,47 @@
             <End Role="RENTALDETAIL" EntitySet="RENTALDETAIL" />
             <End Role="RENTAL" EntitySet="RENTAL" />
           </AssociationSet>
-          <AssociationSet Name="FK__RENTAL__IdReserv__440B1D61" Association="Self.FK__RENTAL__IdReserv__440B1D61">
+          <AssociationSet Name="FK__RENTAL__IdReserv__45F365D3" Association="Self.FK__RENTAL__IdReserv__45F365D3">
             <End Role="RESERVATION" EntitySet="RESERVATION" />
             <End Role="RENTAL" EntitySet="RENTAL" />
           </AssociationSet>
-          <AssociationSet Name="FK__RENTAL__IdRoom__45F365D3" Association="Self.FK__RENTAL__IdRoom__45F365D3">
+          <AssociationSet Name="FK__RENTAL__IdRoom__46E78A0C" Association="Self.FK__RENTAL__IdRoom__46E78A0C">
             <End Role="ROOM" EntitySet="ROOM" />
             <End Role="RENTAL" EntitySet="RENTAL" />
           </AssociationSet>
-          <AssociationSet Name="FK__RENTALDET__IdSer__412EB0B6" Association="Self.FK__RENTALDET__IdSer__412EB0B6">
+          <AssociationSet Name="FK__RENTALDET__IdSer__47DBAE45" Association="Self.FK__RENTALDET__IdSer__47DBAE45">
             <End Role="SERVICE" EntitySet="SERVICE" />
             <End Role="RENTALDETAIL" EntitySet="RENTALDETAIL" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVATI__IdCus__3A81B327" Association="Self.FK__RESERVATI__IdCus__3A81B327">
+          <AssociationSet Name="FK__RESERVATI__IdCus__48CFD27E" Association="Self.FK__RESERVATI__IdCus__48CFD27E">
             <End Role="CUSTOMER" EntitySet="CUSTOMER" />
             <End Role="RESERVATION" EntitySet="RESERVATION" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVATI__IdEmp__398D8EEE" Association="Self.FK__RESERVATI__IdEmp__398D8EEE">
+          <AssociationSet Name="FK__RESERVATI__IdEmp__49C3F6B7" Association="Self.FK__RESERVATI__IdEmp__49C3F6B7">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="RESERVATION" EntitySet="RESERVATION" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVATI__IdRes__3B75D760" Association="Self.FK__RESERVATI__IdRes__3B75D760">
+          <AssociationSet Name="FK__RESERVATI__IdRes__4AB81AF0" Association="Self.FK__RESERVATI__IdRes__4AB81AF0">
             <End Role="RESERVATION_DETAIL" EntitySet="RESERVATION_DETAIL" />
             <End Role="RESERVATION" EntitySet="RESERVATION" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVATI__IdRoo__3C69FB99" Association="Self.FK__RESERVATI__IdRoo__3C69FB99">
+          <AssociationSet Name="FK__RESERVATI__IdRoo__4BAC3F29" Association="Self.FK__RESERVATI__IdRoo__4BAC3F29">
             <End Role="ROOM" EntitySet="ROOM" />
             <End Role="RESERVATION" EntitySet="RESERVATION" />
           </AssociationSet>
-          <AssociationSet Name="FK__ROOM__IdCategory__300424B4" Association="Self.FK__ROOM__IdCategory__300424B4">
+          <AssociationSet Name="FK__ROOM__IdCategory__4CA06362" Association="Self.FK__ROOM__IdCategory__4CA06362">
             <End Role="CATEGORY_ROOM" EntitySet="CATEGORY_ROOM" />
             <End Role="ROOM" EntitySet="ROOM" />
           </AssociationSet>
-          <AssociationSet Name="FK__SERVICE__IdCateg__34C8D9D1" Association="Self.FK__SERVICE__IdCateg__34C8D9D1">
+          <AssociationSet Name="FK__SERVICE__IdCateg__4D94879B" Association="Self.FK__SERVICE__IdCateg__4D94879B">
             <End Role="CATEGORY_SERVICE" EntitySet="CATEGORY_SERVICE" />
             <End Role="SERVICE" EntitySet="SERVICE" />
           </AssociationSet>
-          <AssociationSet Name="FK__USERS__IdEmploye__286302EC" Association="Self.FK__USERS__IdEmploye__286302EC">
+          <AssociationSet Name="FK__USERS__IdEmploye__4E88ABD4" Association="Self.FK__USERS__IdEmploye__4E88ABD4">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
-          <AssociationSet Name="FK__USERS__Type__29572725" Association="Self.FK__USERS__Type__29572725">
+          <AssociationSet Name="FK__USERS__Type__4F7CD00D" Association="Self.FK__USERS__Type__4F7CD00D">
             <End Role="CATEGORY_USER" EntitySet="CATEGORY_USER" />
             <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
@@ -453,43 +454,43 @@
           <EntitySet Name="ROOMs" EntityType="QLKSModel.ROOM" />
           <EntitySet Name="SERVICEs" EntityType="QLKSModel.SERVICE" />
           <EntitySet Name="USERS" EntityType="QLKSModel.USER" />
-          <AssociationSet Name="FK__Bill__IdBillInfo__49C3F6B7" Association="QLKSModel.FK__Bill__IdBillInfo__49C3F6B7">
+          <AssociationSet Name="FK__Bill__IdBillInfo__412EB0B6" Association="QLKSModel.FK__Bill__IdBillInfo__412EB0B6">
             <End Role="BILLINFO" EntitySet="BILLINFOes" />
             <End Role="Bill" EntitySet="Bills" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bill__IdRental__48CFD27E" Association="QLKSModel.FK__Bill__IdRental__48CFD27E">
+          <AssociationSet Name="FK__Bill__IdRental__4222D4EF" Association="QLKSModel.FK__Bill__IdRental__4222D4EF">
             <End Role="RENTAL" EntitySet="RENTALs" />
             <End Role="Bill" EntitySet="Bills" />
           </AssociationSet>
-          <AssociationSet Name="FK__ROOM__IdCategory__300424B4" Association="QLKSModel.FK__ROOM__IdCategory__300424B4">
+          <AssociationSet Name="FK__ROOM__IdCategory__4CA06362" Association="QLKSModel.FK__ROOM__IdCategory__4CA06362">
             <End Role="CATEGORY_ROOM" EntitySet="CATEGORY_ROOM" />
             <End Role="ROOM" EntitySet="ROOMs" />
           </AssociationSet>
-          <AssociationSet Name="FK__SERVICE__IdCateg__34C8D9D1" Association="QLKSModel.FK__SERVICE__IdCateg__34C8D9D1">
+          <AssociationSet Name="FK__SERVICE__IdCateg__4D94879B" Association="QLKSModel.FK__SERVICE__IdCateg__4D94879B">
             <End Role="CATEGORY_SERVICE" EntitySet="CATEGORY_SERVICE" />
             <End Role="SERVICE" EntitySet="SERVICEs" />
           </AssociationSet>
-          <AssociationSet Name="FK__USERS__Type__29572725" Association="QLKSModel.FK__USERS__Type__29572725">
+          <AssociationSet Name="FK__USERS__Type__4F7CD00D" Association="QLKSModel.FK__USERS__Type__4F7CD00D">
             <End Role="CATEGORY_USER" EntitySet="CATEGORY_USER" />
             <End Role="USER" EntitySet="USERS" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETAIL_CO__IdCon__5FB337D6" Association="QLKSModel.FK__DETAIL_CO__IdCon__5FB337D6">
+          <AssociationSet Name="FK__DETAIL_CO__IdCon__4316F928" Association="QLKSModel.FK__DETAIL_CO__IdCon__4316F928">
             <End Role="CONVINIENT" EntitySet="CONVINIENTs" />
             <End Role="DETAIL_CONVINIENT" EntitySet="DETAIL_CONVINIENT" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVATI__IdCus__3A81B327" Association="QLKSModel.FK__RESERVATI__IdCus__3A81B327">
+          <AssociationSet Name="FK__RESERVATI__IdCus__48CFD27E" Association="QLKSModel.FK__RESERVATI__IdCus__48CFD27E">
             <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
             <End Role="RESERVATION" EntitySet="RESERVATIONs" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETAIL_CO__IdRoo__5EBF139D" Association="QLKSModel.FK__DETAIL_CO__IdRoo__5EBF139D">
+          <AssociationSet Name="FK__DETAIL_CO__IdRoo__440B1D61" Association="QLKSModel.FK__DETAIL_CO__IdRoo__440B1D61">
             <End Role="ROOM" EntitySet="ROOMs" />
             <End Role="DETAIL_CONVINIENT" EntitySet="DETAIL_CONVINIENT" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVATI__IdEmp__398D8EEE" Association="QLKSModel.FK__RESERVATI__IdEmp__398D8EEE">
+          <AssociationSet Name="FK__RESERVATI__IdEmp__49C3F6B7" Association="QLKSModel.FK__RESERVATI__IdEmp__49C3F6B7">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="RESERVATION" EntitySet="RESERVATIONs" />
           </AssociationSet>
-          <AssociationSet Name="FK__USERS__IdEmploye__286302EC" Association="QLKSModel.FK__USERS__IdEmploye__286302EC">
+          <AssociationSet Name="FK__USERS__IdEmploye__4E88ABD4" Association="QLKSModel.FK__USERS__IdEmploye__4E88ABD4">
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="USER" EntitySet="USERS" />
           </AssociationSet>
@@ -497,23 +498,23 @@
             <End Role="RENTALDETAIL" EntitySet="RENTALDETAILs" />
             <End Role="RENTAL" EntitySet="RENTALs" />
           </AssociationSet>
-          <AssociationSet Name="FK__RENTAL__IdReserv__440B1D61" Association="QLKSModel.FK__RENTAL__IdReserv__440B1D61">
+          <AssociationSet Name="FK__RENTAL__IdReserv__45F365D3" Association="QLKSModel.FK__RENTAL__IdReserv__45F365D3">
             <End Role="RESERVATION" EntitySet="RESERVATIONs" />
             <End Role="RENTAL" EntitySet="RENTALs" />
           </AssociationSet>
-          <AssociationSet Name="FK__RENTAL__IdRoom__45F365D3" Association="QLKSModel.FK__RENTAL__IdRoom__45F365D3">
+          <AssociationSet Name="FK__RENTAL__IdRoom__46E78A0C" Association="QLKSModel.FK__RENTAL__IdRoom__46E78A0C">
             <End Role="ROOM" EntitySet="ROOMs" />
             <End Role="RENTAL" EntitySet="RENTALs" />
           </AssociationSet>
-          <AssociationSet Name="FK__RENTALDET__IdSer__412EB0B6" Association="QLKSModel.FK__RENTALDET__IdSer__412EB0B6">
+          <AssociationSet Name="FK__RENTALDET__IdSer__47DBAE45" Association="QLKSModel.FK__RENTALDET__IdSer__47DBAE45">
             <End Role="SERVICE" EntitySet="SERVICEs" />
             <End Role="RENTALDETAIL" EntitySet="RENTALDETAILs" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVATI__IdRes__3B75D760" Association="QLKSModel.FK__RESERVATI__IdRes__3B75D760">
+          <AssociationSet Name="FK__RESERVATI__IdRes__4AB81AF0" Association="QLKSModel.FK__RESERVATI__IdRes__4AB81AF0">
             <End Role="RESERVATION_DETAIL" EntitySet="RESERVATION_DETAIL" />
             <End Role="RESERVATION" EntitySet="RESERVATIONs" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVATI__IdRoo__3C69FB99" Association="QLKSModel.FK__RESERVATI__IdRoo__3C69FB99">
+          <AssociationSet Name="FK__RESERVATI__IdRoo__4BAC3F29" Association="QLKSModel.FK__RESERVATI__IdRoo__4BAC3F29">
             <End Role="ROOM" EntitySet="ROOMs" />
             <End Role="RESERVATION" EntitySet="RESERVATIONs" />
           </AssociationSet>
@@ -527,18 +528,19 @@
           <Property Name="Total" Type="Int32" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IdRental" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="BILLINFO" Relationship="QLKSModel.FK__Bill__IdBillInfo__49C3F6B7" FromRole="Bill" ToRole="BILLINFO" />
-          <NavigationProperty Name="RENTAL" Relationship="QLKSModel.FK__Bill__IdRental__48CFD27E" FromRole="Bill" ToRole="RENTAL" />
+          <Property Name="Date_Bill" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="BILLINFO" Relationship="QLKSModel.FK__Bill__IdBillInfo__412EB0B6" FromRole="Bill" ToRole="BILLINFO" />
+          <NavigationProperty Name="RENTAL" Relationship="QLKSModel.FK__Bill__IdRental__4222D4EF" FromRole="Bill" ToRole="RENTAL" />
         </EntityType>
         <EntityType Name="BILLINFO">
           <Key>
             <PropertyRef Name="IdBillInfo" />
           </Key>
-          <Property Name="IdBillInfo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBillInfo" Type="Int32" Nullable="false" />
           <Property Name="Service" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Amount" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Bills" Relationship="QLKSModel.FK__Bill__IdBillInfo__49C3F6B7" FromRole="BILLINFO" ToRole="Bill" />
+          <NavigationProperty Name="Bills" Relationship="QLKSModel.FK__Bill__IdBillInfo__412EB0B6" FromRole="BILLINFO" ToRole="Bill" />
         </EntityType>
         <EntityType Name="CATEGORY_ROOM">
           <Key>
@@ -549,7 +551,7 @@
           <Property Name="Price_Day" Type="Int32" />
           <Property Name="Price_Hour" Type="Int32" />
           <Property Name="Beds" Type="Int32" />
-          <NavigationProperty Name="ROOMs" Relationship="QLKSModel.FK__ROOM__IdCategory__300424B4" FromRole="CATEGORY_ROOM" ToRole="ROOM" />
+          <NavigationProperty Name="ROOMs" Relationship="QLKSModel.FK__ROOM__IdCategory__4CA06362" FromRole="CATEGORY_ROOM" ToRole="ROOM" />
         </EntityType>
         <EntityType Name="CATEGORY_SERVICE">
           <Key>
@@ -557,7 +559,7 @@
           </Key>
           <Property Name="IdCategoryService" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SERVICEs" Relationship="QLKSModel.FK__SERVICE__IdCateg__34C8D9D1" FromRole="CATEGORY_SERVICE" ToRole="SERVICE" />
+          <NavigationProperty Name="SERVICEs" Relationship="QLKSModel.FK__SERVICE__IdCateg__4D94879B" FromRole="CATEGORY_SERVICE" ToRole="SERVICE" />
         </EntityType>
         <EntityType Name="CATEGORY_USER">
           <Key>
@@ -565,7 +567,7 @@
           </Key>
           <Property Name="IdCategoryUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="USERS" Relationship="QLKSModel.FK__USERS__Type__29572725" FromRole="CATEGORY_USER" ToRole="USER" />
+          <NavigationProperty Name="USERS" Relationship="QLKSModel.FK__USERS__Type__4F7CD00D" FromRole="CATEGORY_USER" ToRole="USER" />
         </EntityType>
         <EntityType Name="CONVINIENT">
           <Key>
@@ -573,7 +575,7 @@
           </Key>
           <Property Name="IdConvinient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DETAIL_CONVINIENT" Relationship="QLKSModel.FK__DETAIL_CO__IdCon__5FB337D6" FromRole="CONVINIENT" ToRole="DETAIL_CONVINIENT" />
+          <NavigationProperty Name="DETAIL_CONVINIENT" Relationship="QLKSModel.FK__DETAIL_CO__IdCon__4316F928" FromRole="CONVINIENT" ToRole="DETAIL_CONVINIENT" />
         </EntityType>
         <EntityType Name="CUSTOMER">
           <Key>
@@ -587,7 +589,7 @@
           <Property Name="CCCD" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Sex" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Nationality" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="RESERVATIONs" Relationship="QLKSModel.FK__RESERVATI__IdCus__3A81B327" FromRole="CUSTOMER" ToRole="RESERVATION" />
+          <NavigationProperty Name="RESERVATIONs" Relationship="QLKSModel.FK__RESERVATI__IdCus__48CFD27E" FromRole="CUSTOMER" ToRole="RESERVATION" />
         </EntityType>
         <EntityType Name="DETAIL_CONVINIENT">
           <Key>
@@ -597,8 +599,8 @@
           <Property Name="IdRoom" Type="Int32" Nullable="false" />
           <Property Name="IdConvinient" Type="Int32" Nullable="false" />
           <Property Name="Amount" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CONVINIENT" Relationship="QLKSModel.FK__DETAIL_CO__IdCon__5FB337D6" FromRole="DETAIL_CONVINIENT" ToRole="CONVINIENT" />
-          <NavigationProperty Name="ROOM" Relationship="QLKSModel.FK__DETAIL_CO__IdRoo__5EBF139D" FromRole="DETAIL_CONVINIENT" ToRole="ROOM" />
+          <NavigationProperty Name="CONVINIENT" Relationship="QLKSModel.FK__DETAIL_CO__IdCon__4316F928" FromRole="DETAIL_CONVINIENT" ToRole="CONVINIENT" />
+          <NavigationProperty Name="ROOM" Relationship="QLKSModel.FK__DETAIL_CO__IdRoo__440B1D61" FromRole="DETAIL_CONVINIENT" ToRole="ROOM" />
         </EntityType>
         <EntityType Name="EMPLOYEE">
           <Key>
@@ -613,8 +615,8 @@
           <Property Name="Sex" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Position" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Salary" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="RESERVATIONs" Relationship="QLKSModel.FK__RESERVATI__IdEmp__398D8EEE" FromRole="EMPLOYEE" ToRole="RESERVATION" />
-          <NavigationProperty Name="USERS" Relationship="QLKSModel.FK__USERS__IdEmploye__286302EC" FromRole="EMPLOYEE" ToRole="USER" />
+          <NavigationProperty Name="RESERVATIONs" Relationship="QLKSModel.FK__RESERVATI__IdEmp__49C3F6B7" FromRole="EMPLOYEE" ToRole="RESERVATION" />
+          <NavigationProperty Name="USERS" Relationship="QLKSModel.FK__USERS__IdEmploye__4E88ABD4" FromRole="EMPLOYEE" ToRole="USER" />
         </EntityType>
         <EntityType Name="RENTAL">
           <Key>
@@ -624,10 +626,10 @@
           <Property Name="IdReservation" Type="Int32" Nullable="false" />
           <Property Name="IdRentalDetail" Type="Int32" Nullable="false" />
           <Property Name="IdRoom" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Bills" Relationship="QLKSModel.FK__Bill__IdRental__48CFD27E" FromRole="RENTAL" ToRole="Bill" />
+          <NavigationProperty Name="Bills" Relationship="QLKSModel.FK__Bill__IdRental__4222D4EF" FromRole="RENTAL" ToRole="Bill" />
           <NavigationProperty Name="RENTALDETAIL" Relationship="QLKSModel.FK__RENTAL__IdRental__44FF419A" FromRole="RENTAL" ToRole="RENTALDETAIL" />
-          <NavigationProperty Name="RESERVATION" Relationship="QLKSModel.FK__RENTAL__IdReserv__440B1D61" FromRole="RENTAL" ToRole="RESERVATION" />
-          <NavigationProperty Name="ROOM" Relationship="QLKSModel.FK__RENTAL__IdRoom__45F365D3" FromRole="RENTAL" ToRole="ROOM" />
+          <NavigationProperty Name="RESERVATION" Relationship="QLKSModel.FK__RENTAL__IdReserv__45F365D3" FromRole="RENTAL" ToRole="RESERVATION" />
+          <NavigationProperty Name="ROOM" Relationship="QLKSModel.FK__RENTAL__IdRoom__46E78A0C" FromRole="RENTAL" ToRole="ROOM" />
         </EntityType>
         <EntityType Name="RENTALDETAIL">
           <Key>
@@ -636,7 +638,7 @@
           <Property Name="IdRentalDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdService" Type="Int32" Nullable="false" />
           <NavigationProperty Name="RENTALs" Relationship="QLKSModel.FK__RENTAL__IdRental__44FF419A" FromRole="RENTALDETAIL" ToRole="RENTAL" />
-          <NavigationProperty Name="SERVICE" Relationship="QLKSModel.FK__RENTALDET__IdSer__412EB0B6" FromRole="RENTALDETAIL" ToRole="SERVICE" />
+          <NavigationProperty Name="SERVICE" Relationship="QLKSModel.FK__RENTALDET__IdSer__47DBAE45" FromRole="RENTALDETAIL" ToRole="SERVICE" />
         </EntityType>
         <EntityType Name="RESERVATION">
           <Key>
@@ -648,11 +650,11 @@
           <Property Name="Date" Type="Int32" />
           <Property Name="IdReservationDetail" Type="Int32" Nullable="false" />
           <Property Name="IdRoom" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CUSTOMER" Relationship="QLKSModel.FK__RESERVATI__IdCus__3A81B327" FromRole="RESERVATION" ToRole="CUSTOMER" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="QLKSModel.FK__RESERVATI__IdEmp__398D8EEE" FromRole="RESERVATION" ToRole="EMPLOYEE" />
-          <NavigationProperty Name="RENTALs" Relationship="QLKSModel.FK__RENTAL__IdReserv__440B1D61" FromRole="RESERVATION" ToRole="RENTAL" />
-          <NavigationProperty Name="RESERVATION_DETAIL" Relationship="QLKSModel.FK__RESERVATI__IdRes__3B75D760" FromRole="RESERVATION" ToRole="RESERVATION_DETAIL" />
-          <NavigationProperty Name="ROOM" Relationship="QLKSModel.FK__RESERVATI__IdRoo__3C69FB99" FromRole="RESERVATION" ToRole="ROOM" />
+          <NavigationProperty Name="CUSTOMER" Relationship="QLKSModel.FK__RESERVATI__IdCus__48CFD27E" FromRole="RESERVATION" ToRole="CUSTOMER" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="QLKSModel.FK__RESERVATI__IdEmp__49C3F6B7" FromRole="RESERVATION" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="RENTALs" Relationship="QLKSModel.FK__RENTAL__IdReserv__45F365D3" FromRole="RESERVATION" ToRole="RENTAL" />
+          <NavigationProperty Name="RESERVATION_DETAIL" Relationship="QLKSModel.FK__RESERVATI__IdRes__4AB81AF0" FromRole="RESERVATION" ToRole="RESERVATION_DETAIL" />
+          <NavigationProperty Name="ROOM" Relationship="QLKSModel.FK__RESERVATI__IdRoo__4BAC3F29" FromRole="RESERVATION" ToRole="ROOM" />
         </EntityType>
         <EntityType Name="RESERVATION_DETAIL">
           <Key>
@@ -664,7 +666,7 @@
           <Property Name="Start_Time" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="End_Time" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Amount" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="RESERVATIONs" Relationship="QLKSModel.FK__RESERVATI__IdRes__3B75D760" FromRole="RESERVATION_DETAIL" ToRole="RESERVATION" />
+          <NavigationProperty Name="RESERVATIONs" Relationship="QLKSModel.FK__RESERVATI__IdRes__4AB81AF0" FromRole="RESERVATION_DETAIL" ToRole="RESERVATION" />
         </EntityType>
         <EntityType Name="ROOM">
           <Key>
@@ -675,10 +677,10 @@
           <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Clean" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IdCategoryRoom" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CATEGORY_ROOM" Relationship="QLKSModel.FK__ROOM__IdCategory__300424B4" FromRole="ROOM" ToRole="CATEGORY_ROOM" />
-          <NavigationProperty Name="DETAIL_CONVINIENT" Relationship="QLKSModel.FK__DETAIL_CO__IdRoo__5EBF139D" FromRole="ROOM" ToRole="DETAIL_CONVINIENT" />
-          <NavigationProperty Name="RENTALs" Relationship="QLKSModel.FK__RENTAL__IdRoom__45F365D3" FromRole="ROOM" ToRole="RENTAL" />
-          <NavigationProperty Name="RESERVATIONs" Relationship="QLKSModel.FK__RESERVATI__IdRoo__3C69FB99" FromRole="ROOM" ToRole="RESERVATION" />
+          <NavigationProperty Name="CATEGORY_ROOM" Relationship="QLKSModel.FK__ROOM__IdCategory__4CA06362" FromRole="ROOM" ToRole="CATEGORY_ROOM" />
+          <NavigationProperty Name="DETAIL_CONVINIENT" Relationship="QLKSModel.FK__DETAIL_CO__IdRoo__440B1D61" FromRole="ROOM" ToRole="DETAIL_CONVINIENT" />
+          <NavigationProperty Name="RENTALs" Relationship="QLKSModel.FK__RENTAL__IdRoom__46E78A0C" FromRole="ROOM" ToRole="RENTAL" />
+          <NavigationProperty Name="RESERVATIONs" Relationship="QLKSModel.FK__RESERVATI__IdRoo__4BAC3F29" FromRole="ROOM" ToRole="RESERVATION" />
         </EntityType>
         <EntityType Name="SERVICE">
           <Key>
@@ -688,8 +690,8 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Int32" Nullable="false" />
           <Property Name="IdCategoryService" Type="Int32" />
-          <NavigationProperty Name="CATEGORY_SERVICE" Relationship="QLKSModel.FK__SERVICE__IdCateg__34C8D9D1" FromRole="SERVICE" ToRole="CATEGORY_SERVICE" />
-          <NavigationProperty Name="RENTALDETAILs" Relationship="QLKSModel.FK__RENTALDET__IdSer__412EB0B6" FromRole="SERVICE" ToRole="RENTALDETAIL" />
+          <NavigationProperty Name="CATEGORY_SERVICE" Relationship="QLKSModel.FK__SERVICE__IdCateg__4D94879B" FromRole="SERVICE" ToRole="CATEGORY_SERVICE" />
+          <NavigationProperty Name="RENTALDETAILs" Relationship="QLKSModel.FK__RENTALDET__IdSer__47DBAE45" FromRole="SERVICE" ToRole="RENTALDETAIL" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -700,10 +702,10 @@
           <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IdEmployee" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CATEGORY_USER" Relationship="QLKSModel.FK__USERS__Type__29572725" FromRole="USER" ToRole="CATEGORY_USER" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="QLKSModel.FK__USERS__IdEmploye__286302EC" FromRole="USER" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="CATEGORY_USER" Relationship="QLKSModel.FK__USERS__Type__4F7CD00D" FromRole="USER" ToRole="CATEGORY_USER" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="QLKSModel.FK__USERS__IdEmploye__4E88ABD4" FromRole="USER" ToRole="EMPLOYEE" />
         </EntityType>
-        <Association Name="FK__Bill__IdBillInfo__49C3F6B7">
+        <Association Name="FK__Bill__IdBillInfo__412EB0B6">
           <End Type="QLKSModel.BILLINFO" Role="BILLINFO" Multiplicity="1" />
           <End Type="QLKSModel.Bill" Role="Bill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -715,7 +717,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bill__IdRental__48CFD27E">
+        <Association Name="FK__Bill__IdRental__4222D4EF">
           <End Type="QLKSModel.RENTAL" Role="RENTAL" Multiplicity="1" />
           <End Type="QLKSModel.Bill" Role="Bill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -727,7 +729,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ROOM__IdCategory__300424B4">
+        <Association Name="FK__ROOM__IdCategory__4CA06362">
           <End Type="QLKSModel.CATEGORY_ROOM" Role="CATEGORY_ROOM" Multiplicity="1" />
           <End Type="QLKSModel.ROOM" Role="ROOM" Multiplicity="*" />
           <ReferentialConstraint>
@@ -739,7 +741,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SERVICE__IdCateg__34C8D9D1">
+        <Association Name="FK__SERVICE__IdCateg__4D94879B">
           <End Type="QLKSModel.CATEGORY_SERVICE" Role="CATEGORY_SERVICE" Multiplicity="0..1" />
           <End Type="QLKSModel.SERVICE" Role="SERVICE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -751,7 +753,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__USERS__Type__29572725">
+        <Association Name="FK__USERS__Type__4F7CD00D">
           <End Type="QLKSModel.CATEGORY_USER" Role="CATEGORY_USER" Multiplicity="1" />
           <End Type="QLKSModel.USER" Role="USER" Multiplicity="*" />
           <ReferentialConstraint>
@@ -763,7 +765,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DETAIL_CO__IdCon__5FB337D6">
+        <Association Name="FK__DETAIL_CO__IdCon__4316F928">
           <End Type="QLKSModel.CONVINIENT" Role="CONVINIENT" Multiplicity="1" />
           <End Type="QLKSModel.DETAIL_CONVINIENT" Role="DETAIL_CONVINIENT" Multiplicity="*" />
           <ReferentialConstraint>
@@ -775,7 +777,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVATI__IdCus__3A81B327">
+        <Association Name="FK__RESERVATI__IdCus__48CFD27E">
           <End Type="QLKSModel.CUSTOMER" Role="CUSTOMER" Multiplicity="1" />
           <End Type="QLKSModel.RESERVATION" Role="RESERVATION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -787,7 +789,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DETAIL_CO__IdRoo__5EBF139D">
+        <Association Name="FK__DETAIL_CO__IdRoo__440B1D61">
           <End Type="QLKSModel.ROOM" Role="ROOM" Multiplicity="1" />
           <End Type="QLKSModel.DETAIL_CONVINIENT" Role="DETAIL_CONVINIENT" Multiplicity="*" />
           <ReferentialConstraint>
@@ -799,7 +801,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVATI__IdEmp__398D8EEE">
+        <Association Name="FK__RESERVATI__IdEmp__49C3F6B7">
           <End Type="QLKSModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
           <End Type="QLKSModel.RESERVATION" Role="RESERVATION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -811,7 +813,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__USERS__IdEmploye__286302EC">
+        <Association Name="FK__USERS__IdEmploye__4E88ABD4">
           <End Type="QLKSModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
           <End Type="QLKSModel.USER" Role="USER" Multiplicity="*" />
           <ReferentialConstraint>
@@ -835,7 +837,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RENTAL__IdReserv__440B1D61">
+        <Association Name="FK__RENTAL__IdReserv__45F365D3">
           <End Type="QLKSModel.RESERVATION" Role="RESERVATION" Multiplicity="1" />
           <End Type="QLKSModel.RENTAL" Role="RENTAL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -847,7 +849,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RENTAL__IdRoom__45F365D3">
+        <Association Name="FK__RENTAL__IdRoom__46E78A0C">
           <End Type="QLKSModel.ROOM" Role="ROOM" Multiplicity="1" />
           <End Type="QLKSModel.RENTAL" Role="RENTAL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -859,7 +861,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RENTALDET__IdSer__412EB0B6">
+        <Association Name="FK__RENTALDET__IdSer__47DBAE45">
           <End Type="QLKSModel.SERVICE" Role="SERVICE" Multiplicity="1" />
           <End Type="QLKSModel.RENTALDETAIL" Role="RENTALDETAIL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -871,7 +873,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVATI__IdRes__3B75D760">
+        <Association Name="FK__RESERVATI__IdRes__4AB81AF0">
           <End Type="QLKSModel.RESERVATION_DETAIL" Role="RESERVATION_DETAIL" Multiplicity="1" />
           <End Type="QLKSModel.RESERVATION" Role="RESERVATION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -883,7 +885,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVATI__IdRoo__3C69FB99">
+        <Association Name="FK__RESERVATI__IdRoo__4BAC3F29">
           <End Type="QLKSModel.ROOM" Role="ROOM" Multiplicity="1" />
           <End Type="QLKSModel.RESERVATION" Role="RESERVATION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -895,7 +897,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -904,6 +906,7 @@
           <EntitySetMapping Name="Bills">
             <EntityTypeMapping TypeName="QLKSModel.Bill">
               <MappingFragment StoreEntitySet="Bill">
+                <ScalarProperty Name="Date_Bill" ColumnName="Date_Bill" />
                 <ScalarProperty Name="IdRental" ColumnName="IdRental" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
