@@ -105,7 +105,7 @@
           <Key>
             <PropertyRef Name="IdRentalDetail" />
           </Key>
-          <Property Name="IdRentalDetail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdRentalDetail" Type="int" Nullable="false" />
           <Property Name="IdService" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RESERVATION">
@@ -635,7 +635,7 @@
           <Key>
             <PropertyRef Name="IdRentalDetail" />
           </Key>
-          <Property Name="IdRentalDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRentalDetail" Type="Int32" Nullable="false" />
           <Property Name="IdService" Type="Int32" Nullable="false" />
           <NavigationProperty Name="RENTALs" Relationship="QLKSModel.FK__RENTAL__IdRental__44FF419A" FromRole="RENTALDETAIL" ToRole="RENTAL" />
           <NavigationProperty Name="SERVICE" Relationship="QLKSModel.FK__RENTALDET__IdSer__47DBAE45" FromRole="RENTALDETAIL" ToRole="SERVICE" />
