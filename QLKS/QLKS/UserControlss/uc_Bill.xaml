@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLKS.UserControlss"
-        xmlns:validation ="clr-namespace:QuanLyGaraOto.Validation"
+        xmlns:validation ="clr-namespace:QLKS.Validation"
         mc:Ignorable="d"
-        x:Name="ServiceWD"
-        Height="450" Width="1200"
+        x:Name="BillWd"
+        Height="650" Width="1300"
         Background="White"  
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
          xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
@@ -18,47 +18,11 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="130"></RowDefinition>
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" 
-              Margin="15 0 15 10"
-              Background="{StaticResource MainColor}"
-              >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <TextBlock 
-                   Text="Dịch vụ"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Left"
-                    Margin="15 0 5 0"            
-                    FontSize="30"
-                    Foreground="White"
-                   FontWeight="Bold"
-                    ></TextBlock>
-            </Grid>
-            <Grid Grid.Column="1">
-
-            </Grid>
-        </Grid>
-        <Grid Grid.Row="1">
-            <Grid Margin="15 0 15 0">
-                <TextBlock Grid.Column="0"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"
-                           Text="{Binding ReceptionOfDay}"
-                           FontSize="16"
-                           FontWeight="DemiBold"
-                           Foreground="{StaticResource MainBlue}"
-                           ></TextBlock>
-
-            </Grid>
-        </Grid>
+      
+       
         <materialDesign:Card
             Margin="15 0 10 15"
             Grid.Row="3">
@@ -112,19 +76,16 @@
                 </DataGrid.ColumnHeaderStyle>
 
                 <DataGrid.Columns>
-                    <materialDesign:DataGridTextColumn Width="100" Header="ID" Binding="{Binding CarReception.Reception_Id}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="150" Header="Biển số" Binding="{Binding CarReception.LicensePlate}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="150" Header="Hiệu xe" Binding="{Binding CarReception.CAR_BRAND.CarBrand_Name}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="250" Header="Chủ xe" Binding="{Binding CarReception.CUSTOMER.Customer_Name}"></materialDesign:DataGridTextColumn>
-
-                    <materialDesign:DataGridTextColumn Width="200" Header="Ngày tiếp nhận" Binding="{Binding CarReception.ReceptionDate, StringFormat=MM/dd/yyyy}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="200" Header="Tiền nợ" Binding="{Binding CarReception.Debt}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="150" Header="Mã hóa đơn" Binding="{Binding CarReception.Reception_Id}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Ngày lập" Binding="{Binding CarReception.LicensePlate, StringFormat=MM/dd/yyyy}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="250" Header="Người lập" Binding="{Binding CarReception.CAR_BRAND.CarBrand_Name}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="250" Header="Tổng tiền" Binding="{Binding CarReception.CUSTOMER.Customer_Name}"></materialDesign:DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
 
         </materialDesign:Card>
 
-        <Grid Grid.Row="2" Margin="15 0 0 0">
+        <Grid Grid.Row="0" Margin="15 0 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="580"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -138,14 +99,7 @@
 
                 </Style>
             </Grid.Resources>
-            <Button Grid.Column="1"
-                    Command="{Binding CarReceptionCommand}"
-                    Content="Thêm xe"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Right"
-                    Style="{StaticResource MainButton}"
-                    Margin="10 5 50 5"
-                    />
+           
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
@@ -156,19 +110,19 @@
                         VerticalAlignment="Top">
                     <TextBox
                     x:Name="txbLicensePlate"
-                      materialDesign:HintAssist.Hint="Biển số"
+                      materialDesign:HintAssist.Hint="Mã hóa đơn"
                       Style="{StaticResource txbSearch}"
-                      Text="{Binding LicensePlate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                      Text="{Binding IdBill,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                       VerticalAlignment="Center">
 
                     </TextBox>
                     <ComboBox
                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                     x:Name="cbBrand"
-                    ItemsSource="{Binding ListCarBrand}"
+                    ItemsSource="{Binding ListRoomCategory}"
                     DisplayMemberPath="CarBrand_Name"
-                    SelectedItem="{Binding SelectedBrand}"
-                      materialDesign:HintAssist.Hint="Hiệu xe"
+                    SelectedItem="{Binding SelectedCategory}"
+                      materialDesign:HintAssist.Hint="Loại phòng"
                         Margin="10 0 0 0"
                     Width="100"
                     FontSize="18"
@@ -178,30 +132,16 @@
                     </ComboBox>
                     <TextBox
                         x:Name="txbCustomerName"
-                      materialDesign:HintAssist.Hint="Chủ xe"
+                      materialDesign:HintAssist.Hint="Người thuê"
                       Style="{StaticResource txbSearch}"
                       Text="{Binding CustomerName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                       VerticalAlignment="Center">
                     </TextBox>
-                    <TextBox
-                        materialDesign:ValidationAssist.FontSize="14"
-                        x:Name="txbDebt"
-                      materialDesign:HintAssist.Hint="Tiền nợ"
-                      Style="{StaticResource txbSearch}"
-                      VerticalAlignment="Center">
-                        <TextBox.Text>
-                            <Binding Path="Debt" UpdateSourceTrigger="PropertyChanged"  Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <validation:OnlyNumberValidation ErrorMessage="Chỉ nhập số (0-9)"></validation:OnlyNumberValidation>
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                    
                     <DatePicker
                         x:Name="dpReceptionDate"
-                            
                             FontSize="16"
-                            materialDesign:HintAssist.Hint="Ngày tiếp nhận"
+                            materialDesign:HintAssist.Hint="Ngày lập hóa đơn"
                             Width="auto"
                             Margin="10 5 0 0"
                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
@@ -225,17 +165,13 @@
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                             materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource MainBlue}"
                             materialDesign:HintAssist.Foreground="{StaticResource MainBlue}"
-                            materialDesign:HintAssist.Hint="Hiển thị danh sách xe theo"
-                           
+                            materialDesign:HintAssist.Hint="Hiển thị theo"
                             FontSize="16">
                             <ComboBoxItem
                             Content="Tất cả" />
                             <ComboBoxItem
-                            Content="Tiếp nhận trong ngày hôm nay" />
-                            <ComboBoxItem
-                            Content="Đã thanh toán" />
-                            <ComboBoxItem
-                            Content="Chưa thanh toán" />
+                            Content="Ngày hôm nay" />
+                  
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding ViewSelectionChanged}"></i:InvokeCommandAction>
@@ -252,34 +188,24 @@
                     <Button Content="Tìm"
                        Margin="20 5 0 0"
                         Command="{Binding SearchCommand}"
-                        CommandParameter="{Binding ElementName=ServiceWD}">
+                        CommandParameter="{Binding ElementName=BillWd}">
                     </Button>
                     <Button Content="Làm mới"
                         Margin="20 5 0 0"
                         Command="{Binding RefeshCommand}"
-                        CommandParameter="{Binding ElementName=ServiceWD}">
+                        CommandParameter="{Binding ElementName=BillWd}">
 
                     </Button>
-                    <Button Content="Xuất"
+                    <Button Content="Chi tiết"
                             Style="{StaticResource ExportButton}"
                             Margin="20 5 0 0"
-                            Command="{Binding ExportCommand}"
-                            CommandParameter="{Binding ElementName=ServiceWD}">
+                            Command="{Binding DetailCommand}"
+                            CommandParameter="{Binding ElementName=BillWd}">
                     </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="0 20 0 0">
-                    <Button 
-                        Command="{Binding DeleteCommand}"
-                        Margin="20 5 0 0"
-                        Style="{StaticResource DeleteButton}"
-                    Content="Xóa">
-                    </Button>
-                    <Button 
-                        Command="{Binding OpenCommand}" 
-                        Margin="20 5 0 0"
-                        Content="Chi tiết">
-                    </Button>
+                   
 
                 </StackPanel>
             </StackPanel>
