@@ -142,6 +142,11 @@
     <Compile Include="UserControlss\uc_RoomManage.xaml.cs">
       <DependentUpon>uc_RoomManage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validation\DateValidation.cs" />
+    <Compile Include="Validation\NonFocusValidation.cs" />
+    <Compile Include="Validation\NullDataValidation.cs" />
+    <Compile Include="Validation\NumberValidation.cs" />
+    <Compile Include="Validation\OnlyNumberValidation.cs" />
     <Compile Include="ViewModel\AddCategoryServiceViewModel.cs" />
     <Compile Include="ViewModel\AddRoomViewModel.cs" />
     <Compile Include="ViewModel\AddServiceViewModel.cs" />
