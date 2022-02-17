@@ -26,7 +26,7 @@
         <materialDesign:Card
             Margin="15 0 10 15"
             Grid.Row="3">
-            <DataGrid ItemsSource="{Binding ListCar}" 
+            <DataGrid ItemsSource="{Binding ListBill, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                       SelectedItem="{Binding SelectedItem}"
                       SelectionMode="Extended"
                       IsReadOnly="True"
@@ -76,10 +76,10 @@
                 </DataGrid.ColumnHeaderStyle>
 
                 <DataGrid.Columns>
-                    <materialDesign:DataGridTextColumn Width="150" Header="Mã hóa đơn" Binding="{Binding CarReception.Reception_Id}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="200" Header="Ngày lập" Binding="{Binding CarReception.LicensePlate, StringFormat=MM/dd/yyyy}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="250" Header="Người lập" Binding="{Binding CarReception.CAR_BRAND.CarBrand_Name}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="250" Header="Tổng tiền" Binding="{Binding CarReception.CUSTOMER.Customer_Name}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="150" Header="Mã hóa đơn" Binding="{Binding Bill.IdBill}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Ngày lập" Binding="{Binding Bill.Date_Bill, StringFormat=dd/MM/yyyy}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="250" Header="Người lập" Binding="{Binding Bill.Name}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="250" Header="Tổng tiền" Binding="{Binding Bill.Total}"></materialDesign:DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -109,20 +109,20 @@
                         Orientation="Horizontal"
                         VerticalAlignment="Top">
                     <TextBox
-                    x:Name="txbLicensePlate"
+                    x:Name="txbMaHD"
                         Width="auto"
                       materialDesign:HintAssist.Hint="Mã hóa đơn"
                       Style="{StaticResource txbSearch}"
-                      Text="{Binding IdBill,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                      Text="{Binding IdHD,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                       VerticalAlignment="Center">
 
                     </TextBox>
                     <ComboBox
                           
                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                    x:Name="cbBrand"
-                    ItemsSource="{Binding ListRoomCategory}"
-                    DisplayMemberPath="CarBrand_Name"
+                    x:Name="cbCategoryRoom"
+                    ItemsSource="{Binding ListCategoryRoom}"
+                    DisplayMemberPath="Name"
                     SelectedItem="{Binding SelectedCategory}"
                       materialDesign:HintAssist.Hint="Loại phòng"
                         Margin="10 0 0 0"
