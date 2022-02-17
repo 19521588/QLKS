@@ -94,6 +94,9 @@
     <Compile Include="Model\BillDetail.cs" />
     <Compile Include="Model\ListBill.cs" />
     <Compile Include="Model\ListBillInfo.cs" />
+    <Compile Include="Template\BillTemplate.xaml.cs">
+      <DependentUpon>BillTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="test.xaml.cs">
       <DependentUpon>test.xaml</DependentUpon>
     </Compile>
@@ -163,6 +166,7 @@
     <Compile Include="ViewModel\AddServiceViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BillDetailViewModel.cs" />
+    <Compile Include="ViewModel\BillTemplateViewModel.cs" />
     <Compile Include="ViewModel\BillViewModel.cs" />
     <Compile Include="ViewModel\ControlBar2ViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
@@ -172,6 +176,7 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\EditServiceViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\PrintViewModel.cs" />
     <Compile Include="ViewModel\RoomCategoryViewModel.cs" />
     <Compile Include="ViewModel\RoomViewModel.cs" />
     <Compile Include="ViewModel\CategoryServiceViewModel.cs" />
@@ -231,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Template\BillTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

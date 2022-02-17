@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QLKS.Model
 {
-    public class BillDetail:BaseViewModel
+    public class BillDetail : BaseViewModel
     {
         private String _Name { get; set; }
         public String Name { get => _Name; set { _Name = value; OnPropertyChanged(); } }
@@ -15,8 +15,8 @@ namespace QLKS.Model
         public String CCCD { get => _CCCD; set { _CCCD = value; OnPropertyChanged(); } }
         private String _Phone { get; set; }
         public String Phone { get => _Phone; set { _Phone = value; OnPropertyChanged(); } }
-        private String _AmountRenter { get; set; }
-        public String AmountRenter { get => _AmountRenter; set { _AmountRenter = value; OnPropertyChanged(); } }
+        private int _AmountRenter { get; set; }
+        public int AmountRenter { get => _AmountRenter; set { _AmountRenter = value; OnPropertyChanged(); } }
         private DateTime _StartDate { get; set; }
         public DateTime StartDate { get => _StartDate; set { _StartDate = value; OnPropertyChanged(); } }
         private DateTime _EndDate { get; set; }
@@ -25,5 +25,6 @@ namespace QLKS.Model
         public long RoomCharge { get => _RoomCharge; set { _RoomCharge = value; OnPropertyChanged(); } }
         private long _ServiceCharge { get; set; }
         public long ServiceCharge { get => _ServiceCharge; set { _ServiceCharge = value; OnPropertyChanged(); } }
-        
+
     }
+}

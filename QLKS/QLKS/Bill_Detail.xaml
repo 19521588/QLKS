@@ -177,7 +177,7 @@
                                            ></TextBlock>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBlock Text="{Binding BillInfo.Phone}"
+                                <TextBlock Text="{Binding BillDetail.Phone}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
                                            Style="{StaticResource txbInfo}"
@@ -205,7 +205,7 @@
                                            Style="{StaticResource txbInfo}"></TextBlock>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBlock Text="{Binding BillInfo.AmountRenter}"
+                                <TextBlock Text="{Binding BillDetail.AmountRenter}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
                                            Style="{StaticResource txbInfo}"></TextBlock>
@@ -223,7 +223,7 @@
                                            ></TextBlock>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBlock Text="{Binding BillInfo.StartDate}"
+                                <TextBlock Text="{Binding BillDetail.StartDate ,StringFormat=dd/MM/yyyy}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
                                            Style="{StaticResource txbInfo}"
@@ -242,7 +242,7 @@
                                            ></TextBlock>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBlock Text="{Binding BillInfo.EndDate}"
+                                <TextBlock Text="{Binding BillDetail.EndDate, StringFormat=dd/MM/yyyy}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
                                            Style="{StaticResource txbInfo}"
@@ -261,7 +261,7 @@
                                            ></TextBlock>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBlock Text="{Binding BillInfo.RoomCharge}"
+                                <TextBlock Text="{Binding BillDetail.RoomCharge}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
                                            Style="{StaticResource txbInfo}"
@@ -280,7 +280,7 @@
                                            ></TextBlock>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBlock Text="{Binding BillInfo.ServiceCharge}"
+                                <TextBlock Text="{Binding BillDetail.ServiceCharge}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
                                            Style="{StaticResource txbInfo}"
@@ -292,10 +292,9 @@
 
                 </Grid>
                 <Grid Grid.Row="3">
-                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
                         <TextBlock Text="Tổng tiền"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
+                                      
                                        Margin="0 0 10 0"
                                        FontSize="20"
                                        FontWeight="ExtraBold"
@@ -304,8 +303,7 @@
 
                         </TextBlock>
                         <TextBlock Text="{Binding TotalMoney}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
+                                      
                                        Margin="0 0 10 0"
                                        FontSize="20"
                                         FontWeight="ExtraBold"

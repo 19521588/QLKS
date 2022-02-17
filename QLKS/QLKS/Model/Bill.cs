@@ -14,6 +14,12 @@ namespace QLKS.Model
     
     public partial class Bill
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Bill()
+        {
+            this.BILLINFOes = new HashSet<BILLINFO>();
+        }
+    
         public int IdBill { get; set; }
         public int IdBillInfo { get; set; }
         public Nullable<int> Total { get; set; }
@@ -23,5 +29,7 @@ namespace QLKS.Model
     
         public virtual BILLINFO BILLINFO { get; set; }
         public virtual RENTAL RENTAL { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BILLINFO> BILLINFOes { get; set; }
     }
 }
