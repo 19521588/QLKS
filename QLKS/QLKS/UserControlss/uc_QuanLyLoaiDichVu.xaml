@@ -12,22 +12,27 @@
              d:DesignHeight="632" d:DesignWidth="1300">
     <Grid Background="#FFFFFF">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid  Grid.Row="0" >
-            <Grid  VerticalAlignment="Center">
-                <materialDesign:ColorZone Mode="Standard" CornerRadius="5" HorizontalAlignment="Left" Margin="100,0,0,0"
+        <Grid  Grid.Row="0" Margin="0 10 0 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!--<materialDesign:ColorZone Mode="Standard" CornerRadius="5" HorizontalAlignment="Left" Margin="100,0,0,0"
                                           VerticalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth1" Width="250">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Style="{DynamicResource MaterialDesignToolButton}">
-                            <materialDesign:PackIcon Kind="Search" Opacity=".56" />
-                        </Button>
-                        <TextBox Grid.Column="1" Name="txtFilter" 
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Style="{DynamicResource MaterialDesignToolButton}">
+                        <materialDesign:PackIcon Kind="Search" Opacity=".56" />
+                    </Button>
+                    <TextBox Grid.Column="1" Name="txtFilter" 
                                 Margin="0 0 0 0"
                                 materialDesign:HintAssist.Hint="Nhập tên loại dịch vụ cần tìm"
                                 materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
@@ -36,49 +41,52 @@
                                 FlowDirection="LeftToRight"
                                 VerticalAlignment="Center" />
 
-                    </Grid>
-                </materialDesign:ColorZone>
-
-
-                <Button HorizontalAlignment="Right"  x:Name="btnThemLoaiDV"                                                    
-                        Width="160" Height="36" Margin="0 0 100 0"
-                        Content="Thêm loại dịch vụ"  VerticalAlignment="Center"                              
-                        Background="#478C10" 
-                        Command="{Binding OpenAddWindowCommand}" 
-                    >
-                    <Button.Clip>
-                        <RectangleGeometry Rect="0,0,160,36" RadiusX="10" RadiusY="10" >
-                        </RectangleGeometry>
-                    </Button.Clip>
-                </Button>
-            </Grid>
+                </Grid>
+            </materialDesign:ColorZone>-->
+            <Button Grid.Column="1"
+                    Name="btnThem" 
+                    Command="{Binding OpenAddWindowCommand}"
+                    Width="150" Content="Thêm dịch vụ" FontSize="15" 
+                    FontFamily="Roboto" FontWeight="Bold" Background="#FF478C10"
+                    Margin="0,0,0,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top">
+                <Button.Clip>
+                    <RectangleGeometry Rect="0,0,150,36" RadiusX="10" RadiusY="10" />
+                </Button.Clip>
+            </Button>
+            <Button Grid.Column="2"
+                    Name="btnSua" 
+                    Command="{Binding OpenEditCategoryServiceWindowCommand}"
+                    Width="150" Content="Sửa dịch vụ" FontSize="15" 
+                    FontFamily="Roboto" FontWeight="Bold" Background="Orange"
+                    Margin="0,0,0,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top">
+                <Button.Clip>
+                    <RectangleGeometry Rect="0,0,150,36" RadiusX="10" RadiusY="10" />
+                </Button.Clip>
+            </Button>
+            <Button Grid.Column="3"
+                    Name="btnXoa" 
+                    Command="{Binding OpenAddWindowCommand}"
+                    FontFamily="Roboto" FontWeight="Bold" Background="Red" Content="Xóa dịch vụ"
+                    Margin="0,0,0,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top">
+                <Button.Clip>
+                    <RectangleGeometry Rect="0,0,150,36" RadiusX="10" RadiusY="10" />
+                </Button.Clip>
+            </Button>
 
         </Grid>
 
         <Grid Grid.Row="1"  >
-            <Grid HorizontalAlignment="Center"  Background="#F2F1F1" Width="700" Height="500" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="149*"/>
+                <ColumnDefinition Width="111*"/>
+            </Grid.ColumnDefinitions>
+            <Grid HorizontalAlignment="Left"  Background="#F2F1F1" Width="470" Height="500" Grid.ColumnSpan="2" Margin="415,36,0,36" >
 
                 <Grid.Clip>
                     <RectangleGeometry  Rect="0,0,700,500" RadiusX="10" RadiusY="10" >
                     </RectangleGeometry>
                 </Grid.Clip>
-                <Grid.Resources>
-                    <DataTemplate x:Key="dtpNutSua">
-                        <Button x:Name="btnCapNhat" BorderThickness="0">
-                            <Button.Background>
-                                <ImageBrush ImageSource="/QLKS;component/Res/edit.png"/>
-                            </Button.Background>
-                        </Button>
-                    </DataTemplate>
 
-                    <DataTemplate x:Key="dtpNutXoa">
-                        <Button x:Name="btnXoa" BorderThickness="0">
-                            <Button.Background>
-                                <ImageBrush ImageSource="/QLKS;component/Res/delete_vs2.png"/>
-                            </Button.Background>
-                        </Button>
-                    </DataTemplate>
-                </Grid.Resources>
                 <ListView  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="lsvLoaiDV" 
                            ItemsSource="{Binding ListCategoryService}" SelectedItem="{Binding SelectedItem}">
 
@@ -96,9 +104,7 @@
                             </GridView.ColumnHeaderContainerStyle>
                             <GridViewColumn Width="235" Header="Mã loại dịch vụ" DisplayMemberBinding="{Binding IdCategoryService}"/>
                             <GridViewColumn Width="235" Header="Tên loại dịch vụ" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Width="115" Header="Sửa" CellTemplate="{StaticResource dtpNutSua}"/>
-                            <GridViewColumn Width="115" Header="Xóa" CellTemplate="{StaticResource dtpNutXoa}"/>
-         
+
                         </GridView>
 
                     </ListView.View>

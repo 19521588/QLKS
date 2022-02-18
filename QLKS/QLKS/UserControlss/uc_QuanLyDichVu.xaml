@@ -17,21 +17,47 @@
              d:DesignHeight="641" d:DesignWidth="1300">
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <!--Grid 1-->
-        <Grid Grid.Row="0">
-            <Button Name="btnThem" 
+        <Grid Grid.Row="0" Margin="0 10 0 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1"
+                    Name="btnThem" 
                     Command="{Binding OpenAddWindowCommand}"
                     Width="150" Content="Thêm dịch vụ" FontSize="15" 
                     FontFamily="Roboto" FontWeight="Bold" Background="#FF478C10"
-                    Margin="1050,9,0,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top">
+                    Margin="0,0,0,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top">
                 <Button.Clip>
                     <RectangleGeometry Rect="0,0,150,36" RadiusX="10" RadiusY="10" />
                 </Button.Clip>
             </Button>
-            <materialDesign:ColorZone Mode="Standard" CornerRadius="5" HorizontalAlignment="Left" Margin="85,0,0,0"
+            <Button Grid.Column="2"
+                    Name="btnSua" 
+                    Command="{Binding OpenEditServiceWindowCommand}"
+                    Width="150" Content="Sửa dịch vụ" FontSize="15" 
+                    FontFamily="Roboto" FontWeight="Bold" Background="Orange"
+                    Margin="0,0,0,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top">
+                <Button.Clip>
+                    <RectangleGeometry Rect="0,0,150,36" RadiusX="10" RadiusY="10" />
+                </Button.Clip>
+            </Button>
+            <Button Grid.Column="3"
+                    Name="btnXoa" 
+                    Command="{Binding OpenAddWindowCommand}"
+                    FontFamily="Roboto" FontWeight="Bold" Background="Red" Content="Xóa dịch vụ"
+                    Margin="0,0,0,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top">
+                <Button.Clip>
+                    <RectangleGeometry Rect="0,0,150,36" RadiusX="10" RadiusY="10" />
+                </Button.Clip>
+            </Button>
+            <!--<materialDesign:ColorZone Mode="Standard" CornerRadius="5" HorizontalAlignment="Left" Margin="85,0,0,0"
                                           VerticalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth1" Width="250">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -51,35 +77,18 @@
                                 VerticalAlignment="Center" />
 
                 </Grid>
-            </materialDesign:ColorZone>
+            </materialDesign:ColorZone>-->
+        
         </Grid>
         <!--Bảng dữ liệu-->
         <Grid Grid.Row="1" Margin="0 20 0 0">
-            <Grid Width="680" Height="500" Background="#F2F1F1">
+            <Grid Width="550" Height="500" Background="#F2F1F1">
                 <Grid.Clip>
                     <RectangleGeometry Rect="0,0,680,500" RadiusX="10" RadiusY="10" >
                     </RectangleGeometry>
                 </Grid.Clip>
 
-                <Grid.Resources>
-                    <DataTemplate x:Key="dtpNutSua">
-                        <Button x:Name="btnCapNhat" BorderThickness="0"
-                                Command="{Binding OpenEditServiceWindowCommand}"
-                                CommandParameter="{Binding ElementName=wdService}">
-                            <Button.Background>
-                                <ImageBrush ImageSource="/QLKS;component/Res/edit.png"/>
-                            </Button.Background>
-                        </Button>
-                    </DataTemplate>
-
-                    <DataTemplate x:Key="dtpNutXoa">
-                        <Button x:Name="btnXoa" BorderThickness="0">
-                            <Button.Background>
-                                <ImageBrush ImageSource="/QLKS;component/Res/delete_vs2.png"/>
-                            </Button.Background>
-                        </Button>
-                    </DataTemplate>
-                </Grid.Resources>
+                
 
                 <ListView Name="lsvDichVu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                           ItemsSource="{Binding ListService}" SelectedItem="{Binding SelectedItem}">
@@ -101,8 +110,7 @@
                             <GridViewColumn Header="Tên dịch vụ" Width="200" DisplayMemberBinding="{Binding Name}"/>
                             <GridViewColumn Header="Loại" Width="140" DisplayMemberBinding="{Binding CATEGORY_SERVICE.Name}"/>
                             <GridViewColumn Header="Đơn giá" Width="120" DisplayMemberBinding="{Binding Price}"/>
-                            <GridViewColumn Header="Sửa" Width="65" CellTemplate="{StaticResource dtpNutSua}"/>
-                            <GridViewColumn Header="Xóa" Width="65" CellTemplate="{StaticResource dtpNutXoa}"/>
+                            
                         </GridView>
                     </ListView.View>
                 </ListView>

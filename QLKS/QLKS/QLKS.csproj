@@ -92,7 +92,7 @@
     </Compile>
     <Compile Include="test2.xaml.cs">
       <DependentUpon>test2.xaml</DependentUpon>
-        </Compile>
+    </Compile>
     <Compile Include="Convert\HashConvert.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -149,6 +149,7 @@
     <Compile Include="ViewModel\ControlBar2ViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\DialogCustomsViewModel.cs" />
+    <Compile Include="ViewModel\EditCategoryServiceViewModel.cs" />
     <Compile Include="ViewModel\EditRoomViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\EditServiceViewModel.cs" />
@@ -164,6 +165,9 @@
     </Compile>
     <Compile Include="wd_AddService.xaml.cs">
       <DependentUpon>wd_AddService.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wd_EditCategoryService.xaml.cs">
+      <DependentUpon>wd_EditCategoryService.xaml</DependentUpon>
     </Compile>
     <Compile Include="wd_EditRoom.xaml.cs">
       <DependentUpon>wd_EditRoom.xaml</DependentUpon>
@@ -260,6 +264,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="wd_AddService.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wd_EditCategoryService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

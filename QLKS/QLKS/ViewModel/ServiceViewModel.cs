@@ -18,6 +18,22 @@ namespace QLKS.ViewModel
 
         public ICommand OpenEditServiceWindowCommand { get; set; }
 
+        private SERVICE _SelectedItem { get; set; }
+        public SERVICE SelectedItem
+        {
+            get => _SelectedItem;
+            set
+            {
+                _SelectedItem = value;
+
+                if (SelectedItem != null)
+                {
+                    
+                }
+                OnPropertyChanged();
+            }
+        }
+
         public ServiceViewModel()
         {
             Load();
@@ -34,10 +50,14 @@ namespace QLKS.ViewModel
 
             //Mở cửa số để sửa dịch vụ
             OpenEditServiceWindowCommand = new RelayCommand<object>((p) => {
+                if (SelectedItem == null)
+                {
+                    return false;
+                }
                 return true;
             },
             (p) => {
-                wd_EditService wd = new wd_EditService();
+                wd_EditService wd = new wd_EditService(SelectedItem);
                 wd.ShowDialog();
                 Load();
             });
