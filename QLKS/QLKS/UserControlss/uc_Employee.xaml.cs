@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QLKS.ViewModel;
 
 namespace QLKS.UserControlss
 {
@@ -20,9 +21,11 @@ namespace QLKS.UserControlss
     /// </summary>
     public partial class uc_Employee : UserControl
     {
+        private EmployeeViewModel employeeViewModel { get; set; }
         public uc_Employee()
         {
             InitializeComponent();
+            this.DataContext = (employeeViewModel = new EmployeeViewModel());
         }
     }
 }

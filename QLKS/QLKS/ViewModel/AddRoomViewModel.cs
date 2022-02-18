@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using QLKS.ViewModel;
 using QLKS.Model;
+using QLKS.UserControlss;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -65,7 +66,6 @@ namespace QLKS.ViewModel
             { return true; },
             (p) =>
             {
-
                 p.Close();
             }
             );
