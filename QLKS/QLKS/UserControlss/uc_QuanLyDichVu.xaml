@@ -14,7 +14,10 @@
              TextOptions.TextFormattingMode="Ideal"     
              TextOptions.TextRenderingMode="Auto"    
              FontFamily="{DynamicResource MaterialDesignFont}"
-             d:DesignHeight="641" d:DesignWidth="1300">
+             d:DesignHeight="650" d:DesignWidth="1300">
+    <UserControl.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource FeatureButton}"></Style>
+    </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>

@@ -57,10 +57,9 @@
             </Button>
             <Button Grid.Column="2"
                     Name="btnSua" 
-                    Command="{Binding OpenEditConvenientWindowCommand}"
+                    Command="{Binding OpenEditWindowCommand}"
                     Width="150" Content="Sửa dịch vụ" FontSize="15" 
-                    FontFamily="Roboto" FontWeight="Bold" Background="Orange"
-                    Margin="0,0,0,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top">
+                    FontFamily="Roboto" FontWeight="Bold" Background="Orange" HorizontalAlignment="Left">
                 <Button.Clip>
                     <RectangleGeometry Rect="0,0,150,36" RadiusX="10" RadiusY="10" />
                 </Button.Clip>
