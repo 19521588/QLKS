@@ -195,8 +195,9 @@
     <Compile Include="wd_AddService.xaml.cs">
       <DependentUpon>wd_AddService.xaml</DependentUpon>
     </Compile>
-    <Compile Include="wd_EditCategoryRoom.xaml.cs">
-      <DependentUpon>wd_EditCategoryRoom.xaml</DependentUpon>
+	  <Compile Include="wd_EditCategoryRoom.xaml.cs">
+		  <DependentUpon>wd_EditCategoryRoom.xaml</DependentUpon>
+	  </Compile>
     <Compile Include="wd_EditCategoryService.xaml.cs">
       <DependentUpon>wd_EditCategoryService.xaml</DependentUpon>
     </Compile>
@@ -327,6 +328,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="wd_EditCategoryRoom.xaml">
+		<SubType>Designer</SubType>
+		<Generator>MSBuild:Compile</Generator>
+	</Page>
     <Page Include="wd_EditCategoryService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
