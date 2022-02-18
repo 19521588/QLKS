@@ -17,15 +17,15 @@ using System.Windows.Shapes;
 namespace QLKS
 {
     /// <summary>
-    /// Interaction logic for wd_EditService.xaml
+    /// Interaction logic for wd_EditCategoryService.xaml
     /// </summary>
-    public partial class wd_EditService : Window
+    public partial class wd_EditCategoryService : Window
     {
-        private EditServiceViewModel editServiceViewModel { get; set; }
-        public wd_EditService(SERVICE s)
+        private EditCategoryServiceViewModel editCategoryServiceViewModel { get; set; }
+        public wd_EditCategoryService(CATEGORY_SERVICE cs)
         {
             InitializeComponent();
-            this.DataContext = editServiceViewModel = new EditServiceViewModel(s);
+            this.DataContext = editCategoryServiceViewModel = new EditCategoryServiceViewModel(cs);
         }
     }
 }

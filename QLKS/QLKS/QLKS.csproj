@@ -172,6 +172,7 @@
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\DialogCustomsViewModel.cs" />
     <Compile Include="ViewModel\EditRoomCategoryViewModel.cs" />
+    <Compile Include="ViewModel\EditCategoryServiceViewModel.cs" />
     <Compile Include="ViewModel\EditRoomViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\EditServiceViewModel.cs" />
@@ -196,6 +197,8 @@
     </Compile>
     <Compile Include="wd_EditCategoryRoom.xaml.cs">
       <DependentUpon>wd_EditCategoryRoom.xaml</DependentUpon>
+    <Compile Include="wd_EditCategoryService.xaml.cs">
+      <DependentUpon>wd_EditCategoryService.xaml</DependentUpon>
     </Compile>
     <Compile Include="wd_EditRoom.xaml.cs">
       <DependentUpon>wd_EditRoom.xaml</DependentUpon>
@@ -324,6 +327,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="wd_EditCategoryRoom.xaml">
+    <Page Include="wd_EditCategoryService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
