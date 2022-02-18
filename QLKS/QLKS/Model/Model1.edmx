@@ -101,6 +101,7 @@
           <Property Name="IdReservation" Type="int" Nullable="false" />
           <Property Name="IdRentalDetail" Type="int" Nullable="false" />
           <Property Name="IdRoom" Type="int" Nullable="false" />
+          <Property Name="DateRental" Type="date" />
         </EntityType>
         <EntityType Name="RENTALDETAIL">
           <Key>
@@ -650,6 +651,7 @@
           <Property Name="IdReservation" Type="Int32" Nullable="false" />
           <Property Name="IdRentalDetail" Type="Int32" Nullable="false" />
           <Property Name="IdRoom" Type="Int32" Nullable="false" />
+          <Property Name="DateRental" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Bills" Relationship="QLKSModel.FK__Bill__IdRental__4222D4EF" FromRole="RENTAL" ToRole="Bill" />
           <NavigationProperty Name="RENTALDETAIL" Relationship="QLKSModel.FK__RENTAL__IdRental__45F365D3" FromRole="RENTAL" ToRole="RENTALDETAIL" />
           <NavigationProperty Name="RESERVATION" Relationship="QLKSModel.FK__RENTAL__IdReserv__46E78A0C" FromRole="RENTAL" ToRole="RESERVATION" />
@@ -1039,6 +1041,7 @@
           <EntitySetMapping Name="RENTALs">
             <EntityTypeMapping TypeName="QLKSModel.RENTAL">
               <MappingFragment StoreEntitySet="RENTAL">
+                <ScalarProperty Name="DateRental" ColumnName="DateRental" />
                 <ScalarProperty Name="IdRoom" ColumnName="IdRoom" />
                 <ScalarProperty Name="IdRentalDetail" ColumnName="IdRentalDetail" />
                 <ScalarProperty Name="IdReservation" ColumnName="IdReservation" />
