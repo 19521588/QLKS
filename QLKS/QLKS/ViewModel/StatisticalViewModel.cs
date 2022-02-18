@@ -255,19 +255,19 @@ namespace QLKS.ViewModel
 
             Revenue_SeriesCollection = new SeriesCollection
             {
-                new ColumnSeries
+                new LineSeries
                 {
                     Title = "Doanh thu dịch vụ",
                     Values = values_service,
                     DataLabels = true
                 },
-                new ColumnSeries
+                new LineSeries
                 {
                     Title = "Doanh thu phòng",
                     Values = values_room,
                     DataLabels = true
                 },
-                 new ColumnSeries
+                 new LineSeries
                 {
                     Title = "Tổng doanh thu",
                     Values = values_total,
