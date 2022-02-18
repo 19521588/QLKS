@@ -1,6 +1,7 @@
 ﻿using LiveCharts;
 using LiveCharts.Wpf;
 using QLKS.Model;
+using QLKS.UserControlss;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,12 +12,12 @@ using System.Windows.Input;
 
 namespace QLKS.ViewModel
 {
-    public class StatisticalViewModel:BaseViewModel
+    public class StatisticalViewModel : BaseViewModel
     {
-        public SeriesCollection SeriesCollection { get; set; }
-        public string[] Labels { get; set; }
+      
+        
         public ICommand YearChangedCommand_Revenue { get; set; }
-        public ICommand YearChangedCommand_Car { get; set; }
+        public ICommand YearChangedCommand_Rental { get; set; }
         private int _SelectedYear_Revenue { get; set; }
         public int SelectedYear_Revenue
         {
@@ -26,12 +27,12 @@ namespace QLKS.ViewModel
                 OnPropertyChanged();
             }
         }
-        private int _SelecteYear_Reservation { get; set; }
-        public int SelecteYear_Reservation
+        private int _SelectedYear_Rental { get; set; }
+        public int SelectedYear_Rental
         {
-            get => _SelecteYear_Reservation; set
+            get => _SelectedYear_Rental; set
             {
-                _SelecteYear_Reservation = value;
+                _SelectedYear_Rental = value;
                 OnPropertyChanged();
             }
         }
@@ -53,7 +54,7 @@ namespace QLKS.ViewModel
                 OnPropertyChanged();
             }
         }
-        
+
         private int _Rental_Room_Day { get; set; }
         public int Rental_Room_Day
         {
@@ -72,17 +73,26 @@ namespace QLKS.ViewModel
                 OnPropertyChanged();
             }
         }
-        public List<string> _Labels_Room { get; set; }
-        public List<string> Labels_Room
+        private SeriesCollection _SeriesCollection_Rental { get; set; }
+        public SeriesCollection SeriesCollection_Rental
         {
-            get => _Labels_Room; set
+            get => _SeriesCollection_Rental; set
             {
-                _Labels_Room = value;
+                _SeriesCollection_Rental = value;
                 OnPropertyChanged();
             }
         }
-        public Func<double, string> Formatter_Room { get; set; }
-        public Func<ChartPoint, string> PointLabel_Room { get; set; }
+        public List<string> Labels_Rental { get; set; }
+        public List<string> _Labels_Rental
+        {
+            get => _Labels_Rental; set
+            {
+                _Labels_Rental = value;
+                OnPropertyChanged();
+            }
+        }
+        public Func<double, string> Formatter_Rental { get; set; }
+        public Func<ChartPoint, string> PointLabel_Rental { get; set; }
         private Separator _Separator { get; set; }
         public Separator Separator
         {
@@ -92,40 +102,80 @@ namespace QLKS.ViewModel
                 OnPropertyChanged();
             }
         }
+
+
+        private SeriesCollection _Revenue_SeriesCollection { get; set; }
+        public SeriesCollection Revenue_SeriesCollection
+        {
+            get => _Revenue_SeriesCollection; set
+            {
+                _Revenue_SeriesCollection = value;
+                OnPropertyChanged();
+            }
+        }
+        private List<string> _Revenue_Labels { get; set; }
+        public List<string> Revenue_Labels
+        {
+            get => _Revenue_Labels; set
+            {
+                _Revenue_Labels = value;
+                OnPropertyChanged();
+            }
+        }
+        public Func<double, string> Revenue_Formatter { get; set; }
+
+        public Func<ChartPoint, string> PointLabel_Revenue { get; set; }
+
         public StatisticalViewModel()
         {
-            Labels_Room = new List<string>();
+            Revenue_Labels = new List<string>();
+            Labels_Rental = new List<string>();
             ItemSource_Year = new Dictionary<string, int>();
             LoadData();
 
-            SeriesCollection = new SeriesCollection
+            if (ItemSource_Year.Count > 0)
             {
-                new LineSeries
+                if (ItemSource_Year.Last().Value < DateTime.Now.Year)
                 {
-                    Title = "Doanh thu phòng",
-                    Values = new ChartValues<double> { 4, 6, 5, 2 ,4 }
-                },
-                new LineSeries
-                {
-                    Title = "Doanh thu DV",
-                    Values = new ChartValues<double> { 6, 7, 3, 4 ,6 },
-                    PointGeometry = null
-                },
-                new LineSeries
-                {
-                    Title = "SL phòng đặt",
-                    Values = new ChartValues<double> { 4,2,7,2,7 },
-                    PointGeometry = DefaultGeometries.Square,
-                    PointGeometrySize = 15
-                }
-            };
+                    SelectedYear_Revenue = ItemSource_Year.First().Value;
+                    SelectedYear_Rental = ItemSource_Year.First().Value;
 
-            Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" };
+                    LoadDataToChart_Revenue(SelectedYear_Revenue);
+                    LoadDataToChart_Rental (SelectedYear_Rental);
+
+                }
+                else
+                {
+                    SelectedYear_Revenue = SelectedYear_Rental = DateTime.Now.Year;
+                    LoadDataToChart_Revenue(SelectedYear_Revenue);
+                    LoadDataToChart_Rental(SelectedYear_Rental);
+                }
+            }
+            Separator = new Separator { Step = 1 };
+
+            Revenue_Formatter = value => value.ToString();
+            PointLabel_Revenue = ChartPoint =>
+                    string.Format("{0} ({1:P})", ChartPoint.Y, ChartPoint.Participation);
+
+            Formatter_Rental = value => value.ToString();
+            PointLabel_Rental = ChartPoint =>
+                    string.Format("{0} ({1:P})", ChartPoint.Y, ChartPoint.Participation);
+
+
+            YearChangedCommand_Revenue = new RelayCommand<uc_Home>((p) => { return true; }, (p) =>
+            {
+                LoadDataToChart_Revenue(SelectedYear_Revenue);
+            });
+            YearChangedCommand_Rental = new RelayCommand<uc_Home>((p) => { return true; }, (p) =>
+            {
+                LoadDataToChart_Rental(SelectedYear_Rental);
+            });
+
         }
         public void LoadData()
         {
             Revenue = 0;
-           
+
             DateTime time = DateTime.Now;
 
             ObservableCollection<Bill> receipts = new ObservableCollection<Bill>
@@ -152,7 +202,109 @@ namespace QLKS.ViewModel
             }
             var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.DateRental.Value.Month == time.Month && x.DateRental.Value.Year == time.Year);
             Rental_Room_Month = rental.Count();
-            Rental_Room_Day = rental.Count(x=>x.DateRental.Value.Day==time.Day);
+            Rental_Room_Day = rental.Count(x => x.DateRental.Value.Day == time.Day);
+
+        }
+        public void LoadDataToChart_Revenue(int year)
+        {
+            ObservableCollection<Bill> receipts = new ObservableCollection<Bill>
+                (DataProvider.Ins.DB.Bills.Where(x => x.Date_Bill.Value.Year == year).OrderBy(x => x.Date_Bill));
+
+            Revenue_Labels.Clear();
+            ChartValues<long> values_service = new ChartValues<long>();
+            ChartValues<long> values_room = new ChartValues<long>();
+            ChartValues<long> values_total = new ChartValues<long>();
+
+            for (int i = 1; i <= 12; i++)
+            {
+                if (receipts.Count == 0 || i < receipts.First().Date_Bill.Value.Month)
+                {
+                    values_service.Add(0);
+                    values_room.Add(0);
+                    values_total.Add(0);
+                    Revenue_Labels.Add(i.ToString());
+                    continue;
+                }
+
+                Revenue_Labels.Add(i.ToString());
+                long totalMoney_sercvice = 0;
+                long totalMoney_room = 0;
+                long total = 0;
+
+                while (receipts.Count() > 0 && i == receipts.First().Date_Bill.Value.Month)
+                {
+                    var billinfo = DataProvider.Ins.DB.BILLINFOes;
+                    if (billinfo.Count() > 0)
+                    {
+                        foreach (var item in billinfo)
+                        {
+                            if (item.IdBill == receipts.First().IdBill)
+                                totalMoney_sercvice += item.Amount * item.Price;
+                        }
+                    }
+                    total += (uint)receipts.First().Total;
+                    receipts.Remove(receipts.First());
+                }
+
+
+                values_service.Add(totalMoney_sercvice);
+                totalMoney_room = total - totalMoney_sercvice;
+                values_room.Add(totalMoney_room);
+                values_total.Add(total);
+            }
+
+            Revenue_SeriesCollection = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    Title = "Doanh thu dịch vụ",
+                    Values = values_service,
+                    DataLabels = true
+                },
+                new ColumnSeries
+                {
+                    Title = "Doanh thu phòng",
+                    Values = values_room,
+                    DataLabels = true
+                },
+                 new ColumnSeries
+                {
+                    Title = "Tổng doanh thu",
+                    Values = values_total,
+                    DataLabels = true
+                }
+
+            };
+        }
+        public void LoadDataToChart_Rental(int year)
+        {
+            ObservableCollection<Bill> bill = new ObservableCollection<Bill>
+                (DataProvider.Ins.DB.Bills.Where(x => x.Date_Bill.Value.Year == year).OrderBy(x => x.Date_Bill));
+            Labels_Rental.Clear();
+            ChartValues<long> values = new ChartValues<long>();
+
+            for (int i = 1; i <= 12; i++)
+            {
+                Labels_Rental.Add(i.ToString());
+                if (bill.Count == 0 || i < bill.First().Date_Bill.Value.Month)
+                {
+                    values.Add(0);
+                    continue;
+                }
+
+                values.Add((long)bill.Where(x => x.Date_Bill.Value.Month == i).LongCount());
+            }
+
+            SeriesCollection_Rental = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Phòng",
+                    Values = values,
+                    DataLabels = true,
+                    LineSmoothness = 0
+                }
+            };
         }
 
 
