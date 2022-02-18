@@ -94,6 +94,7 @@
     <Compile Include="Model\BillDetail.cs" />
     <Compile Include="Model\ListBill.cs" />
     <Compile Include="Model\ListBillInfo.cs" />
+    <Compile Include="Model\QLKSEntities.cs" />
     <Compile Include="Template\BillTemplate.xaml.cs">
       <DependentUpon>BillTemplate.xaml</DependentUpon>
     </Compile>
@@ -119,6 +120,7 @@
     <Compile Include="UserControlss\ControlBar2.xaml.cs">
       <DependentUpon>ControlBar2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlss\ConvenientViewModel.cs" />
     <Compile Include="UserControlss\DialogCustoms.xaml.cs">
       <DependentUpon>DialogCustoms.xaml</DependentUpon>
     </Compile>
@@ -197,6 +199,7 @@
     </Compile>
     <Compile Include="wd_EditCategoryRoom.xaml.cs">
       <DependentUpon>wd_EditCategoryRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="wd_EditCategoryService.xaml.cs">
       <DependentUpon>wd_EditCategoryService.xaml</DependentUpon>
     </Compile>
@@ -327,6 +330,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="wd_EditCategoryRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="wd_EditCategoryService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
