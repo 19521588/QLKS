@@ -16,15 +16,15 @@ using System.Windows.Shapes;
 namespace QLKS
 {
     /// <summary>
-    /// Interaction logic for test.xaml
+    /// Interaction logic for wd_AddConvenientDetail.xaml
     /// </summary>
-    public partial class test : Window
+    public partial class wd_AddConvenientDetail : Window
     {
-        private ServiceViewModel serviceViewModel { get; set; }
-        public test()
+        private AddConvenientDetailViewModel addConvenientDetailViewModel { get; set; }
+        public wd_AddConvenientDetail()
         {
             InitializeComponent();
-            this.DataContext = serviceViewModel = new ServiceViewModel();
+            this.DataContext = addConvenientDetailViewModel = new AddConvenientDetailViewModel();
         }
     }
 }

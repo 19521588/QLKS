@@ -97,12 +97,6 @@
     <Compile Include="Template\BillTemplate.xaml.cs">
       <DependentUpon>BillTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="test.xaml.cs">
-      <DependentUpon>test.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="test2.xaml.cs">
-      <DependentUpon>test2.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Convert\HashConvert.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -163,6 +157,8 @@
     <Compile Include="ViewModel\AddCategoryServiceViewModel.cs" />
     <Compile Include="ViewModel\AddCustomerViewModel.cs" />
     <Compile Include="ViewModel\AddEmployeeViewModel.cs" />
+    <Compile Include="ViewModel\AddConvenientDetailViewModel.cs" />
+    <Compile Include="ViewModel\AddConvenientViewModel.cs" />
     <Compile Include="ViewModel\AddRoomCategoryViewModel.cs" />
     <Compile Include="ViewModel\AddRoomViewModel.cs" />
     <Compile Include="ViewModel\AddServiceViewModel.cs" />
@@ -176,6 +172,10 @@
     <Compile Include="ViewModel\DialogCustomsViewModel.cs" />
     <Compile Include="ViewModel\EditCustomerViewModel.cs" />
     <Compile Include="ViewModel\EditEmployeeViewModel.cs" />
+    <Compile Include="ViewModel\ConvenientDetailViewModel.cs" />
+    <Compile Include="ViewModel\ConvenientViewModel.cs" />
+    <Compile Include="ViewModel\DialogCustomsViewModel.cs" />
+    <Compile Include="ViewModel\EditConvenientViewModel.cs" />
     <Compile Include="ViewModel\EditRoomCategoryViewModel.cs" />
     <Compile Include="ViewModel\EditCategoryServiceViewModel.cs" />
     <Compile Include="ViewModel\EditRoomViewModel.cs" />
@@ -198,6 +198,12 @@
     <Compile Include="wd_AddEmployee.xaml.cs">
       <DependentUpon>wd_AddEmployee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="wd_AddConvenient.xaml.cs">
+      <DependentUpon>wd_AddConvenient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wd_AddConvenientDetail.xaml.cs">
+      <DependentUpon>wd_AddConvenientDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="wd_AddNewCategoryRoom.xaml.cs">
       <DependentUpon>wd_AddNewCategoryRoom.xaml</DependentUpon>
     </Compile>
@@ -207,9 +213,9 @@
     <Compile Include="wd_AddService.xaml.cs">
       <DependentUpon>wd_AddService.xaml</DependentUpon>
     </Compile>
-	  <Compile Include="wd_EditCategoryRoom.xaml.cs">
-		  <DependentUpon>wd_EditCategoryRoom.xaml</DependentUpon>
-	  </Compile>
+    <Compile Include="wd_EditCategoryRoom.xaml.cs">
+      <DependentUpon>wd_EditCategoryRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="wd_EditCategoryService.xaml.cs">
       <DependentUpon>wd_EditCategoryService.xaml</DependentUpon>
     </Compile>
@@ -218,6 +224,12 @@
     </Compile>
     <Compile Include="wd_EditEmployee.xaml.cs">
       <DependentUpon>wd_EditEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wd_EditConvenient.xaml.cs">
+      <DependentUpon>wd_EditConvenient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wd_EditConvenientDetail.xaml.cs">
+      <DependentUpon>wd_EditConvenientDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="wd_EditRoom.xaml.cs">
       <DependentUpon>wd_EditRoom.xaml</DependentUpon>
@@ -262,14 +274,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Template\BillTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="test.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="test2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -341,6 +345,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="wd_AddConvenient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wd_AddConvenientDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="wd_AddNewCategoryRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -354,9 +366,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="wd_EditCategoryRoom.xaml">
-		<SubType>Designer</SubType>
-		<Generator>MSBuild:Compile</Generator>
-	</Page>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="wd_EditCategoryService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -366,6 +378,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="wd_EditEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wd_EditConvenient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wd_EditConvenientDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

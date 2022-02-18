@@ -11,21 +11,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QLKS.UserControlss
+namespace QLKS
 {
     /// <summary>
-    /// Interaction logic for uc_QuanLyTienNghi.xaml
+    /// Interaction logic for wd_AddConvenient.xaml
     /// </summary>
-    public partial class uc_QuanLyTienNghi : UserControl
+    public partial class wd_AddConvenient : Window
     {
-        private ConvenientViewModel convenientViewModel { get; set; }
-        public uc_QuanLyTienNghi()
+        private AddConvenientViewModel addConvenientViewModel { get; set; }
+        public wd_AddConvenient()
         {
             InitializeComponent();
-            this.DataContext = convenientViewModel = new ConvenientViewModel();
+            this.DataContext = addConvenientViewModel  = new AddConvenientViewModel();
         }
     }
 }
