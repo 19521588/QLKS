@@ -1,4 +1,5 @@
-﻿using QLKS.ViewModel;
+﻿using QLKS.Model;
+using QLKS.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,15 +17,15 @@ using System.Windows.Shapes;
 namespace QLKS
 {
     /// <summary>
-    /// Interaction logic for test2.xaml
+    /// Interaction logic for wd_EditConvenient.xaml
     /// </summary>
-    public partial class test2 : Window
+    public partial class wd_EditConvenient : Window
     {
-        private CategoryServiceViewModel categoryServiceViewModel { get; set; }
-        public test2()
+        private EditConvenientViewModel editConvenientViewModel { get; set; }
+        public wd_EditConvenient(CONVINIENT x)
         {
             InitializeComponent();
-            this.DataContext = categoryServiceViewModel = new CategoryServiceViewModel();
+            this.DataContext = editConvenientViewModel = new EditConvenientViewModel(x);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using QLKS.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,21 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QLKS.UserControlss
+namespace QLKS
 {
     /// <summary>
-    /// Interaction logic for uc_QuanLyTienNghi.xaml
+    /// Interaction logic for wd_EditConvenientDetail.xaml
     /// </summary>
-    public partial class uc_QuanLyTienNghi : UserControl
+    public partial class wd_EditConvenientDetail : Window
     {
-        private ConvenientViewModel convenientViewModel { get; set; }
-        public uc_QuanLyTienNghi()
+        public wd_EditConvenientDetail()
         {
             InitializeComponent();
-            this.DataContext = convenientViewModel = new ConvenientViewModel();
         }
     }
 }
