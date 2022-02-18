@@ -1,7 +1,9 @@
 ﻿using LiveCharts;
 using LiveCharts.Wpf;
+using QLKS.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,36 +44,59 @@ namespace QLKS.ViewModel
                 OnPropertyChanged();
             }
         }
-        private long _Room_revenue { get; set; }
-        public long Room_revenue
+        private long _Revenue { get; set; }
+        public long Revenue
         {
-            get => _Room_revenue; set
+            get => _Revenue; set
             {
-                _Room_revenue = value;
+                _Revenue = value;
                 OnPropertyChanged();
             }
         }
         
-        private long _Service_revenue { get; set; }
-        public long Service_revenue
+        private int _Rental_Room_Day { get; set; }
+        public int Rental_Room_Day
         {
-            get => _Service_revenue; set
+            get => _Rental_Room_Day; set
             {
-                _Service_revenue = value;
+                _Rental_Room_Day = value;
                 OnPropertyChanged();
             }
         }
-        private int _Total_Reservation { get; set; }
-        public int Total_Reservation
+        private int _Rental_Room_Month { get; set; }
+        public int Rental_Room_Month
         {
-            get => _Total_Reservation; set
+            get => _Rental_Room_Month; set
             {
-                _Total_Reservation = value;
+                _Rental_Room_Month = value;
+                OnPropertyChanged();
+            }
+        }
+        public List<string> _Labels_Room { get; set; }
+        public List<string> Labels_Room
+        {
+            get => _Labels_Room; set
+            {
+                _Labels_Room = value;
+                OnPropertyChanged();
+            }
+        }
+        public Func<double, string> Formatter_Room { get; set; }
+        public Func<ChartPoint, string> PointLabel_Room { get; set; }
+        private Separator _Separator { get; set; }
+        public Separator Separator
+        {
+            get => _Separator; set
+            {
+                _Separator = value;
                 OnPropertyChanged();
             }
         }
         public StatisticalViewModel()
         {
+            Labels_Room = new List<string>();
+            ItemSource_Year = new Dictionary<string, int>();
+            LoadData();
 
             SeriesCollection = new SeriesCollection
             {
@@ -97,5 +122,39 @@ namespace QLKS.ViewModel
 
             Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" };
         }
+        public void LoadData()
+        {
+            Revenue = 0;
+           
+            DateTime time = DateTime.Now;
+
+            ObservableCollection<Bill> receipts = new ObservableCollection<Bill>
+                (DataProvider.Ins.DB.Bills.OrderBy(x => x.Date_Bill));
+
+            if (receipts.Count > 0)
+            {
+                ItemSource_Year.Clear();
+
+                int firstYear = receipts.First().Date_Bill.Value.Year;
+                ItemSource_Year.Add("Năm " + firstYear.ToString(), firstYear);
+
+                foreach (var receipt in receipts)
+                {
+                    if (receipt.Date_Bill.Value.Year <= ItemSource_Year.Last().Value) continue;
+                    int year = receipt.Date_Bill.Value.Year;
+                    ItemSource_Year.Add("Năm " + year.ToString(), year);
+                }
+            }
+
+            foreach (var receipt in DataProvider.Ins.DB.Bills.Where(x => x.Date_Bill.Value.Month == time.Month && x.Date_Bill.Value.Year == time.Year))
+            {
+                Revenue += (long)receipt.Total;
+            }
+            var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.DateRental.Value.Month == time.Month && x.DateRental.Value.Year == time.Year);
+            Rental_Room_Month = rental.Count();
+            Rental_Room_Day = rental.Count(x=>x.DateRental.Value.Day==time.Day);
+        }
+
+
     }
 }

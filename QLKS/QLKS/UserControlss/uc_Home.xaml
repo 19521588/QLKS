@@ -18,16 +18,16 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <materialDesign:Card Background="#FFFEC007" VerticalAlignment="Center" 
-                                 Width="320" Height="150" Margin="60 0 0 0" >
+                                 Width="330" Height="150" Margin="60 0 0 0" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1.5*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Doanh thu phòng" HorizontalAlignment="Left"
+                    <TextBlock Text="Doanh thu trong tháng" HorizontalAlignment="Left"
                            Margin="20,20,0,0" TextWrapping="Wrap" Grid.Row="0"
-                           VerticalAlignment="Top" FontSize="25" Foreground="White"/>
-                    <TextBlock x:Name="txbRevenueThisMonth" Grid.Row="1" Text="{Binding Room_revenue}" HorizontalAlignment="Left"
+                           VerticalAlignment="Top" FontSize="22" Foreground="White"/>
+                    <TextBlock x:Name="txbRevenueThisMonth" Grid.Row="1" Text="{Binding Revenue}" HorizontalAlignment="Left"
                            Margin="20,0.8,0,4.8" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="24" 
                            FontWeight="Bold" Foreground="White"  />
                     <Grid Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,20,0">
@@ -40,16 +40,16 @@
                 </Grid>
             </materialDesign:Card>
             <materialDesign:Card Background="#FF2195F2" VerticalAlignment="Center" 
-                                 Width="320" Height="150" Margin="90 0 0 0">
+                                 Width="330" Height="150" Margin="90 0 0 0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1.5*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Doanh thu dịch vụ" HorizontalAlignment="Left"
+                    <TextBlock Text="Số phòng thuê/tháng" HorizontalAlignment="Left"
                            Margin="20,20,0,0" TextWrapping="Wrap" Grid.Row="0"
-                           VerticalAlignment="Top" FontSize="25" Foreground="White"/>
-                    <TextBlock Grid.Row="1" Text="{Binding Service_revenue}" HorizontalAlignment="Left"
+                           VerticalAlignment="Top" FontSize="22" Foreground="White"/>
+                    <TextBlock Grid.Row="1" Text="{Binding Rental_Room_Month}" HorizontalAlignment="Left"
                            Margin="20,0.8,0,4.8" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="24" 
                            FontWeight="Bold" Foreground="White"  />
                     <Grid Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,20,0">
@@ -62,16 +62,16 @@
                 </Grid>
             </materialDesign:Card>
             <materialDesign:Card Background="#FFF34336" VerticalAlignment="Center"
-                                 Width="320" Height="150" Margin="90 0 0 0">
+                                 Width="330" Height="150" Margin="90 0 0 0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1.5*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Số lượng phòng đặt" HorizontalAlignment="Left"
+                    <TextBlock Text="Số phòng thuê hôm nay" HorizontalAlignment="Left"
                            Margin="20,20,0,0" TextWrapping="Wrap" Grid.Row="0"
-                           VerticalAlignment="Top" FontSize="25" Foreground="White"/>
-                    <TextBlock Grid.Row="1" Text="{Binding Total_Reservation}" HorizontalAlignment="Left"
+                           VerticalAlignment="Top" FontSize="22" Foreground="White"/>
+                    <TextBlock Grid.Row="1" Text="{Binding Rental_Room_Day}" HorizontalAlignment="Left"
                            Margin="20,0.8,0,4.8" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="24" 
                            FontWeight="Bold" Foreground="White"  />
                     <Grid Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,20,0">
@@ -127,6 +127,7 @@
                         <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" >
 
                         </lvc:CartesianChart>
+                        
                     </Grid>
                 </Grid>
             </Grid>
@@ -167,19 +168,19 @@
                     </Grid>
                     <Grid Grid.Row="1" Margin="5 20 0 0">
                         
-                        <!--<lvc:CartesianChart x:Name="liveChart_Car" Series="{Binding SeriesCollection_Car}" LegendLocation="Left" Margin="10,0,0,0">
+                        <!--<lvc:CartesianChart x:Name="liveChart_Car" Series="{Binding SeriesCollection_Room}" LegendLocation="Left" Margin="10,0,0,0">
                             <lvc:CartesianChart.AxisX>
                                 <lvc:Axis 
                                         FontSize="14"
                                         Title="Tháng" 
-                                        Labels="{Binding Labels_Car}"></lvc:Axis>
+                                        Labels="{Binding Labels_Room}"></lvc:Axis>
                             </lvc:CartesianChart.AxisX>
                             <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Title="Chiếc" 
+                                <lvc:Axis Title="Phòng" 
                                                FontSize="14"
                                                 MinValue="0"
                                                 Separator="{Binding Separator}"
-                                              LabelFormatter="{Binding Formatter_Car}"></lvc:Axis>
+                                              LabelFormatter="{Binding Formatter_Room}"></lvc:Axis>
                             </lvc:CartesianChart.AxisY>
                         </lvc:CartesianChart>-->
                     </Grid>
