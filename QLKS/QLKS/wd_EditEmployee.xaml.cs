@@ -10,22 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QLKS.ViewModel;
+using QLKS.Model;
 
-namespace QLKS.UserControlss
+namespace QLKS
 {
     /// <summary>
-    /// Interaction logic for uc_Customer.xaml
+    /// Interaction logic for wd_EditEmployee.xaml
     /// </summary>
-    public partial class uc_Customer : UserControl
+    public partial class wd_EditEmployee : Window
     {
-        private CustomerViewmodel customerViewmodel { get; set; }
-        public uc_Customer()
+        private EditEmployeeViewModel editEmployeeViewModel { get; set; }
+
+        public wd_EditEmployee(EMPLOYEE  employee)
         {
             InitializeComponent();
-            this.DataContext = (customerViewmodel = new CustomerViewmodel());
+            this.DataContext = (editEmployeeViewModel = new EditEmployeeViewModel(employee));
         }
     }
 }

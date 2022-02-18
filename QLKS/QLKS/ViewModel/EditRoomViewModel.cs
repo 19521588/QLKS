@@ -56,7 +56,7 @@ namespace QLKS.ViewModel
                 },
                 (p) =>
                 {
-                    if (MessageBox.Show("Bạn có chắc chắn muốn sửa thông tin phụ tùng", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    if (MessageBox.Show("Bạn có chắc chắn muốn sửa thông tin phòng", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
 
                         var List = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == room.IdRoom).SingleOrDefault();

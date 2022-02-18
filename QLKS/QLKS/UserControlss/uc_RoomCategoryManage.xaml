@@ -62,38 +62,62 @@
                         <RectangleGeometry  Rect="0,0,840,720" RadiusX="10" RadiusY="10" />
                     </Grid.Clip>
 
-                    <ListView ItemsSource="{Binding ListCategory}" SelectedItem="{Binding SelectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Name="lsvPhong" >
+                    <DataGrid
+                        ItemsSource="{Binding ListCategory}" 
+                      SelectedItem="{Binding SelectedItem}"
+                      SelectionMode="Extended"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      AutoGenerateColumns="False"
+                      CanUserDeleteRows="False"
+                      CanUserReorderColumns="True"
+                      FontSize="16"
+                      Name="dataGrid">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Gainsboro" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
+                        <!--<i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
+                                                   CommandParameter="{Binding ElementName=dataGrid}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
 
-                        <!--<ListView.Resources>
-                            <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">10</sys:Double>
-                        </ListView.Resources>-->
+                        </i:Interaction.Triggers>-->
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                <Style.Triggers>
+                                    <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                        <Setter Property="FontWeight" Value="DemiBold" />
+                                        <Setter Property="FontSize" Value="17" />
+                                        <Setter Property="Foreground" Value="Black"></Setter>
+                                    </Trigger>
 
-                        <ListView.View>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                                <Setter Property="Foreground" Value="White"></Setter>
+                                <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
 
-                            <GridView >
-                                <GridView.ColumnHeaderContainerStyle>
-                                    <Style TargetType="{x:Type GridViewColumnHeader}">
-                                        <Setter Property="Background" Value="LightBlue" />
-                                        <Setter Property="Foreground" Value="Black" />
-                                        <Setter Property="FontWeight" Value="Bold" />
-                                    </Style>
-                                </GridView.ColumnHeaderContainerStyle>
+                        <DataGrid.Columns>
+                            <materialDesign:DataGridTextColumn Width="150" Header="Mã loại" Binding="{Binding IdCategoryRoom,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="200" Header="Tên loại phòng" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="150" Header="Số giường" Binding="{Binding Beds,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="200" Header="Giá giờ" Binding="{Binding Price_Hour,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="200" Header="Giá ngày" Binding="{Binding Price_Day,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
 
-                                <GridViewColumn Width="175" Header="Mã loại phòng"  DisplayMemberBinding="{Binding IdCategoryRoom}"  />
-
-                                <GridViewColumn Width="245" Header="Tên Loại" DisplayMemberBinding="{Binding Name}" />
-
-                                <GridViewColumn Width="210" Header="Số giường" DisplayMemberBinding="{Binding Beds}" />
-
-                                <GridViewColumn Width="110" Header="Giá Ngày" DisplayMemberBinding="{Binding Price_Day}"/>
-
-                                <GridViewColumn Width="110" Header="Giá giờ" DisplayMemberBinding="{Binding Price_Hour}"/>
-
-                            </GridView>
-
-                        </ListView.View>
-
-                    </ListView>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
                 </Grid>
             </Grid>

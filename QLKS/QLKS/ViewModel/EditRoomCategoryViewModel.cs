@@ -44,7 +44,7 @@ namespace QLKS.ViewModel
                 },
                 (p) =>
                 {
-                    if (MessageBox.Show("Bạn có chắc chắn muốn sửa thông tin phụ tùng", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    if (MessageBox.Show("Bạn có chắc chắn muốn sửa thông tin loại phòng", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
 
                         var List = DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == cate.IdCategoryRoom).SingleOrDefault();

@@ -161,6 +161,8 @@
     <Compile Include="Validation\NumberValidation.cs" />
     <Compile Include="Validation\OnlyNumberValidation.cs" />
     <Compile Include="ViewModel\AddCategoryServiceViewModel.cs" />
+    <Compile Include="ViewModel\AddCustomerViewModel.cs" />
+    <Compile Include="ViewModel\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModel\AddRoomCategoryViewModel.cs" />
     <Compile Include="ViewModel\AddRoomViewModel.cs" />
     <Compile Include="ViewModel\AddServiceViewModel.cs" />
@@ -170,10 +172,14 @@
     <Compile Include="ViewModel\BillViewModel.cs" />
     <Compile Include="ViewModel\ControlBar2ViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewmodel.cs" />
     <Compile Include="ViewModel\DialogCustomsViewModel.cs" />
+    <Compile Include="ViewModel\EditCustomerViewModel.cs" />
+    <Compile Include="ViewModel\EditEmployeeViewModel.cs" />
     <Compile Include="ViewModel\EditRoomCategoryViewModel.cs" />
     <Compile Include="ViewModel\EditCategoryServiceViewModel.cs" />
     <Compile Include="ViewModel\EditRoomViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\EditServiceViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -185,6 +191,12 @@
     <Compile Include="ViewModel\StatisticalViewModel.cs" />
     <Compile Include="wd_AddCategoryService.xaml.cs">
       <DependentUpon>wd_AddCategoryService.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wd_AddCustomer.xaml.cs">
+      <DependentUpon>wd_AddCustomer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wd_AddEmployee.xaml.cs">
+      <DependentUpon>wd_AddEmployee.xaml</DependentUpon>
     </Compile>
     <Compile Include="wd_AddNewCategoryRoom.xaml.cs">
       <DependentUpon>wd_AddNewCategoryRoom.xaml</DependentUpon>
@@ -200,6 +212,12 @@
 	  </Compile>
     <Compile Include="wd_EditCategoryService.xaml.cs">
       <DependentUpon>wd_EditCategoryService.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wd_EditCustomer.xaml.cs">
+      <DependentUpon>wd_EditCustomer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wd_EditEmployee.xaml.cs">
+      <DependentUpon>wd_EditEmployee.xaml</DependentUpon>
     </Compile>
     <Compile Include="wd_EditRoom.xaml.cs">
       <DependentUpon>wd_EditRoom.xaml</DependentUpon>
@@ -315,6 +333,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="wd_AddCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wd_AddEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="wd_AddNewCategoryRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -332,6 +358,14 @@
 		<Generator>MSBuild:Compile</Generator>
 	</Page>
     <Page Include="wd_EditCategoryService.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wd_EditCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wd_EditEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

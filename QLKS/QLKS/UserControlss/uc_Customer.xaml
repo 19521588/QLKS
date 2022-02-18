@@ -40,7 +40,7 @@
                         />
                 <Button HorizontalAlignment="Right"  x:Name="btnThemPhong"                                                    
                         Width="180" Height="36" Margin="0" 
-                        Content="Thêm loại phòng"
+                        Content="Thêm khách hàng"
                         Command="{Binding OpenAddCommand}"
                         Background="#478C10" >
                     <Button.Clip>
@@ -62,41 +62,62 @@
                         <RectangleGeometry  Rect="0,0,940,720" RadiusX="10" RadiusY="10" />
                     </Grid.Clip>
 
-                    <ListView ItemsSource="{Binding ListCategory}" SelectedItem="{Binding SelectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Name="lsvPhong" >
+                    <DataGrid
+                        ItemsSource="{Binding ListCustomer}" 
+                      SelectedItem="{Binding SelectedItem}"
+                      SelectionMode="Extended"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      AutoGenerateColumns="False"
+                      CanUserDeleteRows="False"
+                      CanUserReorderColumns="True"
+                      FontSize="16"
+                      Name="dataGrid">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Gainsboro" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
+                        <!--<i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
+                                                   CommandParameter="{Binding ElementName=dataGrid}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
 
-                        <!--<ListView.Resources>
-                            <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">10</sys:Double>
-                        </ListView.Resources>-->
+                        </i:Interaction.Triggers>-->
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                <Style.Triggers>
+                                    <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                        <Setter Property="FontWeight" Value="DemiBold" />
+                                        <Setter Property="FontSize" Value="17" />
+                                        <Setter Property="Foreground" Value="Black"></Setter>
+                                    </Trigger>
 
-                        <ListView.View>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                                <Setter Property="Foreground" Value="White"></Setter>
+                                <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
 
-                            <GridView >
-                                <GridView.ColumnHeaderContainerStyle>
-                                    <Style TargetType="{x:Type GridViewColumnHeader}">
-                                        <Setter Property="Background" Value="LightBlue" />
-                                        <Setter Property="Foreground" Value="Black" />
-                                        <Setter Property="FontWeight" Value="Bold" />
-                                    </Style>
-                                </GridView.ColumnHeaderContainerStyle>
-
-                                <GridViewColumn Width="85" Header="Mã KH"  DisplayMemberBinding="{Binding IdCategoryRoom}"  />
-
-                                <GridViewColumn Width="245" Header="Tên khách hàng" DisplayMemberBinding="{Binding Name}" />
-
-                                <GridViewColumn Width="150" Header="CCCD" DisplayMemberBinding="{Binding Beds}" />
-
-                                <GridViewColumn Width="150" Header="Số điện thoại" DisplayMemberBinding="{Binding Price_Day}"/>
-
-                                <GridViewColumn Width="210" Header="Địa chỉ" DisplayMemberBinding="{Binding Price_Hour}"/>
-                                
-                                <GridViewColumn Width="110" Header="Giới tính" DisplayMemberBinding="{Binding Price_Hour}"/>
-                                
-
-                            </GridView>
-
-                        </ListView.View>
-
-                    </ListView>
+                        <DataGrid.Columns>
+                            <materialDesign:DataGridTextColumn Width="100" Header="Mã KH" Binding="{Binding IdEmployee,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="220" Header="Tên nhân viên" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="220" Header="Địa chỉ" Binding="{Binding Address,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="120" Header="CCCD" Binding="{Binding CCCD,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="150" Header="Số điện thoại" Binding="{Binding Phone,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="150" Header="Quốc tịch" Binding="{Binding Nationality,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
                 </Grid>
             </Grid>
@@ -132,7 +153,7 @@
                         />
 
                     </Grid>
-                    <Grid Margin="0 100 0 0"
+                    <Grid Margin="0 80 0 0"
                           VerticalAlignment="Top"
                           Height="80">
                         <Label
@@ -157,11 +178,11 @@
                         FontSize="14"  
                         IsEnabled="True"
                         Margin="10 50 0 0"
-                        Text="{Binding SelectedItem.Beds}"
+                        Text="{Binding SelectedItem.CCCD}"
                         Foreground="Black"
                         />
                     </Grid>
-                    <Grid Margin="0 200 0 0"
+                    <Grid Margin="0 160 0 0"
                           VerticalAlignment="Top"
                           Height="80">
                         <Label
@@ -186,11 +207,11 @@
                         FontSize="14"  
                         IsEnabled="True"
                         Margin="10 50 0 0"
-                        Text="{Binding SelectedItem.Price_Day}"
+                        Text="{Binding SelectedItem.Phone}"
                         Foreground="Black"
                         />
                     </Grid>
-                    <Grid Margin="0 300 0 0"
+                    <Grid Margin="0 240 0 0"
                           VerticalAlignment="Top"
                           Height="80">
                         <Label
@@ -215,7 +236,94 @@
                         FontSize="14"  
                         IsEnabled="True"
                         Margin="10 50 0 0"
-                        Text="{Binding SelectedItem.Price_Hour}"
+                        Text="{Binding SelectedItem.Address}"
+                        Foreground="Black"
+                        />
+                    </Grid>
+                    <Grid Margin="0 320 0 0"
+                          VerticalAlignment="Top"
+                          Height="80">
+                        <Label
+                            Content="Ngày sinh"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="Black"
+                            />
+                        <Rectangle
+                            Margin="0"
+                            Height="40"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Stretch"
+                            RadiusX="4"
+                            RadiusY="4"
+                            Stroke="Black"
+                            />
+                        <TextBlock
+                        x:Name="txbBirth"
+                        FontSize="14"  
+                        IsEnabled="True"
+                        Margin="10 50 0 0"
+                        Text="{Binding SelectedItem.BirthDay}"
+                        Foreground="Black"
+                        />
+                    </Grid>
+                    <Grid Margin="0 400 0 0"
+                          VerticalAlignment="Top"
+                          Height="80">
+                        <Label
+                            Content="Quốc tịch"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="Black"
+                            />
+                        <Rectangle
+                            Margin="0"
+                            Height="40"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Stretch"
+                            RadiusX="4"
+                            RadiusY="4"
+                            Stroke="Black"
+                            />
+                        <TextBlock
+                        x:Name="txbNationality"
+                        FontSize="14"  
+                        IsEnabled="True"
+                        Margin="10 50 0 0"
+                        Text="{Binding SelectedItem.Nationality}"
+                        Foreground="Black"
+                        />
+                    </Grid>
+                    <Grid Margin="0 480 0 0"
+                          VerticalAlignment="Top"
+                          Height="80">
+                        <Label
+                            Content="Giới tính"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="Black"
+                            />
+                        <Rectangle
+                            Margin="0"
+                            Height="40"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Stretch"
+                            RadiusX="4"
+                            RadiusY="4"
+                            Stroke="Black"
+                            />
+                        <TextBlock
+                        x:Name="txbSalary"
+                        FontSize="14"  
+                        IsEnabled="True"
+                        Margin="10 50 0 0"
+                        Text="{Binding SelectedItem.Sex}"
                         Foreground="Black"
                         />
                     </Grid>
