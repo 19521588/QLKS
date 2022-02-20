@@ -94,6 +94,7 @@
     <Compile Include="Model\BillDetail.cs" />
     <Compile Include="Model\ListBill.cs" />
     <Compile Include="Model\ListBillInfo.cs" />
+    <Compile Include="Model\ReservationItem.cs" />
     <Compile Include="Template\BillTemplate.xaml.cs">
       <DependentUpon>BillTemplate.xaml</DependentUpon>
     </Compile>
@@ -159,6 +160,7 @@
     <Compile Include="ViewModel\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModel\AddConvenientDetailViewModel.cs" />
     <Compile Include="ViewModel\AddConvenientViewModel.cs" />
+    <Compile Include="ViewModel\AddReservationViewModel.cs" />
     <Compile Include="ViewModel\AddRoomCategoryViewModel.cs" />
     <Compile Include="ViewModel\AddRoomViewModel.cs" />
     <Compile Include="ViewModel\AddServiceViewModel.cs" />
@@ -184,6 +186,7 @@
     <Compile Include="ViewModel\EditServiceViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PrintViewModel.cs" />
+    <Compile Include="ViewModel\ReservationViewMOdel.cs" />
     <Compile Include="ViewModel\RoomCategoryViewModel.cs" />
     <Compile Include="ViewModel\RoomViewModel.cs" />
     <Compile Include="ViewModel\CategoryServiceViewModel.cs" />
@@ -206,6 +209,9 @@
     </Compile>
     <Compile Include="wd_AddNewCategoryRoom.xaml.cs">
       <DependentUpon>wd_AddNewCategoryRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wd_AddNewReservation.xaml.cs">
+      <DependentUpon>wd_AddNewReservation.xaml</DependentUpon>
     </Compile>
     <Compile Include="wd_AddNewRoom.xaml.cs">
       <DependentUpon>wd_AddNewRoom.xaml</DependentUpon>
@@ -354,6 +360,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="wd_AddNewCategoryRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wd_AddNewReservation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

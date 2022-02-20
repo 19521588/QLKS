@@ -118,19 +118,19 @@
           <Property Name="IdEmployee" Type="int" Nullable="false" />
           <Property Name="IdCustomer" Type="int" Nullable="false" />
           <Property Name="Date" Type="int" />
-          <Property Name="IdReservationDetail" Type="int" Nullable="false" />
-          <Property Name="IdRoom" Type="int" Nullable="false" />
+          <Property Name="Start_Date" Type="date" Nullable="false" />
+          <Property Name="End_Date" Type="date" Nullable="false" />
+          <Property Name="Start_Time" Type="date" Nullable="false" />
+          <Property Name="End_Time" Type="date" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RESERVATION_DETAIL">
           <Key>
             <PropertyRef Name="IdReservationDetail" />
           </Key>
           <Property Name="IdReservationDetail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Start_Date" Type="date" Nullable="false" />
-          <Property Name="End_Date" Type="date" Nullable="false" />
-          <Property Name="Start_Time" Type="date" Nullable="false" />
-          <Property Name="End_Time" Type="date" Nullable="false" />
-          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="IdRoom" Type="int" Nullable="false" />
+          <Property Name="IdReservation" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ROOM">
           <Key>
@@ -294,25 +294,25 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__RESERVATI__IdRes__4BAC3F29">
-          <End Role="RESERVATION_DETAIL" Type="Self.RESERVATION_DETAIL" Multiplicity="1" />
-          <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="*" />
+          <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="1" />
+          <End Role="RESERVATION_DETAIL" Type="Self.RESERVATION_DETAIL" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="RESERVATION_DETAIL">
-              <PropertyRef Name="IdReservationDetail" />
+            <Principal Role="RESERVATION">
+              <PropertyRef Name="IdReservation" />
             </Principal>
-            <Dependent Role="RESERVATION">
-              <PropertyRef Name="IdReservationDetail" />
+            <Dependent Role="RESERVATION_DETAIL">
+              <PropertyRef Name="IdReservation" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__RESERVATI__IdRoo__4CA06362">
           <End Role="ROOM" Type="Self.ROOM" Multiplicity="1" />
-          <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="*" />
+          <End Role="RESERVATION_DETAIL" Type="Self.RESERVATION_DETAIL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ROOM">
               <PropertyRef Name="IdRoom" />
             </Principal>
-            <Dependent Role="RESERVATION">
+            <Dependent Role="RESERVATION_DETAIL">
               <PropertyRef Name="IdRoom" />
             </Dependent>
           </ReferentialConstraint>
@@ -427,12 +427,12 @@
             <End Role="RESERVATION" EntitySet="RESERVATION" />
           </AssociationSet>
           <AssociationSet Name="FK__RESERVATI__IdRes__4BAC3F29" Association="Self.FK__RESERVATI__IdRes__4BAC3F29">
-            <End Role="RESERVATION_DETAIL" EntitySet="RESERVATION_DETAIL" />
             <End Role="RESERVATION" EntitySet="RESERVATION" />
+            <End Role="RESERVATION_DETAIL" EntitySet="RESERVATION_DETAIL" />
           </AssociationSet>
           <AssociationSet Name="FK__RESERVATI__IdRoo__4CA06362" Association="Self.FK__RESERVATI__IdRoo__4CA06362">
             <End Role="ROOM" EntitySet="ROOM" />
-            <End Role="RESERVATION" EntitySet="RESERVATION" />
+            <End Role="RESERVATION_DETAIL" EntitySet="RESERVATION_DETAIL" />
           </AssociationSet>
           <AssociationSet Name="FK__ROOM__IdCategory__4D94879B" Association="Self.FK__ROOM__IdCategory__4D94879B">
             <End Role="CATEGORY_ROOM" EntitySet="CATEGORY_ROOM" />
@@ -533,12 +533,12 @@
             <End Role="RENTALDETAIL" EntitySet="RENTALDETAILs" />
           </AssociationSet>
           <AssociationSet Name="FK__RESERVATI__IdRes__4BAC3F29" Association="QLKSModel.FK__RESERVATI__IdRes__4BAC3F29">
-            <End Role="RESERVATION_DETAIL" EntitySet="RESERVATION_DETAIL" />
             <End Role="RESERVATION" EntitySet="RESERVATIONs" />
+            <End Role="RESERVATION_DETAIL" EntitySet="RESERVATION_DETAIL" />
           </AssociationSet>
           <AssociationSet Name="FK__RESERVATI__IdRoo__4CA06362" Association="QLKSModel.FK__RESERVATI__IdRoo__4CA06362">
             <End Role="ROOM" EntitySet="ROOMs" />
-            <End Role="RESERVATION" EntitySet="RESERVATIONs" />
+            <End Role="RESERVATION_DETAIL" EntitySet="RESERVATION_DETAIL" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Bill">
@@ -674,25 +674,25 @@
           <Property Name="IdEmployee" Type="Int32" Nullable="false" />
           <Property Name="IdCustomer" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="Int32" />
-          <Property Name="IdReservationDetail" Type="Int32" Nullable="false" />
-          <Property Name="IdRoom" Type="Int32" Nullable="false" />
+          <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="End_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Start_Time" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="End_Time" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CUSTOMER" Relationship="QLKSModel.FK__RESERVATI__IdCus__49C3F6B7" FromRole="RESERVATION" ToRole="CUSTOMER" />
           <NavigationProperty Name="EMPLOYEE" Relationship="QLKSModel.FK__RESERVATI__IdEmp__4AB81AF0" FromRole="RESERVATION" ToRole="EMPLOYEE" />
           <NavigationProperty Name="RENTALs" Relationship="QLKSModel.FK__RENTAL__IdReserv__46E78A0C" FromRole="RESERVATION" ToRole="RENTAL" />
           <NavigationProperty Name="RESERVATION_DETAIL" Relationship="QLKSModel.FK__RESERVATI__IdRes__4BAC3F29" FromRole="RESERVATION" ToRole="RESERVATION_DETAIL" />
-          <NavigationProperty Name="ROOM" Relationship="QLKSModel.FK__RESERVATI__IdRoo__4CA06362" FromRole="RESERVATION" ToRole="ROOM" />
         </EntityType>
         <EntityType Name="RESERVATION_DETAIL">
           <Key>
             <PropertyRef Name="IdReservationDetail" />
           </Key>
           <Property Name="IdReservationDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="End_Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Start_Time" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="End_Time" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Amount" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="RESERVATIONs" Relationship="QLKSModel.FK__RESERVATI__IdRes__4BAC3F29" FromRole="RESERVATION_DETAIL" ToRole="RESERVATION" />
+          <Property Name="IdRoom" Type="Int32" Nullable="false" />
+          <Property Name="IdReservation" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RESERVATION" Relationship="QLKSModel.FK__RESERVATI__IdRes__4BAC3F29" FromRole="RESERVATION_DETAIL" ToRole="RESERVATION" />
+          <NavigationProperty Name="ROOM" Relationship="QLKSModel.FK__RESERVATI__IdRoo__4CA06362" FromRole="RESERVATION_DETAIL" ToRole="ROOM" />
         </EntityType>
         <EntityType Name="ROOM">
           <Key>
@@ -706,7 +706,7 @@
           <NavigationProperty Name="CATEGORY_ROOM" Relationship="QLKSModel.FK__ROOM__IdCategory__4D94879B" FromRole="ROOM" ToRole="CATEGORY_ROOM" />
           <NavigationProperty Name="DETAIL_CONVINIENT" Relationship="QLKSModel.FK__DETAIL_CO__IdRoo__44FF419A" FromRole="ROOM" ToRole="DETAIL_CONVINIENT" />
           <NavigationProperty Name="RENTALs" Relationship="QLKSModel.FK__RENTAL__IdRoom__47DBAE45" FromRole="ROOM" ToRole="RENTAL" />
-          <NavigationProperty Name="RESERVATIONs" Relationship="QLKSModel.FK__RESERVATI__IdRoo__4CA06362" FromRole="ROOM" ToRole="RESERVATION" />
+          <NavigationProperty Name="RESERVATION_DETAIL" Relationship="QLKSModel.FK__RESERVATI__IdRoo__4CA06362" FromRole="ROOM" ToRole="RESERVATION_DETAIL" />
         </EntityType>
         <EntityType Name="SERVICE">
           <Key>
@@ -912,25 +912,25 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__RESERVATI__IdRes__4BAC3F29">
-          <End Type="QLKSModel.RESERVATION_DETAIL" Role="RESERVATION_DETAIL" Multiplicity="1" />
-          <End Type="QLKSModel.RESERVATION" Role="RESERVATION" Multiplicity="*" />
+          <End Type="QLKSModel.RESERVATION" Role="RESERVATION" Multiplicity="1" />
+          <End Type="QLKSModel.RESERVATION_DETAIL" Role="RESERVATION_DETAIL" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="RESERVATION_DETAIL">
-              <PropertyRef Name="IdReservationDetail" />
+            <Principal Role="RESERVATION">
+              <PropertyRef Name="IdReservation" />
             </Principal>
-            <Dependent Role="RESERVATION">
-              <PropertyRef Name="IdReservationDetail" />
+            <Dependent Role="RESERVATION_DETAIL">
+              <PropertyRef Name="IdReservation" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__RESERVATI__IdRoo__4CA06362">
           <End Type="QLKSModel.ROOM" Role="ROOM" Multiplicity="1" />
-          <End Type="QLKSModel.RESERVATION" Role="RESERVATION" Multiplicity="*" />
+          <End Type="QLKSModel.RESERVATION_DETAIL" Role="RESERVATION_DETAIL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ROOM">
               <PropertyRef Name="IdRoom" />
             </Principal>
-            <Dependent Role="RESERVATION">
+            <Dependent Role="RESERVATION_DETAIL">
               <PropertyRef Name="IdRoom" />
             </Dependent>
           </ReferentialConstraint>
@@ -1060,8 +1060,11 @@
           <EntitySetMapping Name="RESERVATIONs">
             <EntityTypeMapping TypeName="QLKSModel.RESERVATION">
               <MappingFragment StoreEntitySet="RESERVATION">
-                <ScalarProperty Name="IdRoom" ColumnName="IdRoom" />
-                <ScalarProperty Name="IdReservationDetail" ColumnName="IdReservationDetail" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="End_Time" ColumnName="End_Time" />
+                <ScalarProperty Name="Start_Time" ColumnName="Start_Time" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
                 <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
@@ -1072,11 +1075,8 @@
           <EntitySetMapping Name="RESERVATION_DETAIL">
             <EntityTypeMapping TypeName="QLKSModel.RESERVATION_DETAIL">
               <MappingFragment StoreEntitySet="RESERVATION_DETAIL">
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="End_Time" ColumnName="End_Time" />
-                <ScalarProperty Name="Start_Time" ColumnName="Start_Time" />
-                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
-                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="IdReservation" ColumnName="IdReservation" />
+                <ScalarProperty Name="IdRoom" ColumnName="IdRoom" />
                 <ScalarProperty Name="IdReservationDetail" ColumnName="IdReservationDetail" />
               </MappingFragment>
             </EntityTypeMapping>

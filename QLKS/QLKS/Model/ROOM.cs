@@ -19,7 +19,7 @@ namespace QLKS.Model
         {
             this.DETAIL_CONVINIENT = new HashSet<DETAIL_CONVINIENT>();
             this.RENTALs = new HashSet<RENTAL>();
-            this.RESERVATIONs = new HashSet<RESERVATION>();
+            this.RESERVATION_DETAIL = new HashSet<RESERVATION_DETAIL>();
         }
     
         public int IdRoom { get; set; }
@@ -34,6 +34,6 @@ namespace QLKS.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RENTAL> RENTALs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RESERVATION> RESERVATIONs { get; set; }
+        public virtual ICollection<RESERVATION_DETAIL> RESERVATION_DETAIL { get; set; }
     }
 }

@@ -10,22 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QLKS.ViewModel;
 
-namespace QLKS.UserControlss
+namespace QLKS
 {
     /// <summary>
-    /// Interaction logic for uc_DatPhong.xaml
+    /// Interaction logic for wd_AddNewReservation.xaml
     /// </summary>
-    public partial class uc_DatPhong : UserControl
+    public partial class wd_AddNewReservation : Window
     {
-        private ReservationViewMOdel reservationViewMOdel { get; set; }
-        public uc_DatPhong()
+        private AddReservationViewModel addReservationViewModel { get; set; }
+        public wd_AddNewReservation()
         {
             InitializeComponent();
-            this.DataContext = (reservationViewMOdel = new ReservationViewMOdel());
+            this.DataContext = (addReservationViewModel = new AddReservationViewModel());
         }
     }
 }
