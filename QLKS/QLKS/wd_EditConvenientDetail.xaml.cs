@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QLKS.Model;
+using QLKS.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,11 @@ namespace QLKS
     /// </summary>
     public partial class wd_EditConvenientDetail : Window
     {
-        public wd_EditConvenientDetail()
+        private EditConvenientDetailViewModel editConvenientDetailViewModel { get; set; } 
+        public wd_EditConvenientDetail(DETAIL_CONVINIENT detail_convenient)
         {
             InitializeComponent();
+            this.DataContext = editConvenientDetailViewModel = new EditConvenientDetailViewModel(detail_convenient);
         }
     }
 }

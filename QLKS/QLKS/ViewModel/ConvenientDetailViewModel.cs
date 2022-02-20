@@ -56,7 +56,8 @@ namespace QLKS.ViewModel
                 return true;
             },
             (p) => {
-                
+                wd_EditConvenientDetail wd = new wd_EditConvenientDetail(SelectedItem);
+                wd.ShowDialog();
                 Load();
             });
         }

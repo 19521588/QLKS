@@ -27,6 +27,7 @@ namespace QLKS.ViewModel
         private uc_QuanLyChiTietTienNghi QuanLyChiTietTienNghi_UC;
         private uc_QuanLyLoaiDichVu QuanLyLoaiDichVu_UC;
         private uc_Bill HoaDon_UC;
+        private uc_Phong Phong_UC;
         //private uc_ThongKe ThongKe_UC;
         #endregion
         #region
@@ -125,13 +126,13 @@ namespace QLKS.ViewModel
                         }
                         CurrentView = Home_UC;
                         break;
-                    //case "Phòng":
-                    //    if (Phong_UC == null)
-                    //    {
-                    //        Phong_UC = new uc_Phong(MaNV);
-                    //    }
-                    //    contenDisplayMain.Content = Phong_UC;
-                    //    break;
+                    case "Phòng":
+                        if (Phong_UC == null)
+                        {
+                            Phong_UC = new uc_Phong();
+                        }
+                        CurrentView = Phong_UC;
+                        break;
                     case "Đặt phòng":
                         if (DatPhong_UC == null)
                         {

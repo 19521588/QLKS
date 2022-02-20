@@ -125,6 +125,9 @@
     <Compile Include="UserControlss\uc_Home.xaml.cs">
       <DependentUpon>uc_Home.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlss\uc_Phong.xaml.cs">
+      <DependentUpon>uc_Phong.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControlss\uc_QuanLyChiTietTienNghi.xaml.cs">
       <DependentUpon>uc_QuanLyChiTietTienNghi.xaml</DependentUpon>
     </Compile>
@@ -170,6 +173,7 @@
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewmodel.cs" />
     <Compile Include="ViewModel\DialogCustomsViewModel.cs" />
+    <Compile Include="ViewModel\EditConvenientDetailViewModel.cs" />
     <Compile Include="ViewModel\EditCustomerViewModel.cs" />
     <Compile Include="ViewModel\EditEmployeeViewModel.cs" />
     <Compile Include="ViewModel\ConvenientDetailViewModel.cs" />
@@ -183,6 +187,7 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\EditServiceViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\PhongViewModel.cs" />
     <Compile Include="ViewModel\PrintViewModel.cs" />
     <Compile Include="ViewModel\RoomCategoryViewModel.cs" />
     <Compile Include="ViewModel\RoomViewModel.cs" />
@@ -298,6 +303,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlss\uc_Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlss\uc_Phong.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

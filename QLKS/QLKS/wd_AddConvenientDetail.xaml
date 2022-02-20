@@ -51,8 +51,10 @@
                     </Grid>
                     <Grid Grid.Column="1" Margin="2 0 0 0">
                         <ComboBox Name="cmbSoPhong" MaxDropDownHeight="80"                                
-                                Width="143"                                                                        
-                                materialDesign:HintAssist.Hint="Số phòng">
+                                  Width="143"                                                                        
+                                  materialDesign:HintAssist.Hint="Số phòng"
+                                  ItemsSource="{Binding ListRoom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                  DisplayMemberPath="Name">
                         </ComboBox>
                     </Grid>
                 </Grid>
@@ -69,7 +71,9 @@
                     <Grid Grid.Column="1" Margin="2 0 0 0">
                         <ComboBox Name="cmbTienNghi" MaxDropDownHeight="80"                                 
                                 Width="143"                                                                        
-                                materialDesign:HintAssist.Hint="Tên tiện nghi">
+                                materialDesign:HintAssist.Hint="Tên tiện nghi"
+                                  ItemsSource="{Binding ListConvenient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                  DisplayMemberPath="Name">
                         </ComboBox>
                     </Grid>
 
@@ -109,41 +113,30 @@
 
                 <Grid Grid.Column="0">
 
-                    <Button Content="Cập nhật" Name="btnCapNhat" 
-                                    Width="89" Height="36"
-                                    Margin=" 4 4 0 0" 
-                                    Background="#478C10">
+                    <Button Content="Thêm" Name="btnThem" 
+                            Width="89" Height="36"
+                            Margin=" 4 4 0 0" 
+                            Background="#478C10"
+                            Command="{Binding AddCommand}"
+                            CommandParameter="{Binding ElementName=wdAddConvenientDetail}">
                         <Button.Clip>
                             <RectangleGeometry Rect="0,0,89,36" RadiusX="10" RadiusY="10" >
                             </RectangleGeometry>
                         </Button.Clip>
                     </Button>
-                    <Button Content="Thêm" Name="btnThem"  Foreground="White"   Width="89" Height="36" Margin=" 4 4 0 0" Background="#478C10" >
-                        <Button.Clip>
-                            <RectangleGeometry Rect="0,0,89,36" RadiusX="10" RadiusY="10" >
-                            </RectangleGeometry>
-                        </Button.Clip>
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Visibility" Value="Hidden"></Setter>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=Text, ElementName=txbTitle }" Value="Nhập thông tin chi tiết tiện nghi">
-                                        <Setter Property="Visibility" Value="Visible"></Setter>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
+                   
 
                 </Grid>
 
                 <Grid Grid.Column="1" >
                     <Grid>
                         <Button x:Name="btnHuy" 
-                                    Width="89" Height="36"                                    
-                                    Content="Hủy bỏ" 
-                                    Margin=" 4 4 0 0" 
-                                    Background="#9D9999" >
+                                Width="89" Height="36"                                    
+                                Content="Hủy bỏ" 
+                                Margin=" 4 4 0 0" 
+                                Background="#9D9999" 
+                                Command="{Binding CloseAddWindowCommand}"
+                                CommandParameter="{Binding ElementName=wdAddConvenientDetail}">
                             <Button.Clip>
                                 <RectangleGeometry Rect="0,0,89,36" RadiusX="10" RadiusY="10" >
                                 </RectangleGeometry>
