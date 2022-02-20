@@ -13,6 +13,7 @@
              TextElement.FontSize="13"     
              TextOptions.TextFormattingMode="Ideal"     
              TextOptions.TextRenderingMode="Auto"    
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="650" d:DesignWidth="1300">
     <UserControl.Resources>
@@ -20,104 +21,163 @@
     </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+        <!--Grid 0-->
+        <Grid Grid.Row="0">
+            <Grid.Resources>
+                <Style TargetType="TextBox" x:Key="txbSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <Setter Property="Margin" Value="10 0 0 0"></Setter>
+                    <Setter Property="Width" Value="100"></Setter>
+                    <Setter Property="FontSize" Value="18"></Setter>
+                </Style>
+            </Grid.Resources>
+            <StackPanel Orientation="Horizontal">
+                <TextBox
+                    x:Name="txbMaDV"
+                    Width="auto"
+                    materialDesign:HintAssist.Hint="Mã dịch vụ"
+                    Margin="15 0 0 0"
+                    Style="{StaticResource txbSearch}"
+                    Text="{Binding MaDV,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                    VerticalAlignment="Center">
+                </TextBox>
+                <ComboBox  
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                    x:Name="cbCategoryService"
+                    ItemsSource="{Binding ListCategory}"
+                    DisplayMemberPath="Name"
+                    SelectedItem="{Binding SelectedCategory}"
+                    materialDesign:HintAssist.Hint="Loại dịch vụ"
+                    Margin="15 0 0 0"
+                    Width="auto"
+                    FontSize="18"
+                    VerticalAlignment="Center">
+                </ComboBox>
+                <Button Content="Tìm"
+                       Margin="15 5 0 0"
+                        Command="{Binding SearchCommand}"
+                        CommandParameter="{Binding ElementName=wdService}">
+                </Button>
+                <Button Content="Làm mới"
+                        Margin="20 5 0 0"
+                        Command="{Binding RefeshCommand}"
+                        CommandParameter="{Binding ElementName=wdService}">
+
+                </Button>
+            </StackPanel>
+        </Grid>
         <!--Grid 1-->
-        <Grid Grid.Row="0" Margin="0 10 0 10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="1"
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Button
                     Name="btnThem" 
                     Command="{Binding OpenAddWindowCommand}"
-                    Width="150" Content="Thêm dịch vụ" FontSize="15" 
-                    FontFamily="Roboto" FontWeight="Bold" Background="#FF478C10"
-                    Margin="0,0,0,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top">
-                <Button.Clip>
-                    <RectangleGeometry Rect="0,0,150,36" RadiusX="10" RadiusY="10" />
-                </Button.Clip>
-            </Button>
-            <Button Grid.Column="2"
+                    Content="Thêm dịch vụ"
+                    Background="Green"
+                    BorderBrush="Green"
+                    Margin="15 0 0 0"
+                />
+                <Button 
                     Name="btnSua" 
                     Command="{Binding OpenEditServiceWindowCommand}"
-                    Width="150" Content="Sửa dịch vụ" FontSize="15" 
-                    FontFamily="Roboto" FontWeight="Bold" Background="Orange"
-                    Margin="0,0,0,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top">
-                <Button.Clip>
-                    <RectangleGeometry Rect="0,0,150,36" RadiusX="10" RadiusY="10" />
-                </Button.Clip>
-            </Button>
-            <Button Grid.Column="3"
+                    Content="Sửa dịch vụ" 
+                    Background="Orange"
+                    BorderBrush="Orange"
+                    Margin="15,0,0,0" 
+                />
+                <Button
                     Name="btnXoa" 
                     Command="{Binding OpenAddWindowCommand}"
-                    FontFamily="Roboto" FontWeight="Bold" Background="Red" Content="Xóa dịch vụ"
-                    Margin="0,0,0,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top">
-                <Button.Clip>
-                    <RectangleGeometry Rect="0,0,150,36" RadiusX="10" RadiusY="10" />
-                </Button.Clip>
-            </Button>
-            <!--<materialDesign:ColorZone Mode="Standard" CornerRadius="5" HorizontalAlignment="Left" Margin="85,0,0,0"
-                                          VerticalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth1" Width="250">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Style="{DynamicResource MaterialDesignToolButton}">
-                        <materialDesign:PackIcon Kind="Search" Opacity=".56" />
-                    </Button>
-                    <TextBox Grid.Column="1"
-                                Margin="0 0 10 0"
-                                materialDesign:HintAssist.Hint="Nhập tên dịch vụ cần tìm"
-                                materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                                BorderThickness="0"
-                                MinWidth="200"
-                                FlowDirection="LeftToRight"
-                                VerticalAlignment="Center" />
-
-                </Grid>
-            </materialDesign:ColorZone>-->
-        
+                    Content="Xóa dịch vụ"
+                    Background="Red"
+                    BorderBrush="Red"
+                    Margin="15,0,0,0"
+                />
+            </StackPanel>
         </Grid>
-        <!--Bảng dữ liệu-->
-        <Grid Grid.Row="1" Margin="0 20 0 0">
-            <Grid Width="550" Height="500" Background="#F2F1F1">
-                <Grid.Clip>
-                    <RectangleGeometry Rect="0,0,680,500" RadiusX="10" RadiusY="10" >
-                    </RectangleGeometry>
-                </Grid.Clip>
+        <!--Grid 2-->
+        <materialDesign:Card Grid.Row="2" Margin="15 0 15 15">
+            <DataGrid ItemsSource="{Binding ListService, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                      SelectedItem="{Binding SelectedItem}"
+                      SelectionMode="Extended"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      AutoGenerateColumns="False"
+                      CanUserDeleteRows="False"
+                      CanUserReorderColumns="True"
+                      FontSize="18"
+                      Name="dataGrid"
+                      >
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Gainsboro" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
+                                                   CommandParameter="{Binding ElementName=dataGrid}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
 
-                
+                </i:Interaction.Triggers>
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                <Setter Property="FontWeight" Value="DemiBold" />
+                                <Setter Property="FontSize" Value="19" />
 
-                <ListView Name="lsvDichVu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                        <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <materialDesign:DataGridTextColumn Width="150" Header="Mã dịch vụ" Binding="{Binding IdService}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Tên dịch vụ" Binding="{Binding Name}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Loại" Binding="{Binding CATEGORY_SERVICE.Name}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Đơn giá" Binding="{Binding Price}"></materialDesign:DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!--<ListView Name="lsvDichVu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                           ItemsSource="{Binding ListService}" SelectedItem="{Binding SelectedItem}">
-                    <!--căn giữa-->
-                    <ListView.Resources>
-                        <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">10</sys:Double>
-                    </ListView.Resources>
-                    <ListView.View>
-                        <GridView>
-                            <!--thay màu cho header-->
-                            <GridView.ColumnHeaderContainerStyle>
-                                <Style TargetType="{x:Type GridViewColumnHeader}">
-                                    <Setter Property="Background" Value="LightBlue" />
-                                    <Setter Property="Foreground" Value="Black" />
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                </Style>
-                            </GridView.ColumnHeaderContainerStyle>
-                            <GridViewColumn Header="Mã dịch vụ" Width="100" DisplayMemberBinding="{Binding IdService}"/>
-                            <GridViewColumn Header="Tên dịch vụ" Width="200" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Loại" Width="140" DisplayMemberBinding="{Binding CATEGORY_SERVICE.Name}"/>
-                            <GridViewColumn Header="Đơn giá" Width="120" DisplayMemberBinding="{Binding Price}"/>
-                            
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </Grid>
-        </Grid>
+                --><!--căn giữa--><!--
+                <ListView.Resources>
+                    <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">10</sys:Double>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView>
+                        --><!--thay màu cho header--><!--
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                <Setter Property="Background" Value="LightBlue" />
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
+                        <GridViewColumn Header="Mã dịch vụ" Width="100" DisplayMemberBinding="{Binding IdService}"/>
+                        <GridViewColumn Header="Tên dịch vụ" Width="200" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Loại" Width="140" DisplayMemberBinding="{Binding CATEGORY_SERVICE.Name}"/>
+                        <GridViewColumn Header="Đơn giá" Width="120" DisplayMemberBinding="{Binding Price}"/>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>-->
+        </materialDesign:Card>
     </Grid>
 </UserControl>

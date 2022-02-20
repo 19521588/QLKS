@@ -6,114 +6,105 @@
              xmlns:local="clr-namespace:QLKS.UserControlss"
              mc:Ignorable="d" 
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"        
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              TextElement.FontFamily="Roboto"   
-             d:DesignHeight="632" d:DesignWidth="1300">
-    <Grid Background="#FFFFFF">
+             d:DesignHeight="650" d:DesignWidth="1300">
+    <UserControl.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource FeatureButton}"></Style>
+    </UserControl.Resources>
+    <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
+        <!--Grid 0-->
+        <Grid  Grid.Row="0">
 
-
-        <Grid  Grid.Row="0" VerticalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <!--<materialDesign:ColorZone Mode="Standard" CornerRadius="5" HorizontalAlignment="Left" Margin="120,0,0,0"
-                                          VerticalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth1" Width="250">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Style="{DynamicResource MaterialDesignToolButton}">
-                        <materialDesign:PackIcon Kind="Search" Opacity=".56" />
-                    </Button>
-                    <TextBox Grid.Column="1" Name="txtFilter" 
-                                Margin="0 0 0 0"
-                                materialDesign:HintAssist.Hint="Nhập tên tiện nghi cần tìm"
-                                materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                                BorderThickness="0"
-                                MinWidth="200"
-                                FlowDirection="LeftToRight"
-                                VerticalAlignment="Center" />
-
-                </Grid>
-            </materialDesign:ColorZone>-->
-
-            <Button Grid.Column="1"
-                    Name="btnThem" 
+        </Grid>
+        <!--Grid 1-->
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Button
                     Command="{Binding OpenAddWindowCommand}"
-                    Width="150" Content="Thêm dịch vụ" FontSize="15" 
-                    FontFamily="Roboto" FontWeight="Bold" Background="#FF478C10"
-                    Margin="0,0,0,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top">
-                <Button.Clip>
-                    <RectangleGeometry Rect="0,0,150,36" RadiusX="10" RadiusY="10" />
-                </Button.Clip>
-            </Button>
-            <Button Grid.Column="2"
-                    Name="btnSua" 
+                    Content="Thêm dịch vụ"
+                    Background="Green"
+                    BorderBrush="Green"
+                    Margin="15 0 0 0"
+                />
+                <Button 
                     Command="{Binding OpenEditWindowCommand}"
-                    Width="150" Content="Sửa dịch vụ" FontSize="15" 
-                    FontFamily="Roboto" FontWeight="Bold" Background="Orange" HorizontalAlignment="Left">
-                <Button.Clip>
-                    <RectangleGeometry Rect="0,0,150,36" RadiusX="10" RadiusY="10" />
-                </Button.Clip>
-            </Button>
-            <Button Grid.Column="3"
-                    Name="btnXoa" 
+                    Content="Sửa dịch vụ" 
+                    Background="Orange"
+                    BorderBrush="Orange"
+                    Margin="15,0,0,0" 
+                />
+                <Button
                     Command="{Binding OpenAddWindowCommand}"
-                    FontFamily="Roboto" FontWeight="Bold" Background="Red" Content="Xóa dịch vụ"
-                    Margin="0,0,0,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top">
-                <Button.Clip>
-                    <RectangleGeometry Rect="0,0,150,36" RadiusX="10" RadiusY="10" />
-                </Button.Clip>
-            </Button>
-
+                    Content="Xóa dịch vụ"
+                    Background="Red"
+                    BorderBrush="Red"
+                    Margin="15,0,0,0"
+                />
+            </StackPanel>
         </Grid>
+        <!--Grid 2-->
+        <materialDesign:Card Grid.Row="2" Margin="15 0 15 15">
+            <DataGrid ItemsSource="{Binding ListConvenientDetail, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                      SelectedItem="{Binding SelectedItem}"
+                      SelectionMode="Extended"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      AutoGenerateColumns="False"
+                      CanUserDeleteRows="False"
+                      CanUserReorderColumns="True"
+                      FontSize="18"
+                      Name="dataGrid"
+                      >
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Gainsboro" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
+                                                   CommandParameter="{Binding ElementName=dataGrid}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
 
+                </i:Interaction.Triggers>
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                <Setter Property="FontWeight" Value="DemiBold" />
+                                <Setter Property="FontSize" Value="19" />
 
-        <Grid Grid.Row="1" >
-            <Grid HorizontalAlignment="Center" Width="900" Height="500" Background="#F2F1F1"  >
-                <Grid.Clip>
-                    <RectangleGeometry  Rect="0,0,690,500" RadiusX="10" RadiusY="10" />
-                </Grid.Clip>
-                <ListView  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="lsvCTTienNghi" 
-                           ItemsSource="{Binding ListConvenientDetail}" SelectedItem="{Binding SelectedItem}">
-                    <ListView.Resources>
-                        <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">10</sys:Double>
-                    </ListView.Resources>
+                            </Trigger>
+                        </Style.Triggers>
 
-                    <ListView.View>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                        <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
 
-                        <GridView >
-                            <GridView.ColumnHeaderContainerStyle>
-                                <Style TargetType="{x:Type GridViewColumnHeader}">
-                                    <Setter Property="Background" Value="LightBlue" />
-                                    <Setter Property="Foreground" Value="Black" />
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                </Style>
-                            </GridView.ColumnHeaderContainerStyle>
-
-                            <GridViewColumn Width="190" Header="Mã chi tiết tiện nghi" DisplayMemberBinding="{Binding IdConvinientDetail}"/>
-
-                            <GridViewColumn Width="190" Header="Số phòng" DisplayMemberBinding="{Binding ROOM.Name}" />
-
-                            <GridViewColumn Width="180" Header="Tên tiện nghi" DisplayMemberBinding="{Binding CONVINIENT.Name}" />
-
-                            <GridViewColumn Width="130" Header="Số lượng" DisplayMemberBinding="{Binding Amount}" />
-
-                        </GridView>
-
-                    </ListView.View>
-
-                </ListView>
-            </Grid>
-
-        </Grid>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Mã chi tiết tiện nghi" Binding="{Binding IdConvinientDetail}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Tên phòng" Binding="{Binding ROOM.Name}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Tên tiện nghi" Binding="{Binding CONVINIENT.Name}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Số lượng" Binding="{Binding Amount}"></materialDesign:DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </materialDesign:Card>
     </Grid>
 </UserControl>

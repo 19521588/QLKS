@@ -21,8 +21,8 @@
             <RowDefinition Height="130"></RowDefinition>
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
-      
-       
+
+
         <materialDesign:Card
             Margin="15 0 10 15"
             Grid.Row="3">
@@ -99,7 +99,7 @@
 
                 </Style>
             </Grid.Resources>
-           
+
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
@@ -140,7 +140,7 @@
                       Text="{Binding CustomerName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                       VerticalAlignment="Center">
                     </TextBox>
-                    
+
                     <DatePicker
                         x:Name="dpReceptionDate"
                             FontSize="16"
@@ -151,9 +151,13 @@
                             />
                 </StackPanel>
                 <Grid Grid.Row="1" Margin="0 0 0 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="24*"/>
+                    </Grid.ColumnDefinitions>
                     <materialDesign:Card Width="300"
                                           HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
+                                            VerticalAlignment="Center" Grid.ColumnSpan="2"
                                          >
                         <ComboBox
                             Margin="10 0 10 10"
@@ -174,7 +178,7 @@
                             Content="Tất cả" />
                             <ComboBoxItem
                             Content="Ngày hôm nay" />
-                  
+
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding ViewSelectionChanged}"></i:InvokeCommandAction>
@@ -208,7 +212,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="0 20 0 0">
-                   
+
 
                 </StackPanel>
             </StackPanel>

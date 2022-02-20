@@ -1,4 +1,5 @@
 ﻿using QLKS.Model;
+using QLKS.UserControlss;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,9 +15,13 @@ namespace QLKS.ViewModel
         private ObservableCollection<SERVICE> _ListService { get; set; }
         public ObservableCollection<SERVICE> ListService { get => _ListService; set { _ListService = value; OnPropertyChanged(); } }
 
-        public ICommand OpenAddWindowCommand { get; set; }
+        private ObservableCollection<CATEGORY_SERVICE> _ListCategory;
+        public ObservableCollection<CATEGORY_SERVICE> ListCategory { get => _ListCategory; set { _ListCategory = value; OnPropertyChanged(); } }
 
+        public ICommand OpenAddWindowCommand { get; set; }
         public ICommand OpenEditServiceWindowCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+        public ICommand RefeshCommand { get; set; }
 
         private SERVICE _SelectedItem { get; set; }
         public SERVICE SelectedItem
@@ -37,6 +42,8 @@ namespace QLKS.ViewModel
         public ServiceViewModel()
         {
             Load();
+
+            ListCategory = new ObservableCollection<CATEGORY_SERVICE>(DataProvider.Ins.DB.CATEGORY_SERVICE);
 
             //Mở cửa số để thêm dịch vụ
             OpenAddWindowCommand = new RelayCommand<object>((p) => {
@@ -62,6 +69,27 @@ namespace QLKS.ViewModel
                 Load();
             });
 
+            //Tìm kiếm
+            SearchCommand = new RelayCommand<uc_QuanLyDichVu>((p) => {
+                if (String.IsNullOrEmpty(p.txbMaDV.Text) && String.IsNullOrEmpty(p.cbCategoryService.Text))
+                {
+                    return false;
+                }
+                return true;
+            },
+            (p) => {
+                
+            });
+
+            //Làm mới
+            RefeshCommand = new RelayCommand<uc_QuanLyDichVu>((p) =>
+            {
+                return true;
+            },
+            (p) =>
+            {                  
+                Load();
+            });
         }
 
         void Load()
