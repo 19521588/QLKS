@@ -10,24 +10,39 @@ namespace QLKS.ViewModel
 {
     public class PhongViewModel : BaseViewModel
     {
-        private ObservableCollection<ROOM> _ListRoom { get; set; }
-        public ObservableCollection<ROOM> ListRoom { get => _ListRoom; set { _ListRoom = value; OnPropertyChanged(); } }
+        private ObservableCollection<ListRoom> _SingleRoom { get; set; }
+        public ObservableCollection<ListRoom> SingleRoom { get => _SingleRoom; set { _SingleRoom = value; OnPropertyChanged(); } }
 
         public List<ROOM> list { get; set; }
 
         public PhongViewModel()
         {
+            
             Load();
             
         }
         void Load()
         {
-            ListRoom = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs);
-            list = new List<ROOM>();
-            foreach(var item in ListRoom)
+            SingleRoom = new ObservableCollection<ListRoom>();
+            var rooms = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs);
+            foreach(var item in rooms)
             {
-                list.Add(item);
+                ListRoom temp = new ListRoom();
+                var category_rooms = DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == item.IdCategoryRoom && x.IdCategoryRoom==1).SingleOrDefault();
+                temp.Room = item;
+                if(item.Status== "Phòng trống")
+                {
+                    temp.IsDay = true;
+                    temp.SoGio = 0;
+                    temp.SoNgayO = 0;
+                    temp.TenKH = "Phòng trống";
+                    temp.CategoryRoom = category_rooms.Name;
+                    temp.DonDep = item.Clean;
+                }
+                SingleRoom.Add(temp);
             }
         }
+        
+
     }
 }

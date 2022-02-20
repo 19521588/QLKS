@@ -60,11 +60,11 @@ namespace QLKS.ViewModel
             },
             (p) =>
             {
-                RESERVATION_DETAIL res_detail = new RESERVATION_DETAIL() {IdReservationDetail = -1,Amount = 2, Start_Date = DateTime.Parse(p.dtStartDate.SelectedDate.ToString()), End_Date = DateTime.Parse(p.dtStartDate.SelectedDate.ToString()), Start_Time = DateTime.Parse(p.dtStartDate.SelectedDate.ToString()), End_Time = DateTime.Parse(p.dtStartDate.SelectedDate.ToString()) };
-                ListRoom.Remove(SelectedRoom);
+                //RESERVATION_DETAIL res_detail = new RESERVATION_DETAIL() {IdReservationDetail = -1,Amount = 2, Start_Date = DateTime.Parse(p.dtStartDate.SelectedDate.ToString()), End_Date = DateTime.Parse(p.dtStartDate.SelectedDate.ToString()), Start_Time = DateTime.Parse(p.dtStartDate.SelectedDate.ToString()), End_Time = DateTime.Parse(p.dtStartDate.SelectedDate.ToString()) };
+                //ListRoom.Remove(SelectedRoom);
                 
-                ListReservation.Add(res_detail);
-                //p.Close();
+                //ListReservation.Add(res_detail);
+                ////p.Close();
             }
             );
 

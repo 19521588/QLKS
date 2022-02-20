@@ -5,8 +5,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="21ebf786e5c64eaabd475181090a2731" Name="Diagram1">
-        <EntityTypeShape EntityType="QLKSModel.Bill" Width="1.5" PointX="10.5" PointY="4.125" />
-        <EntityTypeShape EntityType="QLKSModel.BILLINFO" Width="1.5" PointX="12.75" PointY="4.25" />
+        <EntityTypeShape EntityType="QLKSModel.Bill" Width="1.5" PointX="10.5" PointY="4.25" />
+        <EntityTypeShape EntityType="QLKSModel.BILLINFO" Width="1.5" PointX="12.75" PointY="4.375" />
         <EntityTypeShape EntityType="QLKSModel.CATEGORY_ROOM" Width="1.5" PointX="0.75" PointY="4.375" />
         <EntityTypeShape EntityType="QLKSModel.CATEGORY_SERVICE" Width="1.5" PointX="1.5" PointY="15.625" />
         <EntityTypeShape EntityType="QLKSModel.CATEGORY_USER" Width="1.5" PointX="3.75" PointY="19" />
@@ -21,23 +21,22 @@
         <EntityTypeShape EntityType="QLKSModel.ROOM" Width="1.5" PointX="3" PointY="4.125" />
         <EntityTypeShape EntityType="QLKSModel.SERVICE" Width="1.5" PointX="3.75" PointY="15.375" />
         <EntityTypeShape EntityType="QLKSModel.USER" Width="1.5" PointX="6" PointY="11.625" />
-        <AssociationConnector Association="QLKSModel.FK__Bill__IdBillInfo__412EB0B6" />
-        <AssociationConnector Association="QLKSModel.FK__Bill__IdRental__4222D4EF" />
-        <AssociationConnector Association="QLKSModel.FK__BILLINFO__IdBill__4316F928" />
-        <AssociationConnector Association="QLKSModel.FK__ROOM__IdCategory__4D94879B" />
-        <AssociationConnector Association="QLKSModel.FK__SERVICE__IdCateg__4E88ABD4" />
-        <AssociationConnector Association="QLKSModel.FK__USERS__Type__5070F446" />
-        <AssociationConnector Association="QLKSModel.FK__DETAIL_CO__IdCon__440B1D61" />
-        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdCus__49C3F6B7" />
-        <AssociationConnector Association="QLKSModel.FK__DETAIL_CO__IdRoo__44FF419A" />
-        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdEmp__4AB81AF0" />
-        <AssociationConnector Association="QLKSModel.FK__USERS__IdEmploye__4F7CD00D" />
-        <AssociationConnector Association="QLKSModel.FK__RENTAL__IdRental__45F365D3" />
-        <AssociationConnector Association="QLKSModel.FK__RENTAL__IdReserv__46E78A0C" />
-        <AssociationConnector Association="QLKSModel.FK__RENTAL__IdRoom__47DBAE45" />
-        <AssociationConnector Association="QLKSModel.FK__RENTALDET__IdSer__48CFD27E" />
-        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdRes__4BAC3F29" />
-        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdRoo__4CA06362" />
+        <AssociationConnector Association="QLKSModel.FK__Bill__IdRental__412EB0B6" />
+        <AssociationConnector Association="QLKSModel.FK__BILLINFO__IdBill__4222D4EF" />
+        <AssociationConnector Association="QLKSModel.FK__ROOM__IdCategory__4CA06362" />
+        <AssociationConnector Association="QLKSModel.FK__SERVICE__IdCateg__4D94879B" />
+        <AssociationConnector Association="QLKSModel.FK__USERS__Type__4F7CD00D" />
+        <AssociationConnector Association="QLKSModel.FK__DETAIL_CO__IdCon__4316F928" />
+        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdCus__48CFD27E" />
+        <AssociationConnector Association="QLKSModel.FK__DETAIL_CO__IdRoo__440B1D61" />
+        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdEmp__49C3F6B7" />
+        <AssociationConnector Association="QLKSModel.FK__USERS__IdEmploye__4E88ABD4" />
+        <AssociationConnector Association="QLKSModel.FK__RENTAL__IdRental__44FF419A" />
+        <AssociationConnector Association="QLKSModel.FK__RENTAL__IdReserv__45F365D3" />
+        <AssociationConnector Association="QLKSModel.FK__RENTAL__IdRoom__46E78A0C" />
+        <AssociationConnector Association="QLKSModel.FK__RENTALDET__IdSer__47DBAE45" />
+        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdRes__4AB81AF0" />
+        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdRoo__4BAC3F29" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

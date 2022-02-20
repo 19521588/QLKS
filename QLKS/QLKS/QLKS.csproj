@@ -94,6 +94,7 @@
     <Compile Include="Model\BillDetail.cs" />
     <Compile Include="Model\ListBill.cs" />
     <Compile Include="Model\ListBillInfo.cs" />
+    <Compile Include="Model\ListRoom.cs" />
     <Compile Include="Model\ReservationItem.cs" />
     <Compile Include="Template\BillTemplate.xaml.cs">
       <DependentUpon>BillTemplate.xaml</DependentUpon>
