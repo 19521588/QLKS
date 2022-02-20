@@ -14,20 +14,11 @@ namespace QLKS.Model
     
     public partial class RESERVATION_DETAIL
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public RESERVATION_DETAIL()
-        {
-            this.RESERVATIONs = new HashSet<RESERVATION>();
-        }
-    
         public int IdReservationDetail { get; set; }
-        public System.DateTime Start_Date { get; set; }
-        public System.DateTime End_Date { get; set; }
-        public System.DateTime Start_Time { get; set; }
-        public System.DateTime End_Time { get; set; }
-        public int Amount { get; set; }
+        public int IdRoom { get; set; }
+        public int IdReservation { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RESERVATION> RESERVATIONs { get; set; }
+        public virtual RESERVATION RESERVATION { get; set; }
+        public virtual ROOM ROOM { get; set; }
     }
 }
