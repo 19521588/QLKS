@@ -88,16 +88,16 @@ namespace QLKS.ViewModel
             BillDetail = new BillDetail();
             var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.IdRental == bill.IdRental).SingleOrDefault();
             var reservation = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.IdReservation == rental.IdReservation).SingleOrDefault();
-            var reservationDetail = DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdReservationDetail == reservation.IdReservationDetail).SingleOrDefault();
+            
 
             var room = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == rental.IdRoom).SingleOrDefault();
             var roomCategory = DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == room.IdCategoryRoom).SingleOrDefault();
 
             var customer = DataProvider.Ins.DB.CUSTOMERs.Where(x => x.IdCustomer == reservation.IdCustomer).SingleOrDefault();
 
-            BillDetail.StartDate = reservationDetail.Start_Date;
-            BillDetail.EndDate = reservationDetail.End_Date;
-            BillDetail.AmountRenter = reservationDetail.Amount;
+            BillDetail.StartDate = reservation.Start_Date;
+            BillDetail.EndDate = reservation.End_Date;
+            BillDetail.AmountRenter = reservation.Amount;
             BillDetail.ServiceCharge = BillInfo.Sum(x=>x.Total);
             BillDetail.CCCD = customer.CCCD;
             BillDetail.Name = customer.Name;
