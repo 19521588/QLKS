@@ -57,6 +57,7 @@ namespace QLKS.ViewModel
                 AddReservationViewModel add = wdAddReservation.DataContext as AddReservationViewModel;
                 if (add.check)
                     ListReservation.Insert(0, add.reservation);
+                Load();
             });
         }
 

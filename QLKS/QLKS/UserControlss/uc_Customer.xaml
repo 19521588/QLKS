@@ -110,7 +110,7 @@
                         </DataGrid.ColumnHeaderStyle>
 
                         <DataGrid.Columns>
-                            <materialDesign:DataGridTextColumn Width="100" Header="Mã KH" Binding="{Binding IdEmployee,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="100" Header="Mã KH" Binding="{Binding IdCustomer,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
                             <materialDesign:DataGridTextColumn Width="220" Header="Tên nhân viên" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                             <materialDesign:DataGridTextColumn Width="220" Header="Địa chỉ" Binding="{Binding Address,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                             <materialDesign:DataGridTextColumn Width="120" Header="CCCD" Binding="{Binding CCCD,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>

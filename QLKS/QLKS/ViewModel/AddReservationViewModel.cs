@@ -13,6 +13,7 @@ namespace QLKS.ViewModel
     {
         public ICommand AddCommand { get; set; }
 
+        public ICommand SaveCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         private bool _check { get; set; }
         public bool check { get => _check; set { _check = value; OnPropertyChanged(); } }
@@ -29,13 +30,21 @@ namespace QLKS.ViewModel
 
         public ObservableCollection<ROOM> ListRoom { get => _ListRoom; set { _ListRoom = value; OnPropertyChanged(); } }
 
+        private ObservableCollection<ROOM> _ListSelectRoom { get; set; }
+
+        public ObservableCollection<ROOM> ListSelectRoom { get => _ListSelectRoom; set { _ListSelectRoom = value; OnPropertyChanged(); } }
+
         private ROOM _SelectedRoom { get; set; }
 
         public ROOM SelectedRoom { get => _SelectedRoom; set { _SelectedRoom = value; OnPropertyChanged(); } }
 
-        private RENTALDETAIL _SelectedItem { get; set; }
+        private ROOM _SelectedItem { get; set; }
 
-        public RENTALDETAIL SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); } }
+        public ROOM SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); } }
+
+        public int date;
+
+        public RESERVATION_DETAIL reservation_detail;
 
         private bool _IsClose { get; set; }
         public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
@@ -43,6 +52,7 @@ namespace QLKS.ViewModel
         {
 
             ListRoom = new ObservableCollection<ROOM>();
+            ListSelectRoom = new ObservableCollection<ROOM>();
             ListReservation = new ObservableCollection<RESERVATION_DETAIL>();
             ObservableCollection<ROOM> temp = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs.Where(x => x.Name != "Trống"));
             for (int i = temp.Count() - 1; i >= 0; i--)
@@ -50,21 +60,57 @@ namespace QLKS.ViewModel
                 ListRoom.Add(temp[i]);
             }
 
-            
+
 
             AddCommand = new RelayCommand<wd_AddNewReservation>(
             (p) =>
             {
-                if(SelectedRoom == null) return false;
+                if (SelectedRoom == null) return false;
                 return true;
             },
             (p) =>
             {
-                //RESERVATION_DETAIL res_detail = new RESERVATION_DETAIL() {IdReservationDetail = -1,Amount = 2, Start_Date = DateTime.Parse(p.dtStartDate.SelectedDate.ToString()), End_Date = DateTime.Parse(p.dtStartDate.SelectedDate.ToString()), Start_Time = DateTime.Parse(p.dtStartDate.SelectedDate.ToString()), End_Time = DateTime.Parse(p.dtStartDate.SelectedDate.ToString()) };
-                //ListRoom.Remove(SelectedRoom);
-                
+                //RESERVATION_DETAIL res_detail = new RESERVATION_DETAIL() {IdRoom = SelectedRoom.IdRoom};
+                ListSelectRoom.Add(SelectedRoom);
+                ListRoom.Remove(SelectedRoom);            
                 //ListReservation.Add(res_detail);
-                ////p.Close();
+                //p.Close();
+            }
+            );
+
+            SaveCommand = new RelayCommand<wd_AddNewReservation>(
+            (p) =>
+            {
+                if (ListSelectRoom.Count == 0) return false;
+                if (p.dtStartDate.SelectedDate > p.dtpEndDate.SelectedDate) return false;
+                if (p.txbName.Text == null || p.txbCCCD.Text == null || p.txbAddress.Text == null || p.txbPhone.Text == null || p.txbNationality.Text == null || p.cbSex.Text == null || p.dtBirth.Text == null) return false;
+                if (p.dtStartDate.Text == null || p.dtpEndDate == null || p.tpStartTime.Text == null || p.tpEndTime.Text == null) return false;
+                return true;
+            },
+            (p) =>
+            {
+                CUSTOMER customer = new CUSTOMER() { Name = p.txbName.Text, BirthDay = DateTime.Parse(p.dtBirth.SelectedDate.ToString()), Address = p.txbAddress.Text, Phone = p.txbPhone.Text, Nationality = p.txbNationality.Text, CCCD = p.txbCCCD.Text, Sex = p.cbSex.Text };
+                DataProvider.Ins.DB.CUSTOMERs.Add(customer);
+
+                
+                if (p.dtStartDate.SelectedDate == p.dtpEndDate.SelectedDate) date = 0;
+                else
+                {
+                    TimeSpan datespan = (TimeSpan)(p.dtpEndDate.SelectedDate -  p.dtStartDate.SelectedDate);
+                    date = datespan.Days;
+                }
+                reservation = new RESERVATION() { IdCustomer = customer.IdCustomer, Amount = Int32.Parse(p.txbAmount.Text), Start_Date = DateTime.Parse(p.dtStartDate.Text +" "+ p.tpStartTime.Text) , End_Date = DateTime.Parse(p.dtpEndDate.Text + " " + p.tpEndTime.Text), Date = date, IdEmployee = 1 };
+                DataProvider.Ins.DB.RESERVATIONs.Add(reservation);
+
+                foreach(var item in ListSelectRoom)
+                {
+                    var List = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == item.IdRoom).SingleOrDefault();
+                    List.Status = "Đang đặt";
+                    reservation_detail = new RESERVATION_DETAIL() { IdReservation = reservation.IdReservation, Status = "Đang đặt", IdRoom = item.IdRoom};
+                    DataProvider.Ins.DB.RESERVATION_DETAIL.Add(reservation_detail);
+                }
+                DataProvider.Ins.DB.SaveChanges();
+                p.Close();
             }
             );
 
