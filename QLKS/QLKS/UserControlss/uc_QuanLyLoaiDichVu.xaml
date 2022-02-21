@@ -21,8 +21,36 @@
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
         <!--Grid 0-->
-        <Grid  Grid.Row="0">
-           
+        <Grid Grid.Row="0">
+            <Grid.Resources>
+                <Style TargetType="TextBox" x:Key="txbSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <Setter Property="Margin" Value="10 0 0 0"></Setter>
+                    <Setter Property="Width" Value="100"></Setter>
+                    <Setter Property="FontSize" Value="18"></Setter>
+                </Style>
+            </Grid.Resources>
+            <StackPanel Orientation="Horizontal">
+                <TextBox
+                    x:Name="txbTenLoaiDV"
+                    Width="auto"
+                    materialDesign:HintAssist.Hint="Tên loại dịch vụ"
+                    Margin="15 0 0 0"
+                    Style="{StaticResource txbSearch}"
+                    Text="{Binding TenLoaiDV,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                    VerticalAlignment="Center">
+                </TextBox>
+                <Button Content="Tìm"
+                       Margin="15 5 0 0"
+                        Command="{Binding SearchCommand}"
+                        CommandParameter="{Binding ElementName=wdCategoryService}">
+                </Button>
+                <Button Content="Làm mới"
+                        Margin="20 5 0 0"
+                        Command="{Binding RefeshCommand}"
+                        CommandParameter="{Binding ElementName=wdCategoryService}">
+
+                </Button>
+            </StackPanel>
         </Grid>
         <!--Grid 1-->
         <Grid Grid.Row="1">

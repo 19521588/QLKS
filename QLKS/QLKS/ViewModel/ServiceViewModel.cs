@@ -1,4 +1,5 @@
-﻿using QLKS.Model;
+﻿using QLKS.Convert;
+using QLKS.Model;
 using QLKS.UserControlss;
 using System;
 using System.Collections.Generic;
@@ -70,15 +71,30 @@ namespace QLKS.ViewModel
             });
 
             //Tìm kiếm
-            SearchCommand = new RelayCommand<uc_QuanLyDichVu>((p) => {
-                if (String.IsNullOrEmpty(p.txbMaDV.Text) && String.IsNullOrEmpty(p.cbCategoryService.Text))
+            SearchCommand = new RelayCommand<uc_QuanLyDichVu>((p) => 
+            {
+                if (String.IsNullOrEmpty(p.txbTenDV.Text) && String.IsNullOrEmpty(p.cbCategoryService.Text))
                 {
                     return false;
                 }
                 return true;
             },
             (p) => {
-                
+                UnicodeConvert uni = new UnicodeConvert();
+
+                ObservableCollection<SERVICE> _ListTempt = new ObservableCollection<SERVICE>();
+                ObservableCollection<SERVICE> _ListNew = new ObservableCollection<SERVICE>(DataProvider.Ins.DB.SERVICEs);
+
+                foreach (var item in _ListNew)
+                {
+                    if ((string.IsNullOrEmpty(p.txbTenDV.Text) || (!string.IsNullOrEmpty(p.txbTenDV.Text) && uni.RemoveUnicode(item.Name).ToLower().Contains(uni.RemoveUnicode(p.txbTenDV.Text).ToLower())))
+                        && (string.IsNullOrEmpty(p.cbCategoryService.Text) || (!string.IsNullOrEmpty(p.cbCategoryService.Text) && uni.RemoveUnicode(item.CATEGORY_SERVICE.Name).ToLower().Contains(uni.RemoveUnicode(p.cbCategoryService.Text).ToLower()))))
+                    {
+                        _ListTempt.Add(item);
+                    }
+                }
+
+                ListService = _ListTempt;
             });
 
             //Làm mới
@@ -87,7 +103,9 @@ namespace QLKS.ViewModel
                 return true;
             },
             (p) =>
-            {                  
+            {             
+                p.txbTenDV.Text = null;
+                p.cbCategoryService.Text = null;
                 Load();
             });
         }

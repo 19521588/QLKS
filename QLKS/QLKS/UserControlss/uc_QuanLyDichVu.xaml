@@ -36,12 +36,12 @@
             </Grid.Resources>
             <StackPanel Orientation="Horizontal">
                 <TextBox
-                    x:Name="txbMaDV"
+                    x:Name="txbTenDV"
                     Width="auto"
-                    materialDesign:HintAssist.Hint="Mã dịch vụ"
+                    materialDesign:HintAssist.Hint="Tên dịch vụ"
                     Margin="15 0 0 0"
                     Style="{StaticResource txbSearch}"
-                    Text="{Binding MaDV,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                    Text="{Binding TenDV,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                     VerticalAlignment="Center">
                 </TextBox>
                 <ComboBox  
