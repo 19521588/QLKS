@@ -1,4 +1,6 @@
-﻿using QLKS.Model;
+﻿using QLKS.Convert;
+using QLKS.Model;
+using QLKS.UserControlss;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,8 +16,9 @@ namespace QLKS.ViewModel
         private ObservableCollection<CATEGORY_SERVICE> _ListCategoryService { get; set; }
         public ObservableCollection<CATEGORY_SERVICE> ListCategoryService { get => _ListCategoryService; set { _ListCategoryService = value; OnPropertyChanged(); } }
         public ICommand OpenAddWindowCommand { get; set; }
-
         public ICommand OpenEditCategoryServiceWindowCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+        public ICommand RefeshCommand { get; set; }
 
         private CATEGORY_SERVICE _SelectedItem { get; set; }
         public CATEGORY_SERVICE SelectedItem
@@ -61,7 +64,42 @@ namespace QLKS.ViewModel
                 Load();
             });
 
+            //Tìm kiếm
+            SearchCommand = new RelayCommand<uc_QuanLyLoaiDichVu>((p) =>
+            {
+                if (String.IsNullOrEmpty(p.txbTenLoaiDV.Text))
+                {
+                    return false;
+                }
+                return true;
+            },
+            (p) => {
+                UnicodeConvert uni = new UnicodeConvert();
 
+                ObservableCollection<CATEGORY_SERVICE> _ListTempt = new ObservableCollection<CATEGORY_SERVICE>();
+                ObservableCollection<CATEGORY_SERVICE> _ListNew = new ObservableCollection<CATEGORY_SERVICE>(DataProvider.Ins.DB.CATEGORY_SERVICE);
+
+                foreach (var item in _ListNew)
+                {
+                    if ((string.IsNullOrEmpty(p.txbTenLoaiDV.Text) || (!string.IsNullOrEmpty(p.txbTenLoaiDV.Text) && uni.RemoveUnicode(item.Name).ToLower().Contains(uni.RemoveUnicode(p.txbTenLoaiDV.Text).ToLower()))))
+                    {
+                        _ListTempt.Add(item);
+                    }
+                }
+
+                ListCategoryService = _ListTempt;
+            });
+
+            //Làm mới
+            RefeshCommand = new RelayCommand<uc_QuanLyLoaiDichVu>((p) =>
+            {
+                return true;
+            },
+            (p) =>
+            {
+                p.txbTenLoaiDV.Text = null;
+                Load();
+            });
         }
 
         void Load()

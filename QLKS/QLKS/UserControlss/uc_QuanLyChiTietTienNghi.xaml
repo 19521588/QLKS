@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QLKS.UserControlss"
              mc:Ignorable="d" 
+             x:Name="wdConvenientDetail"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -20,8 +21,51 @@
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
         <!--Grid 0-->
-        <Grid  Grid.Row="0">
+        <Grid Grid.Row="0">
+            <Grid.Resources>
+                <Style TargetType="TextBox" x:Key="txbSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <Setter Property="Margin" Value="10 0 0 0"></Setter>
+                    <Setter Property="Width" Value="100"></Setter>
+                    <Setter Property="FontSize" Value="18"></Setter>
+                </Style>
+            </Grid.Resources>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox  
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                    x:Name="cbRoom"
+                    ItemsSource="{Binding ListRoom}"
+                    DisplayMemberPath="Name"
+                    
+                    materialDesign:HintAssist.Hint="Tên phòng"
+                    Margin="15 0 0 0"
+                    Width="auto"
+                    FontSize="18"
+                    VerticalAlignment="Center">
+                </ComboBox>
+                <ComboBox  
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                    x:Name="cbConvinient"
+                    ItemsSource="{Binding ListConvenient}"
+                    DisplayMemberPath="Name"
+                    
+                    materialDesign:HintAssist.Hint="Tiện nghi"
+                    Margin="15 0 0 0"
+                    Width="auto"
+                    FontSize="18"
+                    VerticalAlignment="Center">
+                </ComboBox>
+                <Button Content="Tìm"
+                       Margin="15 5 0 0"
+                        Command="{Binding SearchCommand}"
+                        CommandParameter="{Binding ElementName=wdConvenientDetail}">
+                </Button>
+                <Button Content="Làm mới"
+                        Margin="20 5 0 0"
+                        Command="{Binding RefeshCommand}"
+                        CommandParameter="{Binding ElementName=wdConvenientDetail}">
 
+                </Button>
+            </StackPanel>
         </Grid>
         <!--Grid 1-->
         <Grid Grid.Row="1">
