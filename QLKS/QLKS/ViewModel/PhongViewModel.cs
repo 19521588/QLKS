@@ -32,12 +32,21 @@ namespace QLKS.ViewModel
                 temp.Room = item;
                 if(item.Status== "Phòng trống")
                 {
-                    temp.IsDay = true;
+                    temp.IsDay = false;
                     temp.SoGio = 0;
                     temp.SoNgayO = 0;
                     temp.TenKH = "Phòng trống";
                     temp.CategoryRoom = category_rooms.Name;
                     temp.DonDep = item.Clean;
+                }
+                else
+                {
+                    if(item.Status== "Phòng đang thuê")
+                    {
+                        var reservation_detail= DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdRoom==item.IdRoom);
+                        temp.CategoryRoom = category_rooms.Name;
+                        temp.DonDep = item.Clean;
+                    }
                 }
                 SingleRoom.Add(temp);
             }

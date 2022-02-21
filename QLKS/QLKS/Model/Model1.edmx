@@ -117,10 +117,8 @@
           <Property Name="IdEmployee" Type="int" Nullable="false" />
           <Property Name="IdCustomer" Type="int" Nullable="false" />
           <Property Name="Date" Type="int" />
-          <Property Name="Start_Date" Type="date" Nullable="false" />
-          <Property Name="End_Date" Type="date" Nullable="false" />
-          <Property Name="Start_Time" Type="date" Nullable="false" />
-          <Property Name="End_Time" Type="date" Nullable="false" />
+          <Property Name="Start_Date" Type="datetime" Nullable="false" />
+          <Property Name="End_Date" Type="datetime" Nullable="false" />
           <Property Name="Amount" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RESERVATION_DETAIL">
@@ -130,6 +128,7 @@
           <Property Name="IdReservationDetail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdRoom" Type="int" Nullable="false" />
           <Property Name="IdReservation" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="ROOM">
           <Key>
@@ -650,10 +649,8 @@
           <Property Name="IdEmployee" Type="Int32" Nullable="false" />
           <Property Name="IdCustomer" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="Int32" />
-          <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="End_Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Start_Time" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="End_Time" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="End_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Amount" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CUSTOMER" Relationship="QLKSModel.FK__RESERVATI__IdCus__48CFD27E" FromRole="RESERVATION" ToRole="CUSTOMER" />
           <NavigationProperty Name="EMPLOYEE" Relationship="QLKSModel.FK__RESERVATI__IdEmp__49C3F6B7" FromRole="RESERVATION" ToRole="EMPLOYEE" />
@@ -667,6 +664,7 @@
           <Property Name="IdReservationDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdRoom" Type="Int32" Nullable="false" />
           <Property Name="IdReservation" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="RESERVATION" Relationship="QLKSModel.FK__RESERVATI__IdRes__4AB81AF0" FromRole="RESERVATION_DETAIL" ToRole="RESERVATION" />
           <NavigationProperty Name="ROOM" Relationship="QLKSModel.FK__RESERVATI__IdRoo__4BAC3F29" FromRole="RESERVATION_DETAIL" ToRole="ROOM" />
         </EntityType>
@@ -1024,8 +1022,6 @@
             <EntityTypeMapping TypeName="QLKSModel.RESERVATION">
               <MappingFragment StoreEntitySet="RESERVATION">
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="End_Time" ColumnName="End_Time" />
-                <ScalarProperty Name="Start_Time" ColumnName="Start_Time" />
                 <ScalarProperty Name="End_Date" ColumnName="End_Date" />
                 <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -1038,6 +1034,7 @@
           <EntitySetMapping Name="RESERVATION_DETAIL">
             <EntityTypeMapping TypeName="QLKSModel.RESERVATION_DETAIL">
               <MappingFragment StoreEntitySet="RESERVATION_DETAIL">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="IdReservation" ColumnName="IdReservation" />
                 <ScalarProperty Name="IdRoom" ColumnName="IdRoom" />
                 <ScalarProperty Name="IdReservationDetail" ColumnName="IdReservationDetail" />

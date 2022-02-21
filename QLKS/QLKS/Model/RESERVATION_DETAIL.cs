@@ -17,6 +17,7 @@ namespace QLKS.Model
         public int IdReservationDetail { get; set; }
         public int IdRoom { get; set; }
         public int IdReservation { get; set; }
+        public string Status { get; set; }
     
         public virtual RESERVATION RESERVATION { get; set; }
         public virtual ROOM ROOM { get; set; }

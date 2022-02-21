@@ -27,8 +27,6 @@ namespace QLKS.Model
         public Nullable<int> Date { get; set; }
         public System.DateTime Start_Date { get; set; }
         public System.DateTime End_Date { get; set; }
-        public System.DateTime Start_Time { get; set; }
-        public System.DateTime End_Time { get; set; }
         public int Amount { get; set; }
     
         public virtual CUSTOMER CUSTOMER { get; set; }

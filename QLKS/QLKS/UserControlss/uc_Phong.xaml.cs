@@ -25,7 +25,7 @@ namespace QLKS.UserControlss
         public uc_Phong()
         {
             InitializeComponent();
-            this.phongViewModel = phongViewModel = new PhongViewModel();
+            this.DataContext = phongViewModel = new PhongViewModel();
         }
     }
 }
