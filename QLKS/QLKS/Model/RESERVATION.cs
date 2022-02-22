@@ -28,7 +28,6 @@ namespace QLKS.Model
         public System.DateTime Start_Date { get; set; }
         public System.DateTime End_Date { get; set; }
         public int Amount { get; set; }
-        public string Status { get; set; }
     
         public virtual CUSTOMER CUSTOMER { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
