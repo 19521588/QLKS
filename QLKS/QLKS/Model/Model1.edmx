@@ -120,6 +120,7 @@
           <Property Name="Start_Date" Type="datetime" Nullable="false" />
           <Property Name="End_Date" Type="datetime" Nullable="false" />
           <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="RESERVATION_DETAIL">
           <Key>
@@ -136,7 +137,6 @@
           </Key>
           <Property Name="IdRoom" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Clean" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdCategoryRoom" Type="int" Nullable="false" />
         </EntityType>
@@ -652,6 +652,7 @@
           <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="End_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CUSTOMER" Relationship="QLKSModel.FK__RESERVATI__IdCus__48CFD27E" FromRole="RESERVATION" ToRole="CUSTOMER" />
           <NavigationProperty Name="EMPLOYEE" Relationship="QLKSModel.FK__RESERVATI__IdEmp__49C3F6B7" FromRole="RESERVATION" ToRole="EMPLOYEE" />
           <NavigationProperty Name="RENTALs" Relationship="QLKSModel.FK__RENTAL__IdReserv__45F365D3" FromRole="RESERVATION" ToRole="RENTAL" />
@@ -674,7 +675,6 @@
           </Key>
           <Property Name="IdRoom" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Clean" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IdCategoryRoom" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CATEGORY_ROOM" Relationship="QLKSModel.FK__ROOM__IdCategory__4CA06362" FromRole="ROOM" ToRole="CATEGORY_ROOM" />
@@ -1021,6 +1021,7 @@
           <EntitySetMapping Name="RESERVATIONs">
             <EntityTypeMapping TypeName="QLKSModel.RESERVATION">
               <MappingFragment StoreEntitySet="RESERVATION">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="End_Date" ColumnName="End_Date" />
                 <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
@@ -1046,7 +1047,6 @@
               <MappingFragment StoreEntitySet="ROOM">
                 <ScalarProperty Name="IdCategoryRoom" ColumnName="IdCategoryRoom" />
                 <ScalarProperty Name="Clean" ColumnName="Clean" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IdRoom" ColumnName="IdRoom" />
               </MappingFragment>

@@ -24,7 +24,6 @@ namespace QLKS.Model
     
         public int IdRoom { get; set; }
         public string Name { get; set; }
-        public string Status { get; set; }
         public string Clean { get; set; }
         public int IdCategoryRoom { get; set; }
     
