@@ -43,6 +43,7 @@ namespace QLKS.ViewModel
                 {
                     Name = _SelectedItem.Name.ToString();
                     //Status = _SelectedItem.Status.ToString();
+                    
                     Category = _SelectedItem.IdCategoryRoom.ToString();
                 }
                 OnPropertyChanged();

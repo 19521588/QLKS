@@ -6,64 +6,126 @@
              xmlns:local="clr-namespace:QLKS.UserControlss"
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+               xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              d:DesignHeight="920" d:DesignWidth="1280">
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="130"></RowDefinition>
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" VerticalAlignment="Center">
-            <Grid
-                    Margin="40 0 40 0"
-                    VerticalAlignment="Center"
-                    Height="40">
+        <Grid Grid.Row="0" Margin="15 0 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="440"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <Style TargetType="TextBox" x:Key="txbSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <Setter Property="Margin" Value="10 0 0 0"></Setter>
+                    <Setter Property="Width" Value="100"></Setter>
+                    <Setter Property="FontSize" Value="18"></Setter>
 
-                <Rectangle
-                        Margin="0"
-                        Height="40"
-                        Width="440"
-                   
+
+                </Style>
+            </Grid.Resources>
+            <Grid  Grid.Column="1">
+                <Button Content="Tìm kiếm"
+                            Style="{StaticResource FeatureButton}"
+                            VerticalAlignment="Top"
                         HorizontalAlignment="Left"
-                        RadiusX="4"
-                        RadiusY="4"
-                        Stroke="Black"
-                        />
-                <TextBox
-                        x:Name="txbSearch"
-                        materialDesign:HintAssist.Hint="Tìm khách hàng"
-                        FontSize="14"
-                        Margin="20 0 0 0"
-                        Foreground="Black"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Width="400"
-                        />
-                <Button HorizontalAlignment="Right"  x:Name="btnThemPhong"                                                    
-                        Width="180" Height="36" Margin="0" 
-                        Content="Thêm nhân viên"
-                        Command="{Binding OpenAddCommand}"
-                        Background="#478C10" >
-                    <Button.Clip>
-                        <RectangleGeometry Rect="0,0,180,40" RadiusX="5" RadiusY="5" >
-                        </RectangleGeometry>
-                    </Button.Clip>
+                            Margin="20 20 20 12"
+                            Command="{Binding SearchCommand}"
+                            >
                 </Button>
+                <Button Content="Làm mới"
+                            Style="{StaticResource FeatureButton}"
+                            VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                            Margin="160 20 180 12"
+                            Command="{Binding RefreshCommand}"
+                            >
+                </Button>
+
+                <Button Content="Sửa"
+                            Style="{StaticResource ExportButton}"
+                            VerticalAlignment="Bottom"
+                        HorizontalAlignment="Left"
+                            Margin="20 20 20 12"
+                            Command="{Binding OpenEditCommand}"
+                            >
+                </Button>
+                <Button Content="Xóa"
+                            Style="{StaticResource DeleteButton}"
+                            VerticalAlignment="Bottom"
+                        HorizontalAlignment="Left"
+                            Margin="160 20 180 12"
+                            Command="{Binding DeleteCommand}"
+                            >
+                </Button>
+
+                <Button Content="Thêm nhân viên"
+                            Style="{StaticResource AddButton}"
+                            VerticalAlignment="Top"
+                        Height="60"
+                        Width="180"
+                        FontSize="18"
+                        HorizontalAlignment="Right"
+                            Margin="20 20 15 12"
+                            Command="{Binding OpenAddCommand}"
+                            >
+                </Button>
+
+            </Grid>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65*"></RowDefinition>
+                    <RowDefinition Height="46*"></RowDefinition>
+                    <RowDefinition Height="19*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                    <TextBox
+                    x:Name="txbNameSearch"
+                        Width="180"
+                      materialDesign:HintAssist.Hint="Tên nhân viên"
+                      Style="{StaticResource txbSearch}"
+                      Text="{Binding IdHD,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                      VerticalAlignment="Center">
+
+                    </TextBox>
+                    <TextBox
+                    x:Name="txbPhoneSearch"
+                        Width="180"
+                      materialDesign:HintAssist.Hint="Số điện thoại"
+                      Style="{StaticResource txbSearch}"
+                      Text="{Binding IdHD,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                      VerticalAlignment="Center">
+
+                    </TextBox>
+
+
+                </StackPanel>
+                <Grid Grid.Row="1" Margin="0,0.2,0,9.6" Grid.RowSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="24*"/>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:Card Width="300"
+                                          HorizontalAlignment="Left"
+                                            VerticalAlignment="Center" Grid.ColumnSpan="2"
+                                         >
+
+                    </materialDesign:Card>
+
+                </Grid>
             </Grid>
         </Grid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width ="1000" x:Name ="table"></ColumnDefinition>
-                <ColumnDefinition ></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Background="AliceBlue">
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 20 0 0"  Background="#F2F1F1" Width="940" Height="720" >
-
-                    <Grid.Clip>
-                        <RectangleGeometry  Rect="0,0,940,720" RadiusX="10" RadiusY="10" />
-                    </Grid.Clip>
-
-                    <DataGrid
-                        ItemsSource="{Binding  ListEmloyee}" 
+        <materialDesign:Card
+            Margin="15 0 10 15"
+            Grid.Row="1">
+            <DataGrid
+                        ItemsSource="{Binding ListEmployee}" 
                       SelectedItem="{Binding SelectedItem}"
                       SelectionMode="Extended"
                       IsReadOnly="True"
@@ -73,291 +135,54 @@
                       CanUserReorderColumns="True"
                       FontSize="16"
                       Name="dataGrid">
-                        <DataGrid.Resources>
-                            <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="Gainsboro" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </DataGrid.Resources>
-                        <!--<i:Interaction.Triggers>
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Gainsboro" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+                <!--<i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
                                                    CommandParameter="{Binding ElementName=dataGrid}"></i:InvokeCommandAction>
                             </i:EventTrigger>
 
                         </i:Interaction.Triggers>-->
-                        <DataGrid.CellStyle>
-                            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
-                                <Style.Triggers>
-                                    <Trigger Property="DataGridCell.IsSelected" Value="True">
-                                        <Setter Property="FontWeight" Value="DemiBold" />
-                                        <Setter Property="FontSize" Value="17" />
-                                        <Setter Property="Foreground" Value="Black"></Setter>
-                                    </Trigger>
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                <Setter Property="FontWeight" Value="DemiBold" />
+                                <Setter Property="FontSize" Value="17" />
+                                <Setter Property="Foreground" Value="Black"></Setter>
+                            </Trigger>
 
-                                </Style.Triggers>
-                            </Style>
-                        </DataGrid.CellStyle>
-                        <DataGrid.ColumnHeaderStyle>
-                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
-                                <Setter Property="Foreground" Value="White"></Setter>
-                                <Setter Property="FontWeight" Value="DemiBold"></Setter>
-                            </Style>
-                        </DataGrid.ColumnHeaderStyle>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                        <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
 
-                        <DataGrid.Columns>
-                            <materialDesign:DataGridTextColumn Width="100" Header="Mã NV" Binding="{Binding IdEmployee,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Width="220" Header="Tên nhân viên" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Width="220" Header="Địa chỉ" Binding="{Binding Address,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Width="120" Header="CCCD" Binding="{Binding CCCD,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Width="150" Header="Số điện thoại" Binding="{Binding Phone,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Width="150" Header="Chức vụ" Binding="{Binding Position,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                <DataGrid.Columns>
+                    <materialDesign:DataGridTextColumn Width="80" Header="Mã NV" Binding="{Binding IdEmployee,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="300" Header="Tên nhân viên" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="150" Header="CCCD" Binding="{Binding CCCD ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="150" Header="Số điện thoại" Binding="{Binding Phone,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Địa chỉ" Binding="{Binding Address ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="100" Header="Giới tính" Binding="{Binding Sex,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="150" Header="Chức vụ" Binding="{Binding Position ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="150" Header="Lương" Binding="{Binding Salary ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
 
-                </Grid>
-            </Grid>
-            <Grid Grid.Column="1">
-                <ScrollViewer x:Name="scvMain" VerticalScrollBarVisibility="Auto"
-                          HorizontalScrollBarVisibility="Visible">
-                <Grid Margin="20 20 20 80">
-                    
-                    <Grid Margin="0"
-                          VerticalAlignment="Top"
-                          Height="80">
-                        <Label
-                            Content="Tên nhân viên"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Foreground="Black"
-                            />
-                        <Rectangle
-                            Margin="0"
-                            Height="40"
-                            VerticalAlignment="Bottom"
-                            HorizontalAlignment="Stretch"
-                            RadiusX="4"
-                            RadiusY="4"
-                            Stroke="Black"
-                            />
-                        <TextBlock
-                        x:Name="txbProduce"
-                        FontSize="14"  
-                        IsEnabled="True"
-                        Margin="10 50 0 0"
-                        Text="{Binding SelectedItem.Name}"
-                        Foreground="Black"
-                        />
-
-                    </Grid>
-                    <Grid Margin="0 80 0 0"
-                          VerticalAlignment="Top"
-                          Height="80">
-                        <Label
-                            Content="Căn cước công dân"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Foreground="Black"
-                            />
-                        <Rectangle
-                            Margin="0"
-                            Height="40"
-                            VerticalAlignment="Bottom"
-                            HorizontalAlignment="Stretch"
-                            RadiusX="4"
-                            RadiusY="4"
-                            Stroke="Black"
-                            />
-                        <TextBlock
-                        x:Name="txbCategory"
-                        FontSize="14"  
-                        IsEnabled="True"
-                        Margin="10 50 0 0"
-                        Text="{Binding SelectedItem.CCCD}"
-                        Foreground="Black"
-                        />
-                    </Grid>
-                    <Grid Margin="0 160 0 0"
-                          VerticalAlignment="Top"
-                          Height="80">
-                        <Label
-                            Content="Số điện thoại"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Foreground="Black"
-                            />
-                        <Rectangle
-                            Margin="0"
-                            Height="40"
-                            VerticalAlignment="Bottom"
-                            HorizontalAlignment="Stretch"
-                            RadiusX="4"
-                            RadiusY="4"
-                            Stroke="Black"
-                            />
-                        <TextBlock
-                        x:Name="txbStatus"
-                        FontSize="14"  
-                        IsEnabled="True"
-                        Margin="10 50 0 0"
-                        Text="{Binding SelectedItem.Phone}"
-                        Foreground="Black"
-                        />
-                    </Grid>
-                    <Grid Margin="0 240 0 0"
-                          VerticalAlignment="Top"
-                          Height="80">
-                        <Label
-                            Content="Địa chỉ"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Foreground="Black"
-                            />
-                        <Rectangle
-                            Margin="0"
-                            Height="40"
-                            VerticalAlignment="Bottom"
-                            HorizontalAlignment="Stretch"
-                            RadiusX="4"
-                            RadiusY="4"
-                            Stroke="Black"
-                            />
-                        <TextBlock
-                        x:Name="txbDatePrice"
-                        FontSize="14"  
-                        IsEnabled="True"
-                        Margin="10 50 0 0"
-                        Text="{Binding SelectedItem.Address}"
-                        Foreground="Black"
-                        />
-                    </Grid>
-                    <Grid Margin="0 320 0 0"
-                          VerticalAlignment="Top"
-                          Height="80">
-                        <Label
-                            Content="Ngày sinh"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Foreground="Black"
-                            />
-                        <Rectangle
-                            Margin="0"
-                            Height="40"
-                            VerticalAlignment="Bottom"
-                            HorizontalAlignment="Stretch"
-                            RadiusX="4"
-                            RadiusY="4"
-                            Stroke="Black"
-                            />
-                        <TextBlock
-                        x:Name="txbBirth"
-                        FontSize="14"  
-                        IsEnabled="True"
-                        Margin="10 50 0 0"
-                        Text="{Binding SelectedItem.BirthDay}"
-                        Foreground="Black"
-                        />
-                    </Grid>
-                    <Grid Margin="0 400 0 0"
-                          VerticalAlignment="Top"
-                          Height="80">
-                        <Label
-                            Content="Chức vụ"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Foreground="Black"
-                            />
-                        <Rectangle
-                            Margin="0"
-                            Height="40"
-                            VerticalAlignment="Bottom"
-                            HorizontalAlignment="Stretch"
-                            RadiusX="4"
-                            RadiusY="4"
-                            Stroke="Black"
-                            />
-                        <TextBlock
-                        x:Name="txbPotision"
-                        FontSize="14"  
-                        IsEnabled="True"
-                        Margin="10 50 0 0"
-                        Text="{Binding SelectedItem.Position}"
-                        Foreground="Black"
-                        />
-                    </Grid>
-                    <Grid Margin="0 480 0 0"
-                          VerticalAlignment="Top"
-                          Height="80">
-                        <Label
-                            Content="Lương"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Foreground="Black"
-                            />
-                        <Rectangle
-                            Margin="0"
-                            Height="40"
-                            VerticalAlignment="Bottom"
-                            HorizontalAlignment="Stretch"
-                            RadiusX="4"
-                            RadiusY="4"
-                            Stroke="Black"
-                            />
-                        <TextBlock
-                        x:Name="txbSalary"
-                        FontSize="14"  
-                        IsEnabled="True"
-                        Margin="10 50 0 0"
-                        Text="{Binding SelectedItem.Salary}"
-                        Foreground="Black"
-                        />
-                    </Grid>
-                </Grid>
-                </ScrollViewer>
-                <Grid
-            Margin="20 0 20 20"
-            Width="180"
-            Height="40"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom">
-                    <Button
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Command="{Binding OpenEditCommand}"
-               
-                Width="80"
-                HorizontalAlignment="Left"
-                ToolTip="Resource name: MaterialDesignRaisedButton">
-                        _Sửa
-                    </Button>
-                    <Button
-                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                Command="{Binding DeleteCommand}"
-                
-                Width="80"
-                HorizontalAlignment="Right"
-                ToolTip="Resource name: MaterialDesignRaisedLightButton">
-                        _Xóa
-                    </Button>
-                </Grid>
-            </Grid>
-        </Grid>
+        </materialDesign:Card>
     </Grid>
 </UserControl>

@@ -9,7 +9,7 @@
              Background="White"
              d:DesignHeight="641" d:DesignWidth="1300"
      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
          xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
@@ -19,68 +19,142 @@
      FontFamily="{DynamicResource MaterialDesignFont}" >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="130"></RowDefinition>
+            <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
         <!--Các button-->
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Margin="15 0 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid  Grid.Column="1">
+            <Grid.Resources>
+                <Style TargetType="TextBox" x:Key="txbSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <Setter Property="Margin" Value="10 0 0 0"></Setter>
+                    <Setter Property="Width" Value="100"></Setter>
+                    <Setter Property="FontSize" Value="18"></Setter>
 
-                <Button Width="150" Height="38" Content="Đặt phòng"
-                        Command="{Binding OpenAddCommand}"
-                        FontSize="15" HorizontalAlignment="Right"
-                    FontFamily="Roboto" FontWeight="Bold" Background="#FF478C10"
-                    Margin="0 0 80 0">
-                    <Button.Clip>
-                        <RectangleGeometry Rect="0,0,150,38" RadiusX="10" RadiusY="10" >
-                        </RectangleGeometry>
-                    </Button.Clip>
+
+                </Style>
+            </Grid.Resources>
+            <Grid  Grid.Column="1">
+                <Button Content="Tìm kiếm"
+                            Style="{StaticResource FeatureButton}"
+                            VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                            Margin="20 20 20 12"
+                            Command="{Binding OpenAddCommand}"
+                            >
+                </Button>
+                <Button Content="Làm mới"
+                            Style="{StaticResource FeatureButton}"
+                            VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                            Margin="160 20 180 12"
+                            Command="{Binding DetailCommand}"
+                            >
+                </Button>
+                <Button Content="Đặt phòng"
+                            Style="{StaticResource AddButton}"
+                            VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                            Margin="20 20 20 12"
+                            Command="{Binding OpenAddCommand}"
+                            >
                 </Button>
                 <Button Content="Chi tiết"
                             Style="{StaticResource ExportButton}"
-                            VerticalAlignment="Center"
-                            Margin="20 9 0 12"
+                            VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                            Margin="20 20 160 12"
                             Command="{Binding DetailCommand}"
-                            CommandParameter="{Binding ElementName=BillWd}">
+                            >
                 </Button>
             </Grid>
             <Grid Grid.Column="0">
-                <!--ô tìm kiếm-->
-                <materialDesign:ColorZone Mode="Standard" CornerRadius="5" HorizontalAlignment="Left" Margin="160,0,0,0"
-                                          VerticalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth1" Width="250">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Style="{DynamicResource MaterialDesignToolButton}">
-                            <materialDesign:PackIcon Kind="Search" Opacity="0.56" />
-                        </Button>
-                        <TextBox Grid.Column="1" x:Name="txbTimKiem"
-                                Margin="0 0 10 0"
-                                materialDesign:HintAssist.Hint="Tìm theo tên khách hàng"
-                                materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                                BorderThickness="0"
-                                MinWidth="200"
-                                
-                                FlowDirection="LeftToRight"
-                                VerticalAlignment="Center" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65*"></RowDefinition>
+                    <RowDefinition Height="46*"></RowDefinition>
+                    <RowDefinition Height="19*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                    <TextBox
+                    x:Name="txbCustomer"
+                        Width="auto"
+                      materialDesign:HintAssist.Hint="Người thuê phòng"
+                      Style="{StaticResource txbSearch}"
+                      Text="{Binding IdHD,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                      VerticalAlignment="Center">
 
-                    </Grid>
-                </materialDesign:ColorZone>
+                    </TextBox>
+                    
+                    <TextBox
+                          Width="160"
+                        x:Name="txbEmployee"
+                      materialDesign:HintAssist.Hint="Tên nhân viên"
+                      Style="{StaticResource txbSearch}"
+                      Text="{Binding CustomerName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                      VerticalAlignment="Center">
+                    </TextBox>
+
+                    <DatePicker
+                        x:Name="dtReservationDate"
+                            FontSize="16"
+                            materialDesign:HintAssist.Hint="Ngày lập phiếu thuê"
+                            Width="250"
+                            Margin="10 5 0 0"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                            />
+                </StackPanel>
+                <Grid Grid.Row="1" Margin="0,0.2,0,9.6" Grid.RowSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="24*"/>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:Card Width="300"
+                                          HorizontalAlignment="Left"
+                                            VerticalAlignment="Center" Grid.ColumnSpan="2"
+                                         >
+                        <ComboBox
+                            Margin="10 0 10 10"
+                            x:Name="cbSelectionView"
+                            Text="{Binding ViewSelectedValue
+                                            ,UpdateSourceTrigger=PropertyChanged
+                                            ,Mode=TwoWay}"
+                            SelectedIndex="{Binding ViewSelectedIndex
+                                            ,UpdateSourceTrigger=PropertyChanged
+                                            ,Mode=TwoWay}"
+                            FontWeight="DemiBold"
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                            materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource MainBlue}"
+                            materialDesign:HintAssist.Foreground="{StaticResource MainBlue}"
+                            materialDesign:HintAssist.Hint="Hiển thị theo"
+                            FontSize="16">
+                            <ComboBoxItem
+                            Content="Tất cả" />
+                            <ComboBoxItem
+                            Content="Ngày hôm nay" />
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding ViewSelectionChanged}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+                    </materialDesign:Card>
+
+                </Grid>
             </Grid>
         </Grid>
 
 
         <!--Listview hiển thị-->
-        <Grid Grid.Row="1">
-            <materialDesign:Card
+        
+        <materialDesign:Card
             Margin="15 0 10 15"
-            Grid.Row="3">
+            Grid.Row="1">
                 <DataGrid
                         ItemsSource="{Binding ListReservation}" 
                       SelectedItem="{Binding SelectedItem}"
@@ -138,6 +212,6 @@
                 </DataGrid>
 
             </materialDesign:Card>
-        </Grid>
+       
     </Grid>
 </UserControl>

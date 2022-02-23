@@ -53,7 +53,7 @@ namespace QLKS.ViewModel
                 {
                     if (MessageBox.Show("Bạn có chắc chắn muốn thêm phòng mới", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
-                        room = new ROOM() { Name = p.txbName.Text, IdCategoryRoom = SelectedCategory.IdCategoryRoom,/* Status = "Trống",*/ Clean = "Không" };
+                        room = new ROOM() { Name = p.txbName.Text, IdCategoryRoom = SelectedCategory.IdCategoryRoom, Clean = "Không" };
                         DataProvider.Ins.DB.ROOMs.Add(room);
                         DataProvider.Ins.DB.SaveChanges();
                         check = true;
