@@ -11,6 +11,8 @@ namespace QLKS.Model
     {
         private ROOM _Room { get; set; }
         public ROOM Room { get => _Room; set { _Room = value; OnPropertyChanged(); } }
+        private RESERVATION _Reservation { get; set; }
+        public RESERVATION Reservation { get => _Reservation; set { _Reservation = value; OnPropertyChanged(); } }
         private String _CategoryRoom { get; set; }
         public String CategoryRoom { get => _CategoryRoom; set { _CategoryRoom = value; OnPropertyChanged(); } }
         private String _TenKH { get; set; }
@@ -23,6 +25,8 @@ namespace QLKS.Model
         public int SoGio { get => _SoGio; set { _SoGio = value; OnPropertyChanged(); } }
         private String _DonDep { get; set; }
         public String DonDep { get => _DonDep; set { _DonDep = value; OnPropertyChanged(); } }
+        private String _Status { get; set; }
+        public String Status { get => _Status; set { _Status = value; OnPropertyChanged(); } }
 
     }
 }

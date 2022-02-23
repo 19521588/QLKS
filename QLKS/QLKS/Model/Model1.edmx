@@ -98,7 +98,6 @@
           </Key>
           <Property Name="IdRental" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdReservation" Type="int" Nullable="false" />
-          <Property Name="IdRentalDetail" Type="int" Nullable="false" />
           <Property Name="IdRoom" Type="int" Nullable="false" />
           <Property Name="DateRental" Type="date" />
         </EntityType>
@@ -106,8 +105,11 @@
           <Key>
             <PropertyRef Name="IdRentalDetail" />
           </Key>
-          <Property Name="IdRentalDetail" Type="int" Nullable="false" />
+          <Property Name="IdRentalDetail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdRental" Type="int" Nullable="false" />
           <Property Name="IdService" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Total" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RESERVATION">
           <Key>
@@ -206,18 +208,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RENTAL__IdRental__44FF419A">
-          <End Role="RENTALDETAIL" Type="Self.RENTALDETAIL" Multiplicity="1" />
-          <End Role="RENTAL" Type="Self.RENTAL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RENTALDETAIL">
-              <PropertyRef Name="IdRentalDetail" />
-            </Principal>
-            <Dependent Role="RENTAL">
-              <PropertyRef Name="IdRentalDetail" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__RENTAL__IdReserv__45F365D3">
           <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="1" />
           <End Role="RENTAL" Type="Self.RENTAL" Multiplicity="*" />
@@ -239,6 +229,18 @@
             </Principal>
             <Dependent Role="RENTAL">
               <PropertyRef Name="IdRoom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RENTALDET__IdRen__44FF419A">
+          <End Role="RENTAL" Type="Self.RENTAL" Multiplicity="1" />
+          <End Role="RENTALDETAIL" Type="Self.RENTALDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RENTAL">
+              <PropertyRef Name="IdRental" />
+            </Principal>
+            <Dependent Role="RENTALDETAIL">
+              <PropertyRef Name="IdRental" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -383,10 +385,6 @@
             <End Role="ROOM" EntitySet="ROOM" />
             <End Role="DETAIL_CONVINIENT" EntitySet="DETAIL_CONVINIENT" />
           </AssociationSet>
-          <AssociationSet Name="FK__RENTAL__IdRental__44FF419A" Association="Self.FK__RENTAL__IdRental__44FF419A">
-            <End Role="RENTALDETAIL" EntitySet="RENTALDETAIL" />
-            <End Role="RENTAL" EntitySet="RENTAL" />
-          </AssociationSet>
           <AssociationSet Name="FK__RENTAL__IdReserv__45F365D3" Association="Self.FK__RENTAL__IdReserv__45F365D3">
             <End Role="RESERVATION" EntitySet="RESERVATION" />
             <End Role="RENTAL" EntitySet="RENTAL" />
@@ -394,6 +392,10 @@
           <AssociationSet Name="FK__RENTAL__IdRoom__46E78A0C" Association="Self.FK__RENTAL__IdRoom__46E78A0C">
             <End Role="ROOM" EntitySet="ROOM" />
             <End Role="RENTAL" EntitySet="RENTAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RENTALDET__IdRen__44FF419A" Association="Self.FK__RENTALDET__IdRen__44FF419A">
+            <End Role="RENTAL" EntitySet="RENTAL" />
+            <End Role="RENTALDETAIL" EntitySet="RENTALDETAIL" />
           </AssociationSet>
           <AssociationSet Name="FK__RENTALDET__IdSer__47DBAE45" Association="Self.FK__RENTALDET__IdSer__47DBAE45">
             <End Role="SERVICE" EntitySet="SERVICE" />
@@ -493,10 +495,6 @@
             <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
             <End Role="USER" EntitySet="USERS" />
           </AssociationSet>
-          <AssociationSet Name="FK__RENTAL__IdRental__44FF419A" Association="QLKSModel.FK__RENTAL__IdRental__44FF419A">
-            <End Role="RENTALDETAIL" EntitySet="RENTALDETAILs" />
-            <End Role="RENTAL" EntitySet="RENTALs" />
-          </AssociationSet>
           <AssociationSet Name="FK__RENTAL__IdReserv__45F365D3" Association="QLKSModel.FK__RENTAL__IdReserv__45F365D3">
             <End Role="RESERVATION" EntitySet="RESERVATIONs" />
             <End Role="RENTAL" EntitySet="RENTALs" />
@@ -504,6 +502,10 @@
           <AssociationSet Name="FK__RENTAL__IdRoom__46E78A0C" Association="QLKSModel.FK__RENTAL__IdRoom__46E78A0C">
             <End Role="ROOM" EntitySet="ROOMs" />
             <End Role="RENTAL" EntitySet="RENTALs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RENTALDET__IdRen__44FF419A" Association="QLKSModel.FK__RENTALDET__IdRen__44FF419A">
+            <End Role="RENTAL" EntitySet="RENTALs" />
+            <End Role="RENTALDETAIL" EntitySet="RENTALDETAILs" />
           </AssociationSet>
           <AssociationSet Name="FK__RENTALDET__IdSer__47DBAE45" Association="QLKSModel.FK__RENTALDET__IdSer__47DBAE45">
             <End Role="SERVICE" EntitySet="SERVICEs" />
@@ -623,21 +625,23 @@
           </Key>
           <Property Name="IdRental" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdReservation" Type="Int32" Nullable="false" />
-          <Property Name="IdRentalDetail" Type="Int32" Nullable="false" />
           <Property Name="IdRoom" Type="Int32" Nullable="false" />
           <Property Name="DateRental" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Bills" Relationship="QLKSModel.FK__Bill__IdRental__412EB0B6" FromRole="RENTAL" ToRole="Bill" />
-          <NavigationProperty Name="RENTALDETAIL" Relationship="QLKSModel.FK__RENTAL__IdRental__44FF419A" FromRole="RENTAL" ToRole="RENTALDETAIL" />
           <NavigationProperty Name="RESERVATION" Relationship="QLKSModel.FK__RENTAL__IdReserv__45F365D3" FromRole="RENTAL" ToRole="RESERVATION" />
           <NavigationProperty Name="ROOM" Relationship="QLKSModel.FK__RENTAL__IdRoom__46E78A0C" FromRole="RENTAL" ToRole="ROOM" />
+          <NavigationProperty Name="RENTALDETAILs" Relationship="QLKSModel.FK__RENTALDET__IdRen__44FF419A" FromRole="RENTAL" ToRole="RENTALDETAIL" />
         </EntityType>
         <EntityType Name="RENTALDETAIL">
           <Key>
             <PropertyRef Name="IdRentalDetail" />
           </Key>
-          <Property Name="IdRentalDetail" Type="Int32" Nullable="false" />
+          <Property Name="IdRentalDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRental" Type="Int32" Nullable="false" />
           <Property Name="IdService" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="RENTALs" Relationship="QLKSModel.FK__RENTAL__IdRental__44FF419A" FromRole="RENTALDETAIL" ToRole="RENTAL" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RENTAL" Relationship="QLKSModel.FK__RENTALDET__IdRen__44FF419A" FromRole="RENTALDETAIL" ToRole="RENTAL" />
           <NavigationProperty Name="SERVICE" Relationship="QLKSModel.FK__RENTALDET__IdSer__47DBAE45" FromRole="RENTALDETAIL" ToRole="SERVICE" />
         </EntityType>
         <EntityType Name="RESERVATION">
@@ -823,18 +827,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RENTAL__IdRental__44FF419A">
-          <End Type="QLKSModel.RENTALDETAIL" Role="RENTALDETAIL" Multiplicity="1" />
-          <End Type="QLKSModel.RENTAL" Role="RENTAL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RENTALDETAIL">
-              <PropertyRef Name="IdRentalDetail" />
-            </Principal>
-            <Dependent Role="RENTAL">
-              <PropertyRef Name="IdRentalDetail" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__RENTAL__IdReserv__45F365D3">
           <End Type="QLKSModel.RESERVATION" Role="RESERVATION" Multiplicity="1" />
           <End Type="QLKSModel.RENTAL" Role="RENTAL" Multiplicity="*" />
@@ -856,6 +848,18 @@
             </Principal>
             <Dependent Role="RENTAL">
               <PropertyRef Name="IdRoom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RENTALDET__IdRen__44FF419A">
+          <End Type="QLKSModel.RENTAL" Role="RENTAL" Multiplicity="1" />
+          <End Type="QLKSModel.RENTALDETAIL" Role="RENTALDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RENTAL">
+              <PropertyRef Name="IdRental" />
+            </Principal>
+            <Dependent Role="RENTALDETAIL">
+              <PropertyRef Name="IdRental" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1002,7 +1006,6 @@
               <MappingFragment StoreEntitySet="RENTAL">
                 <ScalarProperty Name="DateRental" ColumnName="DateRental" />
                 <ScalarProperty Name="IdRoom" ColumnName="IdRoom" />
-                <ScalarProperty Name="IdRentalDetail" ColumnName="IdRentalDetail" />
                 <ScalarProperty Name="IdReservation" ColumnName="IdReservation" />
                 <ScalarProperty Name="IdRental" ColumnName="IdRental" />
               </MappingFragment>
@@ -1011,7 +1014,10 @@
           <EntitySetMapping Name="RENTALDETAILs">
             <EntityTypeMapping TypeName="QLKSModel.RENTALDETAIL">
               <MappingFragment StoreEntitySet="RENTALDETAIL">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="IdService" ColumnName="IdService" />
+                <ScalarProperty Name="IdRental" ColumnName="IdRental" />
                 <ScalarProperty Name="IdRentalDetail" ColumnName="IdRentalDetail" />
               </MappingFragment>
             </EntityTypeMapping>

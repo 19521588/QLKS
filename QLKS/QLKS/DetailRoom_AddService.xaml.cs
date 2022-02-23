@@ -2,6 +2,7 @@
 using QLKS.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,22 +18,16 @@ using System.Windows.Shapes;
 namespace QLKS
 {
     /// <summary>
-    /// Interaction logic for RoomDetail.xaml
+    /// Interaction logic for DetailRoom_AddService.xaml
     /// </summary>
-    public partial class RoomDetail : Window
+    public partial class DetailRoom_AddService : Window
     {
-        RoomDetailViewModel viewModel { get; set; }
-        public RoomDetail()
+        AddServiceDRViewModel viewModel { get; set; }
+
+        public DetailRoom_AddService(ObservableCollection<ListService> list)
         {
             InitializeComponent();
-
+            this.DataContext=viewModel=new AddServiceDRViewModel(list);
         }
-        public RoomDetail(ListRoom listRoom)
-        {
-            InitializeComponent();
-            this.DataContext=viewModel=new RoomDetailViewModel(listRoom);
-        }
-
-       
     }
 }
