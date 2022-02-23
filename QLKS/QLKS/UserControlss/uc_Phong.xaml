@@ -190,7 +190,14 @@
                             <ListView x:Name="lvPhongDon" Width="1091" Margin="50 10 0 0"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                               ScrollViewer.VerticalScrollBarVisibility="Disabled" 
-                              ItemsSource="{Binding SingleRoom}">
+                              ItemsSource="{Binding SingleRoom}" SelectedItem="{Binding SelectedItem}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                        <i:InvokeCommandAction 
+                                              Command="{Binding ItemClickCommand}"
+                                              CommandParameter="{Binding ElementName=wd_room}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                                 <!--Vô hiệu hóa cuộn-->
                                 <ListView.Template>
                                     <ControlTemplate>
@@ -214,10 +221,10 @@
                                                 <Style TargetType="Grid">
                                                     <Setter Property="Background" Value="#71D693"/>
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Room.Status}" Value="Phòng đang thuê">
+                                                        <DataTrigger Binding="{Binding Status}" Value="Phòng đang thuê">
                                                             <Setter Property="Background" Value="#89B5CE"/>
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Room.Status}" Value="Phòng đã đặt">
+                                                        <DataTrigger Binding="{Binding Status}" Value="Phòng đã đặt">
                                                             <Setter Property="Background" Value="#7D7D7D"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
@@ -241,7 +248,7 @@
                                                 <Grid Grid.Row="0">
                                                     <TextBlock Text="{Binding Room.Name}" HorizontalAlignment="Left" VerticalAlignment="Center"
                                                         Margin="18 0 0 0" FontSize="15" Foreground="#FFFFFF" FontWeight="Bold"/>
-                                                    <TextBlock Text="{Binding Room.Status}" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                    <TextBlock Text="{Binding Status}" HorizontalAlignment="Right" VerticalAlignment="Center"
                                                         Margin="0 0 9 0" FontSize="11" Foreground="#FFFFFF"/>
                                                 </Grid>
 
@@ -257,10 +264,10 @@
                                                             <Style TargetType="materialDesign:PackIcon">
                                                                 <Setter Property="Kind" Value="CheckboxMarkedCircle"/>
                                                                 <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Room.Status}" Value="Phòng đang thuê">
+                                                                    <DataTrigger Binding="{Binding Status}" Value="Phòng đang thuê">
                                                                         <Setter Property="Kind" Value="User"/>
                                                                     </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Room.Status}" Value="Phòng đã đặt">
+                                                                    <DataTrigger Binding="{Binding Status}" Value="Phòng đã đặt">
                                                                         <Setter Property="Kind" Value="User"/>
                                                                     </DataTrigger>
                                                                 </Style.Triggers>
@@ -274,7 +281,7 @@
                                                                 <Style TargetType="TextBlock">
                                                                     <Setter Property="Text" Value="{Binding TenKH}"/>
                                                                     <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding Room.Status}" Value="Phòng trống" >
+                                                                        <DataTrigger Binding="{Binding Status}" Value="Phòng trống" >
                                                                             <Setter Property="Text" Value="Phòng trống"/>
                                                                         </DataTrigger>
                                                                     </Style.Triggers>
@@ -369,7 +376,14 @@
                                Margin="40 20 0 0"/>
                             <ListView x:Name="lvPhongDoi" Width="1091" Margin="50 10 0 0"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                              ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding DoubleRoom}">
+                              ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding DoubleRoom}" SelectedItem="{Binding SelectedItem}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                        <i:InvokeCommandAction 
+                                              Command="{Binding ItemClickCommand}"
+                                              CommandParameter="{Binding ElementName=wd_room}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                                 <!--Vô hiệu hóa cuộn-->
                                 <ListView.Template>
                                     <ControlTemplate>
@@ -392,10 +406,10 @@
                                                 <Style TargetType="Grid">
                                                     <Setter Property="Background" Value="#71D693"/>
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Room.Status}" Value="Phòng đang thuê">
+                                                        <DataTrigger Binding="{Binding Status}" Value="Phòng đang thuê">
                                                             <Setter Property="Background" Value="#89B5CE"/>
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Room.Status}" Value="Phòng đã đặt">
+                                                        <DataTrigger Binding="{Binding Status}" Value="Phòng đã đặt">
                                                             <Setter Property="Background" Value="#7D7D7D"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
@@ -419,7 +433,7 @@
                                                 <Grid Grid.Row="0">
                                                     <TextBlock Text="{Binding Room.Name}" HorizontalAlignment="Left" VerticalAlignment="Center"
                                            Margin="18 0 0 0" FontSize="15" Foreground="#FFFFFF" FontWeight="Bold"/>
-                                                    <TextBlock Text="{Binding Room.Status}" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                    <TextBlock Text="{Binding Status}" HorizontalAlignment="Right" VerticalAlignment="Center"
                                            Margin="0 0 9 0" FontSize="11" Foreground="#FFFFFF"/>
                                                 </Grid>
 
@@ -435,10 +449,10 @@
                                                             <Style TargetType="materialDesign:PackIcon">
                                                                 <Setter Property="Kind" Value="CheckboxMarkedCircle"/>
                                                                 <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Room.Status}" Value="Phòng đang thuê">
+                                                                    <DataTrigger Binding="{Binding Status}" Value="Phòng đang thuê">
                                                                         <Setter Property="Kind" Value="AccountMultiple"/>
                                                                     </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Room.Status}" Value="Phòng đã đặt">
+                                                                    <DataTrigger Binding="{Binding Status}" Value="Phòng đã đặt">
                                                                         <Setter Property="Kind" Value="AccountMultiple"/>
                                                                     </DataTrigger>
                                                                 </Style.Triggers>
@@ -452,7 +466,7 @@
                                                                 <Style TargetType="TextBlock">
                                                                     <Setter Property="Text" Value="{Binding TenKH}"/>
                                                                     <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding Room.Status}" Value="Phòng trống" >
+                                                                        <DataTrigger Binding="{Binding Status}" Value="Phòng trống" >
                                                                             <Setter Property="Text" Value="Phòng trống"/>
                                                                         </DataTrigger>
                                                                     </Style.Triggers>
@@ -546,7 +560,14 @@
                             <ListView x:Name="lvPhongGiaDinh" Width="1091" Margin="50 10 0 0"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                               ScrollViewer.VerticalScrollBarVisibility="Disabled" 
-                                      ItemsSource="{Binding FamilyRoom}">
+                                      ItemsSource="{Binding FamilyRoom}" SelectedItem="{Binding SelectedItem}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                        <i:InvokeCommandAction 
+                                              Command="{Binding ItemClickCommand}"
+                                              CommandParameter="{Binding ElementName=wd_room}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                                 <!--Vô hiệu hóa cuộn-->
                                 <ListView.Template>
                                     <ControlTemplate>
@@ -569,10 +590,10 @@
                                                 <Style TargetType="Grid">
                                                     <Setter Property="Background" Value="#71D693"/>
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Room.Status}" Value="Phòng đang thuê">
+                                                        <DataTrigger Binding="{Binding Status}" Value="Phòng đang thuê">
                                                             <Setter Property="Background" Value="#89B5CE"/>
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Room.Status}" Value="Phòng đã đặt">
+                                                        <DataTrigger Binding="{Binding Status}" Value="Phòng đã đặt">
                                                             <Setter Property="Background" Value="#7D7D7D"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
@@ -596,7 +617,7 @@
                                                 <Grid Grid.Row="0">
                                                     <TextBlock Text="{Binding Room.Name}" HorizontalAlignment="Left" VerticalAlignment="Center"
                                            Margin="18 0 0 0" FontSize="15" Foreground="#FFFFFF" FontWeight="Bold"/>
-                                                    <TextBlock Text="{Binding Room.Status}" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                    <TextBlock Text="{Binding Status}" HorizontalAlignment="Right" VerticalAlignment="Center"
                                            Margin="0 0 9 0" FontSize="11" Foreground="#FFFFFF"/>
                                                 </Grid>
 
@@ -612,10 +633,10 @@
                                                             <Style TargetType="materialDesign:PackIcon">
                                                                 <Setter Property="Kind" Value="CheckboxMarkedCircle"/>
                                                                 <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Room.Status}" Value="Phòng đang thuê">
+                                                                    <DataTrigger Binding="{Binding Status}" Value="Phòng đang thuê">
                                                                         <Setter Property="Kind" Value="AccountGroup"/>
                                                                     </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Room.Status}" Value="Phòng đã đặt">
+                                                                    <DataTrigger Binding="{Binding Status}" Value="Phòng đã đặt">
                                                                         <Setter Property="Kind" Value="AccountGroup"/>
                                                                     </DataTrigger>
                                                                 </Style.Triggers>
@@ -629,7 +650,7 @@
                                                                 <Style TargetType="TextBlock">
                                                                     <Setter Property="Text" Value="{Binding TenKH}"/>
                                                                     <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding Room.Status}" Value="Phòng trống" >
+                                                                        <DataTrigger Binding="{Binding Status}" Value="Phòng trống" >
                                                                             <Setter Property="Text" Value="Phòng trống"/>
                                                                         </DataTrigger>
                                                                     </Style.Triggers>

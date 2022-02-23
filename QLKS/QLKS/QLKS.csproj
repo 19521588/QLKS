@@ -91,11 +91,16 @@
       <DependentUpon>Bill_Detail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Convert\UnicodeConvert.cs" />
+    <Compile Include="DetailRoom_AddService.xaml.cs">
+      <DependentUpon>DetailRoom_AddService.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\BillDetail.cs" />
     <Compile Include="Model\ListBill.cs" />
     <Compile Include="Model\ListBillInfo.cs" />
     <Compile Include="Model\ListRoom.cs" />
+    <Compile Include="Model\ListService.cs" />
     <Compile Include="Model\ReservationItem.cs" />
+    <Compile Include="Model\ServiceCt.cs" />
     <Compile Include="RoomDetail.xaml.cs">
       <DependentUpon>RoomDetail.xaml</DependentUpon>
     </Compile>
@@ -170,11 +175,13 @@
     <Compile Include="ViewModel\AddReservationViewModel.cs" />
     <Compile Include="ViewModel\AddRoomCategoryViewModel.cs" />
     <Compile Include="ViewModel\AddRoomViewModel.cs" />
+    <Compile Include="ViewModel\AddServiceDRViewModel.cs" />
     <Compile Include="ViewModel\AddServiceViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BillDetailViewModel.cs" />
     <Compile Include="ViewModel\BillTemplateViewModel.cs" />
     <Compile Include="ViewModel\BillViewModel.cs" />
+    <Compile Include="ViewModel\Icommand.cs" />
     <Compile Include="ViewModel\RoomDetailViewModel.cs" />
     <Compile Include="ViewModel\ControlBar2ViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
@@ -251,6 +258,10 @@
       <DependentUpon>wd_EditRoom.xaml</DependentUpon>
     </Compile>
     <Page Include="Bill_Detail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DetailRoom_AddService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

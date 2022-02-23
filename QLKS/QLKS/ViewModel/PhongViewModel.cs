@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static QLKS.ViewModel.MainViewModel;
 
 namespace QLKS.ViewModel
 {
@@ -28,18 +29,21 @@ namespace QLKS.ViewModel
         public ObservableCollection<ListRoom> TempFamilyRoom { get => _TempFamilyRoom; set { _TempFamilyRoom = value; OnPropertyChanged(); } }
         private DateTime _DateTimeNow { get; set; }
         public DateTime DateTimeNow { get => _DateTimeNow; set { _DateTimeNow = value; OnPropertyChanged(); } }
+        private ListRoom _SelectedItem { get; set; }
+        public ListRoom SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); } }
         public List<ROOM> list { get; set; }
         public ICommand SelectCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand RefreshCommand { get; set; }
         public ICommand LoadDatePickerCommand { get; set; }
         public ICommand LoadTimePickerCommand { get; set; }
+        public ICommand ItemClickCommand { get; set; }
 
         public PhongViewModel()
         {
             DateTimeNow = DateTime.Now;
             Load();
-
+            LoadTemp(DateTime.Now);
             SelectCommand = new RelayCommand<uc_Phong>((p) =>
             {
                 return true;
@@ -74,7 +78,9 @@ namespace QLKS.ViewModel
                         radioLoaiPhong = i;
                     }
                 }
-
+                DateTime dateTime = new DateTime();
+                DateTime.TryParse(p.dtpChonNgay.Text + " " + p.tpGio.Text, out dateTime);
+                LoadTemp(dateTime);
                 SingleRoom = new ObservableCollection<ListRoom>(LoadbyStatus(TempSingleRoom, radioTinhTrang.Content.ToString(), radioDonDep.Content.ToString(), radioLoaiPhong.Content.ToString(), ""));
                 DoubleRoom = new ObservableCollection<ListRoom>(LoadbyStatus(TempDoubleRoom, radioTinhTrang.Content.ToString(), radioDonDep.Content.ToString(), radioLoaiPhong.Content.ToString(), ""));
                 FamilyRoom = new ObservableCollection<ListRoom>(LoadbyStatus(TempFamilyRoom, radioTinhTrang.Content.ToString(), radioDonDep.Content.ToString(), radioLoaiPhong.Content.ToString(), ""));
@@ -115,6 +121,9 @@ namespace QLKS.ViewModel
                         radioLoaiPhong = i;
                     }
                 }
+                DateTime dateTime = new DateTime();
+                DateTime.TryParse(p.dtpChonNgay.Text + " " + p.tpGio.Text, out dateTime);
+                LoadTemp(dateTime);
                 SingleRoom = new ObservableCollection<ListRoom>(LoadbyStatus(TempSingleRoom, radioTinhTrang.Content.ToString(), radioDonDep.Content.ToString(), radioLoaiPhong.Content.ToString(), p.txbTimKiem.Text));
                 DoubleRoom = new ObservableCollection<ListRoom>(LoadbyStatus(TempDoubleRoom, radioTinhTrang.Content.ToString(), radioDonDep.Content.ToString(), radioLoaiPhong.Content.ToString(), p.txbTimKiem.Text));
                 FamilyRoom = new ObservableCollection<ListRoom>(LoadbyStatus(TempFamilyRoom, radioTinhTrang.Content.ToString(), radioDonDep.Content.ToString(), radioLoaiPhong.Content.ToString(), p.txbTimKiem.Text));
@@ -159,7 +168,7 @@ namespace QLKS.ViewModel
               },
             (p) =>
             {
-               
+
                 p.SelectedDate = DateTime.Now;
                 p.BlackoutDates.AddDatesInPast();
             });
@@ -170,20 +179,35 @@ namespace QLKS.ViewModel
             (p) =>
             {
                 p.SelectedTime = DateTime.Now;
-          
+
             });
+            ItemClickCommand = new RelayCommand<uc_Phong>
+                ((p) =>
+                {
+                    if (SelectedItem == null)
+                        return false;
+                    return true;
+                }, (p) =>
+                {
+                        RoomDetail roomDetail = new RoomDetail(SelectedItem);
+                        roomDetail.ShowDialog();
+                }
+            );
         }
         public void Load()
         {
-            SingleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(1));
-            DoubleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(2));
-            FamilyRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(3));
-            TempSingleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(1));
-            TempDoubleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(2));
-            TempFamilyRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(3));
+            SingleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(1, DateTime.Now));
+            DoubleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(2, DateTime.Now));
+            FamilyRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(3, DateTime.Now));
 
         }
-        public List<ListRoom> LoadbyCategoryRoom(int type)
+        public void LoadTemp(DateTime time)
+        {
+            TempSingleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(1, time));
+            TempDoubleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(2, time));
+            TempFamilyRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(3, time));
+        }
+        public List<ListRoom> LoadbyCategoryRoom(int type, DateTime time)
 
         {
             var list = new List<ListRoom>();
@@ -196,38 +220,59 @@ namespace QLKS.ViewModel
                 {
                     ListRoom temp = new ListRoom();
                     temp.Room = item;
-                    if (item.Status == "Phòng trống")
+                    var reservation = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.End_Date >= time && x.Start_Date <= time).SingleOrDefault();
+
+                    if (reservation == null)
                     {
                         temp.IsDay = false;
                         temp.SoGio = 0;
                         temp.SoNgayO = 0;
                         temp.TenKH = "Phòng trống";
+                        temp.Status = "Phòng trống";
                         temp.CategoryRoom = category_rooms.Name;
-                        temp.DonDep = item.Clean;
+                        temp.DonDep = "Đã dọn dẹp";
+                        temp.Reservation = reservation;
                     }
                     else
                     {
-                        var reservation_detail = DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdRoom == item.IdRoom && (x.Status == "Đang đặt" || x.Status == "Đang thuê    ")).SingleOrDefault();
-                        var reservation = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.IdReservation == reservation_detail.IdReservation).SingleOrDefault();
-                        var customer = DataProvider.Ins.DB.CUSTOMERs.Where(x => x.IdCustomer == reservation.IdCustomer).SingleOrDefault();
-                        temp.SoNgayO = reservation.Date.Value;
-                        if (reservation.Date.Value == 0)
+                        var reservation_detail = DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdRoom == item.IdRoom && x.IdReservation == reservation.IdReservation).SingleOrDefault();
+                        if (reservation_detail == null || reservation_detail.Status == "Đã thanh toán")
                         {
-                            temp.SoGio = reservation.End_Date.Hour - reservation.Start_Date.Hour;
                             temp.IsDay = false;
+                            temp.SoGio = 0;
+                            temp.SoNgayO = 0;
+                            temp.TenKH = "Phòng trống";
+                            temp.Status = "Phòng trống";
+                            temp.CategoryRoom = category_rooms.Name;
+                            temp.DonDep = "Đã dọn dẹp";
                         }
                         else
                         {
-                            temp.SoGio = 0;
-                            temp.IsDay = true;
+                            var customer = DataProvider.Ins.DB.CUSTOMERs.Where(x => x.IdCustomer == reservation.IdCustomer).SingleOrDefault();
+                            temp.SoNgayO = reservation.Date.Value;
+                            if (reservation.Date.Value == 0)
+                            {
+                                temp.SoGio = reservation.End_Date.Hour - reservation.Start_Date.Hour;
+                                temp.IsDay = false;
+                            }
+                            else
+                            {
+                                temp.SoGio = 0;
+                                temp.IsDay = true;
+                                
+                            }
+                            temp.TenKH = customer.Name;
+                            temp.Status = reservation_detail.Status;
+                            temp.CategoryRoom = category_rooms.Name;
+                            temp.DonDep = item.Clean;
+                            temp.Reservation = reservation;
                         }
-                        temp.TenKH = customer.Name;
-                        temp.CategoryRoom = category_rooms.Name;
-                        temp.DonDep = item.Clean;
-
 
                     }
+                  
                     list.Add(temp);
+
+
                 }
 
 
@@ -243,16 +288,16 @@ namespace QLKS.ViewModel
                 if (status == "Tất cả phòng" && type != "Tất cả loại phòng" && clean == "Tất cả")
                     return list.Where(p => p.CategoryRoom == type).ToList();
                 if (status != "Tất cả phòng" && type == "Tất cả loại phòng" && clean == "Tất cả")
-                    return list.Where(p => p.Room.Status == status).ToList();
+                    return list.Where(p => p.Status == status).ToList();
                 //cặp
                 if (status != "Tất cả phòng" && type != "Tất cả loại phòng" && clean == "Tất cả")
-                    return list.Where(p => p.Room.Status == status && p.CategoryRoom == type).ToList();
+                    return list.Where(p => p.Status == status && p.CategoryRoom == type).ToList();
                 if (status != "Tất cả phòng" && type == "Tất cả loại phòng" && clean != "Tất cả")
-                    return list.Where(p => p.Room.Status == status && p.Room.Clean == clean).ToList();
+                    return list.Where(p => p.Status == status && p.Room.Clean == clean).ToList();
                 if (status == "Tất cả phòng" && type != "Tất cả loại phòng" && clean != "Tất cả")
                     return list.Where(p => p.CategoryRoom == type && p.Room.Clean == clean).ToList();
                 if (status != "Tất cả phòng" && type != "Tất cả loại phòng" && clean != "Tất cả")
-                    return list.Where(p => p.CategoryRoom == type && p.Room.Clean == clean && p.Room.Status == status).ToList();
+                    return list.Where(p => p.CategoryRoom == type && p.Room.Clean == clean && p.Status == status).ToList();
 
                 return list.ToList();
             }
@@ -263,16 +308,16 @@ namespace QLKS.ViewModel
                 if (status == "Tất cả phòng" && type != "Tất cả loại phòng" && clean == "Tất cả")
                     return list.Where(p => p.CategoryRoom == type && p.Room.Name == code).ToList();
                 if (status != "Tất cả phòng" && type == "Tất cả loại phòng" && clean == "Tất cả")
-                    return list.Where(p => p.Room.Status == status && p.Room.Name == code).ToList();
+                    return list.Where(p => p.Status == status && p.Room.Name == code).ToList();
                 //cặp
                 if (status != "Tất cả phòng" && type != "Tất cả loại phòng" && clean == "Tất cả")
-                    return list.Where(p => p.Room.Status == status && p.CategoryRoom == type && p.Room.Name == code).ToList();
+                    return list.Where(p => p.Status == status && p.CategoryRoom == type && p.Room.Name == code).ToList();
                 if (status != "Tất cả phòng" && type == "Tất cả loại phòng" && clean != "Tất cả")
-                    return list.Where(p => p.Room.Status == status && p.Room.Clean == clean && p.Room.Name == code).ToList();
+                    return list.Where(p => p.Status == status && p.Room.Clean == clean && p.Room.Name == code).ToList();
                 if (status == "Tất cả phòng" && type != "Tất cả loại phòng" && clean != "Tất cả")
                     return list.Where(p => p.CategoryRoom == type && p.Room.Clean == clean && p.Room.Name == code).ToList();
                 if (status != "Tất cả phòng" && type != "Tất cả loại phòng" && clean != "Tất cả")
-                    return list.Where(p => p.CategoryRoom == type && p.Room.Clean == clean && p.Room.Status == status && p.Room.Name == code).ToList();
+                    return list.Where(p => p.CategoryRoom == type && p.Room.Clean == clean && p.Status == status && p.Room.Name == code).ToList();
 
                 return list.Where(p => p.Room.Name == code).ToList();
             }

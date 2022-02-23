@@ -18,18 +18,19 @@ namespace QLKS.Model
         public RENTAL()
         {
             this.Bills = new HashSet<Bill>();
+            this.RENTALDETAILs = new HashSet<RENTALDETAIL>();
         }
     
         public int IdRental { get; set; }
         public int IdReservation { get; set; }
-        public int IdRentalDetail { get; set; }
         public int IdRoom { get; set; }
         public Nullable<System.DateTime> DateRental { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bill> Bills { get; set; }
-        public virtual RENTALDETAIL RENTALDETAIL { get; set; }
         public virtual RESERVATION RESERVATION { get; set; }
         public virtual ROOM ROOM { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RENTALDETAIL> RENTALDETAILs { get; set; }
     }
 }
