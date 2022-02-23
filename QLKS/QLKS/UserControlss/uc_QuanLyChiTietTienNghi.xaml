@@ -16,21 +16,81 @@
     </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"></RowDefinition>
-            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="130"></RowDefinition>
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
-        <!--Grid 0-->
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Margin="15 0 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="440"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             <Grid.Resources>
                 <Style TargetType="TextBox" x:Key="txbSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
                     <Setter Property="Margin" Value="10 0 0 0"></Setter>
                     <Setter Property="Width" Value="100"></Setter>
                     <Setter Property="FontSize" Value="18"></Setter>
+
+
                 </Style>
             </Grid.Resources>
-            <StackPanel Orientation="Horizontal">
-                <ComboBox  
+            <Grid  Grid.Column="1">
+                <Button Content="Tìm kiếm"
+                            Style="{StaticResource FeatureButton}"
+                            VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                            Margin="20 20 20 12"
+                            Command="{Binding SearchCommand}"
+                            >
+                </Button>
+                <Button Content="Làm mới"
+                            Style="{StaticResource FeatureButton}"
+                            VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                            Margin="160 20 180 12"
+                            Command="{Binding RefreshCommand}"
+                            >
+                </Button>
+
+                <Button Content="Sửa"
+                            Style="{StaticResource ExportButton}"
+                            VerticalAlignment="Bottom"
+                        HorizontalAlignment="Left"
+                            Margin="20 20 20 12"
+                            Command="{Binding OpenEditCommand}"
+                            >
+                </Button>
+                <Button Content="Xóa"
+                            Style="{StaticResource DeleteButton}"
+                            VerticalAlignment="Bottom"
+                        HorizontalAlignment="Left"
+                            Margin="160 20 180 12"
+                            Command="{Binding DeleteCommand}"
+                            >
+                </Button>
+
+                <Button Content="Thêm"
+                            Style="{StaticResource AddButton}"
+                            VerticalAlignment="Top"
+                        Height="60"
+                        Width="180"
+                        FontSize="20"
+                        HorizontalAlignment="Right"
+                            Margin="20 20 15 12"
+                            Command="{Binding OpenAddCommand}"
+                            >
+                </Button>
+
+            </Grid>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65*"></RowDefinition>
+                    <RowDefinition Height="46*"></RowDefinition>
+                    <RowDefinition Height="19*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                    <ComboBox  
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                     x:Name="cbRoom"
                     ItemsSource="{Binding ListRoom}"
@@ -38,11 +98,11 @@
                     
                     materialDesign:HintAssist.Hint="Tên phòng"
                     Margin="15 0 0 0"
-                    Width="auto"
+                    Width="180"
                     FontSize="18"
                     VerticalAlignment="Center">
-                </ComboBox>
-                <ComboBox  
+                    </ComboBox>
+                    <ComboBox  
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                     x:Name="cbConvinient"
                     ItemsSource="{Binding ListConvenient}"
@@ -50,52 +110,33 @@
                     
                     materialDesign:HintAssist.Hint="Tiện nghi"
                     Margin="15 0 0 0"
-                    Width="auto"
+                    Width="180"
                     FontSize="18"
                     VerticalAlignment="Center">
-                </ComboBox>
-                <Button Content="Tìm"
-                       Margin="15 5 0 0"
-                        Command="{Binding SearchCommand}"
-                        CommandParameter="{Binding ElementName=wdConvenientDetail}">
-                </Button>
-                <Button Content="Làm mới"
-                        Margin="20 5 0 0"
-                        Command="{Binding RefeshCommand}"
-                        CommandParameter="{Binding ElementName=wdConvenientDetail}">
+                    </ComboBox>
 
-                </Button>
-            </StackPanel>
+
+                </StackPanel>
+                <Grid Grid.Row="1" Margin="0,0.2,0,9.6" Grid.RowSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="24*"/>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:Card Width="300"
+                                          HorizontalAlignment="Left"
+                                            VerticalAlignment="Center" Grid.ColumnSpan="2"
+                                         >
+
+                    </materialDesign:Card>
+
+                </Grid>
+            </Grid>
         </Grid>
-        <!--Grid 1-->
-        <Grid Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
-                <Button
-                    Command="{Binding OpenAddWindowCommand}"
-                    Content="Thêm dịch vụ"
-                    Background="Green"
-                    BorderBrush="Green"
-                    Margin="15 0 0 0"
-                />
-                <Button 
-                    Command="{Binding OpenEditWindowCommand}"
-                    Content="Sửa dịch vụ" 
-                    Background="Orange"
-                    BorderBrush="Orange"
-                    Margin="15,0,0,0" 
-                />
-                <Button
-                    Command="{Binding OpenAddWindowCommand}"
-                    Content="Xóa dịch vụ"
-                    Background="Red"
-                    BorderBrush="Red"
-                    Margin="15,0,0,0"
-                />
-            </StackPanel>
-        </Grid>
-        <!--Grid 2-->
-        <materialDesign:Card Grid.Row="2" Margin="15 0 15 15">
-            <DataGrid ItemsSource="{Binding ListConvenientDetail, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+        <materialDesign:Card
+            Margin="15 0 10 15"
+            Grid.Row="1">
+            <DataGrid
+                        ItemsSource="{Binding ListConvenientDetail}" 
                       SelectedItem="{Binding SelectedItem}"
                       SelectionMode="Extended"
                       IsReadOnly="True"
@@ -103,9 +144,8 @@
                       AutoGenerateColumns="False"
                       CanUserDeleteRows="False"
                       CanUserReorderColumns="True"
-                      FontSize="18"
-                      Name="dataGrid"
-                      >
+                      FontSize="16"
+                      Name="dataGrid">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
                         <Style.Triggers>
@@ -115,23 +155,23 @@
                         </Style.Triggers>
                     </Style>
                 </DataGrid.Resources>
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
+                <!--<i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
                                                    CommandParameter="{Binding ElementName=dataGrid}"></i:InvokeCommandAction>
-                    </i:EventTrigger>
+                            </i:EventTrigger>
 
-                </i:Interaction.Triggers>
+                        </i:Interaction.Triggers>-->
                 <DataGrid.CellStyle>
                     <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
                         <Style.Triggers>
                             <Trigger Property="DataGridCell.IsSelected" Value="True">
                                 <Setter Property="FontWeight" Value="DemiBold" />
-                                <Setter Property="FontSize" Value="19" />
-
+                                <Setter Property="FontSize" Value="17" />
+                                <Setter Property="Foreground" Value="Black"></Setter>
                             </Trigger>
-                        </Style.Triggers>
 
+                        </Style.Triggers>
                     </Style>
                 </DataGrid.CellStyle>
                 <DataGrid.ColumnHeaderStyle>
@@ -139,16 +179,17 @@
                         <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
                         <Setter Property="Foreground" Value="White"></Setter>
                         <Setter Property="FontWeight" Value="DemiBold"></Setter>
-
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
+
                 <DataGrid.Columns>
-                    <materialDesign:DataGridTextColumn Width="200" Header="Mã chi tiết tiện nghi" Binding="{Binding IdConvinientDetail}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="200" Header="Tên phòng" Binding="{Binding ROOM.Name}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="200" Header="Tên tiện nghi" Binding="{Binding CONVINIENT.Name}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="200" Header="Số lượng" Binding="{Binding Amount}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Mã chi tiết tiện nghi" Binding="{Binding IdService,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="400" Header="Tên Phòng" Binding="{Binding ROOM.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Tiện nghi" Binding="{Binding CONVINIENT.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Số lượng" Binding="{Binding Amount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
+
         </materialDesign:Card>
     </Grid>
 </UserControl>

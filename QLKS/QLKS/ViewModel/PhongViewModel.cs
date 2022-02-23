@@ -196,7 +196,7 @@ namespace QLKS.ViewModel
                 {
                     ListRoom temp = new ListRoom();
                     temp.Room = item;
-                    if (item.Status == "Phòng trống")
+                    if (item.Clean == "")
                     {
                         temp.IsDay = false;
                         temp.SoGio = 0;
@@ -243,16 +243,16 @@ namespace QLKS.ViewModel
                 if (status == "Tất cả phòng" && type != "Tất cả loại phòng" && clean == "Tất cả")
                     return list.Where(p => p.CategoryRoom == type).ToList();
                 if (status != "Tất cả phòng" && type == "Tất cả loại phòng" && clean == "Tất cả")
-                    return list.Where(p => p.Room.Status == status).ToList();
+                    return list.Where(p => p.Room.Clean == status).ToList();
                 //cặp
                 if (status != "Tất cả phòng" && type != "Tất cả loại phòng" && clean == "Tất cả")
-                    return list.Where(p => p.Room.Status == status && p.CategoryRoom == type).ToList();
+                    return list.Where(p => p.Room.Clean == status && p.CategoryRoom == type).ToList();
                 if (status != "Tất cả phòng" && type == "Tất cả loại phòng" && clean != "Tất cả")
-                    return list.Where(p => p.Room.Status == status && p.Room.Clean == clean).ToList();
+                    return list.Where(p => p.Room.Clean == status && p.Room.Clean == clean).ToList();
                 if (status == "Tất cả phòng" && type != "Tất cả loại phòng" && clean != "Tất cả")
                     return list.Where(p => p.CategoryRoom == type && p.Room.Clean == clean).ToList();
                 if (status != "Tất cả phòng" && type != "Tất cả loại phòng" && clean != "Tất cả")
-                    return list.Where(p => p.CategoryRoom == type && p.Room.Clean == clean && p.Room.Status == status).ToList();
+                    return list.Where(p => p.CategoryRoom == type && p.Room.Clean == clean && p.Room.Clean == status).ToList();
 
                 return list.ToList();
             }
@@ -263,16 +263,16 @@ namespace QLKS.ViewModel
                 if (status == "Tất cả phòng" && type != "Tất cả loại phòng" && clean == "Tất cả")
                     return list.Where(p => p.CategoryRoom == type && p.Room.Name == code).ToList();
                 if (status != "Tất cả phòng" && type == "Tất cả loại phòng" && clean == "Tất cả")
-                    return list.Where(p => p.Room.Status == status && p.Room.Name == code).ToList();
+                    return list.Where(p =>/* p.Room.Status == status &&*/ p.Room.Name == code).ToList();
                 //cặp
                 if (status != "Tất cả phòng" && type != "Tất cả loại phòng" && clean == "Tất cả")
-                    return list.Where(p => p.Room.Status == status && p.CategoryRoom == type && p.Room.Name == code).ToList();
+                    return list.Where(p => /*p.Room.Status == status &&*/ p.CategoryRoom == type && p.Room.Name == code).ToList();
                 if (status != "Tất cả phòng" && type == "Tất cả loại phòng" && clean != "Tất cả")
-                    return list.Where(p => p.Room.Status == status && p.Room.Clean == clean && p.Room.Name == code).ToList();
+                    return list.Where(p => /*p.Room.Status == status &&*/ p.Room.Clean == clean && p.Room.Name == code).ToList();
                 if (status == "Tất cả phòng" && type != "Tất cả loại phòng" && clean != "Tất cả")
                     return list.Where(p => p.CategoryRoom == type && p.Room.Clean == clean && p.Room.Name == code).ToList();
                 if (status != "Tất cả phòng" && type != "Tất cả loại phòng" && clean != "Tất cả")
-                    return list.Where(p => p.CategoryRoom == type && p.Room.Clean == clean && p.Room.Status == status && p.Room.Name == code).ToList();
+                    return list.Where(p => p.CategoryRoom == type && p.Room.Clean == clean && /*p.Room.Status == status &&*/ p.Room.Name == code).ToList();
 
                 return list.Where(p => p.Room.Name == code).ToList();
             }

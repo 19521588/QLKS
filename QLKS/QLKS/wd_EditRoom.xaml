@@ -6,110 +6,141 @@
         xmlns:local="clr-namespace:QLKS"
         mc:Ignorable="d"
         x:Name="wdEditRoom"
-        Title="Sửa phòng" Height="360" Width="480"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        >
-    <Grid>
-        <Grid
-            Margin="20 60 20 80"
-           >
-            <Grid
-                Margin="0"
-                VerticalAlignment="Top"
-                Height="40">
-                <Label
-                    Content="Nhập tên phòng"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    />
-                <Rectangle
-                    Margin="0"
-                    Height="40"
-                    Width="240"
-                    HorizontalAlignment="Right"
-                    RadiusX="4"
-                    RadiusY="4"
-                    Stroke="Black"
-                    />
-                <TextBox
-                    x:Name="txbName"
-                    materialDesign:HintAssist.Hint="nhập tên phòng"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    Width="220"
-                    Margin="0 0 10 0"
-                    Foreground="Black"
-                    />
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"        
+        TextElement.FontFamily="Roboto"
+        AllowsTransparency="True"         
+        WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Title="Them_SuaPhong" Height="380" Width="400">
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,400,380" RadiusX="10" RadiusY="10"/>
+    </Window.Clip>
+
+    <Border BorderThickness="1" BorderBrush="#2C2A2A" CornerRadius="10">
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="180" ></RowDefinition>
+                <RowDefinition ></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!--Làm phần tiêu đề -->
+            <Grid Grid.Row="0">
+                <TextBlock x:Name="txbTitle" Text="Nhập thông tin phòng"  
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Height="40"
+                               FontSize="30"
+                               FontWeight="Bold" 
+                               Foreground="#00A3FF"
+                     />
 
             </Grid>
-            <Grid
-                Margin="0 80 0 0"
-                VerticalAlignment="Top"
-                Height="40">
-                <Label
-                    Content="Chọn loại phòng"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    />
-                <Rectangle
-                    Margin="0"
-                    Height="40"
-                    Width="240"
-                    HorizontalAlignment="Right"
-                    RadiusX="4"
-                    RadiusY="4"
-                    Stroke="Black"
-                    />
-                <ComboBox
-                    x:Name="cbCategory"
-                    materialDesign:HintAssist.Hint="Loại phòng"
-                    ItemsSource="{Binding ListCategory}"
-                    SelectedItem="{Binding SelectedCategory}"
-                    DisplayMemberPath="Name"
-                    Height="40" 
-                    FontSize="14" 
-                    Width="220"
-                    BorderThickness="0" 
-                    Padding="0" 
-                    Margin="0,0,10,0" 
-                    HorizontalAlignment="Right"
-                    VerticalContentAlignment="Center" 
-                    HorizontalContentAlignment="Left"
-                    FontWeight="SemiBold">
-                </ComboBox>
+            <!--Làm phần phần nhập thông tin -->
+            <Grid Grid.Row="1" Width="280" Height="160"                     
+                      HorizontalAlignment="Center"                       
+                      Background="#F2F1F1">
+                <Grid.Clip>
+                    <RectangleGeometry Rect="0,0,280,160" RadiusX="10" RadiusY="10"/>
+                </Grid.Clip>
+
+                <Grid Width="300" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70" ></RowDefinition>
+                        <RowDefinition Height="70" ></RowDefinition>
+                    </Grid.RowDefinitions>
+
+
+
+                    <!--Làm phần nhập thông tin phòng -->
+                    <Grid Grid.Row="0" Margin="6 0 0 0" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="160"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0" VerticalAlignment="Center">
+                            <materialDesign:PackIcon Kind="Home" Width="25" Height="25" />
+                        </Grid>
+
+                        <Grid Grid.Column="1" >
+                            <TextBox x:Name="txbName"                       
+                                materialDesign:HintAssist.Hint="Nhập số phòng (Ví dụ: P100)"                        
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"                        
+                                VerticalAlignment="Center"  />
+                        </Grid>
+                    </Grid>
+
+                    <!--Làm phần nhập loại phòng -->
+                    <Grid Grid.Row="2" Width="180" HorizontalAlignment="Center">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" VerticalAlignment="Center">
+                            <materialDesign:PackIcon Kind="TableOfContents" Width="25" Height="25"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <ComboBox Name="cbCategory"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"                                      
+                                Width="143"                                                                        
+                                materialDesign:HintAssist.Hint="Loại phòng" RenderTransformOrigin="0.479,-4.084">
+                            </ComboBox>
+
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+
+            </Grid>
+
+
+            <!--Làm nút nhập thêm hoặc hủy -->
+            <Grid Grid.Row="2">
+                <Grid Width="250" Margin="0 0 0 0" HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+
+                        <Button Content="Sửa"
+                                Command="{Binding EditCommand}"
+                                CommandParameter="{Binding ElementName= wdEditRoom}"
+                                FontWeight="Bold" Foreground="White"   Width="100" Height="40" Margin=" 0 4 20 0" Background="#478C10" >
+                            
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Visibility" Value="Hidden"></Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=Text, ElementName=txbTitle }" Value="Nhập thông tin phòng">
+                                            <Setter Property="Visibility" Value="Visible"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
+                    </Grid>
+
+                    <Grid Grid.Column="1" >
+                        <Grid>
+                            <Button x:Name="btnHuy"
+                                    Command="{Binding CloseCommand}"
+                                    CommandParameter="{Binding ElementName= wdEditRoom}"
+                                    Width="100" Height="40"                                    
+                                    Content="Hủy bỏ" 
+                                    Margin=" 20 4 0 0" 
+                                    Background="#9D9999" >
+                                
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
-        <Grid
-            Margin="20 0 20 20"
-            Width="240"
-            Height="40"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom">
-            <Button
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Command="{Binding EditCommand}"
-                CommandParameter="{Binding ElementName= wdEditRoom}"
-                Width="100"
-                HorizontalAlignment="Left"
-                ToolTip="Resource name: MaterialDesignRaisedButton">
-                _Sửa
-            </Button>
-            <Button
-                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                Command="{Binding CloseCommand}"
-                CommandParameter="{Binding ElementName= wdEditRoom}"
-                Width="100"
-                HorizontalAlignment="Right"
-                ToolTip="Resource name: MaterialDesignRaisedLightButton">
-                _Hủy
-            </Button>
-        </Grid>
-    </Grid>
+    </Border>
 </Window>

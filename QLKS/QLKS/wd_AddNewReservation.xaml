@@ -199,7 +199,7 @@
 
                         <DataGrid.Columns>
                             <materialDesign:DataGridTextColumn Width="110" Header="Số phòng" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Width="120" Header="Loại phòng" Binding="{Binding CATEGORY_ROOM.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="110" Header="Loại phòng" Binding="{Binding CATEGORY_ROOM.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                             
                         </DataGrid.Columns>
                     </DataGrid>

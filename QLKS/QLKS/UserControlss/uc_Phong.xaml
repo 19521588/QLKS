@@ -44,10 +44,12 @@
                     </i:Interaction.Triggers>
                 </DatePicker>
                 <!--Ngày tháng năm-->
-                <Border BorderThickness="1" BorderBrush="Black" Height="33" CornerRadius="4" Margin="10 0 0 5" Width="110" >
-                    <materialDesign:TimePicker x:Name="tpGio" Height="35"  
+                <Grid>
+                    <materialDesign:TimePicker x:Name="tpGio"
+                                      Margin="20 0 0 0"
+                                      Width="120"
                                       Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
-                                      materialDesign:HintAssist.Hint="Chọn giờ"  Focusable="False">
+                                      materialDesign:HintAssist.Hint="Chọn giờ" >
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Loaded">
                                 <i:InvokeCommandAction Command="{Binding LoadTimePickerCommand}" 
@@ -57,7 +59,7 @@
                         </i:Interaction.Triggers>
                     </materialDesign:TimePicker>
 
-                </Border>
+                </Grid>
                 
 
 
