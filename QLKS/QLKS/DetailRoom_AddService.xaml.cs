@@ -29,5 +29,34 @@ namespace QLKS
             InitializeComponent();
             this.DataContext=viewModel=new AddServiceDRViewModel(list);
         }
+        private void txbSoLuong_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox txb = sender as TextBox;
+            SelectService dvdc = (sender as TextBox).DataContext as SelectService;
+            int soLuong = 1;
+            if (!int.TryParse(txb.Text, out soLuong))
+            {
+                MessageBox.Show("Lỗi: Nhập số lượng kiểu số nguyên!", "Thông báo", MessageBoxButton.OK);
+                return;
+            }
+            dvdc.Amount = soLuong;
+            dvdc.Total = dvdc.Service.Price * soLuong;
+        }
+        private void txbSoLuong_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                TextBox txb = sender as TextBox;
+                SelectService dvdc = (sender as TextBox).DataContext as SelectService;
+                int soLuong = 1;
+                if (!int.TryParse(txb.Text, out soLuong))
+                {
+                    MessageBox.Show("Lỗi: Nhập số lượng kiểu số nguyên!", "Thông báo", MessageBoxButton.OK);
+                    return;
+                }
+                dvdc.Amount = soLuong;
+                dvdc.Total = dvdc.Service.Price * soLuong;
+            }
+        }
     }
 }

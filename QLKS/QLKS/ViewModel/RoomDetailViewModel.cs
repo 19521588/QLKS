@@ -19,7 +19,7 @@ namespace QLKS.ViewModel
         public ICommand PaymentCommand { get; set; }
         public ICommand CheckInCommand { get; set; }
         public ICommand LoadCbCommand { get; set; }
-
+        
         private ListRoom _RoomDetail { get; set; }
         public ListRoom RoomDetail { get => _RoomDetail; set { _RoomDetail = value; OnPropertyChanged(); } }
         private ObservableCollection<ListService> _ListService { get; set; }

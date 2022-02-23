@@ -100,6 +100,7 @@
     <Compile Include="Model\ListRoom.cs" />
     <Compile Include="Model\ListService.cs" />
     <Compile Include="Model\ReservationItem.cs" />
+    <Compile Include="Model\SelectService.cs" />
     <Compile Include="Model\ServiceCt.cs" />
     <Compile Include="RoomDetail.xaml.cs">
       <DependentUpon>RoomDetail.xaml</DependentUpon>
