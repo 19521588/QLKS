@@ -105,7 +105,7 @@ namespace QLKS.ViewModel
                 foreach(var item in ListSelectRoom)
                 {
                     var List = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == item.IdRoom).SingleOrDefault();
-                    List.Status = "Đang đặt";
+                    
                     reservation_detail = new RESERVATION_DETAIL() { IdReservation = reservation.IdReservation, Status = "Đang đặt", IdRoom = item.IdRoom};
                     DataProvider.Ins.DB.RESERVATION_DETAIL.Add(reservation_detail);
                 }

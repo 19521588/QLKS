@@ -1,4 +1,5 @@
-﻿using QLKS.UserControlss;
+﻿using QLKS.Model;
+using QLKS.UserControlss;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,6 +37,10 @@ namespace QLKS.ViewModel
 
         private bool _IsClose { get; set; }
         public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
+        private string _Name { get; set; }
+        public string Name { get => _Name; set { _Name = value; OnPropertyChanged(); } }
+        private USER _User { get; set; }
+        public USER User { get => _User; set { _User = value; OnPropertyChanged(); } }
 
         public ObservableCollection<ItemMenuMainWindow> MyListItems
         {
@@ -70,22 +75,26 @@ namespace QLKS.ViewModel
         #endregion
         public MainViewModel()
         {
-            
+            initListViewMenu();
             LoadedWindowCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
-                initListViewMenu();
-                //LoadLoginWindow(p);
-               
+              
+                LoadLoginWindow(p);
+
             });
          
             ItemClickCommand = new RelayCommand<ItemMenuMainWindow>((p) => { return true; }, (p) =>
             {
                 DoStuff(p);
             });
-            LogOutCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            LogOutCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
-                DialogCustoms wd = new DialogCustoms("Bạn có muốn đăng xuất ?", "Thông báo",1);
-                wd.ShowDialog();
+                if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    p.DataContext = new MainViewModel();
+                   
+                    LoadLoginWindow(mainWindow);
+                }
             });
            
 
@@ -93,6 +102,7 @@ namespace QLKS.ViewModel
         public void LoadLoginWindow(MainWindow p)
         {
             IsLoaded = true;
+           
             if (p == null)
                 return;
             p.Hide();
@@ -104,7 +114,10 @@ namespace QLKS.ViewModel
             if (loginVM.IsLogin)
             {
                 p.Show();
-               
+                mainWindow = p;
+                User = loginVM.User;
+                var employee = DataProvider.Ins.DB.EMPLOYEEs.Where(x => x.IdEmployee == User.IdEmployee).SingleOrDefault();
+                Name = employee.Name;
             }
             else
             {
@@ -129,7 +142,7 @@ namespace QLKS.ViewModel
                     case "Phòng":
                         if (Phong_UC == null)
                         {
-                            Phong_UC = new uc_Phong();
+                            Phong_UC = new uc_Phong(User);
                         }
                         CurrentView = Phong_UC;
                         break;

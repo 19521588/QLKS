@@ -9,13 +9,13 @@
         xmlns:uc="clr-namespace:QLKS.UserControlss"
         x:Name="mainwindows"
         
-     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-     TextElement.FontWeight="Regular"
-     TextElement.FontSize="13"
-     TextOptions.TextFormattingMode="Ideal"
-     TextOptions.TextRenderingMode="Auto"
-     FontFamily="{DynamicResource MaterialDesignFont}"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
         Title="Quản lý khách sạn" Height="700" Width="1300"
         WindowStyle="None"
@@ -162,16 +162,18 @@
                 <!--Khu vực header listView Menu-->
                 <Grid Grid.Row="0" Height="170">
                     <Grid Background="#FF142C2F" >
-                        <Button x:Name="btnDangXuat" Width="80" Height="30" HorizontalAlignment="Left" Padding="0" Foreground="DarkKhaki"
+                        <Button x:Name="btnDangXuat" Width="30" Height="30" HorizontalAlignment="Left" Padding="0" Foreground="DarkKhaki" Margin="10 10 0 0" ToolTip="Đăng xuất"
                                 VerticalAlignment="Top" FontSize="11"  BorderThickness="0" Background="Transparent" BorderBrush="White" 
                                 Command="{Binding LogOutCommand}"
-                                CommandParameter="{Binding ElementName=btnDangXuat}">
-                            <TextBlock Text="Đăng xuất" Foreground="#FFE4EAF3" />
+                                CommandParameter="{Binding ElementName=mainwindows}">
+                            <materialDesign:PackIcon Kind="Logout" Width="30"
+                                         Height="30"  
+                                         Foreground="White" Opacity="0.7" />
                         </Button>
 
                         <Ellipse x:Name="imgAvatar" Width="130" Height="130" VerticalAlignment="Top" Margin="0 10 0 0">
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="/QLKS;component/Res/mountains.jpg"/>
+                                <ImageBrush ImageSource="/QLKS;component/Res/logo.png"/>
                             </Ellipse.Fill>
                         </Ellipse>
                         <Grid x:Name="grdAvatar" Width="130" Height="130"  VerticalAlignment="Top" Margin="0 10 0 0">
@@ -200,7 +202,7 @@
 
                         </Grid>
 
-                        <TextBlock x:Name="txbHoTenNV" Text="Nguyễn Văn Duy" FontSize="18" Margin="0 0 0 4" 
+                        <TextBlock x:Name="txbHoTenNV" Text="{Binding Name}" FontSize="18" Margin="0 0 0 4" 
                                    HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#DDDFE9F7" TextDecorations="{x:Null}" FontFamily="Oboto"/>
                     </Grid>
 

@@ -24,7 +24,7 @@ namespace QLKS
     {
         AddServiceDRViewModel viewModel { get; set; }
 
-        public DetailRoom_AddService(ObservableCollection<ListService> list)
+        public DetailRoom_AddService(ObservableCollection<SelectService> list)
         {
             InitializeComponent();
             this.DataContext=viewModel=new AddServiceDRViewModel(list);

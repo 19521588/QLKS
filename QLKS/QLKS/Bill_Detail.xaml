@@ -316,7 +316,7 @@
                 <Grid Grid.Row="4" Margin="0 0 0 10" VerticalAlignment="Center">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
+                        
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     
@@ -325,9 +325,9 @@
                             Command="{Binding PrintCommand}"
                             CommandParameter="{Binding ElementName=PayWD}"
                             Visibility="{Binding VisPrint, Converter={StaticResource BooleanToVisibilityConverter}}"
-                            Grid.Row="1" 
+                            Grid.Row="0" 
                             BorderBrush="{StaticResource Green0}"
-                            Content="In hóa đơn"
+                            Content="{Binding btText}"
                             Margin="30 0 30 10"
                             FontWeight="Bold"
                             Height="40"
@@ -338,7 +338,7 @@
                         IsCancel="True"
                             Command="{Binding CloseCommand}"
                             CommandParameter="{Binding ElementName=PayWD}"
-                            Grid.Row="2"
+                            Grid.Row="1"
                             Margin="30 0 30 0"
                             FontWeight="Bold"
                             Content="Đóng"

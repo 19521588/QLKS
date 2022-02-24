@@ -137,7 +137,7 @@ namespace QLKS.ViewModel
                     }
                     else
                     {
-                        Bill_Detail BillDetail = new Bill_Detail(SelectedItem.Bill);
+                        Bill_Detail BillDetail = new Bill_Detail(SelectedItem.Bill,true);
                         BillDetail.ShowDialog();
    
                     }
