@@ -94,6 +94,9 @@
     <Compile Include="DetailRoom_AddService.xaml.cs">
       <DependentUpon>DetailRoom_AddService.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditInfo.xaml.cs">
+      <DependentUpon>EditInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\BillDetail.cs" />
     <Compile Include="Model\ListBill.cs" />
     <Compile Include="Model\ListBillInfo.cs" />
@@ -182,6 +185,7 @@
     <Compile Include="ViewModel\BillDetailViewModel.cs" />
     <Compile Include="ViewModel\BillTemplateViewModel.cs" />
     <Compile Include="ViewModel\BillViewModel.cs" />
+    <Compile Include="ViewModel\EditInfoViewModel.cs" />
     <Compile Include="ViewModel\Icommand.cs" />
     <Compile Include="ViewModel\ReservationDetailViewModel.cs" />
     <Compile Include="ViewModel\RoomDetailViewModel.cs" />
@@ -267,6 +271,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DetailRoom_AddService.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

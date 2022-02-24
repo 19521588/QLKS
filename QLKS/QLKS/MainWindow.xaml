@@ -201,9 +201,19 @@
                             </Button>
 
                         </Grid>
-
-                        <TextBlock x:Name="txbHoTenNV" Text="{Binding Name}" FontSize="18" Margin="0 0 0 4" 
-                                   HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#DDDFE9F7" TextDecorations="{x:Null}" FontFamily="Oboto"/>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
+                            <TextBlock x:Name="txbHoTenNV" Text="{Binding Name}" FontSize="18" Margin="0 0 0 4" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"  Foreground="#DDDFE9F7" TextDecorations="{x:Null}" FontFamily="Oboto"/>
+                            <Button x:Name="btnEdit" Width="20" Height="20" HorizontalAlignment="Center" Padding="0" Foreground="DarkKhaki" Margin="5 0 0 0" ToolTip="Sửa thông tin"
+                                VerticalAlignment="Center" FontSize="11"  BorderThickness="0" Background="Transparent" BorderBrush="White" 
+                                Command="{Binding EditCommand}"
+                                CommandParameter="{Binding ElementName=mainwindows}">
+                                <materialDesign:PackIcon Kind="Pen" Width="20"
+                                         Height="20"  
+                                         Foreground="White" Opacity="0.7" />
+                            </Button>
+                        </StackPanel>
+                      
                     </Grid>
 
                     <!--Button đóng mở menu-->

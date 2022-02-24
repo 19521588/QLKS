@@ -57,6 +57,7 @@ namespace QLKS.ViewModel
         public bool IsLoaded = false;
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand ItemClickCommand { get; set; }
+        public ICommand EditCommand { get; set; }
 
         public ICommand LogOutCommand { get; set; }
         public ICommand CloseSideBarCommand { get; set; }
@@ -82,7 +83,14 @@ namespace QLKS.ViewModel
                 LoadLoginWindow(p);
 
             });
-         
+            EditCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
+            {
+
+                EditInfo editInfoWd = new EditInfo(User);
+                editInfoWd.ShowDialog();
+
+            });
+
             ItemClickCommand = new RelayCommand<ItemMenuMainWindow>((p) => { return true; }, (p) =>
             {
                 DoStuff(p);
