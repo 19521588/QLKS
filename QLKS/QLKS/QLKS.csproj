@@ -549,6 +549,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Res\logo.svg" />
+    <Resource Include="Res\logo.png" />
     <Resource Include="Res\add.png" />
     <Resource Include="Res\backGround_DN.png" />
     <Resource Include="Res\delete_vs2.png" />

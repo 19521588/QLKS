@@ -1,4 +1,5 @@
-﻿using QLKS.ViewModel;
+﻿using QLKS.Model;
+using QLKS.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +23,10 @@ namespace QLKS.UserControlss
     public partial class uc_Phong : UserControl
     {
         private PhongViewModel phongViewModel { get; set; }
-        public uc_Phong()
+        public uc_Phong(USER User)
         {
             InitializeComponent();
-            this.DataContext = phongViewModel = new PhongViewModel();
+            this.DataContext = phongViewModel = new PhongViewModel(User);
         }
     }
 }

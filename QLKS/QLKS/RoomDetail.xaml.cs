@@ -27,10 +27,10 @@ namespace QLKS
             InitializeComponent();
 
         }
-        public RoomDetail(ListRoom listRoom)
+        public RoomDetail(ListRoom listRoom,USER User)
         {
             InitializeComponent();
-            this.DataContext=viewModel=new RoomDetailViewModel(listRoom);
+            this.DataContext=viewModel=new RoomDetailViewModel(listRoom,User);
         }
 
        

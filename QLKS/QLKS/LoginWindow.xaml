@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLKS"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        x:Name="dangnhap"
+        x:Name="wd_login"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -25,76 +25,106 @@
         <RectangleGeometry Rect="0,0,900,500" RadiusX="10" RadiusY="10" x:Name="boGoc">
         </RectangleGeometry>
     </Window.Clip>
-    <Grid>
-        <Button Width="65" Height="60" x:Name="btn_Close"   Command="{Binding CloseCommand}"                          
-                            CommandParameter="{Binding ElementName=dangnhap}"
-                    HorizontalAlignment="Right" VerticalAlignment="Top" Background="Transparent"
-                    BorderThickness="0" ToolTip="Close">
-            <Button.Clip>
-                <RectangleGeometry Rect="0,0,65,50" RadiusX="20" RadiusY="20">
-                </RectangleGeometry>
-            </Button.Clip>
-            <materialDesign:PackIcon Kind="CloseOctagonOutline" Width="35"
-                                         Height="35"
-                                         Foreground="White" Opacity="0.7"/>
-        </Button>
+    <Grid Width="325" Height="400" HorizontalAlignment="Left" Margin="50 0 0 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-        <materialDesign:Card Width="238" Height="325" Background="#FFFFFF"
-                             VerticalAlignment="Top" HorizontalAlignment="Left"
-                             Margin="100 80 0 0" >
-            <!--vẽ hình tròn-->
-            <materialDesign:Card.Clip>
-                <RectangleGeometry Rect="0,0,238,325" RadiusX="10" RadiusY="10" >
-                </RectangleGeometry>
-            </materialDesign:Card.Clip>
+
+        <Border CornerRadius="10" Grid.RowSpan="2">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="White" Offset="0.0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+
+        <StackPanel Grid.Row="0" VerticalAlignment="Center" >
+
+            <TextBlock Text="Đăng nhập"
+                           FontWeight="Bold"
+                           FontFamily="helvetica"
+                           FontSize="50"
+                           Foreground="#3d4751"
+                           HorizontalAlignment="Center"/>
+        </StackPanel>
+
+
+
+        <StackPanel Grid.Row="1" Margin="65,0,65,0" >
             <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Grid">
+                        <Setter Property="Margin" Value="0 0 0 0"></Setter>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" >
+                    <TextBox
+                            
+                        Text="{Binding UserName}"
+                        FontSize="20"
+                        Foreground="#3d4751"
+                        materialDesign:HintAssist.Foreground="#3d4751"
+                        materialDesign:TextFieldAssist.UnderlineBrush="#3d4751"
+                        materialDesign:HintAssist.Hint="Tên đăng nhập"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        VerticalAlignment="Center" />
+                </Grid>
 
-                <TextBlock Height="35" FontWeight="Bold" FontSize="30" Foreground="#0056FC" 
-                           HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,31,0,0">Đăng Nhập</TextBlock>
-                <materialDesign:PackIcon Kind="Account" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                                         Height="19" Width="19"
-                                         Margin="20,114,0,0"/>
-                <materialDesign:PackIcon Kind="Lock" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                                         Height="19" Width="19"
-                                         Margin="20,160,0,0"/>
-                <TextBox    Margin="55 107 0 0" Height="26" Width="130" x:Name="txbTenDangNhap" Text="{Binding UserName}"
-                            HorizontalAlignment="Left" VerticalAlignment="Top"
-                            materialDesign:HintAssist.Hint="Tên đăng nhập">
-                </TextBox>
+                <Grid Grid.Row="1">
+                    <PasswordBox
+                        x:Name="PasswordBox"
+                        FontSize="20"
+                        materialDesign:HintAssist.Foreground="#3d4751"
+                        materialDesign:TextFieldAssist.UnderlineBrush="#3d4751"
+                       
+                        materialDesign:HintAssist.Hint="Mật khẩu"
+                        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
+                        VerticalAlignment="Center">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PasswordChanged">
+                                <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" 
+                                   CommandParameter="{Binding ElementName=PasswordBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </PasswordBox>
 
-                <PasswordBox  materialDesign:HintAssist.Hint="Mật khẩu"  x:Name="txbMatKhau"
-                              HorizontalAlignment="Left" VerticalAlignment="Top"
-                              Margin="55,154,0,0" Height="26" Width="130"
-                              materialDesign:TextFieldAssist.HasClearButton="True" >
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="PasswordChanged">
-                            <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" 
-                                   CommandParameter="{Binding ElementName=txbMatKhau}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </PasswordBox>
+                </Grid>
 
-                <TextBlock Foreground="#0056FC"
-                           HorizontalAlignment="Left" VerticalAlignment="Top"
-                           Margin="119 200 0 0">
-                   <Hyperlink NavigateUri="https://www.facebook.com/duydidom05" >
-                        Quên mật khẩu?
-                    </Hyperlink>
-                </TextBlock>
-
-                <Button Height="28" Width="107" Background="#0056FC" 
-                        HorizontalAlignment="Left" VerticalAlignment="Top"
-                        Margin="63,240,0,0" 
-                        Command="{Binding LoginCommand}"
-                            CommandParameter="{Binding ElementName=dangnhap}"  >
-                    <Button.Clip>
-                        <RectangleGeometry Rect="0,0,107,28" RadiusX="10" RadiusY="10" >
-                        </RectangleGeometry>
-                    </Button.Clip>
-                    <TextBlock Text="Đăng nhập" FontSize="15" Foreground="White"></TextBlock>
-                </Button>
             </Grid>
+            <Grid Grid.Row="2">
+                <StackPanel Orientation="Vertical" Margin="0,25,0,0">
+                    <Button 
+                            IsDefault="True"
+                            Width="190"
+                            Height="40" 
+                            Content="Đăng nhập" 
+                            Margin="0 10 0 10"  BorderThickness="0"
+                            Style="{StaticResource MainButton}"
+                            FontSize="20"
+                            Command="{Binding LoginCommand}"
+                            CommandParameter="{Binding ElementName=wd_login}" />
+                    <Button Height="40" Content="Thoát" Margin="0,4,0,0" Background="#3d4751" BorderThickness="0" 
+                            IsCancel="True"
+                            FontSize="20"
+                            Command="{Binding CloseCommand}"                          
+                            CommandParameter="{Binding ElementName=wd_login}"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
 
-        </materialDesign:Card>
+
+
+
+
+
     </Grid>
 </Window>

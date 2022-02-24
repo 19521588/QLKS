@@ -21,9 +21,11 @@ namespace QLKS.ViewModel
         public ICommand DeleteCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand AmountChangedCommand { get; set; }
-        
+
         private ServiceCt _SelectedItem { get; set; }
         public ServiceCt SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); } }
+        private bool _isSave { get; set; }
+        public bool IsSave { get => _isSave; set { _isSave = value; OnPropertyChanged(); } }
         private SelectService _SelectedValue { get; set; }
         public SelectService SelectedValue { get => _SelectedValue; set { _SelectedValue = value; OnPropertyChanged(); } }
 
@@ -40,16 +42,16 @@ namespace QLKS.ViewModel
         private ObservableCollection<CATEGORY_SERVICE> _CategoryService { get; set; }
         public ObservableCollection<CATEGORY_SERVICE> CategoryService { get => _CategoryService; set { _CategoryService = value; OnPropertyChanged(); } }
 
-        public AddServiceDRViewModel(ObservableCollection<ListService> listService)
+        public AddServiceDRViewModel(ObservableCollection<SelectService> listService)
         {
-            Load();
+            Load(listService);
             TempListService = ListService;
             CloseCommand = new RelayCommand<Window>((p) =>
             {
                 return true;
             }, (p) =>
             {
-
+                IsSave = false;
                 p.Close();
 
             });
@@ -59,8 +61,8 @@ namespace QLKS.ViewModel
                 return true;
             }, (p) =>
             {
-                var temp= p.cbTimKiemLoaiDV.SelectedItem as CATEGORY_SERVICE;
-                ListService = new ObservableCollection<ServiceCt>(LoadByChanged(TempListService,temp.Name,  p.txbTimKiem.Text));
+                var temp = p.cbTimKiemLoaiDV.SelectedItem as CATEGORY_SERVICE;
+                ListService = new ObservableCollection<ServiceCt>(LoadByChanged(TempListService, temp.Name, p.txbTimKiem.Text));
 
             });
             TxbChangedCommand = new RelayCommand<DetailRoom_AddService>((p) =>
@@ -72,19 +74,47 @@ namespace QLKS.ViewModel
                 ListService = new ObservableCollection<ServiceCt>(LoadByChanged(TempListService, temp.Name, p.txbTimKiem.Text));
 
             });
-            
+            DeleteCommand = new RelayCommand<DetailRoom_AddService>((p) =>
+            {
+                if (SelectedItem == null) return false;
+                return true;
+            }, (p) =>
+            {
+                SelectListService.Remove(SelectedValue);
+                if (SelectListService.Count() != 0)
+                {
+                    int i = 1;
+                    foreach (var item in SelectListService)
+                    {
+                        item.STT = i;
+                        i++;
+                    }
+                }
+            });
+            SaveCommand = new RelayCommand<DetailRoom_AddService>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                if (MessageBox.Show("Bạn có chắc chắn muốn lưu  thay đổi", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    IsSave = true;
+                    p.Close();
+                }
+            });
+
             AddCommand = new RelayCommand<DetailRoom_AddService>((p) =>
             {
                 if (SelectedItem == null) return false;
                 return true;
             }, (p) =>
             {
-                if(SelectListService.Where(x=>x.Service==SelectedItem.Service).Count()!=0)
+                if (SelectListService.Where(x => x.Service == SelectedItem.Service).Count() != 0)
                 {
                     SelectListService.Where(x => x.Service == SelectedItem.Service).SingleOrDefault().Amount++;
                     var amount = SelectListService.Where(x => x.Service == SelectedItem.Service).SingleOrDefault().Amount;
                     var price = SelectListService.Where(x => x.Service == SelectedItem.Service).SingleOrDefault().Service.Price;
-                    SelectListService.Where(x => x.Service == SelectedItem.Service).SingleOrDefault().Total=amount*price;
+                    SelectListService.Where(x => x.Service == SelectedItem.Service).SingleOrDefault().Total = amount * price;
                 }
                 else
                 {
@@ -96,11 +126,11 @@ namespace QLKS.ViewModel
                     temp.Total = temp.Amount * SelectedItem.Service.Price;
                     SelectListService.Add(temp);
                 }
-              
+
             });
 
         }
-        public void Load()
+        public void Load(ObservableCollection<SelectService> listService)
         {
             ListService = new ObservableCollection<ServiceCt>();
             SelectListService = new ObservableCollection<SelectService>();
@@ -120,14 +150,19 @@ namespace QLKS.ViewModel
                 ListService.Add(temp);
                 i++;
             }
+            if(listService!=null)
+            {
+                SelectListService=listService;
+            }
+           
             SelectedCategory = a;
         }
         public List<ServiceCt> LoadByChanged(ObservableCollection<ServiceCt> list, string cbCategory, string txbSearch)
         {
             UnicodeConvert uni = new UnicodeConvert();
-            if (cbCategory != "Tất cả" && txbSearch!="")
+            if (cbCategory != "Tất cả" && txbSearch != "")
             {
-                
+
                 return list.Where(x => x.Category == cbCategory && uni.RemoveUnicode(x.Service.Name).ToLower().Contains(uni.RemoveUnicode(txbSearch).ToLower())).ToList();
             }
             if (cbCategory != "Tất cả" && txbSearch == "")
