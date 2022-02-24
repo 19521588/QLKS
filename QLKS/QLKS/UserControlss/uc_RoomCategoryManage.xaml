@@ -125,7 +125,7 @@
             Margin="15 0 10 15"
             Grid.Row="1">
             <DataGrid
-                        ItemsSource="{Binding ListRoom}" 
+                        ItemsSource="{Binding ListCategory}" 
                       SelectedItem="{Binding SelectedItem}"
                       SelectionMode="Extended"
                       IsReadOnly="True"

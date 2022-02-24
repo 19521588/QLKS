@@ -85,7 +85,10 @@
                         <Grid Grid.Column="1">
                             <ComboBox Name="cbCategory"
                                 VerticalAlignment="Center"
-                                HorizontalAlignment="Left"                                      
+                                HorizontalAlignment="Left"
+                                ItemsSource="{Binding ListCategory}"
+                                      SelectedItem="{Binding SelectedCategory}"
+                                DisplayMemberPath="Name"
                                 Width="143"                                                                        
                                 materialDesign:HintAssist.Hint="Loại phòng" RenderTransformOrigin="0.479,-4.084">
                             </ComboBox>

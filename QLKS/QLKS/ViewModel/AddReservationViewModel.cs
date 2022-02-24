@@ -12,9 +12,10 @@ namespace QLKS.ViewModel
     public class AddReservationViewModel : BaseViewModel
     {
         public ICommand AddCommand { get; set; }
-
         public ICommand SaveCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+        public ICommand LoadListRoomCommand { get; set; }
+
         private bool _check { get; set; }
         public bool check { get => _check; set { _check = value; OnPropertyChanged(); } }
 
@@ -29,6 +30,10 @@ namespace QLKS.ViewModel
         private ObservableCollection<ROOM> _ListRoom { get; set; }
 
         public ObservableCollection<ROOM> ListRoom { get => _ListRoom; set { _ListRoom = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<ROOM> _ListAvailableRoom { get; set; }
+
+        public ObservableCollection<ROOM> ListAvailableRoom { get => _ListAvailableRoom; set { _ListAvailableRoom = value; OnPropertyChanged(); } }
 
         private ObservableCollection<ROOM> _ListSelectRoom { get; set; }
 
@@ -46,12 +51,13 @@ namespace QLKS.ViewModel
 
         public RESERVATION_DETAIL reservation_detail;
 
-        private bool _IsClose { get; set; }
-        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
+        private bool _IsAdd { get; set; }
+        public bool IsAdd { get => _IsAdd; set { _IsAdd = value; OnPropertyChanged(); } }
         public AddReservationViewModel()
         {
 
             ListRoom = new ObservableCollection<ROOM>();
+            ListAvailableRoom = new ObservableCollection<ROOM>();
             ListSelectRoom = new ObservableCollection<ROOM>();
             ListReservation = new ObservableCollection<RESERVATION_DETAIL>();
             ObservableCollection<ROOM> temp = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs.Where(x => x.Name != "Trống"));
@@ -65,6 +71,8 @@ namespace QLKS.ViewModel
             AddCommand = new RelayCommand<wd_AddNewReservation>(
             (p) =>
             {
+                if (p.dtStartDate.SelectedDate > p.dtStartDate.SelectedDate) return false;
+                if (p.dtStartDate.SelectedDate == p.dtpEndDate.SelectedDate && p.tpStartTime.SelectedTime > p.tpEndTime.SelectedTime) return false;
                 if (SelectedRoom == null) return false;
                 return true;
             },
@@ -72,7 +80,7 @@ namespace QLKS.ViewModel
             {
                 //RESERVATION_DETAIL res_detail = new RESERVATION_DETAIL() {IdRoom = SelectedRoom.IdRoom};
                 ListSelectRoom.Add(SelectedRoom);
-                ListRoom.Remove(SelectedRoom);            
+                ListAvailableRoom.Remove(SelectedRoom);            
                 //ListReservation.Add(res_detail);
                 //p.Close();
             }
@@ -121,6 +129,39 @@ namespace QLKS.ViewModel
             (p) =>
             {
                 p.Close();
+            }
+            );
+
+            LoadListRoomCommand = new RelayCommand<wd_AddNewReservation>(
+            (p) =>
+            {
+                if (p.dtStartDate.SelectedDate < DateTime.Now) return false;
+                if (p.dtStartDate.SelectedDate == null || p.dtpEndDate.SelectedDate == null || p.tpStartTime.SelectedTime == null || p.tpEndTime.SelectedTime == null) return false;
+                if (p.dtStartDate.SelectedDate > p.dtpEndDate.SelectedDate) return false;
+                if (p.dtStartDate.SelectedDate == p.dtpEndDate.SelectedDate && p.tpStartTime.SelectedTime > p.tpEndTime.SelectedTime) return false;
+                return true;
+            },
+            (p) =>
+            {
+                foreach(var item in ListRoom)
+                {
+                    IsAdd = false;
+                    ObservableCollection<RESERVATION_DETAIL> templist = new ObservableCollection<RESERVATION_DETAIL>(DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdRoom == item.IdRoom));
+                    if (templist.Count == 0)
+                        ListAvailableRoom.Add(item);
+                    else
+                    {
+                        foreach (var detail in templist)
+                        {
+                            if ((detail.RESERVATION.Start_Date == p.dtStartDate.SelectedDate && (detail.RESERVATION.Start_Date >= p.tpEndTime.SelectedTime || detail.RESERVATION.Start_Date.TimeOfDay >= p.tpEndTime.SelectedTime.Value.TimeOfDay)) || detail.RESERVATION.End_Date < p.dtStartDate.SelectedDate || detail.RESERVATION.Start_Date > p.dtpEndDate.SelectedDate || (detail.RESERVATION.End_Date == p.dtStartDate.SelectedDate && detail.RESERVATION.End_Date.TimeOfDay < p.tpStartTime.SelectedTime.Value.TimeOfDay ) || (detail.RESERVATION.End_Date == p.dtStartDate.SelectedDate && detail.RESERVATION.Start_Date.TimeOfDay > p.tpEndTime.SelectedTime.Value.TimeOfDay))
+                                IsAdd = true;
+                        }
+                        if (IsAdd)
+                        {
+                            ListAvailableRoom.Add(item);
+                        }
+                    }
+                }    
             }
             );
         }

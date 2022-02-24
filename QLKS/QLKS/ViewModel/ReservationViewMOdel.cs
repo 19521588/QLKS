@@ -13,7 +13,7 @@ namespace QLKS.ViewModel
     {
         public ICommand OpenAddCommand { get; set; }
 
-        public ICommand OpenEditCommand { get; set; }
+        public ICommand OpenDetailCommand { get; set; }
 
         private ObservableCollection<RESERVATION> _ListReservation { get; set; }
         public ObservableCollection<RESERVATION> ListReservation { get => _ListReservation; set { _ListReservation = value; OnPropertyChanged(); } }
@@ -58,6 +58,16 @@ namespace QLKS.ViewModel
                 if (add.check)
                     ListReservation.Insert(0, add.reservation);
                 Load();
+            });
+            OpenDetailCommand = new RelayCommand<MainWindow>((p) => { if (SelectedItem == null) return false;
+                return true;
+            }, (p) =>
+            {
+
+                wd_ReservationDetail wdAddReservation = new wd_ReservationDetail(SelectedItem);
+
+                //wdAddRooms.txbName.Text = "";
+                wdAddReservation.ShowDialog();
             });
         }
 

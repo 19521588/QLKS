@@ -183,6 +183,7 @@
     <Compile Include="ViewModel\BillTemplateViewModel.cs" />
     <Compile Include="ViewModel\BillViewModel.cs" />
     <Compile Include="ViewModel\Icommand.cs" />
+    <Compile Include="ViewModel\ReservationDetailViewModel.cs" />
     <Compile Include="ViewModel\RoomDetailViewModel.cs" />
     <Compile Include="ViewModel\ControlBar2ViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
@@ -257,6 +258,9 @@
     </Compile>
     <Compile Include="wd_EditRoom.xaml.cs">
       <DependentUpon>wd_EditRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wd_ReservationDetail.xaml.cs">
+      <DependentUpon>wd_ReservationDetail.xaml</DependentUpon>
     </Compile>
     <Page Include="Bill_Detail.xaml">
       <SubType>Designer</SubType>
@@ -434,6 +438,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="wd_EditService.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wd_ReservationDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

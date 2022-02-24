@@ -67,7 +67,7 @@
                             VerticalAlignment="Top"
                         HorizontalAlignment="Right"
                             Margin="20 20 160 12"
-                            Command="{Binding DetailCommand}"
+                            Command="{Binding OpenDetailCommand}"
                             >
                 </Button>
             </Grid>
@@ -117,32 +117,7 @@
                                           HorizontalAlignment="Left"
                                             VerticalAlignment="Center" Grid.ColumnSpan="2"
                                          >
-                        <ComboBox
-                            Margin="10 0 10 10"
-                            x:Name="cbSelectionView"
-                            Text="{Binding ViewSelectedValue
-                                            ,UpdateSourceTrigger=PropertyChanged
-                                            ,Mode=TwoWay}"
-                            SelectedIndex="{Binding ViewSelectedIndex
-                                            ,UpdateSourceTrigger=PropertyChanged
-                                            ,Mode=TwoWay}"
-                            FontWeight="DemiBold"
-                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                            materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource MainBlue}"
-                            materialDesign:HintAssist.Foreground="{StaticResource MainBlue}"
-                            materialDesign:HintAssist.Hint="Hiển thị theo"
-                            FontSize="16">
-                            <ComboBoxItem
-                            Content="Tất cả" />
-                            <ComboBoxItem
-                            Content="Ngày hôm nay" />
-
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding ViewSelectionChanged}"></i:InvokeCommandAction>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </ComboBox>
+                        
                     </materialDesign:Card>
 
                 </Grid>

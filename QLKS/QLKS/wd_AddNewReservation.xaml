@@ -8,6 +8,7 @@
         Title="DatPhong" Height="550" Width="995"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         x:Name="wdAddReservation"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -108,7 +109,16 @@
                             <DatePicker Margin="30 0 0 0" x:Name="dtStartDate"
                                         
                             materialDesign:HintAssist.Hint="Ngày bắt đầu"
-                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedChanged">
+                                        <i:InvokeCommandAction
+                                            Command="{Binding LoadListRoomCommand}"
+                                            CommandParameter="{Binding ElementName=wdAddReservation}"
+                                            ></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </DatePicker>
                         </Grid>
 
                         <Grid Height="33" Width="150" VerticalAlignment="Top" HorizontalAlignment="Right"
@@ -117,7 +127,16 @@
                             <materialDesign:TimePicker x:Name="tpStartTime"
                                       Margin="30 0 0 0"
                                       Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
-                                      materialDesign:HintAssist.Hint="Giờ bắt đầu" />
+                                      materialDesign:HintAssist.Hint="Giờ bắt đầu" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedChanged">
+                                        <i:InvokeCommandAction
+                                            Command="{Binding LoadListRoomCommand}"
+                                            CommandParameter="{Binding ElementName=wdAddReservation}"
+                                            ></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </materialDesign:TimePicker>
                         </Grid>
 
                         <Grid Height="33" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left"
@@ -125,7 +144,16 @@
                             <materialDesign:PackIcon Kind="CalendarToday" Height="25" Width="25" VerticalAlignment="Bottom"/>
                             <DatePicker Margin="30 0 0 0" x:Name="dtpEndDate"
                             materialDesign:HintAssist.Hint="Ngày kết thúc"
-                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedChanged">
+                                        <i:InvokeCommandAction
+                                            Command="{Binding LoadListRoomCommand}"
+                                            CommandParameter="{Binding ElementName=wdAddReservation}"
+                                            ></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </DatePicker>
                         </Grid>
 
                         <Grid Height="33" Width="150" VerticalAlignment="Top" HorizontalAlignment="Right"
@@ -134,14 +162,39 @@
                             <materialDesign:TimePicker x:Name="tpEndTime"
                                       Margin="30 0 0 0"
                                       Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
-                                      materialDesign:HintAssist.Hint="Giờ kết thúc" />
+                                      materialDesign:HintAssist.Hint="Giờ kết thúc">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedChanged">
+                                        <i:InvokeCommandAction
+                                            Command="{Binding LoadListRoomCommand}"
+                                            CommandParameter="{Binding ElementName=wdAddReservation}"
+                                            ></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </materialDesign:TimePicker>
                         </Grid>
 
                         <Grid Height="33" Width="120" VerticalAlignment="Top" HorizontalAlignment="Right"
                         Margin="0 50 20 0">
                             <materialDesign:PackIcon Kind="HumanMaleFemale" Height="25" Width="25" VerticalAlignment="Bottom"/>
-                            <TextBox x:Name="txbAmount" Margin="30 0 0 0" materialDesign:HintAssist.Hint="Nhập số người"/>
+                            <TextBox x:Name="txbAmount" Margin="30 0 0 0" materialDesign:HintAssist.Hint="Nhập số người">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedChanged">
+                                        <i:InvokeCommandAction
+                                            Command="{Binding LoadListRoomCommand}"
+                                            CommandParameter="{Binding ElementName=wdAddReservation}"
+                                            ></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
                         </Grid>
+
+                        <Button Width="89" Height="36" Background="#478C10" Content="Tìm"
+                                Command="{Binding LoadListRoomCommand}"
+                                
+                                CommandParameter="{Binding ElementName= wdAddReservation}"
+                        HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 100 20 8"/>
+
                         <!--Lisview Phòng Trống-->
                         <TextBlock Text="Danh sách phòng trống" FontSize="20" Foreground="#00A3FF"
                                Margin="12 160 0 0"/>
@@ -151,7 +204,7 @@
                                 <RectangleGeometry Rect="0,0,230,172" RadiusX="10" RadiusY="10"/>
                             </Grid.Clip>
                             <DataGrid
-                        ItemsSource="{Binding ListRoom}" 
+                        ItemsSource="{Binding ListAvailableRoom}" 
                       SelectedItem="{Binding SelectedRoom}"
                       SelectionMode="Extended"
                       IsReadOnly="True"
@@ -199,18 +252,17 @@
 
                         <DataGrid.Columns>
                             <materialDesign:DataGridTextColumn Width="110" Header="Số phòng" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Width="110" Header="Loại phòng" Binding="{Binding CATEGORY_ROOM.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="100" Header="Loại phòng" Binding="{Binding CATEGORY_ROOM.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                             
                         </DataGrid.Columns>
                     </DataGrid>
                         </Grid>
-                        <Button Width="89" Height="36" Background="#478C10" Content="Thêm"
+                        <Button Width="89" Height="36" Content="Thêm"
                                 Command="{Binding AddCommand}"
+                                Style="{StaticResource AddButton}"
                                 CommandParameter="{Binding ElementName= wdAddReservation}"
                         HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 290 8">
-                            <Button.Clip>
-                                <RectangleGeometry Rect="0,0,89,36" RadiusX="10" RadiusY="10"/>
-                            </Button.Clip>
+                            
                         </Button>
                         <!--Lisview Phòng Đã Chọn-->
                         <TextBlock Text="Phòng đã chọn" FontSize="20" Foreground="#00A3FF"
@@ -268,8 +320,8 @@
                                 </DataGrid.ColumnHeaderStyle>
 
                                 <DataGrid.Columns>
-                                    <materialDesign:DataGridTextColumn Width="120" Header="Phòng" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
-                                    <materialDesign:DataGridTextColumn Width="110" Header="Loại phòng" Binding="{Binding CATEGORY_ROOM.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                                    <materialDesign:DataGridTextColumn Width="110" Header="Phòng" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
+                                    <materialDesign:DataGridTextColumn Width="100" Header="Loại phòng" Binding="{Binding CATEGORY_ROOM.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                                     
                                 </DataGrid.Columns>
                             </DataGrid>
@@ -282,17 +334,13 @@
                         Command="{Binding SaveCommand}"
                                 CommandParameter="{Binding ElementName= wdAddReservation}"
                         HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 212 11">
-                    <Button.Clip>
-                        <RectangleGeometry Rect="0,0,89,36" RadiusX="10" RadiusY="10"/>
-                    </Button.Clip>
+                    
                 </Button>
                 <Button Width="89" Height="36" Background="#9D9999" Content="Hủy"
                         Command="{Binding CloseCommand}"
                         CommandParameter="{Binding ElementName= wdAddReservation}"
                         HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 80 12">
-                    <Button.Clip>
-                        <RectangleGeometry Rect="0,0,89,36" RadiusX="10" RadiusY="10"/>
-                    </Button.Clip>
+                    
                 </Button>
             </Grid>
         </Grid>

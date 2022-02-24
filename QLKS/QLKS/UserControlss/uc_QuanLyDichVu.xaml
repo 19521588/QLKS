@@ -60,18 +60,18 @@
 
                 <Button Content="Sửa"
                             Style="{StaticResource ExportButton}"
-                            VerticalAlignment="Bottom"
+                            VerticalAlignment="Top"
                         HorizontalAlignment="Left"
-                            Margin="20 20 20 12"
+                            Margin="300 20 20 12"
                             Command="{Binding OpenEditCommand}"
                         CommandParameter="{Binding ElementName=wdService}"
                             >
                 </Button>
                 <Button Content="Xóa"
                             Style="{StaticResource DeleteButton}"
-                            VerticalAlignment="Bottom"
+                            VerticalAlignment="Top"
                         HorizontalAlignment="Left"
-                            Margin="160 20 180 12"
+                            Margin="440 20 180 12"
                             Command="{Binding DeleteCommand}"
                         CommandParameter="{Binding ElementName=wdService}"
                             >

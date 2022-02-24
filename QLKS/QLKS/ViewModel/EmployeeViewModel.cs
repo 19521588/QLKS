@@ -19,9 +19,9 @@ namespace QLKS.ViewModel
         private string _Name { get; set; }
 
         public string Name { get => _Name; set { _Name = value; OnPropertyChanged(); } }
-        private ObservableCollection<EMPLOYEE> _ListEmloyee { get; set; }
+        private ObservableCollection<EMPLOYEE> _ListEmployee { get; set; }
 
-        public ObservableCollection<EMPLOYEE> ListEmloyee { get => _ListEmloyee; set { _ListEmloyee = value; OnPropertyChanged(); } }
+        public ObservableCollection<EMPLOYEE> ListEmployee { get => _ListEmployee; set { _ListEmployee = value; OnPropertyChanged(); } }
 
         private EMPLOYEE _SelectedItem { get; set; }
         public EMPLOYEE SelectedItem
@@ -52,7 +52,7 @@ namespace QLKS.ViewModel
 
                 AddEmployeeViewModel add = wdAddEmployee.DataContext as AddEmployeeViewModel;
                 if (add.check)
-                    ListEmloyee.Insert(0, add.employee);
+                    ListEmployee.Insert(0, add.employee);
             });
             OpenEditCommand = new RelayCommand<MainWindow>((p) => {
                 if (SelectedItem == null) return false;
@@ -74,7 +74,7 @@ namespace QLKS.ViewModel
         }
         void Load()
         {
-            ListEmloyee = new ObservableCollection<EMPLOYEE>(DataProvider.Ins.DB.EMPLOYEEs);
+            ListEmployee = new ObservableCollection<EMPLOYEE>(DataProvider.Ins.DB.EMPLOYEEs);
         }
     }
 }
