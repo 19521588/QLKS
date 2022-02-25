@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using QLKS.ViewModel;
 using QLKS.Model;
 using System.Windows.Input;
+using QLKS.Convert;
+using QLKS.UserControlss;
 
 namespace QLKS.ViewModel
 {
@@ -17,6 +19,10 @@ namespace QLKS.ViewModel
         public ICommand OpenEditCommand { get; set; }
 
         public ICommand DeleteCommand { get; set; }
+
+        public ICommand SearchCommand { get; set; }
+
+        public ICommand RefreshCommand { get; set; }
 
         private ObservableCollection<ROOM> _ListRoom { get; set; }
         public ObservableCollection<ROOM> ListRoom { get => _ListRoom; set { _ListRoom = value; OnPropertyChanged(); } }
@@ -82,6 +88,30 @@ namespace QLKS.ViewModel
             }, (p) =>
             {
 
+            });
+            SearchCommand = new RelayCommand<uc_RoomManage>((p) =>
+            {            
+                return true;
+            }, (p) =>
+            {
+                UnicodeConvert uni = new UnicodeConvert();
+
+                ObservableCollection<ROOM> _ListTemp = new ObservableCollection<ROOM>();
+                ObservableCollection<ROOM> _ListNew = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs);
+
+                foreach (var item in _ListNew)
+                {
+                    if (uni.RemoveUnicode(item.Name).ToLower().Contains(uni.RemoveUnicode(p.txbRoomSearch.Text)))
+                        _ListTemp.Add(item);
+                }
+                ListRoom = _ListTemp;
+            });
+            RefreshCommand = new RelayCommand<MainWindow>((p) => 
+            {
+                return true;
+            }, (p) =>
+            {
+                LoadRoom();
             });
         }
 

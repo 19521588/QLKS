@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QLKS.UserControlss"
              mc:Ignorable="d" 
+             x:Name="ucCategoryRoomManage"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
@@ -35,6 +36,7 @@
                         HorizontalAlignment="Left"
                             Margin="20 20 20 12"
                             Command="{Binding SearchCommand}"
+                        CommandParameter="{Binding ElementName=ucCategoryRoomManage}"
                             >
                 </Button>
                 <Button Content="Làm mới"
@@ -48,17 +50,17 @@
 
                 <Button Content="Sửa"
                             Style="{StaticResource ExportButton}"
-                            VerticalAlignment="Bottom"
+                            VerticalAlignment="Top"
                         HorizontalAlignment="Left"
-                            Margin="20 20 20 12"
+                            Margin="300 20 20 12"
                             Command="{Binding OpenEditCommand}"
                             >
                 </Button>
                 <Button Content="Xóa"
                             Style="{StaticResource DeleteButton}"
-                            VerticalAlignment="Bottom"
+                            VerticalAlignment="Top"
                         HorizontalAlignment="Left"
-                            Margin="160 20 180 12"
+                            Margin="440 20 180 12"
                             Command="{Binding DeleteCommand}"
                             >
                 </Button>

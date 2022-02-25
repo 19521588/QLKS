@@ -172,14 +172,14 @@
                 </DataGrid.ColumnHeaderStyle>
 
                 <DataGrid.Columns>
-                    <materialDesign:DataGridTextColumn Width="80" Header="Mã NV" Binding="{Binding IdEmployee,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="90" Header="Mã NV" Binding="{Binding IdEmployee,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="300" Header="Tên nhân viên" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="150" Header="CCCD" Binding="{Binding CCCD ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="150" Header="Số điện thoại" Binding="{Binding Phone,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="200" Header="Địa chỉ" Binding="{Binding Address ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="100" Header="Giới tính" Binding="{Binding Sex,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="150" Header="Chức vụ" Binding="{Binding Position ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="150" Header="Lương" Binding="{Binding Salary ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="120" Header="Chức vụ" Binding="{Binding Position ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="120" Header="Lương" Binding="{Binding Salary ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
 
