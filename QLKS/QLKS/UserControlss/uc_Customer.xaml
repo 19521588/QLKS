@@ -172,13 +172,13 @@
                 </DataGrid.ColumnHeaderStyle>
 
                 <DataGrid.Columns>
-                    <materialDesign:DataGridTextColumn Width="80" Header="Mã KH" Binding="{Binding IdCustomer,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="90" Header="Mã KH" Binding="{Binding IdCustomer,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="350" Header="Tên khách" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="150" Header="CCCD" Binding="{Binding CCCD ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="150" Header="Số điện thoại" Binding="{Binding Phone,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="250" Header="Địa chỉ" Binding="{Binding Address ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="100" Header="Giới tính" Binding="{Binding Sex,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="150" Header="Quốc tịch" Binding="{Binding Nationality ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="100" Header="Quốc tịch" Binding="{Binding Nationality ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
 

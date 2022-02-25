@@ -184,7 +184,7 @@
 
             <!--Làm nút nhập thêm hoặc hủy -->
             <Grid Grid.Row="2">
-                <Grid  Width="250" Margin="230 0 0 0">
+                <Grid  Width="250" Margin="0 0 0 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition ></ColumnDefinition>
                         <ColumnDefinition ></ColumnDefinition>
@@ -193,11 +193,9 @@
                     <Grid Grid.Column="0">
                         <Button Content="Thêm"
                                 Command="{Binding AddCommand}"
-                                FontWeight="Bold" Foreground="White"   Width="89" Height="36" Margin=" 4 4 0 0" Background="#478C10" >
-                            <Button.Clip>
-                                <RectangleGeometry Rect="0,0,89,36" RadiusX="10" RadiusY="10" >
-                                </RectangleGeometry>
-                            </Button.Clip>
+                                FontWeight="Bold" Foreground="White"   Width="100" Height="40" Margin=" 4 4 20 0" Background="#478C10" >
+                             
+                               
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Visibility" Value="Hidden"></Setter>
@@ -217,13 +215,9 @@
                         <Button x:Name="btnHuy" 
                                 Command="{Binding CloseCommand}"
                                     Content="Hủy bỏ" 
-                                    Width="89" Height="36"                                    
-                                    Margin=" 4 4 0 0" 
+                                    Width="100" Height="40"                                    
+                                    Margin=" 14 4 0 0" 
                                     Background="#9D9999" >
-                            <Button.Clip>
-                                <RectangleGeometry Rect="0,0,89,36" RadiusX="10" RadiusY="10" >
-                                </RectangleGeometry>
-                            </Button.Clip>
                         </Button>
 
                     </Grid>

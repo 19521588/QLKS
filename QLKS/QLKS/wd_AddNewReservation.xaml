@@ -87,7 +87,7 @@
                         <Grid Height="25" Width="213" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65 27 0 0">
                             <materialDesign:PackIcon Kind="GenderTransgender" Height="25" Width="25"/>
                             <ComboBox x:Name="cbSex" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="30 0 0 0"
-                                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                    Style="{StaticResource MaterialDesignComboBox}"
                                     materialDesign:HintAssist.Hint="Giới tính"
                                     Height="25" Padding="5" Width="180">
                                 <ComboBoxItem Content="Nam" />

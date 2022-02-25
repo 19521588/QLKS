@@ -66,7 +66,7 @@
                                       materialDesign:HintAssist.Hint="Nhập căn cước công dân"
                                       Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         </Grid>
-                        <Grid Height="25" Width="213" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="40 40 0 0">
+                        <Grid Height="30" Width="213" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="40 40 0 0">
                             <materialDesign:PackIcon Kind="Counter" Height="25" Width="25" VerticalAlignment="Center"/>
                             <TextBox  x:Name="txbSalary" Margin="30 0 0 0" Padding="0"
                                       materialDesign:HintAssist.Hint="Nhập lương"
@@ -87,7 +87,7 @@
                         <Grid Height="30" Width="213" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="40 40 0 0">
                             <materialDesign:PackIcon Kind="GenderTransgender" Height="25" Width="25" VerticalAlignment="Center"/>
                             <ComboBox x:Name="cbSex" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="30 0 0 0"
-                                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                    Style="{StaticResource MaterialDesignComboBox}"
                                     materialDesign:HintAssist.Hint="Giới tính"
                                     SelectedItem="{Binding SelectedCategory}"
                                     Height="25" Padding="5" Width="180">
@@ -101,7 +101,7 @@
                                       materialDesign:HintAssist.Hint="Nhập địa chỉ"
                                       Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         </Grid>
-                        <Grid Height="25" Width="213" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="40 40 0 0">
+                        <Grid Height="30" Width="213" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="40 40 0 0">
                             <materialDesign:PackIcon Kind="AccountHardHat" Height="25" Width="25" VerticalAlignment="Center"/>
                             <TextBox  x:Name="txbPosition" Margin="30 0 0 0" Padding="0"
                                       materialDesign:HintAssist.Hint="Nhập chức vụ"
@@ -115,14 +115,18 @@
             </Grid>
             <Grid Grid.Row="2">
 
-                <Button Width="89" Height="36" Background="#478C10" Content="Sửa"
+                <Button Width="160" Height="40" Content="Reset password"
+                        Style="{StaticResource AddButton }"
+                        Command="{Binding CloseCommand}"
+                                CommandParameter="{Binding ElementName=wdAddEmployee}"
+                        HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 340 20"   >
+                </Button>
+                
+                <Button Width="100" Height="40" Background="#478C10" Content="Sửa"
                         Command="{Binding AddCommand}"
                                 CommandParameter="{Binding ElementName=wdEditEmployee}"
                         Foreground="White"
                         HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 212 20" >
-                    <Button.Clip>
-                        <RectangleGeometry Rect="0,0,89,36" RadiusX="10" RadiusY="10"/>
-                    </Button.Clip>
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Visibility" Value="Hidden"></Setter>
@@ -135,13 +139,10 @@
                     </Button.Style>
                 </Button>
 
-                <Button Width="89" Height="36" Background="#9D9999" Content="Hủy"
+                <Button Width="100" Height="40" Background="#9D9999" Content="Đóng"
                         Command="{Binding CloseCommand}"
                                 CommandParameter="{Binding ElementName=wdAddEmployee}"
                         HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 80 20"   >
-                    <Button.Clip>
-                        <RectangleGeometry Rect="0,0,89,36" RadiusX="10" RadiusY="10"/>
-                    </Button.Clip>
                 </Button>
             </Grid>
         </Grid>
