@@ -124,14 +124,14 @@
                                     <ListBoxItem Content="Đổi mật khẩu" >
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                <i:InvokeCommandAction Command="{Binding Path=EditCommand}"/>
+                                                <i:InvokeCommandAction Command="{Binding Path=ChangePasswordCommand}"/>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </ListBoxItem>
                                     <ListBoxItem Content="Đăng xuất" >
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                <i:InvokeCommandAction Command="{Binding Path=EditCommand}"/>
+                                                <i:InvokeCommandAction Command="{Binding Path=LogOutCommand}"/>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </ListBoxItem>
@@ -146,15 +146,16 @@
                 <Grid   x:Name="displayMain"
                             Grid.Row="1" >
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
                         <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition/>
                         <ColumnDefinition Width="0*"/>
-                        <ColumnDefinition Width="127*"/>
+                        <ColumnDefinition Width="243*"/>
+                        <ColumnDefinition Width="11*"/>
                     </Grid.ColumnDefinitions>
                     <ContentControl x:Name="contenDisplayMain" 
                                         Content="{Binding CurrentView}"
                                         Width="auto"
-                                        Height="auto" Grid.ColumnSpan="4" />
+                                        Height="auto" Grid.ColumnSpan="5" />
                 </Grid>
             </Grid>
             <!--Menu-->
@@ -231,7 +232,7 @@
                                          Foreground="White" Opacity="0.7" />
                             </Button>
                         </StackPanel>
-                      
+
                     </Grid>
 
                     <!--Button đóng mở menu-->

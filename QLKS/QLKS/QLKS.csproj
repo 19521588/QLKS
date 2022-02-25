@@ -186,6 +186,7 @@
     <Compile Include="ViewModel\BillDetailViewModel.cs" />
     <Compile Include="ViewModel\BillTemplateViewModel.cs" />
     <Compile Include="ViewModel\BillViewModel.cs" />
+    <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\EditInfoViewModel.cs" />
     <Compile Include="ViewModel\Icommand.cs" />
     <Compile Include="ViewModel\ReservationDetailViewModel.cs" />
@@ -242,6 +243,9 @@
     </Compile>
     <Compile Include="wd_AddService.xaml.cs">
       <DependentUpon>wd_AddService.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wd_ChangePassword.xaml.cs">
+      <DependentUpon>wd_ChangePassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="wd_EditCategoryRoom.xaml.cs">
       <DependentUpon>wd_EditCategoryRoom.xaml</DependentUpon>
@@ -415,6 +419,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="wd_AddService.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wd_ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
