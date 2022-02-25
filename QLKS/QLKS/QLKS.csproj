@@ -98,6 +98,7 @@
       <DependentUpon>EditInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\BillDetail.cs" />
+    <Compile Include="Model\DeleteModel.cs" />
     <Compile Include="Model\ListBill.cs" />
     <Compile Include="Model\ListBillInfo.cs" />
     <Compile Include="Model\ListRoom.cs" />
