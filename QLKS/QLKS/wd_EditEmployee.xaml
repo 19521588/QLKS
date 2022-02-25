@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QLKS"
         mc:Ignorable="d"
         Height="500" Width="750"
-        x:Name="wdAddEmployee"
+        x:Name="wdEditEmployee"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -118,12 +118,12 @@
                 <Button Width="160" Height="40" Content="Reset password"
                         Style="{StaticResource AddButton }"
                         Command="{Binding CloseCommand}"
-                                CommandParameter="{Binding ElementName=wdAddEmployee}"
+                                CommandParameter="{Binding ElementName=wdEditEmployee}"
                         HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 340 20"   >
                 </Button>
                 
                 <Button Width="100" Height="40" Background="#478C10" Content="Sửa"
-                        Command="{Binding AddCommand}"
+                        Command="{Binding EditCommand}"
                                 CommandParameter="{Binding ElementName=wdEditEmployee}"
                         Foreground="White"
                         HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 212 20" >
@@ -141,7 +141,7 @@
 
                 <Button Width="100" Height="40" Background="#9D9999" Content="Đóng"
                         Command="{Binding CloseCommand}"
-                                CommandParameter="{Binding ElementName=wdAddEmployee}"
+                                CommandParameter="{Binding ElementName=wdEditEmployee}"
                         HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 80 20"   >
                 </Button>
             </Grid>

@@ -59,6 +59,8 @@ namespace QLKS.ViewModel
         public ICommand ItemClickCommand { get; set; }
         public ICommand EditCommand { get; set; }
 
+        public ICommand ChangePasswordCommand { get; set; }
+
         public ICommand LogOutCommand { get; set; }
         public ICommand CloseSideBarCommand { get; set; }
      
@@ -99,6 +101,17 @@ namespace QLKS.ViewModel
                 wdEditEmployee.dtpBirth.SelectedDate = User.EMPLOYEE.BirthDay;
                 wdEditEmployee.cbSex.Text = User.EMPLOYEE.Sex.ToString();
                 wdEditEmployee.ShowDialog();
+
+            });
+
+            ChangePasswordCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
+            {
+
+                //ditInfo editInfoWd = new EditInfo(User);
+                //editInfoWd.ShowDialog();
+                wd_ChangePassword wd = new wd_ChangePassword(User);
+
+                wd.ShowDialog();
 
             });
 
