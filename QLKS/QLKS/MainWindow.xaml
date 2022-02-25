@@ -114,9 +114,27 @@
                             <!--Chưa có gì hết-->
                             <materialDesign:PopupBox Margin=" 0 0 40 0" HorizontalAlignment="Right">
                                 <ListBox>
-                                    <ListBoxItem Content="Hello World" />
-                                    <ListBoxItem Content="Nice Popup" />
-                                    <ListBoxItem Content="Information" />
+                                    <ListBoxItem Content="Thông tin cá nhân" >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                <i:InvokeCommandAction Command="{Binding Path=EditCommand}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ListBoxItem>
+                                    <ListBoxItem Content="Đổi mật khẩu" >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                <i:InvokeCommandAction Command="{Binding Path=EditCommand}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ListBoxItem>
+                                    <ListBoxItem Content="Đăng xuất" >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                <i:InvokeCommandAction Command="{Binding Path=EditCommand}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ListBoxItem>
                                 </ListBox>
                             </materialDesign:PopupBox>
                         </Grid>

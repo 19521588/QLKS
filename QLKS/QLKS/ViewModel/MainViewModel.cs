@@ -86,8 +86,19 @@ namespace QLKS.ViewModel
             EditCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
 
-                EditInfo editInfoWd = new EditInfo(User);
-                editInfoWd.ShowDialog();
+                //ditInfo editInfoWd = new EditInfo(User);
+                //editInfoWd.ShowDialog();
+                wd_EditEmployee wdEditEmployee = new wd_EditEmployee(User.EMPLOYEE);
+
+                wdEditEmployee.txbName.Text = User.EMPLOYEE.Name;
+                wdEditEmployee.txbCCCD.Text = User.EMPLOYEE.CCCD.ToString();
+                wdEditEmployee.txbPhone.Text = User.EMPLOYEE.Phone.ToString();
+                wdEditEmployee.txbAddress.Text = User.EMPLOYEE.Address.ToString();
+                wdEditEmployee.txbPosition.Text = User.EMPLOYEE.Position.ToString();
+                wdEditEmployee.txbSalary.Text = User.EMPLOYEE.Salary.ToString();
+                wdEditEmployee.dtpBirth.SelectedDate = User.EMPLOYEE.BirthDay;
+                wdEditEmployee.cbSex.Text = User.EMPLOYEE.Sex.ToString();
+                wdEditEmployee.ShowDialog();
 
             });
 
