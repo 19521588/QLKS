@@ -100,8 +100,11 @@ namespace QLKS.ViewModel
 
                 foreach (var item in _ListNew)
                 {
-                    if (uni.RemoveUnicode(item.Name).ToLower().Contains(uni.RemoveUnicode(p.txbCategoryRoomSearch.Text)) || item.Beds == Int32.Parse(p.txbBedSearch.Text))
+                    if ((string.IsNullOrEmpty(p.txbCategoryRoomSearch.Text) || (!string.IsNullOrEmpty(p.txbCategoryRoomSearch.Text) && uni.RemoveUnicode(item.Name).ToLower().Contains(uni.RemoveUnicode(p.txbCategoryRoomSearch.Text).ToLower())))
+                        && (string.IsNullOrEmpty(p.txbBedSearch.Text) || (!string.IsNullOrEmpty(p.txbBedSearch.Text) && item.Beds == Int32.Parse(p.txbBedSearch.Text))))
+                    {
                         _ListTemp.Add(item);
+                    }
                 }
                 ListCategory = _ListTemp;
             });

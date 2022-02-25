@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLKS"
         mc:Ignorable="d"
+        x:Name="wdEditCustomer"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"        
         TextElement.FontFamily="Roboto"
         AllowsTransparency="True"         
@@ -191,8 +192,9 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
-                        <Button Content="Thêm"
+                        <Button Content="Sửa"
                                 Command="{Binding EditCommand}"
+                                CommandParameter="{Binding ElementName=wdEditCustomer}"
                                 FontWeight="Bold" Foreground="White"   Width="100" Height="40" Margin=" 4 4 20 0" Background="#478C10" >
                             <Button.Style>
                                 <Style TargetType="Button">
@@ -212,6 +214,7 @@
 
                         <Button x:Name="btnHuy" 
                                 Command="{Binding CloseCommand}"
+                                CommandParameter="{Binding ElementName=wdEditCustomer}"
                                     Content="Hủy bỏ" 
                                     Width="100" Height="40"                                    
                                     Margin=" 14 4 0 0" 
