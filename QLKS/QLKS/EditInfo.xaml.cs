@@ -27,10 +27,10 @@ namespace QLKS
             InitializeComponent();
             
         }
-        public EditInfo(USER User)
+        public EditInfo(EMPLOYEE e)
         {
             InitializeComponent();
-            this.DataContext = viewModel = new EditInfoViewModel(User);
+            this.DataContext = viewModel = new EditInfoViewModel(e);
         }
     }
 }

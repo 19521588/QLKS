@@ -41,11 +41,15 @@ namespace QLKS.ViewModel
             },
             (p) =>
             {
-                var in4 = DataProvider.Ins.DB.CONVINIENTs.Where(y => y.IdConvinient == Id).SingleOrDefault();
-                in4.Name = Name;
-                DataProvider.Ins.DB.SaveChanges();
+                if (MessageBox.Show("Bạn có chắc chắn muốn sửa tiện ích này", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                {
+                    var in4 = DataProvider.Ins.DB.CONVINIENTs.Where(y => y.IdConvinient == Id).SingleOrDefault();
+                    in4.Name = Name;
+                    DataProvider.Ins.DB.SaveChanges();
 
-                p.Close();
+                    p.Close();
+                }
+               
             }
             );
         }

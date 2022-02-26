@@ -33,15 +33,19 @@ namespace QLKS.ViewModel
             },
             (p) =>
             {
-               
-                var new_convenient = new CONVINIENT()
+                if (MessageBox.Show("Bạn có chắc chắn muốn thêm tiện ích này", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                 {
-                    Name = p.txtTenTN.Text,
-                   
-                };
-                DataProvider.Ins.DB.CONVINIENTs.Add(new_convenient);
-                DataProvider.Ins.DB.SaveChanges();
-                p.Close();
+                    var new_convenient = new CONVINIENT()
+                    {
+                        Name = p.txtTenTN.Text,
+
+                    };
+                    DataProvider.Ins.DB.CONVINIENTs.Add(new_convenient);
+                    DataProvider.Ins.DB.SaveChanges();
+                    p.Close();
+                }
+
+                
             });
         }
     }

@@ -53,7 +53,7 @@
                             VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                             Margin="160 20 180 12"
-                            Command="{Binding RefreshCommand}"
+                            Command="{Binding RefeshCommand}"
                         CommandParameter="{Binding ElementName=wdService}"
                             >
                 </Button>
@@ -63,7 +63,7 @@
                             VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                             Margin="300 20 20 12"
-                            Command="{Binding OpenEditCommand}"
+                            Command="{Binding OpenEditServiceWindowCommand}"
                         CommandParameter="{Binding ElementName=wdService}"
                             >
                 </Button>
@@ -85,7 +85,7 @@
                         FontSize="20"
                         HorizontalAlignment="Right"
                             Margin="20 20 15 12"
-                            Command="{Binding OpenAddCommand}"
+                            Command="{Binding OpenAddWindowCommand}"
                             >
                 </Button>
 

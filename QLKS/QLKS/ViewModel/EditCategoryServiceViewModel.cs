@@ -45,11 +45,15 @@ namespace QLKS.ViewModel
             },
             (p) =>
             {
-                var in4 = DataProvider.Ins.DB.CATEGORY_SERVICE.Where(y => y.IdCategoryService == Id).SingleOrDefault();
-                in4.Name = Name;
-                DataProvider.Ins.DB.SaveChanges();
+                if (MessageBox.Show("Bạn có chắc chắn muốn sửa loại dịch vụ này", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                {
+                    var in4 = DataProvider.Ins.DB.CATEGORY_SERVICE.Where(y => y.IdCategoryService == Id).SingleOrDefault();
+                    in4.Name = Name;
+                    DataProvider.Ins.DB.SaveChanges();
 
-                p.Close();
+                    p.Close();
+                }
+                
             }
             );
         }

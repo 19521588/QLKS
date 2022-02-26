@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QLKS.ViewModel
@@ -24,6 +25,7 @@ namespace QLKS.ViewModel
         public ICommand OpenEditWindowCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand RefeshCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
 
         private DETAIL_CONVINIENT _SelectedItem { get; set; }
         public DETAIL_CONVINIENT SelectedItem
@@ -105,6 +107,26 @@ namespace QLKS.ViewModel
                 p.txbTenDV.Text = null;
                 p.cbCategoryService.Text = null;
                 Load();
+            });
+
+            //Xóa
+            DeleteCommand = new RelayCommand<uc_QuanLyChiTietTienNghi>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            },
+            (p) =>
+            {
+                if (MessageBox.Show("Bạn có chắc chắn muốn xóa chi tiết tiện nghi này", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                {
+                    var in4 = DataProvider.Ins.DB.DETAIL_CONVINIENT.Where(y => y.IdConvinientDetail == SelectedItem.IdConvinientDetail).SingleOrDefault();
+
+                    DataProvider.Ins.DB.DETAIL_CONVINIENT.Remove(in4);
+                    DataProvider.Ins.DB.SaveChanges();
+                    Load();
+
+                }
             });
         }
 

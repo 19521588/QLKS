@@ -116,6 +116,7 @@
                     <Button Content="Thêm" Name="btnThem" 
                             Width="100" Height="40"
                             Margin=" 4 4 20 0" 
+                            BorderBrush="Transparent"
                             Background="#478C10"
                             Command="{Binding AddCommand}"
                             CommandParameter="{Binding ElementName=wdAddConvenientDetail}">
@@ -131,6 +132,7 @@
                                 Width="100" Height="40"                                    
                                 Content="Hủy bỏ" 
                                 Margin=" 14 4 0 0" 
+                                BorderBrush="Transparent"
                                 Background="#9D9999" 
                                 Command="{Binding CloseAddWindowCommand}"
                                 CommandParameter="{Binding ElementName=wdAddConvenientDetail}">

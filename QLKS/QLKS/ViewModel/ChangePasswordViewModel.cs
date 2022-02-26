@@ -37,24 +37,26 @@ namespace QLKS.ViewModel
             },
             (p) =>
             {
-                HashConvert hash = new HashConvert();
-                //string passEncode = hash.GetHash(Password);
-                if (p.txbNewPass.Password != p.txbConfirmPass.Password)
+                if (MessageBox.Show("Bạn có chắc chắn muốn thay đổi mật khẩu", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                 {
-                    MessageBox.Show("Mật khẩu mới không khớp!");
-                }    
-                else if (user.Password != hash.GetHash(p.txbCurentPass.Password))
-                {
-                    MessageBox.Show("Mật khẩu hiện tại không đúng!");
-                }
-                else
-                {
-                    var Temp = DataProvider.Ins.DB.USERS.Where(x => x.Users_Id == user.Users_Id).SingleOrDefault();
-                    Temp.Password = hash.GetHash(p.txbNewPass.Password);
-                    DataProvider.Ins.DB.SaveChanges();
-                    MessageBox.Show("Thành công");
-                    p.Close();
-                }
+                    HashConvert hash = new HashConvert();                   
+                    if (p.txbNewPass.Password != p.txbConfirmPass.Password)
+                    {
+                        MessageBox.Show("Mật khẩu mới không khớp!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                    else if (user.Password != hash.GetHash(p.txbCurentPass.Password))
+                    {
+                        MessageBox.Show("Mật khẩu hiện tại không đúng!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                    else
+                    {
+                        var Temp = DataProvider.Ins.DB.USERS.Where(x => x.Users_Id == user.Users_Id).SingleOrDefault();
+                        Temp.Password = hash.GetHash(p.txbNewPass.Password);
+                        DataProvider.Ins.DB.SaveChanges();
+                        MessageBox.Show("Thành công","Thông báo",MessageBoxButton.OK,MessageBoxImage.Information);
+                        p.Close();
+                    }
+                }                
             });
         }
     }

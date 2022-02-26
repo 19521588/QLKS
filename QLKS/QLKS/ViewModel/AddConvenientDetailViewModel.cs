@@ -44,18 +44,21 @@ namespace QLKS.ViewModel
             },
             (p) =>
             {
-
-                var new_convenient_detail = new DETAIL_CONVINIENT()
+                if (MessageBox.Show("Bạn có chắc chắn muốn thay đổi mật khẩu", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                 {
-                    IdRoom = DataProvider.Ins.DB.ROOMs.Where(x => x.Name == p.cmbSoPhong.Text).SingleOrDefault().IdRoom,
-                    IdConvinient = DataProvider.Ins.DB.CONVINIENTs.Where(x => x.Name == p.cmbTienNghi.Text).SingleOrDefault().IdConvinient,
-                    Amount = Int32.Parse(p.txtSoLuong.Text),
-                   
+                    var new_convenient_detail = new DETAIL_CONVINIENT()
+                    {
+                        IdRoom = DataProvider.Ins.DB.ROOMs.Where(x => x.Name == p.cmbSoPhong.Text).SingleOrDefault().IdRoom,
+                        IdConvinient = DataProvider.Ins.DB.CONVINIENTs.Where(x => x.Name == p.cmbTienNghi.Text).SingleOrDefault().IdConvinient,
+                        Amount = Int32.Parse(p.txtSoLuong.Text),
 
-                };
-                DataProvider.Ins.DB.DETAIL_CONVINIENT.Add(new_convenient_detail);
-                DataProvider.Ins.DB.SaveChanges();
-                p.Close();
+
+                    };
+                    DataProvider.Ins.DB.DETAIL_CONVINIENT.Add(new_convenient_detail);
+                    DataProvider.Ins.DB.SaveChanges();
+                    p.Close();
+                }
+                
             });
         }
     }

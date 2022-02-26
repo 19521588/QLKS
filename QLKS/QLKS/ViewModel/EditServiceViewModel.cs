@@ -59,13 +59,17 @@ namespace QLKS.ViewModel
             }, 
             (p) => 
             {
-                var in4 = DataProvider.Ins.DB.SERVICEs.Where(y => y.IdService == Id).SingleOrDefault();
-                in4.Name = Name;
-                in4.Price = Price;
-                in4.IdCategoryService = DataProvider.Ins.DB.CATEGORY_SERVICE.Where(z => z.Name == CategoryName).SingleOrDefault().IdCategoryService;
-                DataProvider.Ins.DB.SaveChanges();
+                if (MessageBox.Show("Bạn có chắc chắn muốn cập nhật dịch vụ này", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                {
+                    var in4 = DataProvider.Ins.DB.SERVICEs.Where(y => y.IdService == Id).SingleOrDefault();
+                    in4.Name = Name;
+                    in4.Price = Price;
+                    in4.IdCategoryService = DataProvider.Ins.DB.CATEGORY_SERVICE.Where(z => z.Name == CategoryName).SingleOrDefault().IdCategoryService;
+                    DataProvider.Ins.DB.SaveChanges();
 
-                p.Close();
+                    p.Close();
+                }
+               
             }
             );
         }

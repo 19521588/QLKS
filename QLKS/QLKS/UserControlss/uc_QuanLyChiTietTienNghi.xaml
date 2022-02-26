@@ -40,6 +40,7 @@
                         HorizontalAlignment="Left"
                             Margin="20 20 20 12"
                             Command="{Binding SearchCommand}"
+                        CommandParameter="{Binding ElementName=wdConvenientDetail}"
                             >
                 </Button>
                 <Button Content="Làm mới"
@@ -47,7 +48,8 @@
                             VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                             Margin="160 20 180 12"
-                            Command="{Binding RefreshCommand}"
+                            Command="{Binding RefeshCommand}"
+                        CommandParameter="{Binding ElementName=wdConvenientDetail}"
                             >
                 </Button>
 
@@ -56,7 +58,8 @@
                             VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                             Margin="300 20 20 12"
-                            Command="{Binding OpenEditCommand}"
+                            Command="{Binding OpenEditWindowCommand}"
+                        CommandParameter="{Binding ElementName=wdConvenientDetail}"
                             >
                 </Button>
                 <Button Content="Xóa"
@@ -65,6 +68,7 @@
                         HorizontalAlignment="Left"
                             Margin="440 20 180 12"
                             Command="{Binding DeleteCommand}"
+                        CommandParameter="{Binding ElementName=wdConvenientDetail}"
                             >
                 </Button>
 
@@ -76,7 +80,8 @@
                         FontSize="20"
                         HorizontalAlignment="Right"
                             Margin="20 20 15 12"
-                            Command="{Binding OpenAddCommand}"
+                            Command="{Binding OpenAddWindowCommand}"
+                        CommandParameter="{Binding ElementName=wdConvenientDetail}"
                             >
                 </Button>
 
@@ -93,7 +98,7 @@
                     <ComboBox  
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                     x:Name="cbRoom"
-                    ItemsSource="{Binding ListRoom}"
+                    ItemsSource="{Binding ListConvenientDetail}"
                     DisplayMemberPath="Name"
                     
                     materialDesign:HintAssist.Hint="Tên phòng"
@@ -183,7 +188,7 @@
                 </DataGrid.ColumnHeaderStyle>
 
                 <DataGrid.Columns>
-                    <materialDesign:DataGridTextColumn Width="200" Header="Mã chi tiết tiện nghi" Binding="{Binding IdService,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Mã chi tiết tiện nghi" Binding="{Binding IdConvinientDetail,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="400" Header="Tên Phòng" Binding="{Binding ROOM.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="200" Header="Tiện nghi" Binding="{Binding CONVINIENT.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="200" Header="Số lượng" Binding="{Binding Amount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>

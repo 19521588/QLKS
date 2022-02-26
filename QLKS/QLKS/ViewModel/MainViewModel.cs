@@ -88,20 +88,14 @@ namespace QLKS.ViewModel
             EditCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
 
-                //ditInfo editInfoWd = new EditInfo(User);
-                //editInfoWd.ShowDialog();
-                wd_EditEmployee wdEditEmployee = new wd_EditEmployee(User.EMPLOYEE);
-
-                wdEditEmployee.txbName.Text = User.EMPLOYEE.Name;
-                wdEditEmployee.txbCCCD.Text = User.EMPLOYEE.CCCD.ToString();
-                wdEditEmployee.txbPhone.Text = User.EMPLOYEE.Phone.ToString();
-                wdEditEmployee.txbAddress.Text = User.EMPLOYEE.Address.ToString();
-                wdEditEmployee.txbPosition.Text = User.EMPLOYEE.Position.ToString();
-                wdEditEmployee.txbSalary.Text = User.EMPLOYEE.Salary.ToString();
-                wdEditEmployee.dtpBirth.SelectedDate = User.EMPLOYEE.BirthDay;
-                wdEditEmployee.cbSex.Text = User.EMPLOYEE.Sex.ToString();
-                wdEditEmployee.ShowDialog();
-
+                EditInfo editInfoWd = new EditInfo(User.EMPLOYEE);
+                editInfoWd.txbName.Text = User.EMPLOYEE.Name;
+                editInfoWd.txbCCCD.Text = User.EMPLOYEE.CCCD.ToString();
+                editInfoWd.txbPhone.Text = User.EMPLOYEE.Phone.ToString();
+                editInfoWd.txbAddress.Text = User.EMPLOYEE.Address.ToString();
+                editInfoWd.dtpBirth.SelectedDate = User.EMPLOYEE.BirthDay;
+                editInfoWd.cbSex.Text = User.EMPLOYEE.Sex;
+                editInfoWd.ShowDialog();
             });
 
             ChangePasswordCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>

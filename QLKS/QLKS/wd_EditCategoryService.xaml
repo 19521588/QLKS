@@ -33,7 +33,7 @@
                   HorizontalAlignment="Center"                                         
                   Background="#F2F1F1">
             <Grid.Clip>
-                <RectangleGeometry Rect="0,0,300,200" RadiusX="10" RadiusY="10"/>
+                <RectangleGeometry Rect="0,0,300,100" RadiusX="10" RadiusY="10"/>
             </Grid.Clip>
 
             <Grid Width="450"  VerticalAlignment="Center" HorizontalAlignment="Center" >

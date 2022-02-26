@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QLKS.ViewModel
@@ -23,6 +24,7 @@ namespace QLKS.ViewModel
         public ICommand OpenEditServiceWindowCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand RefeshCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
 
         private SERVICE _SelectedItem { get; set; }
         public SERVICE SelectedItem
@@ -107,6 +109,25 @@ namespace QLKS.ViewModel
                 p.txbTenDV.Text = null;
                 p.cbCategoryService.Text = null;
                 Load();
+            });
+
+            //Xóa
+            DeleteCommand = new RelayCommand<uc_QuanLyDichVu>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            },
+            (p) =>
+            {
+                if (MessageBox.Show("Bạn có chắc chắn muốn xóa dịch vụ này", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                {
+                    var in4 = DataProvider.Ins.DB.SERVICEs.Where(y => y.IdService == SelectedItem.IdService).SingleOrDefault();                  
+                    DataProvider.Ins.DB.SERVICEs.Remove(in4);
+                    DataProvider.Ins.DB.SaveChanges();
+                    Load();
+                    
+                }
             });
         }
 

@@ -77,6 +77,7 @@
 
                     <Button Content="Sửa" Name="btnSua" Foreground="White"   Width="100" Height="40" Margin=" 4 4 20 0" Background="#478C10" 
                             Command="{Binding EditConvenientCommand}"
+                            BorderBrush="Transparent"
                             CommandParameter="{Binding ElementName=wdEditConvenient}">
                         
                     </Button>
@@ -88,6 +89,7 @@
                             Content="Hủy bỏ" 
                             Margin=" 14 4 0 0"                                             
                             Background="#9D9999"  
+                            BorderBrush="Transparent"
                             Command="{Binding CloseEditWindowCommand}"
                             CommandParameter="{Binding ElementName=wdEditConvenient}">
                         

@@ -40,16 +40,20 @@ namespace QLKS.ViewModel
             }, 
             (p) => 
             {
-                int id_category = DataProvider.Ins.DB.CATEGORY_SERVICE.Where(x => x.Name == p.cmbMaLoai.Text).SingleOrDefault().IdCategoryService;
-                var new_service = new SERVICE()
+                if (MessageBox.Show("Bạn có chắc chắn muốn thêm dịch vụ này", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                 {
-                    Name = p.txtTenDichVu.Text,
-                    IdCategoryService = id_category,
-                    Price = Int32.Parse(p.txtGia.Text)
-                };
-                DataProvider.Ins.DB.SERVICEs.Add(new_service);
-                DataProvider.Ins.DB.SaveChanges();
-                p.Close();
+                    int id_category = DataProvider.Ins.DB.CATEGORY_SERVICE.Where(x => x.Name == p.cmbMaLoai.Text).SingleOrDefault().IdCategoryService;
+                    var new_service = new SERVICE()
+                    {
+                        Name = p.txtTenDichVu.Text,
+                        IdCategoryService = id_category,
+                        Price = Int32.Parse(p.txtGia.Text)
+                    };
+                    DataProvider.Ins.DB.SERVICEs.Add(new_service);
+                    DataProvider.Ins.DB.SaveChanges();
+                    p.Close();
+                }
+                
             });
 
         }

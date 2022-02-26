@@ -48,7 +48,7 @@
                             VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                             Margin="160 20 180 12"
-                            Command="{Binding RefreshCommand}"
+                            Command="{Binding RefeshCommand}"
                         CommandParameter="{Binding ElementName= wdCategoryService}"
                             >
                 </Button>
@@ -58,7 +58,7 @@
                             VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                             Margin="300 20 20 12"
-                            Command="{Binding OpenEditCommand}"
+                            Command="{Binding OpenEditCategoryServiceWindowCommand}"
                         CommandParameter="{Binding ElementName= wdCategoryService}"
                             >
                 </Button>
@@ -72,15 +72,15 @@
                             >
                 </Button>
 
-                <Button Content="Thêm phòng"
+                <Button Content="Thêm loại dịch vụ"
                             Style="{StaticResource AddButton}"
                             VerticalAlignment="Top"
                         Height="60"
-                        Width="180"
+                        Width="200"
                         FontSize="20"
                         HorizontalAlignment="Right"
                             Margin="20 20 15 12"
-                            Command="{Binding OpenAddCommand}"
+                            Command="{Binding OpenAddWindowCommand}"
                             >
                 </Button>
 
@@ -97,7 +97,7 @@
                     <TextBox
                     x:Name="txbTenLoaiDV"
                         Width="180"
-                      materialDesign:HintAssist.Hint="Tên phòng"
+                      materialDesign:HintAssist.Hint="Tên loại dịch vụ"
                       Style="{StaticResource txbSearch}"
                       Text="{Binding IdHD,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                       VerticalAlignment="Center">
@@ -125,7 +125,7 @@
             Margin="15 0 10 15"
             Grid.Row="1">
             <DataGrid
-                        ItemsSource="{Binding ListService}" 
+                        ItemsSource="{Binding ListCategoryService}" 
                       SelectedItem="{Binding SelectedItem}"
                       SelectionMode="Extended"
                       IsReadOnly="True"

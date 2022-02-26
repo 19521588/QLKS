@@ -33,14 +33,18 @@ namespace QLKS.ViewModel
             },
             (p) =>
             {
-                
-                var new_category_service = new CATEGORY_SERVICE()
+                if (MessageBox.Show("Bạn có chắc chắn muốn thêm loại dịch vụ này", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                 {
-                    Name = p.txtTenLoaiDV.Text,
-                };
-                DataProvider.Ins.DB.CATEGORY_SERVICE.Add(new_category_service);
-                DataProvider.Ins.DB.SaveChanges();
-                p.Close();
+                    var new_category_service = new CATEGORY_SERVICE()
+                    {
+                        Name = p.txtTenLoaiDV.Text,
+                    };
+                    DataProvider.Ins.DB.CATEGORY_SERVICE.Add(new_category_service);
+                    DataProvider.Ins.DB.SaveChanges();
+                    p.Close();
+                }
+
+                
             });
         }
     }
