@@ -14,6 +14,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="IdRental" Type="int" Nullable="false" />
           <Property Name="Date_Bill" Type="date" />
+          <Property Name="CategoryRoom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="BILLINFO">
           <Key>
@@ -140,6 +141,26 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Clean" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdCategoryRoom" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SALES_REPORT">
+          <Key>
+            <PropertyRef Name="SalesReport_Id" />
+          </Key>
+          <Property Name="SalesReport_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalesReport_Revenue" Type="int" Nullable="false" />
+          <Property Name="SalesReport_UserName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="SalesReport_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SALES_REPORT_DETAIL">
+          <Key>
+            <PropertyRef Name="IdSalesReportDetail" />
+          </Key>
+          <Property Name="IdSalesReportDetail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdSalesReport" Type="int" Nullable="false" />
+          <Property Name="CategoryRoom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TotalMoney" Type="int" />
+          <Property Name="Rate" Type="float" />
         </EntityType>
         <EntityType Name="SERVICE">
           <Key>
@@ -352,6 +373,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SALESREPORT_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="SALES_REPORT" Type="Self.SALES_REPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="Users_Id" />
+            </Principal>
+            <Dependent Role="SALES_REPORT">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SALESREPORTDETAIL_SALESREPORT">
+          <End Role="SALES_REPORT" Type="Self.SALES_REPORT" Multiplicity="1" />
+          <End Role="SALES_REPORT_DETAIL" Type="Self.SALES_REPORT_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SALES_REPORT">
+              <PropertyRef Name="SalesReport_Id" />
+            </Principal>
+            <Dependent Role="SALES_REPORT_DETAIL">
+              <PropertyRef Name="IdSalesReport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="QLKSModelStoreContainer">
           <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BILLINFO" EntityType="Self.BILLINFO" Schema="dbo" store:Type="Tables" />
@@ -367,6 +412,8 @@
           <EntitySet Name="RESERVATION" EntityType="Self.RESERVATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RESERVATION_DETAIL" EntityType="Self.RESERVATION_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROOM" EntityType="Self.ROOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SALES_REPORT" EntityType="Self.SALES_REPORT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SALES_REPORT_DETAIL" EntityType="Self.SALES_REPORT_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SERVICE" EntityType="Self.SERVICE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Bill__IdRental__412EB0B6" Association="Self.FK__Bill__IdRental__412EB0B6">
@@ -433,6 +480,14 @@
             <End Role="CATEGORY_USER" EntitySet="CATEGORY_USER" />
             <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
+          <AssociationSet Name="FK_SALESREPORT_USERS" Association="Self.FK_SALESREPORT_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="SALES_REPORT" EntitySet="SALES_REPORT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SALESREPORTDETAIL_SALESREPORT" Association="Self.FK_SALESREPORTDETAIL_SALESREPORT">
+            <End Role="SALES_REPORT" EntitySet="SALES_REPORT" />
+            <End Role="SALES_REPORT_DETAIL" EntitySet="SALES_REPORT_DETAIL" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -453,6 +508,8 @@
           <EntitySet Name="RESERVATIONs" EntityType="QLKSModel.RESERVATION" />
           <EntitySet Name="RESERVATION_DETAIL" EntityType="QLKSModel.RESERVATION_DETAIL" />
           <EntitySet Name="ROOMs" EntityType="QLKSModel.ROOM" />
+          <EntitySet Name="SALES_REPORT" EntityType="QLKSModel.SALES_REPORT" />
+          <EntitySet Name="SALES_REPORT_DETAIL" EntityType="QLKSModel.SALES_REPORT_DETAIL" />
           <EntitySet Name="SERVICEs" EntityType="QLKSModel.SERVICE" />
           <EntitySet Name="USERS" EntityType="QLKSModel.USER" />
           <AssociationSet Name="FK__Bill__IdRental__412EB0B6" Association="QLKSModel.FK__Bill__IdRental__412EB0B6">
@@ -519,6 +576,14 @@
             <End Role="ROOM" EntitySet="ROOMs" />
             <End Role="RESERVATION_DETAIL" EntitySet="RESERVATION_DETAIL" />
           </AssociationSet>
+          <AssociationSet Name="FK_SALESREPORT_USERS" Association="QLKSModel.FK_SALESREPORT_USERS">
+            <End Role="USER" EntitySet="USERS" />
+            <End Role="SALES_REPORT" EntitySet="SALES_REPORT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SALESREPORTDETAIL_SALESREPORT" Association="QLKSModel.FK_SALESREPORTDETAIL_SALESREPORT">
+            <End Role="SALES_REPORT" EntitySet="SALES_REPORT" />
+            <End Role="SALES_REPORT_DETAIL" EntitySet="SALES_REPORT_DETAIL" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Bill">
           <Key>
@@ -529,6 +594,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IdRental" Type="Int32" Nullable="false" />
           <Property Name="Date_Bill" Type="DateTime" Precision="0" />
+          <Property Name="CategoryRoom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="RENTAL" Relationship="QLKSModel.FK__Bill__IdRental__412EB0B6" FromRole="Bill" ToRole="RENTAL" />
           <NavigationProperty Name="BILLINFOes" Relationship="QLKSModel.FK__BILLINFO__IdBill__4222D4EF" FromRole="Bill" ToRole="BILLINFO" />
         </EntityType>
@@ -684,6 +750,29 @@
           <NavigationProperty Name="RENTALs" Relationship="QLKSModel.FK__RENTAL__IdRoom__46E78A0C" FromRole="ROOM" ToRole="RENTAL" />
           <NavigationProperty Name="RESERVATION_DETAIL" Relationship="QLKSModel.FK__RESERVATI__IdRoo__4BAC3F29" FromRole="ROOM" ToRole="RESERVATION_DETAIL" />
         </EntityType>
+        <EntityType Name="SALES_REPORT">
+          <Key>
+            <PropertyRef Name="SalesReport_Id" />
+          </Key>
+          <Property Name="SalesReport_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalesReport_Revenue" Type="Int32" Nullable="false" />
+          <Property Name="SalesReport_UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="SalesReport_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="USER" Relationship="QLKSModel.FK_SALESREPORT_USERS" FromRole="SALES_REPORT" ToRole="USER" />
+          <NavigationProperty Name="SALES_REPORT_DETAIL" Relationship="QLKSModel.FK_SALESREPORTDETAIL_SALESREPORT" FromRole="SALES_REPORT" ToRole="SALES_REPORT_DETAIL" />
+        </EntityType>
+        <EntityType Name="SALES_REPORT_DETAIL">
+          <Key>
+            <PropertyRef Name="IdSalesReportDetail" />
+          </Key>
+          <Property Name="IdSalesReportDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdSalesReport" Type="Int32" Nullable="false" />
+          <Property Name="CategoryRoom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalMoney" Type="Int32" />
+          <Property Name="Rate" Type="Double" />
+          <NavigationProperty Name="SALES_REPORT" Relationship="QLKSModel.FK_SALESREPORTDETAIL_SALESREPORT" FromRole="SALES_REPORT_DETAIL" ToRole="SALES_REPORT" />
+        </EntityType>
         <EntityType Name="SERVICE">
           <Key>
             <PropertyRef Name="IdService" />
@@ -706,6 +795,7 @@
           <Property Name="Type" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CATEGORY_USER" Relationship="QLKSModel.FK__USERS__Type__4F7CD00D" FromRole="USER" ToRole="CATEGORY_USER" />
           <NavigationProperty Name="EMPLOYEE" Relationship="QLKSModel.FK__USERS__IdEmploye__4E88ABD4" FromRole="USER" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="SALES_REPORT" Relationship="QLKSModel.FK_SALESREPORT_USERS" FromRole="USER" ToRole="SALES_REPORT" />
         </EntityType>
         <Association Name="FK__Bill__IdRental__412EB0B6">
           <End Type="QLKSModel.RENTAL" Role="RENTAL" Multiplicity="1" />
@@ -899,6 +989,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SALESREPORT_USERS">
+          <End Type="QLKSModel.USER" Role="USER" Multiplicity="1" />
+          <End Type="QLKSModel.SALES_REPORT" Role="SALES_REPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="Users_Id" />
+            </Principal>
+            <Dependent Role="SALES_REPORT">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SALESREPORTDETAIL_SALESREPORT">
+          <End Type="QLKSModel.SALES_REPORT" Role="SALES_REPORT" Multiplicity="1" />
+          <End Type="QLKSModel.SALES_REPORT_DETAIL" Role="SALES_REPORT_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SALES_REPORT">
+              <PropertyRef Name="SalesReport_Id" />
+            </Principal>
+            <Dependent Role="SALES_REPORT_DETAIL">
+              <PropertyRef Name="IdSalesReport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -908,6 +1022,7 @@
           <EntitySetMapping Name="Bills">
             <EntityTypeMapping TypeName="QLKSModel.Bill">
               <MappingFragment StoreEntitySet="Bill">
+                <ScalarProperty Name="CategoryRoom" ColumnName="CategoryRoom" />
                 <ScalarProperty Name="Date_Bill" ColumnName="Date_Bill" />
                 <ScalarProperty Name="IdRental" ColumnName="IdRental" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1052,6 +1167,28 @@
                 <ScalarProperty Name="Clean" ColumnName="Clean" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IdRoom" ColumnName="IdRoom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SALES_REPORT">
+            <EntityTypeMapping TypeName="QLKSModel.SALES_REPORT">
+              <MappingFragment StoreEntitySet="SALES_REPORT">
+                <ScalarProperty Name="SalesReport_Date" ColumnName="SalesReport_Date" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="SalesReport_UserName" ColumnName="SalesReport_UserName" />
+                <ScalarProperty Name="SalesReport_Revenue" ColumnName="SalesReport_Revenue" />
+                <ScalarProperty Name="SalesReport_Id" ColumnName="SalesReport_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SALES_REPORT_DETAIL">
+            <EntityTypeMapping TypeName="QLKSModel.SALES_REPORT_DETAIL">
+              <MappingFragment StoreEntitySet="SALES_REPORT_DETAIL">
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
+                <ScalarProperty Name="CategoryRoom" ColumnName="CategoryRoom" />
+                <ScalarProperty Name="IdSalesReport" ColumnName="IdSalesReport" />
+                <ScalarProperty Name="IdSalesReportDetail" ColumnName="IdSalesReportDetail" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

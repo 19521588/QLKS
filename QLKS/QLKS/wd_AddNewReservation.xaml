@@ -21,6 +21,16 @@
         AllowsTransparency="True" 
         WindowStartupLocation="CenterScreen"
         >
+    <i:Interaction.Triggers>
+       
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"
+                                   CommandParameter="{Binding ElementName=wdAddReservation}"
+                                   >
+
+            </i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <!--Bo góc-->
     <Window.Clip>
         <RectangleGeometry Rect="0,0,995,550" RadiusX="10" RadiusY="10">

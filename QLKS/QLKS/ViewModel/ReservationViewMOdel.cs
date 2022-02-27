@@ -49,7 +49,7 @@ namespace QLKS.ViewModel
             OpenAddCommand = new RelayCommand<MainWindow>((p) => true, (p) =>
             {
 
-                wd_AddNewReservation wdAddReservation = new wd_AddNewReservation();
+                wd_AddNewReservation wdAddReservation = new wd_AddNewReservation(true);
 
                 //wdAddRooms.txbName.Text = "";
                 wdAddReservation.ShowDialog();

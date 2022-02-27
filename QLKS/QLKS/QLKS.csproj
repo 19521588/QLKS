@@ -61,9 +61,22 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=19.4460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Compression.Base.19.4.0.53\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=19.4460.0.53, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.19.4.0.53\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.XlsIO.Base, Version=19.4460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.XlsIO.Wpf.19.4.0.53\lib\net46\Syncfusion.XlsIO.Base.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.6.0.0\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -102,10 +115,21 @@
     <Compile Include="Model\ListBill.cs" />
     <Compile Include="Model\ListBillInfo.cs" />
     <Compile Include="Model\ListRoom.cs" />
+    <Compile Include="Model\ListSales.cs" />
     <Compile Include="Model\ListService.cs" />
+    <Compile Include="Model\ReportTemplate.cs" />
     <Compile Include="Model\ReservationItem.cs" />
+    <Compile Include="Model\SALES_REPORT.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SALES_REPORT_DETAIL.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\SelectService.cs" />
     <Compile Include="Model\ServiceCt.cs" />
+    <Compile Include="ReportWd.xaml.cs">
+      <DependentUpon>ReportWd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RoomDetail.xaml.cs">
       <DependentUpon>RoomDetail.xaml</DependentUpon>
     </Compile>
@@ -121,6 +145,9 @@
     </Compile>
     <Compile Include="Model\DETAIL_CONVINIENT.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Template\ReportTemplate.xaml.cs">
+      <DependentUpon>ReportTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlss\ControlBar.xaml.cs">
       <DependentUpon>ControlBar.xaml</DependentUpon>
@@ -189,6 +216,8 @@
     <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\EditInfoViewModel.cs" />
     <Compile Include="ViewModel\Icommand.cs" />
+    <Compile Include="ViewModel\ReportTemplateViewModel.cs" />
+    <Compile Include="ViewModel\ReportViewModel.cs" />
     <Compile Include="ViewModel\ReservationDetailViewModel.cs" />
     <Compile Include="ViewModel\RoomDetailViewModel.cs" />
     <Compile Include="ViewModel\ControlBar2ViewModel.cs" />
@@ -302,6 +331,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ReportWd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ResourceXAML\ButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -323,6 +356,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Template\BillTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Template\ReportTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -210,6 +210,16 @@
                             Command="{Binding DetailCommand}"
                             CommandParameter="{Binding ElementName=BillWd}">
                     </Button>
+                    <Button
+                        Margin="20 5 0 0"
+                        IsEnabled="{Binding isReport}"        
+                        Style="{StaticResource MainButton}"
+                        Width="120"
+                        Height="43"
+                        Content="Báo cáo"
+                        Command="{Binding ReportCommand }"
+                        CommandParameter="{Binding ElementName=BillWd}"/>
+    
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="0 20 0 0">

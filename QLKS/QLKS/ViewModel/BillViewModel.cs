@@ -26,7 +26,7 @@ namespace QLKS.ViewModel
 
         private CATEGORY_ROOM _SelectedCategory { get; set; }
         public CATEGORY_ROOM SelectedCategory { get => _SelectedCategory; set { _SelectedCategory = value; OnPropertyChanged(); } }
-        
+
         private ObservableCollection<CATEGORY_ROOM> _ListCategoryRoom { get; set; }
         public ObservableCollection<CATEGORY_ROOM> ListCategoryRoom { get => _ListCategoryRoom; set { _ListCategoryRoom = value; OnPropertyChanged(); } }
         private string _IdHD { get; set; }
@@ -37,6 +37,8 @@ namespace QLKS.ViewModel
 
 
         public ICommand SearchCommand { get; set; }
+        public ICommand ReportCommand { get; set; }
+
         public ICommand RefeshCommand { get; set; }
         public ICommand SelectionChanged { get; set; }
         public ICommand DetailCommand { get; set; }
@@ -48,7 +50,7 @@ namespace QLKS.ViewModel
         public int ViewSelectedIndex { get => _ViewSelectedIndex; set { _ViewSelectedIndex = value; OnPropertyChanged(); } }
         private string _ViewSelectedValue { get; set; }
         public string ViewSelectedValue { get => _ViewSelectedValue; set { _ViewSelectedValue = value; OnPropertyChanged(); } }
-        
+
         private DateTime _SelectedDate { get; set; }
         public DateTime SelectedDate { get => _SelectedDate; set { _SelectedDate = value; OnPropertyChanged(); } }
 
@@ -59,7 +61,7 @@ namespace QLKS.ViewModel
 
 
 
-        public BillViewModel()
+        public BillViewModel(USER User)
         {
             Load_Bill();
 
@@ -73,7 +75,7 @@ namespace QLKS.ViewModel
                    CustomerName = "";
                    IdHD = "";
                    SelectedCategory = null;
-                  
+
                    LoadList();
                }
            );
@@ -86,7 +88,7 @@ namespace QLKS.ViewModel
                    && string.IsNullOrEmpty(CustomerName)
                    ) return false;
 
-                  
+
 
                    return true;
                }, (p) =>
@@ -107,7 +109,7 @@ namespace QLKS.ViewModel
                        && ((!string.IsNullOrEmpty(p.txbCustomerName.Text) && uni.RemoveUnicode(item.Bill.Name).ToLower().Contains(uni.RemoveUnicode(CustomerName).ToLower()))
                        || (string.IsNullOrEmpty(p.txbCustomerName.Text)))
 
-                     
+
 
                        && ((!string.IsNullOrEmpty(p.dpReceptionDate.Text)) && (item.Bill.Date_Bill == p.dpReceptionDate.SelectedDate.Value.Date)
                        || (string.IsNullOrEmpty(p.dpReceptionDate.Text)))) TempListBill.Add(item);
@@ -125,25 +127,39 @@ namespace QLKS.ViewModel
                }
            );
             DetailCommand = new RelayCommand<object>
-                ((p) =>
-                {
-                    if (SelectedItem == null) return false;
-                    return true;
-                }, (p) =>
-                {
-                    if (Temp.Count() > 1)
-                    {
-                        MessageBox.Show("Vui lòng chỉ chọn 1 dòng để xem thông tin", "Lỗi chọn nhiều dữ liệu cùng lúc", MessageBoxButton.OK);
-                    }
-                    else
-                    {
-                        Bill_Detail BillDetail = new Bill_Detail(SelectedItem.Bill,true);
-                        BillDetail.ShowDialog();
-   
-                    }
+               ((p) =>
+               {
+                   if (SelectedItem == null) return false;
+                   return true;
+               }, (p) =>
+               {
+                   if (Temp.Count() > 1)
+                   {
+                       MessageBox.Show("Vui lòng chỉ chọn 1 dòng để xem thông tin", "Lỗi chọn nhiều dữ liệu cùng lúc", MessageBoxButton.OK);
+                   }
+                   else
+                   {
+                       Bill_Detail BillDetail = new Bill_Detail(SelectedItem.Bill, true);
+                       BillDetail.ShowDialog();
 
-                }
-            );
+                   }
+
+               }
+           );
+            ReportCommand = new RelayCommand<object>
+               ((p) =>
+               {
+                   return true;
+               }, (p) =>
+               {
+                   
+                       ReportWd reportWd = new ReportWd(User);
+                       reportWd.ShowDialog();
+
+                   
+
+               }
+           );
             ViewSelectionChanged = new RelayCommand<object>
                 ((p) =>
                 {
@@ -162,11 +178,11 @@ namespace QLKS.ViewModel
             ListCategoryRoom = new ObservableCollection<CATEGORY_ROOM>(DataProvider.Ins.DB.CATEGORY_ROOM);
             ListBill = new ObservableCollection<ListBill>();
             var ListReception = new ObservableCollection<Bill>(DataProvider.Ins.DB.Bills);
-            
+
             foreach (var item in ListReception)
             {
                 ListBill temp = new ListBill();
-                
+
                 var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.IdRental == item.IdRental).SingleOrDefault();
 
                 var room = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == rental.IdRoom).SingleOrDefault();

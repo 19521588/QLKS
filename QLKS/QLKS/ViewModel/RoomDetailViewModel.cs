@@ -66,7 +66,9 @@ namespace QLKS.ViewModel
                     }
                    else
                     {
+                        wd_AddNewReservation wdAddReservation = new wd_AddNewReservation(false);
 
+                        wdAddReservation.ShowDialog();
                     }
                 }
 

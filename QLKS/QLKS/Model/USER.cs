@@ -14,6 +14,12 @@ namespace QLKS.Model
     
     public partial class USER
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public USER()
+        {
+            this.SALES_REPORT = new HashSet<SALES_REPORT>();
+        }
+    
         public int Users_Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -22,5 +28,7 @@ namespace QLKS.Model
     
         public virtual CATEGORY_USER CATEGORY_USER { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SALES_REPORT> SALES_REPORT { get; set; }
     }
 }
