@@ -13,7 +13,7 @@ using System.Windows.Media.Animation;
 
 namespace QLKS.ViewModel
 {
-    public class MainViewModel:BaseViewModel
+    public class MainViewModel : BaseViewModel
     {
         #region uc_view
 
@@ -63,7 +63,7 @@ namespace QLKS.ViewModel
 
         public ICommand LogOutCommand { get; set; }
         public ICommand CloseSideBarCommand { get; set; }
-     
+
         private object _currentView;
         public object CurrentView
         {
@@ -81,7 +81,7 @@ namespace QLKS.ViewModel
             initListViewMenu();
             LoadedWindowCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
-              
+
                 LoadLoginWindow(p);
 
             });
@@ -117,18 +117,20 @@ namespace QLKS.ViewModel
             {
                 if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    p.DataContext = new MainViewModel();
-                   
+                  
+                    mainWindow.DataContext = new MainViewModel();
+
                     LoadLoginWindow(mainWindow);
                 }
             });
-           
+
 
         }
+     
         public void LoadLoginWindow(MainWindow p)
         {
             IsLoaded = true;
-           
+
             if (p == null)
                 return;
             p.Hide();
@@ -143,7 +145,9 @@ namespace QLKS.ViewModel
                 mainWindow = p;
                 User = loginVM.User;
                 var employee = DataProvider.Ins.DB.EMPLOYEEs.Where(x => x.IdEmployee == User.IdEmployee).SingleOrDefault();
-                Name = employee.Name;
+                (p.DataContext as MainViewModel).User = loginVM.User;
+                (p.DataContext as MainViewModel).Name = employee.Name;
+                (p.DataContext as MainViewModel).LoadRole(User.Type);
             }
             else
             {
@@ -182,7 +186,7 @@ namespace QLKS.ViewModel
                     case "Hóa đơn":
                         if (HoaDon_UC == null)
                         {
-                            HoaDon_UC = new uc_Bill();
+                            HoaDon_UC = new uc_Bill(User);
                         }
                         CurrentView = HoaDon_UC;
                         break;
@@ -242,10 +246,10 @@ namespace QLKS.ViewModel
                         }
                         CurrentView = QuanLyChiTietTienNghi_UC;
                         break;
-                    
+
                 }
                 Title_Main = item.name;
-                
+
             }
         }
         public void initListViewMenu()
@@ -259,19 +263,28 @@ namespace QLKS.ViewModel
             MyListItems.Add(new ItemMenuMainWindow() { name = "Phòng", foreColor = "#FFF08033", kind_Icon = "HomeCity" });
             MyListItems.Add(new ItemMenuMainWindow() { name = "Đặt phòng", foreColor = "Green", kind_Icon = "BookAccount" });
             MyListItems.Add(new ItemMenuMainWindow() { name = "Hóa đơn", foreColor = "#FFD41515", kind_Icon = "Receipt" });
-            MyListItems.Add(new ItemMenuMainWindow() { name = "QL nhân Viên", foreColor = "#FFD41515", kind_Icon = "Account" });
-            MyListItems.Add(new ItemMenuMainWindow() { name = "QL khách hàng", foreColor = "#FFD41515", kind_Icon = "Account" });
-            MyListItems.Add(new ItemMenuMainWindow() { name = "QL phòng", foreColor = "#FFE6A701", kind_Icon = "StarCircle" });
-            MyListItems.Add(new ItemMenuMainWindow() { name = "QL loại phòng", foreColor = "#FFE6A701", kind_Icon = "StarCircle" });
-            MyListItems.Add(new ItemMenuMainWindow() { name = "QL dịch vụ", foreColor = "Blue", kind_Icon = "FaceAgent" });
-            MyListItems.Add(new ItemMenuMainWindow() { name = "QL loại dịch vụ", foreColor = "Blue", kind_Icon = "FaceAgent" });
-            MyListItems.Add(new ItemMenuMainWindow() { name = "QL tiện nghi", foreColor = "#FFF08033", kind_Icon = "Fridge" });
-            MyListItems.Add(new ItemMenuMainWindow() { name = "QL chi tiết tiện nghi", foreColor = "#FFF08033", kind_Icon = "Fridge" });
-           
-          
 
-           
+
+
+
             Title_Main = "Trang Chủ";
+        }
+        public void LoadRole(int type)
+        {
+            if (User.Type == 1)
+            {
+
+                MyListItems.Add(new ItemMenuMainWindow() { name = "QL nhân Viên", foreColor = "#FFD41515", kind_Icon = "Account" });
+                MyListItems.Add(new ItemMenuMainWindow() { name = "QL khách hàng", foreColor = "#FFD41515", kind_Icon = "Account" });
+                MyListItems.Add(new ItemMenuMainWindow() { name = "QL phòng", foreColor = "#FFE6A701", kind_Icon = "StarCircle" });
+                MyListItems.Add(new ItemMenuMainWindow() { name = "QL loại phòng", foreColor = "#FFE6A701", kind_Icon = "StarCircle" });
+                MyListItems.Add(new ItemMenuMainWindow() { name = "QL dịch vụ", foreColor = "Blue", kind_Icon = "FaceAgent" });
+                MyListItems.Add(new ItemMenuMainWindow() { name = "QL loại dịch vụ", foreColor = "Blue", kind_Icon = "FaceAgent" });
+                MyListItems.Add(new ItemMenuMainWindow() { name = "QL tiện nghi", foreColor = "#FFF08033", kind_Icon = "Fridge" });
+                MyListItems.Add(new ItemMenuMainWindow() { name = "QL chi tiết tiện nghi", foreColor = "#FFF08033", kind_Icon = "Fridge" });
+
+
+            }
         }
         public class ItemMenuMainWindow
         {

@@ -131,7 +131,7 @@
                                     <ListBoxItem Content="Đăng xuất" >
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                <i:InvokeCommandAction Command="{Binding Path=LogOutCommand}"/>
+                                                <i:InvokeCommandAction Command="{Binding Path=LogOutCommand}" CommandParameter="{Binding ElementName=mainwindows}"/>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </ListBoxItem>
@@ -181,14 +181,7 @@
                 <!--Khu vực header listView Menu-->
                 <Grid Grid.Row="0" Height="170">
                     <Grid Background="#FF142C2F" >
-                        <Button x:Name="btnDangXuat" Width="30" Height="30" HorizontalAlignment="Left" Padding="0" Foreground="DarkKhaki" Margin="10 10 0 0" ToolTip="Đăng xuất"
-                                VerticalAlignment="Top" FontSize="11"  BorderThickness="0" Background="Transparent" BorderBrush="White" 
-                                Command="{Binding LogOutCommand}"
-                                CommandParameter="{Binding ElementName=mainwindows}">
-                            <materialDesign:PackIcon Kind="Logout" Width="30"
-                                         Height="30"  
-                                         Foreground="White" Opacity="0.7" />
-                        </Button>
+                       
 
                         <Ellipse x:Name="imgAvatar" Width="130" Height="130" VerticalAlignment="Top" Margin="0 10 0 0">
                             <Ellipse.Fill>
@@ -223,14 +216,7 @@
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
                             <TextBlock x:Name="txbHoTenNV" Text="{Binding Name}" FontSize="18" Margin="0 0 0 4" 
                                    VerticalAlignment="Center" HorizontalAlignment="Center"  Foreground="#DDDFE9F7" TextDecorations="{x:Null}" FontFamily="Oboto"/>
-                            <Button x:Name="btnEdit" Width="20" Height="20" HorizontalAlignment="Center" Padding="0" Foreground="DarkKhaki" Margin="5 0 0 0" ToolTip="Sửa thông tin"
-                                VerticalAlignment="Center" FontSize="11"  BorderThickness="0" Background="Transparent" BorderBrush="White" 
-                                Command="{Binding EditCommand}"
-                                CommandParameter="{Binding ElementName=mainwindows}">
-                                <materialDesign:PackIcon Kind="Pen" Width="20"
-                                         Height="20"  
-                                         Foreground="White" Opacity="0.7" />
-                            </Button>
+                          
                         </StackPanel>
 
                     </Grid>

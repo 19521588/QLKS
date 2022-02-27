@@ -25,6 +25,7 @@ namespace QLKS.Model
         public string Name { get; set; }
         public int IdRental { get; set; }
         public Nullable<System.DateTime> Date_Bill { get; set; }
+        public string CategoryRoom { get; set; }
     
         public virtual RENTAL RENTAL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

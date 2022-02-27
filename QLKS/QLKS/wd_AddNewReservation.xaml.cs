@@ -21,10 +21,10 @@ namespace QLKS
     public partial class wd_AddNewReservation : Window
     {
         private AddReservationViewModel addReservationViewModel { get; set; }
-        public wd_AddNewReservation()
+        public wd_AddNewReservation(bool isReservation)
         {
             InitializeComponent();
-            this.DataContext = (addReservationViewModel = new AddReservationViewModel());
+            this.DataContext = (addReservationViewModel = new AddReservationViewModel(isReservation));
         }
     }
 }

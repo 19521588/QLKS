@@ -49,10 +49,13 @@ namespace QLKS.ViewModel
                     if (MessageBox.Show("Bạn có chắc chắn muốn thanh toán", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
                         var bill = new Bill();
+                        var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.IdRental ==IdRental).SingleOrDefault();
+                        var room = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == rental.IdRoom).SingleOrDefault();
                         bill.Name = DataProvider.Ins.DB.EMPLOYEEs.Where(x=>x.IdEmployee==User.IdEmployee).SingleOrDefault().Name;
                         bill.Total = TotalMoney;
                         bill.Date_Bill = DateTime.Now;
                         bill.IdRental = IdRental;
+                        bill.CategoryRoom= DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == room.IdCategoryRoom).SingleOrDefault().Name;
                         DataProvider.Ins.DB.Bills.Add(bill);
                         DataProvider.Ins.DB.SaveChanges();
                         foreach (var item in detailPayment)

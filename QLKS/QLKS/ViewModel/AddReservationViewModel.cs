@@ -15,6 +15,8 @@ namespace QLKS.ViewModel
         public ICommand SaveCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public ICommand LoadListRoomCommand { get; set; }
+        public ICommand LoadedWindowCommand { get; set; }
+        
 
         private bool _check { get; set; }
         public bool check { get => _check; set { _check = value; OnPropertyChanged(); } }
@@ -53,25 +55,42 @@ namespace QLKS.ViewModel
 
         private bool _IsAdd { get; set; }
         public bool IsAdd { get => _IsAdd; set { _IsAdd = value; OnPropertyChanged(); } }
-        public AddReservationViewModel()
+        public AddReservationViewModel(bool IsReservation)
         {
 
             ListRoom = new ObservableCollection<ROOM>();
             ListAvailableRoom = new ObservableCollection<ROOM>();
             ListSelectRoom = new ObservableCollection<ROOM>();
             ListReservation = new ObservableCollection<RESERVATION_DETAIL>();
-            ObservableCollection<ROOM> temp = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs.Where(x => x.Name != "Trống"));
+            ObservableCollection<ROOM> temp = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs.Where(x => x.Name != "Phòng trống"));
             for (int i = temp.Count() - 1; i >= 0; i--)
             {
                 ListRoom.Add(temp[i]);
             }
+           LoadedWindowCommand = new RelayCommand<wd_AddNewReservation>(
+           (p) =>
+           {
+              
+               return true;
+           },
+           (p) =>
+           {
+               if (!IsReservation)
+               {
+                   p.dtStartDate.SelectedDate = DateTime.Now;
+                   p.tpStartTime.SelectedTime = DateTime.Now;
+                   p.dtStartDate.IsEnabled = false;
+                   p.tpStartTime.IsEnabled = false;
+               }
+            }
+           );
 
 
 
             AddCommand = new RelayCommand<wd_AddNewReservation>(
             (p) =>
             {
-                if (p.dtStartDate.SelectedDate > p.dtStartDate.SelectedDate) return false;
+                if (p.dtpEndDate.SelectedDate < p.dtStartDate.SelectedDate) return false;
                 if (p.dtStartDate.SelectedDate == p.dtpEndDate.SelectedDate && p.tpStartTime.SelectedTime > p.tpEndTime.SelectedTime) return false;
                 if (SelectedRoom == null) return false;
                 return true;

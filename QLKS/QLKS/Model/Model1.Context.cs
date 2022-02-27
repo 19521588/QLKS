@@ -39,6 +39,8 @@ namespace QLKS.Model
         public virtual DbSet<RESERVATION> RESERVATIONs { get; set; }
         public virtual DbSet<RESERVATION_DETAIL> RESERVATION_DETAIL { get; set; }
         public virtual DbSet<ROOM> ROOMs { get; set; }
+        public virtual DbSet<SALES_REPORT> SALES_REPORT { get; set; }
+        public virtual DbSet<SALES_REPORT_DETAIL> SALES_REPORT_DETAIL { get; set; }
         public virtual DbSet<SERVICE> SERVICEs { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
     }
