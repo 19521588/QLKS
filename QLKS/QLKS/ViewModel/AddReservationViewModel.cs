@@ -59,7 +59,6 @@ namespace QLKS.ViewModel
         {
 
             ListRoom = new ObservableCollection<ROOM>();
-            ListAvailableRoom = new ObservableCollection<ROOM>();
             ListSelectRoom = new ObservableCollection<ROOM>();
             ListReservation = new ObservableCollection<RESERVATION_DETAIL>();
             ObservableCollection<ROOM> temp = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs.Where(x => x.Name != "Phòng trống"));
@@ -155,7 +154,7 @@ namespace QLKS.ViewModel
             LoadListRoomCommand = new RelayCommand<wd_AddNewReservation>(
             (p) =>
             {
-                if (p.dtStartDate.SelectedDate < DateTime.Now) return false;
+                //if (p.dtStartDate.SelectedDate < DateTime.Now) return false;
                 if (p.dtStartDate.SelectedDate == null || p.dtpEndDate.SelectedDate == null || p.tpStartTime.SelectedTime == null || p.tpEndTime.SelectedTime == null) return false;
                 if (p.dtStartDate.SelectedDate > p.dtpEndDate.SelectedDate) return false;
                 if (p.dtStartDate.SelectedDate == p.dtpEndDate.SelectedDate && p.tpStartTime.SelectedTime > p.tpEndTime.SelectedTime) return false;
@@ -163,17 +162,23 @@ namespace QLKS.ViewModel
             },
             (p) =>
             {
-                foreach(var item in ListRoom)
+                ListAvailableRoom = new ObservableCollection<ROOM>();
+                foreach (var item in ListRoom)
                 {
                     IsAdd = false;
                     ObservableCollection<RESERVATION_DETAIL> templist = new ObservableCollection<RESERVATION_DETAIL>(DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdRoom == item.IdRoom));
                     if (templist.Count == 0)
+                    {
                         ListAvailableRoom.Add(item);
+                    }
                     else
                     {
                         foreach (var detail in templist)
                         {
-                            if ((detail.RESERVATION.Start_Date == p.dtStartDate.SelectedDate && (detail.RESERVATION.Start_Date >= p.tpEndTime.SelectedTime || detail.RESERVATION.Start_Date.TimeOfDay >= p.tpEndTime.SelectedTime.Value.TimeOfDay)) || detail.RESERVATION.End_Date < p.dtStartDate.SelectedDate || detail.RESERVATION.Start_Date > p.dtpEndDate.SelectedDate || (detail.RESERVATION.End_Date == p.dtStartDate.SelectedDate && detail.RESERVATION.End_Date.TimeOfDay < p.tpStartTime.SelectedTime.Value.TimeOfDay ) || (detail.RESERVATION.End_Date == p.dtStartDate.SelectedDate && detail.RESERVATION.Start_Date.TimeOfDay > p.tpEndTime.SelectedTime.Value.TimeOfDay))
+                            
+                            //if ((detail.RESERVATION.End_Date == p.dtStartDate.SelectedDate && detail.RESERVATION.End_Date.TimeOfDay < p.tpStartTime.SelectedTime.Value.TimeOfDay) || (detail.RESERVATION.Start_Date == p.dtpEndDate.SelectedDate && detail.RESERVATION.Start_Date.TimeOfDay > p.tpEndTime.SelectedTime.Value.TimeOfDay))
+
+                            if (detail.RESERVATION.End_Date < p.dtStartDate.SelectedDate || detail.RESERVATION.Start_Date > p.dtpEndDate.SelectedDate || (detail.RESERVATION.End_Date == p.dtStartDate.SelectedDate && detail.RESERVATION.End_Date.TimeOfDay < p.tpStartTime.SelectedTime.Value.TimeOfDay ) || (detail.RESERVATION.End_Date == p.dtStartDate.SelectedDate && detail.RESERVATION.Start_Date.TimeOfDay > p.tpEndTime.SelectedTime.Value.TimeOfDay))
                                 IsAdd = true;
                         }
                         if (IsAdd)
