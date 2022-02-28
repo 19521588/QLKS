@@ -30,6 +30,7 @@ namespace QLKS.ViewModel
 
         private bool _IsClose { get; set; }
         public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
+     
 
         public LoginViewModel()
         {
@@ -70,6 +71,18 @@ namespace QLKS.ViewModel
                 MessageBox.Show("Sai tài khoản và mật khẩu!");
             }
 
+        }
+        public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (IsClose)
+            {
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng ứng dụng", "Thông báo",
+            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else e.Cancel = true;
+            }
         }
 
     }

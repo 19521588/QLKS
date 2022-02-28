@@ -23,11 +23,11 @@
         
         WindowStartupLocation="CenterScreen" >
     <i:Interaction.Triggers>
-        <!--<i:EventTrigger  EventName="Closing">
+        <i:EventTrigger  EventName="Closing">
             <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
 
             </ei:CallMethodAction>
-        </i:EventTrigger>-->
+        </i:EventTrigger>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"
                                    CommandParameter="{Binding ElementName=mainwindows}"
@@ -181,7 +181,7 @@
                 <!--Khu vực header listView Menu-->
                 <Grid Grid.Row="0" Height="170">
                     <Grid Background="#FF142C2F" >
-                       
+
 
                         <Ellipse x:Name="imgAvatar" Width="130" Height="130" VerticalAlignment="Top" Margin="0 10 0 0">
                             <Ellipse.Fill>
@@ -216,7 +216,7 @@
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
                             <TextBlock x:Name="txbHoTenNV" Text="{Binding Name}" FontSize="18" Margin="0 0 0 4" 
                                    VerticalAlignment="Center" HorizontalAlignment="Center"  Foreground="#DDDFE9F7" TextDecorations="{x:Null}" FontFamily="Oboto"/>
-                          
+
                         </StackPanel>
 
                     </Grid>

@@ -14,10 +14,20 @@
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+
         Title="Đăng nhập" Height="500" Width="900"
         WindowStyle="None"
         AllowsTransparency="True" 
         WindowStartupLocation="CenterScreen">
+    <i:Interaction.Triggers>
+        <i:EventTrigger  EventName="Closing">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
+
+            </ei:CallMethodAction>
+        </i:EventTrigger>
+        
+    </i:Interaction.Triggers>
     <Window.Background>
         <ImageBrush ImageSource="./Res/backGround_DN.png"></ImageBrush>
     </Window.Background>

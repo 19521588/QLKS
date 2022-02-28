@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QLKS.ViewModel
@@ -55,9 +56,21 @@ namespace QLKS.ViewModel
 
         private bool _IsAdd { get; set; }
         public bool IsAdd { get => _IsAdd; set { _IsAdd = value; OnPropertyChanged(); } }
+        private bool _IsSave { get; set; }
+        public bool IsSave { get => _IsSave; set { _IsSave = value; OnPropertyChanged(); } }
+        private string _Title { get; set; }
+        public string Title { get => _Title; set { _Title = value; OnPropertyChanged(); } }
         public AddReservationViewModel(bool IsReservation)
         {
-
+            if(IsReservation)
+            {
+                Title = "Đặng phòng";
+            }
+            else
+            {
+                Title = "Thuê phòng";
+            }
+            IsSave = false;
             ListRoom = new ObservableCollection<ROOM>();
             ListSelectRoom = new ObservableCollection<ROOM>();
             ListReservation = new ObservableCollection<RESERVATION_DETAIL>();
@@ -115,29 +128,34 @@ namespace QLKS.ViewModel
             },
             (p) =>
             {
-                CUSTOMER customer = new CUSTOMER() { Name = p.txbName.Text, BirthDay = DateTime.Parse(p.dtBirth.SelectedDate.ToString()), Address = p.txbAddress.Text, Phone = p.txbPhone.Text, Nationality = p.txbNationality.Text, CCCD = p.txbCCCD.Text, Sex = p.cbSex.Text };
-                DataProvider.Ins.DB.CUSTOMERs.Add(customer);
+                if (MessageBox.Show("Bạn có chắc chắn muốn "+Title.ToLower(), "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    CUSTOMER customer = new CUSTOMER() { Name = p.txbName.Text, BirthDay = DateTime.Parse(p.dtBirth.SelectedDate.ToString()), Address = p.txbAddress.Text, Phone = p.txbPhone.Text, Nationality = p.txbNationality.Text, CCCD = p.txbCCCD.Text, Sex = p.cbSex.Text };
+                    DataProvider.Ins.DB.CUSTOMERs.Add(customer);
 
+
+                    if (p.dtStartDate.SelectedDate == p.dtpEndDate.SelectedDate) date = 0;
+                    else
+                    {
+                        TimeSpan datespan = (TimeSpan)(p.dtpEndDate.SelectedDate - p.dtStartDate.SelectedDate);
+                        date = datespan.Days;
+                    }
+                    reservation = new RESERVATION() { IdCustomer = customer.IdCustomer, Amount = Int32.Parse(p.txbAmount.Text), Start_Date = DateTime.Parse(p.dtStartDate.Text + " " + p.tpStartTime.Text), End_Date = DateTime.Parse(p.dtpEndDate.Text + " " + p.tpEndTime.Text), Date = date, IdEmployee = 1 };
+                    DataProvider.Ins.DB.RESERVATIONs.Add(reservation);
+
+                    foreach (var item in ListSelectRoom)
+                    {
+                        var List = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == item.IdRoom).SingleOrDefault();
+                        //List.Status = "Đang đặt";
+
+                        reservation_detail = new RESERVATION_DETAIL() { IdReservation = reservation.IdReservation, Status = "Phòng đã đặt", IdRoom = item.IdRoom };
+                        DataProvider.Ins.DB.RESERVATION_DETAIL.Add(reservation_detail);
+                    }
+                    DataProvider.Ins.DB.SaveChanges();
+                    IsSave = true;
+                    p.Close();
+                }
                 
-                if (p.dtStartDate.SelectedDate == p.dtpEndDate.SelectedDate) date = 0;
-                else
-                {
-                    TimeSpan datespan = (TimeSpan)(p.dtpEndDate.SelectedDate -  p.dtStartDate.SelectedDate);
-                    date = datespan.Days;
-                }
-                reservation = new RESERVATION() { IdCustomer = customer.IdCustomer, Amount = Int32.Parse(p.txbAmount.Text), Start_Date = DateTime.Parse(p.dtStartDate.Text +" "+ p.tpStartTime.Text) , End_Date = DateTime.Parse(p.dtpEndDate.Text + " " + p.tpEndTime.Text), Date = date, IdEmployee = 1 };
-                DataProvider.Ins.DB.RESERVATIONs.Add(reservation);
-
-                foreach(var item in ListSelectRoom)
-                {
-                    var List = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == item.IdRoom).SingleOrDefault();
-                    //List.Status = "Đang đặt";
-                    
-                    reservation_detail = new RESERVATION_DETAIL() { IdReservation = reservation.IdReservation, Status = "Đang đặt", IdRoom = item.IdRoom};
-                    DataProvider.Ins.DB.RESERVATION_DETAIL.Add(reservation_detail);
-                }
-                DataProvider.Ins.DB.SaveChanges();
-                p.Close();
             }
             );
 

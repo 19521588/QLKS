@@ -139,15 +139,19 @@ namespace QLKS.ViewModel
             if (loginWindow.DataContext == null)
                 return;
             var loginVM = loginWindow.DataContext as LoginViewModel;
+           
             if (loginVM.IsLogin)
             {
                 p.Show();
+                IsClose = true;
                 mainWindow = p;
                 User = loginVM.User;
+               
                 var employee = DataProvider.Ins.DB.EMPLOYEEs.Where(x => x.IdEmployee == User.IdEmployee).SingleOrDefault();
                 (p.DataContext as MainViewModel).User = loginVM.User;
                 (p.DataContext as MainViewModel).Name = employee.Name;
                 (p.DataContext as MainViewModel).LoadRole(User.Type);
+                (p.DataContext as MainViewModel).IsClose=true;
             }
             else
             {
@@ -295,5 +299,18 @@ namespace QLKS.ViewModel
             public ItemMenuMainWindow() { }
 
         }
+        public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if(IsClose)
+            {
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng ứng dụng", "Thông báo",
+            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else e.Cancel = true;
+            }
+        }
     }
+    
 }

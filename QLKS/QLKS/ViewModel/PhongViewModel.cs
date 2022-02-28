@@ -189,7 +189,7 @@ namespace QLKS.ViewModel
                     return true;
                 }, (p) =>
                 {
-                    RoomDetail roomDetail = new RoomDetail(SelectedItem,User);
+                    RoomDetail roomDetail = new RoomDetail(SelectedItem, User);
                     roomDetail.ShowDialog();
                     RoomDetailViewModel temp = roomDetail.DataContext as RoomDetailViewModel;
                     p.txbTimKiem.Text = "";
@@ -238,7 +238,7 @@ namespace QLKS.ViewModel
 
         {
             var list = new List<ListRoom>();
-            var rooms = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs);
+            var rooms = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs).ToList();
             foreach (var item in rooms)
             {
 
@@ -247,9 +247,9 @@ namespace QLKS.ViewModel
                 {
                     ListRoom temp = new ListRoom();
                     temp.Room = item;
-                    var reservation = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.End_Date >= time && x.Start_Date <= time).SingleOrDefault();
+                    var reservation = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.End_Date >= time && x.Start_Date <= time).ToList();
 
-                    if (reservation == null )
+                    if (reservation == null)
                     {
                         temp.IsDay = false;
                         temp.SoGio = 0;
@@ -258,12 +258,16 @@ namespace QLKS.ViewModel
                         temp.Status = "Phòng trống";
                         temp.CategoryRoom = category_rooms.Name;
                         temp.DonDep = "Đã dọn dẹp";
-                        temp.Reservation = reservation;
+                        temp.Reservation = null;
                     }
                     else
                     {
-                        var reservation_detail = DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdRoom == item.IdRoom && x.IdReservation == reservation.IdReservation).SingleOrDefault();
-                   
+                        RESERVATION_DETAIL reservation_detail = null;
+                        foreach (var check in reservation)
+                        {
+                            reservation_detail = DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdRoom == item.IdRoom && x.IdReservation == check.IdReservation).SingleOrDefault();
+                        }
+
                         if (reservation_detail == null || reservation_detail.Status == "Phòng đã thanh toán")
                         {
                             temp.IsDay = false;
@@ -276,11 +280,12 @@ namespace QLKS.ViewModel
                         }
                         else
                         {
-                            var customer = DataProvider.Ins.DB.CUSTOMERs.Where(x => x.IdCustomer == reservation.IdCustomer).SingleOrDefault();
-                            temp.SoNgayO = reservation.Date.Value;
-                            if (reservation.Date.Value == 0)
+                            var r = reservation.Where(y => y.IdReservation == reservation_detail.IdReservation).SingleOrDefault();
+                            var customer = DataProvider.Ins.DB.CUSTOMERs.Where(x => x.IdCustomer == r.IdCustomer).SingleOrDefault();
+                            temp.SoNgayO = r.Date.Value;
+                            if (r.Date.Value == 0)
                             {
-                                temp.SoGio = reservation.End_Date.Hour - reservation.Start_Date.Hour;
+                                temp.SoGio = r.End_Date.Hour - r.Start_Date.Hour;
                                 temp.IsDay = false;
                             }
                             else
@@ -293,7 +298,7 @@ namespace QLKS.ViewModel
                             temp.Status = reservation_detail.Status;
                             temp.CategoryRoom = category_rooms.Name;
                             temp.DonDep = item.Clean;
-                            temp.Reservation = reservation;
+                            temp.Reservation = r;
                         }
 
                     }

@@ -69,6 +69,50 @@ namespace QLKS.ViewModel
                         wd_AddNewReservation wdAddReservation = new wd_AddNewReservation(false);
 
                         wdAddReservation.ShowDialog();
+
+                        AddReservationViewModel addReservation = wdAddReservation.DataContext as AddReservationViewModel;
+                        if (addReservation.IsSave)
+                        {
+                            var reservation = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.End_Date >= DateTime.Now && x.Start_Date <= DateTime.Now).ToList();
+                          
+                            RESERVATION_DETAIL reservation_detail = null;
+                            foreach (var check in reservation)
+                            {
+                                reservation_detail = DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdRoom == listRoom.Room.IdRoom && x.IdReservation == check.IdReservation).SingleOrDefault();
+                            }
+
+                            var r = reservation.Where(y => y.IdReservation == reservation_detail.IdReservation).SingleOrDefault();
+                            var customer = DataProvider.Ins.DB.CUSTOMERs.Where(x => x.IdCustomer == r.IdCustomer).SingleOrDefault();
+                            listRoom.SoNgayO = r.Date.Value;
+                            if (r.Date.Value == 0)
+                            {
+                                listRoom.SoGio = r.End_Date.Hour - r.Start_Date.Hour;
+                                listRoom.IsDay = false;
+                            }
+                            else
+                            {
+                                listRoom.SoGio = 0;
+                                listRoom.IsDay = true;
+
+                            }
+                            var rooms = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs.Where(x=>x.IdRoom==listRoom.Room.IdRoom)).SingleOrDefault();
+                            var categoryRoom = new ObservableCollection<CATEGORY_ROOM>(DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == listRoom.Room.IdCategoryRoom)).SingleOrDefault();
+                            listRoom.TenKH = customer.Name;
+                            listRoom.Status = reservation_detail.Status;
+                            listRoom.CategoryRoom = categoryRoom.Name;
+                            listRoom.DonDep = rooms.Clean;
+                            listRoom.Reservation = r;
+
+                            reservation_detail.Status = "Phòng đang thuê";
+                            Rental = new RENTAL();
+                            Rental.IdReservation = reservation_detail.IdReservation;
+                            Rental.IdRoom = listRoom.Room.IdRoom;
+                            Rental.DateRental = DateTime.Now;
+                            DataProvider.Ins.DB.RENTALs.Add(Rental);
+                            DataProvider.Ins.DB.SaveChanges();
+                            listRoom.Status = "Phòng đang thuê";
+                            Load(listRoom);
+                        }
                     }
                 }
 
