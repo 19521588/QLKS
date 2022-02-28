@@ -66,27 +66,24 @@ namespace QLKS.ViewModel
                     }
                    else
                     {
-                        wd_AddNewReservation wdAddReservation = new wd_AddNewReservation(false);
+                        wd_AddNewReservation wdAddReservation = new wd_AddNewReservation(false,listRoom.Room.IdRoom);
 
                         wdAddReservation.ShowDialog();
 
                         AddReservationViewModel addReservation = wdAddReservation.DataContext as AddReservationViewModel;
                         if (addReservation.IsSave)
                         {
-                            var reservation = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.End_Date >= DateTime.Now && x.Start_Date <= DateTime.Now).ToList();
-                          
-                            RESERVATION_DETAIL reservation_detail = null;
-                            foreach (var check in reservation)
-                            {
-                                reservation_detail = DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdRoom == listRoom.Room.IdRoom && x.IdReservation == check.IdReservation).SingleOrDefault();
-                            }
+                            var reservation = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.End_Date >= DateTime.Now && x.Start_Date <= DateTime.Now && x.RESERVATION_DETAIL.FirstOrDefault().IdRoom == listRoom.Room.IdRoom && x.RESERVATION_DETAIL.FirstOrDefault().Status != "Phòng đã thanh toán").SingleOrDefault();
 
-                            var r = reservation.Where(y => y.IdReservation == reservation_detail.IdReservation).SingleOrDefault();
-                            var customer = DataProvider.Ins.DB.CUSTOMERs.Where(x => x.IdCustomer == r.IdCustomer).SingleOrDefault();
-                            listRoom.SoNgayO = r.Date.Value;
-                            if (r.Date.Value == 0)
+                            var reservation_detail = DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdRoom == listRoom.Room.IdRoom && x.IdReservation == reservation.IdReservation).SingleOrDefault();
+
+
+
+                            var customer = DataProvider.Ins.DB.CUSTOMERs.Where(x => x.IdCustomer == reservation.IdCustomer).SingleOrDefault();
+                            listRoom.SoNgayO = reservation.Date.Value;
+                            if (reservation.Date.Value == 0)
                             {
-                                listRoom.SoGio = r.End_Date.Hour - r.Start_Date.Hour;
+                                listRoom.SoGio = reservation.End_Date.Hour - reservation.Start_Date.Hour;
                                 listRoom.IsDay = false;
                             }
                             else
@@ -101,7 +98,7 @@ namespace QLKS.ViewModel
                             listRoom.Status = reservation_detail.Status;
                             listRoom.CategoryRoom = categoryRoom.Name;
                             listRoom.DonDep = rooms.Clean;
-                            listRoom.Reservation = r;
+                            listRoom.Reservation = reservation;
 
                             reservation_detail.Status = "Phòng đang thuê";
                             Rental = new RENTAL();

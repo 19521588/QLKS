@@ -169,7 +169,7 @@ namespace QLKS.ViewModel
                         //Đang là Home rồi thì không set nữa
                         if (Title_Main.Equals(item.name))
                         {
-                            break;
+                            Home_UC = new uc_Home();
                         }
                         CurrentView = Home_UC;
                         break;

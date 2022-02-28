@@ -17,7 +17,7 @@ namespace QLKS.ViewModel
         public ICommand CloseCommand { get; set; }
         public ICommand LoadListRoomCommand { get; set; }
         public ICommand LoadedWindowCommand { get; set; }
-        
+
 
         private bool _check { get; set; }
         public bool check { get => _check; set { _check = value; OnPropertyChanged(); } }
@@ -60,15 +60,20 @@ namespace QLKS.ViewModel
         public bool IsSave { get => _IsSave; set { _IsSave = value; OnPropertyChanged(); } }
         private string _Title { get; set; }
         public string Title { get => _Title; set { _Title = value; OnPropertyChanged(); } }
-        public AddReservationViewModel(bool IsReservation)
+        private bool _VisGrid { get; set; }
+        public bool VisGrid { get => _VisGrid; set { _VisGrid = value; OnPropertyChanged(); } }
+
+        public AddReservationViewModel(bool IsReservation, int IdRoom)
         {
-            if(IsReservation)
+            if (IsReservation)
             {
-                Title = "Đặng phòng";
+                Title = "Đặt phòng";
+                VisGrid = true;
             }
             else
             {
-                Title = "Thuê phòng";
+                Title = "Thuê phòng " + DataProvider.Ins.DB.ROOMs.Where(x=>x.IdRoom==IdRoom).SingleOrDefault().Name;
+                VisGrid = false;
             }
             IsSave = false;
             ListRoom = new ObservableCollection<ROOM>();
@@ -79,31 +84,47 @@ namespace QLKS.ViewModel
             {
                 ListRoom.Add(temp[i]);
             }
-           LoadedWindowCommand = new RelayCommand<wd_AddNewReservation>(
-           (p) =>
-           {
-              
-               return true;
-           },
-           (p) =>
-           {
-               if (!IsReservation)
-               {
-                   p.dtStartDate.SelectedDate = DateTime.Now;
-                   p.tpStartTime.SelectedTime = DateTime.Now;
-                   p.dtStartDate.IsEnabled = false;
-                   p.tpStartTime.IsEnabled = false;
-               }
+            LoadedWindowCommand = new RelayCommand<wd_AddNewReservation>(
+            (p) =>
+            {
+
+                return true;
+            },
+            (p) =>
+            {
+                if (!IsReservation)
+                {
+                    p.dtStartDate.SelectedDate = DateTime.Now;
+                    p.tpStartTime.SelectedTime = DateTime.Now;
+                    p.dtStartDate.IsEnabled = false;
+                    p.tpStartTime.IsEnabled = false;
+                }
             }
-           );
+            );
 
 
 
             AddCommand = new RelayCommand<wd_AddNewReservation>(
             (p) =>
             {
-                if (p.dtpEndDate.SelectedDate < p.dtStartDate.SelectedDate) return false;
-                if (p.dtStartDate.SelectedDate == p.dtpEndDate.SelectedDate && p.tpStartTime.SelectedTime > p.tpEndTime.SelectedTime) return false;
+                if (p.dtStartDate.SelectedDate.Value.Date > p.dtpEndDate.SelectedDate.Value.Date) return false;
+                if (p.dtStartDate.SelectedDate == p.dtpEndDate.SelectedDate)
+                {
+                    var zero = new TimeSpan(0, 0, 0);
+                    var twelve = new TimeSpan(12, 0, 0);
+                    if (p.tpEndTime.SelectedTime.Value.TimeOfDay == twelve)
+                    {
+                        if (p.tpStartTime.SelectedTime.Value.Hour > 12) return true;
+                    }
+                    if (p.tpEndTime.SelectedTime.Value.TimeOfDay == zero)
+                    {
+                        if (p.tpStartTime.SelectedTime.Value.Hour < 12) return true;
+                    }
+                    else
+                    {
+                        if (DateTime.Compare(p.tpStartTime.SelectedTime.Value, p.tpEndTime.SelectedTime.Value) == 1) return false;
+                    }
+                }
                 if (SelectedRoom == null) return false;
                 return true;
             },
@@ -111,7 +132,7 @@ namespace QLKS.ViewModel
             {
                 //RESERVATION_DETAIL res_detail = new RESERVATION_DETAIL() {IdRoom = SelectedRoom.IdRoom};
                 ListSelectRoom.Add(SelectedRoom);
-                ListAvailableRoom.Remove(SelectedRoom);            
+                ListAvailableRoom.Remove(SelectedRoom);
                 //ListReservation.Add(res_detail);
                 //p.Close();
             }
@@ -119,16 +140,35 @@ namespace QLKS.ViewModel
 
             SaveCommand = new RelayCommand<wd_AddNewReservation>(
             (p) =>
-            {
-                if (ListSelectRoom.Count == 0) return false;
-                if (p.dtStartDate.SelectedDate > p.dtpEndDate.SelectedDate) return false;
-                if (p.txbName.Text == null || p.txbCCCD.Text == null || p.txbAddress.Text == null || p.txbPhone.Text == null || p.txbNationality.Text == null || p.cbSex.Text == null || p.dtBirth.Text == null) return false;
-                if (p.dtStartDate.Text == null || p.dtpEndDate == null || p.tpStartTime.Text == null || p.tpEndTime.Text == null) return false;
+            {   
+                if (IsReservation)
+                {
+                    if (ListSelectRoom.Count == 0) return false;
+                }
+                if (p.dtStartDate.SelectedDate == null || p.dtpEndDate.SelectedDate == null || p.tpStartTime.SelectedTime == null || p.tpEndTime.SelectedTime == null) return false;
+                if (p.txbName.Text == "" || p.txbCCCD.Text == "" || p.txbAddress.Text == "" || p.txbPhone.Text == "" || p.txbNationality.Text == "" || p.cbSex.Text == "" || p.dtBirth.Text == ""||p.txbAmount.Text=="") return false;
+
+                if (p.dtStartDate.SelectedDate.Value.Date > p.dtpEndDate.SelectedDate.Value.Date) return false;
+               
+                if (p.dtStartDate.SelectedDate.Value.Date == p.dtpEndDate.SelectedDate.Value.Date)
+                {
+                    var zero = new TimeSpan(0, 0, 0);
+                    
+                   
+                    if (p.tpEndTime.SelectedTime.Value.TimeOfDay == zero)
+                    {
+                        if (p.tpStartTime.SelectedTime.Value.Hour > 12) return false;
+                    }
+                    else
+                    {
+                        if (DateTime.Compare(p.tpStartTime.SelectedTime.Value, p.tpEndTime.SelectedTime.Value) == 1) return false;
+                    }
+                }
                 return true;
             },
             (p) =>
             {
-                if (MessageBox.Show("Bạn có chắc chắn muốn "+Title.ToLower(), "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Bạn có chắc chắn muốn " + Title.ToLower(), "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     CUSTOMER customer = new CUSTOMER() { Name = p.txbName.Text, BirthDay = DateTime.Parse(p.dtBirth.SelectedDate.ToString()), Address = p.txbAddress.Text, Phone = p.txbPhone.Text, Nationality = p.txbNationality.Text, CCCD = p.txbCCCD.Text, Sex = p.cbSex.Text };
                     DataProvider.Ins.DB.CUSTOMERs.Add(customer);
@@ -143,19 +183,28 @@ namespace QLKS.ViewModel
                     reservation = new RESERVATION() { IdCustomer = customer.IdCustomer, Amount = Int32.Parse(p.txbAmount.Text), Start_Date = DateTime.Parse(p.dtStartDate.Text + " " + p.tpStartTime.Text), End_Date = DateTime.Parse(p.dtpEndDate.Text + " " + p.tpEndTime.Text), Date = date, IdEmployee = 1 };
                     DataProvider.Ins.DB.RESERVATIONs.Add(reservation);
 
-                    foreach (var item in ListSelectRoom)
+                    if (IsReservation)
                     {
-                        var List = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == item.IdRoom).SingleOrDefault();
-                        //List.Status = "Đang đặt";
+                        foreach (var item in ListSelectRoom)
+                        {
+                            var List = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == item.IdRoom).SingleOrDefault();
+                            //List.Status = "Đang đặt";
 
-                        reservation_detail = new RESERVATION_DETAIL() { IdReservation = reservation.IdReservation, Status = "Phòng đã đặt", IdRoom = item.IdRoom };
+                            reservation_detail = new RESERVATION_DETAIL() { IdReservation = reservation.IdReservation, Status = "Phòng đã đặt", IdRoom = item.IdRoom };
+                            DataProvider.Ins.DB.RESERVATION_DETAIL.Add(reservation_detail);
+                        }
+                    }
+                    else
+                    {
+
+                        reservation_detail = new RESERVATION_DETAIL() { IdReservation = reservation.IdReservation, Status = "Phòng đã đặt", IdRoom = IdRoom };
                         DataProvider.Ins.DB.RESERVATION_DETAIL.Add(reservation_detail);
                     }
                     DataProvider.Ins.DB.SaveChanges();
                     IsSave = true;
                     p.Close();
                 }
-                
+
             }
             );
 
@@ -174,8 +223,24 @@ namespace QLKS.ViewModel
             {
                 //if (p.dtStartDate.SelectedDate < DateTime.Now) return false;
                 if (p.dtStartDate.SelectedDate == null || p.dtpEndDate.SelectedDate == null || p.tpStartTime.SelectedTime == null || p.tpEndTime.SelectedTime == null) return false;
-                if (p.dtStartDate.SelectedDate > p.dtpEndDate.SelectedDate) return false;
-                if (p.dtStartDate.SelectedDate == p.dtpEndDate.SelectedDate && p.tpStartTime.SelectedTime > p.tpEndTime.SelectedTime) return false;
+                if (p.dtStartDate.SelectedDate.Value.Date > p.dtpEndDate.SelectedDate.Value.Date) return false;
+                if (p.dtStartDate.SelectedDate == p.dtpEndDate.SelectedDate)
+                {
+                    var zero = new TimeSpan(0, 0, 0);
+                    var twelve = new TimeSpan(12, 0, 0);
+                    if (p.tpEndTime.SelectedTime.Value.TimeOfDay == twelve)
+                    {
+                        if (p.tpStartTime.SelectedTime.Value.Hour > 12) return true;
+                    }
+                    if (p.tpEndTime.SelectedTime.Value.TimeOfDay == zero)
+                    {
+                        if (p.tpStartTime.SelectedTime.Value.Hour < 12) return true;
+                    }
+                    else
+                    {
+                        if (DateTime.Compare(p.tpStartTime.SelectedTime.Value, p.tpEndTime.SelectedTime.Value) == 1) return false;
+                    }
+                }
                 return true;
             },
             (p) =>
@@ -191,20 +256,24 @@ namespace QLKS.ViewModel
                     }
                     else
                     {
+                        IsAdd = true;
                         foreach (var detail in templist)
                         {
-                            
-                            //if ((detail.RESERVATION.End_Date == p.dtStartDate.SelectedDate && detail.RESERVATION.End_Date.TimeOfDay < p.tpStartTime.SelectedTime.Value.TimeOfDay) || (detail.RESERVATION.Start_Date == p.dtpEndDate.SelectedDate && detail.RESERVATION.Start_Date.TimeOfDay > p.tpEndTime.SelectedTime.Value.TimeOfDay))
 
-                            if (detail.RESERVATION.End_Date < p.dtStartDate.SelectedDate || detail.RESERVATION.Start_Date > p.dtpEndDate.SelectedDate || (detail.RESERVATION.End_Date == p.dtStartDate.SelectedDate && detail.RESERVATION.End_Date.TimeOfDay < p.tpStartTime.SelectedTime.Value.TimeOfDay ) || (detail.RESERVATION.End_Date == p.dtStartDate.SelectedDate && detail.RESERVATION.Start_Date.TimeOfDay > p.tpEndTime.SelectedTime.Value.TimeOfDay))
-                                IsAdd = true;
+                            //if ((detail.RESERVATION.End_Date == p.dtStartDate.SelectedDate && detail.RESERVATION.End_Date.TimeOfDay < p.tpStartTime.SelectedTime.Value.TimeOfDay) || (detail.RESERVATION.Start_Date == p.dtpEndDate.SelectedDate && detail.RESERVATION.Start_Date.TimeOfDay > p.tpEndTime.SelectedTime.Value.TimeOfDay))
+                            if (detail.Status != "Phòng đã thanh toán")
+                            {
+
+                                if (detail.RESERVATION.End_Date < p.dtStartDate.SelectedDate || detail.RESERVATION.Start_Date > p.dtpEndDate.SelectedDate || (detail.RESERVATION.End_Date == p.dtStartDate.SelectedDate && detail.RESERVATION.End_Date.TimeOfDay < p.tpStartTime.SelectedTime.Value.TimeOfDay))
+                                    IsAdd = false;
+                            }
                         }
                         if (IsAdd)
                         {
                             ListAvailableRoom.Add(item);
                         }
                     }
-                }    
+                }
             }
             );
         }

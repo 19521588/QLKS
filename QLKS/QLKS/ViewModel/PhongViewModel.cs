@@ -247,7 +247,7 @@ namespace QLKS.ViewModel
                 {
                     ListRoom temp = new ListRoom();
                     temp.Room = item;
-                    var reservation = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.End_Date >= time && x.Start_Date <= time).ToList();
+                    var reservation = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.End_Date >= time && x.Start_Date <= time && x.RESERVATION_DETAIL.FirstOrDefault().IdRoom == item.IdRoom && x.RESERVATION_DETAIL.FirstOrDefault().Status != "Phòng đã thanh toán").SingleOrDefault();
 
                     if (reservation == null)
                     {
@@ -262,13 +262,12 @@ namespace QLKS.ViewModel
                     }
                     else
                     {
-                        RESERVATION_DETAIL reservation_detail = null;
-                        foreach (var check in reservation)
-                        {
-                            reservation_detail = DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdRoom == item.IdRoom && x.IdReservation == check.IdReservation).SingleOrDefault();
-                        }
 
-                        if (reservation_detail == null || reservation_detail.Status == "Phòng đã thanh toán")
+                        var reservation_detail = DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdRoom == item.IdRoom && x.IdReservation == reservation.IdReservation).SingleOrDefault();
+
+
+
+                        if (reservation_detail == null)
                         {
                             temp.IsDay = false;
                             temp.SoGio = 0;
@@ -280,12 +279,12 @@ namespace QLKS.ViewModel
                         }
                         else
                         {
-                            var r = reservation.Where(y => y.IdReservation == reservation_detail.IdReservation).SingleOrDefault();
-                            var customer = DataProvider.Ins.DB.CUSTOMERs.Where(x => x.IdCustomer == r.IdCustomer).SingleOrDefault();
-                            temp.SoNgayO = r.Date.Value;
-                            if (r.Date.Value == 0)
+
+                            var customer = DataProvider.Ins.DB.CUSTOMERs.Where(x => x.IdCustomer == reservation.IdCustomer).SingleOrDefault();
+                            temp.SoNgayO = reservation.Date.Value;
+                            if (reservation.Date.Value == 0)
                             {
-                                temp.SoGio = r.End_Date.Hour - r.Start_Date.Hour;
+                                temp.SoGio = reservation.End_Date.Hour - reservation.Start_Date.Hour;
                                 temp.IsDay = false;
                             }
                             else
@@ -298,7 +297,7 @@ namespace QLKS.ViewModel
                             temp.Status = reservation_detail.Status;
                             temp.CategoryRoom = category_rooms.Name;
                             temp.DonDep = item.Clean;
-                            temp.Reservation = r;
+                            temp.Reservation = reservation;
                         }
 
                     }
