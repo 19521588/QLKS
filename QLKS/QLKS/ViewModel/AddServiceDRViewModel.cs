@@ -61,6 +61,7 @@ namespace QLKS.ViewModel
                 return true;
             }, (p) =>
             {
+
                 var temp = p.cbTimKiemLoaiDV.SelectedItem as CATEGORY_SERVICE;
                 ListService = new ObservableCollection<ServiceCt>(LoadByChanged(TempListService, temp.Name, p.txbTimKiem.Text));
 

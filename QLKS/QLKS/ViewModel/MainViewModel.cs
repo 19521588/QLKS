@@ -117,7 +117,7 @@ namespace QLKS.ViewModel
             {
                 if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                  
+
                     mainWindow.DataContext = new MainViewModel();
 
                     LoadLoginWindow(mainWindow);
@@ -126,7 +126,7 @@ namespace QLKS.ViewModel
 
 
         }
-     
+
         public void LoadLoginWindow(MainWindow p)
         {
             IsLoaded = true;
@@ -139,19 +139,19 @@ namespace QLKS.ViewModel
             if (loginWindow.DataContext == null)
                 return;
             var loginVM = loginWindow.DataContext as LoginViewModel;
-           
+
             if (loginVM.IsLogin)
             {
                 p.Show();
                 IsClose = true;
                 mainWindow = p;
                 User = loginVM.User;
-               
+
                 var employee = DataProvider.Ins.DB.EMPLOYEEs.Where(x => x.IdEmployee == User.IdEmployee).SingleOrDefault();
                 (p.DataContext as MainViewModel).User = loginVM.User;
                 (p.DataContext as MainViewModel).Name = employee.Name;
                 (p.DataContext as MainViewModel).LoadRole(User.Type);
-                (p.DataContext as MainViewModel).IsClose=true;
+                (p.DataContext as MainViewModel).IsClose = true;
             }
             else
             {
@@ -169,9 +169,13 @@ namespace QLKS.ViewModel
                         //Đang là Home rồi thì không set nữa
                         if (Title_Main.Equals(item.name))
                         {
+                            //Home_UC = new uc_Home();
+                            //(CurrentView.DataContext as StatisticalViewModel).LoadData();
                             break;
                         }
+
                         CurrentView = Home_UC;
+                        (Home_UC.DataContext as StatisticalViewModel).LoadData();
                         break;
                     case "Phòng":
                         if (Phong_UC == null)
@@ -192,7 +196,9 @@ namespace QLKS.ViewModel
                         {
                             HoaDon_UC = new uc_Bill(User);
                         }
+
                         CurrentView = HoaDon_UC;
+                        (HoaDon_UC.DataContext as BillViewModel).Load_Bill();
                         break;
                     case "QL nhân Viên":
                         if (NhanVien_UC == null)
@@ -301,7 +307,7 @@ namespace QLKS.ViewModel
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if(IsClose)
+            if (IsClose)
             {
                 if (MessageBox.Show("Bạn chắc chắn muốn đóng ứng dụng", "Thông báo",
             MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -312,5 +318,5 @@ namespace QLKS.ViewModel
             }
         }
     }
-    
+
 }

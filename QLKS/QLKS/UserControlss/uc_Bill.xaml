@@ -7,7 +7,7 @@
         xmlns:validation ="clr-namespace:QLKS.Validation"
         mc:Ignorable="d"
         x:Name="BillWd"
-        Height="650" Width="1300"
+         d:DesignHeight="650" d:DesignWidth="1300"
         Background="White"  
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
          xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"

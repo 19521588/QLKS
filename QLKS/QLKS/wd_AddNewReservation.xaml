@@ -193,12 +193,16 @@
 
                         <Button Width="89" Height="36" Background="#478C10" Content="Tìm"
                                 Command="{Binding LoadListRoomCommand}"
-                                
+                                Visibility="{Binding VisGrid, Converter={StaticResource BooleanToVisibilityConverter}}"
                                 CommandParameter="{Binding ElementName= wdAddReservation}"
                         HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 100 20 8"/>
 
-                        <!--Lisview Phòng Trống-->
-                        <TextBlock Text="Danh sách phòng trống" FontSize="20" Foreground="#00A3FF"
+                        <Grid
+                              Visibility="{Binding VisGrid, Converter={StaticResource BooleanToVisibilityConverter}}"
+                              Name="gr_addRoom"
+                            >
+                            <!--Lisview Phòng Trống-->
+                            <TextBlock Text="Danh sách phòng trống" FontSize="20" Foreground="#00A3FF"
                                Margin="12 160 0 0"/>
                         <Grid Background="#FFFCFC" Height="190" Width="230" Margin="12 0  0 64"
                         HorizontalAlignment="Left" VerticalAlignment="Bottom">
@@ -216,50 +220,50 @@
                       CanUserReorderColumns="True"
                       FontSize="12"
                       Name="dataGrid">
-                        <DataGrid.Resources>
-                            <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="Gainsboro" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </DataGrid.Resources>
-                        <!--<i:Interaction.Triggers>
+                                    <DataGrid.Resources>
+                                        <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gainsboro" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGrid.Resources>
+                                    <!--<i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
                                                    CommandParameter="{Binding ElementName=dataGrid}"></i:InvokeCommandAction>
                             </i:EventTrigger>
 
                         </i:Interaction.Triggers>-->
-                        <DataGrid.CellStyle>
-                            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
-                                <Style.Triggers>
-                                    <Trigger Property="DataGridCell.IsSelected" Value="True">
-                                        <Setter Property="FontWeight" Value="DemiBold" />
-                                        <Setter Property="FontSize" Value="12" />
-                                        <Setter Property="Foreground" Value="Black"></Setter>
-                                    </Trigger>
+                                    <DataGrid.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                            <Style.Triggers>
+                                                <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                                    <Setter Property="FontWeight" Value="DemiBold" />
+                                                    <Setter Property="FontSize" Value="12" />
+                                                    <Setter Property="Foreground" Value="Black"></Setter>
+                                                </Trigger>
 
-                                </Style.Triggers>
-                            </Style>
-                        </DataGrid.CellStyle>
-                        <DataGrid.ColumnHeaderStyle>
-                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
-                                <Setter Property="Foreground" Value="White"></Setter>
-                                <Setter Property="FontWeight" Value="DemiBold"></Setter>
-                            </Style>
-                        </DataGrid.ColumnHeaderStyle>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGrid.CellStyle>
+                                    <DataGrid.ColumnHeaderStyle>
+                                        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                            <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                                            <Setter Property="Foreground" Value="White"></Setter>
+                                            <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                                        </Style>
+                                    </DataGrid.ColumnHeaderStyle>
 
-                        <DataGrid.Columns>
-                            <materialDesign:DataGridTextColumn Width="110" Header="Số phòng" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Width="100" Header="Loại phòng" Binding="{Binding CATEGORY_ROOM.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                            
-                        </DataGrid.Columns>
-                    </DataGrid>
-                        </Grid>
-                        <Button Width="89" Height="36" Content="Thêm"
+                                    <DataGrid.Columns>
+                                        <materialDesign:DataGridTextColumn Width="110" Header="Số phòng" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
+                                        <materialDesign:DataGridTextColumn Width="100" Header="Loại phòng" Binding="{Binding CATEGORY_ROOM.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                            <Button Width="89" Height="36" Content="Thêm"
                                 Command="{Binding AddCommand}"
                                 Style="{StaticResource AddButton}"
                                 CommandParameter="{Binding ElementName= wdAddReservation}"
@@ -292,48 +296,49 @@
                       CanUserReorderColumns="True"
                       FontSize="12"
                       Name="dataGrid2">
-                                <DataGrid.Resources>
-                                    <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="Gainsboro" />
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </DataGrid.Resources>
-                                <!--<i:Interaction.Triggers>
+                                    <DataGrid.Resources>
+                                        <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gainsboro" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGrid.Resources>
+                                    <!--<i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
                                                    CommandParameter="{Binding ElementName=dataGrid}"></i:InvokeCommandAction>
                             </i:EventTrigger>
 
                         </i:Interaction.Triggers>-->
-                                <DataGrid.CellStyle>
-                                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
-                                        <Style.Triggers>
-                                            <Trigger Property="DataGridCell.IsSelected" Value="True">
-                                                <Setter Property="FontWeight" Value="DemiBold" />
-                                                <Setter Property="FontSize" Value="12" />
-                                                <Setter Property="Foreground" Value="Black"></Setter>
-                                            </Trigger>
+                                    <DataGrid.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                            <Style.Triggers>
+                                                <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                                    <Setter Property="FontWeight" Value="DemiBold" />
+                                                    <Setter Property="FontSize" Value="12" />
+                                                    <Setter Property="Foreground" Value="Black"></Setter>
+                                                </Trigger>
 
-                                        </Style.Triggers>
-                                    </Style>
-                                </DataGrid.CellStyle>
-                                <DataGrid.ColumnHeaderStyle>
-                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                        <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
-                                        <Setter Property="Foreground" Value="White"></Setter>
-                                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
-                                    </Style>
-                                </DataGrid.ColumnHeaderStyle>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGrid.CellStyle>
+                                    <DataGrid.ColumnHeaderStyle>
+                                        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                            <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                                            <Setter Property="Foreground" Value="White"></Setter>
+                                            <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                                        </Style>
+                                    </DataGrid.ColumnHeaderStyle>
 
-                                <DataGrid.Columns>
-                                    <materialDesign:DataGridTextColumn Width="110" Header="Phòng" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
-                                    <materialDesign:DataGridTextColumn Width="100" Header="Loại phòng" Binding="{Binding CATEGORY_ROOM.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                                    
-                                </DataGrid.Columns>
-                            </DataGrid>
+                                    <DataGrid.Columns>
+                                        <materialDesign:DataGridTextColumn Width="110" Header="Phòng" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
+                                        <materialDesign:DataGridTextColumn Width="100" Header="Loại phòng" Binding="{Binding CATEGORY_ROOM.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
                         </Grid>
 
                     </Grid>
