@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLKS"
         mc:Ignorable="d"
-        Title="DatPhong" Height="550" Width="995"
+        Title="DatPhong" Height="580" Width="995"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         x:Name="wdAddReservation"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -33,7 +33,7 @@
     </i:Interaction.Triggers>
     <!--Bo góc-->
     <Window.Clip>
-        <RectangleGeometry Rect="0,0,995,550" RadiusX="10" RadiusY="10">
+        <RectangleGeometry Rect="0,0,995,580" RadiusX="10" RadiusY="10">
         </RectangleGeometry>
     </Window.Clip>
 
@@ -44,13 +44,13 @@
                 <RowDefinition Height="60"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" FontSize="30" FontWeight="Bold" Text="{Binding Title}" Margin="0 12 0 0"
+            <TextBlock Grid.Row="0" FontSize="30" FontWeight="Bold" Text="ĐẶT PHÒNG" Margin="0 12 0 0"
                    Foreground="#00A3FF" VerticalAlignment="Top" HorizontalAlignment="Center"/>
             <Grid Grid.Row="1">
-                <Grid  Width="900" Height="420" Background="#F2F1F1"
+                <Grid  Width="900" Height="450" Background="#F2F1F1"
               VerticalAlignment="Top" HorizontalAlignment="Center">
                     <Grid.Clip>
-                        <RectangleGeometry Rect="0,0,900,420" RadiusX="10" RadiusY="10"/>
+                        <RectangleGeometry Rect="0,0,900,450" RadiusX="10" RadiusY="10"/>
                     </Grid.Clip>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="366"></ColumnDefinition>
@@ -60,46 +60,46 @@
                     <StackPanel Grid.Column="0" Orientation="Vertical">
                         <TextBlock FontSize="30" FontWeight="Bold" Text="Thông tin khách hàng" Margin="0 10 0 0"
                    Foreground="#00A3FF" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-                        <Grid Height="25" Width="213" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65 15 0 0">
-                            <materialDesign:PackIcon Kind="AccountBox" Height="25" Width="25"/>
-                            <TextBox x:Name="txbName" Margin="30 0 0 0" materialDesign:HintAssist.Hint="Nhập họ tên khách hàng"/>
+                        <Grid Height="30" Width="230" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65 15 0 0">
+                            <materialDesign:PackIcon Kind="AccountBox" Height="30" Width="30"/>
+                            <TextBox x:Name="txbName" FontSize="16" Margin="40 0 0 0" materialDesign:HintAssist.Hint="Nhập họ tên khách hàng"/>
                         </Grid>
 
-                        <Grid Height="25" Width="213" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65 25 0 0">
-                            <materialDesign:PackIcon Kind="CalendarRange" Height="25" Width="25"/>
+                        <Grid Height="30" Width="230" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65 25 0 0">
+                            <materialDesign:PackIcon Kind="CalendarRange" Height="30" Width="30"/>
                             <Grid Grid.Column="1" >
-                                <DatePicker x:Name="dtBirth" Margin="30 -10 0 0" Padding="0"
+                                <DatePicker x:Name="dtBirth" FontSize="16" Margin="40 -10 0 0" Padding="0"
                                           materialDesign:HintAssist.Hint="Ngày tháng năm sinh"
                                           Style="{StaticResource MaterialDesignFloatingHintDatePicker}" DisplayDate="2021-10-01" />
                             </Grid>
                         </Grid>
 
-                        <Grid Height="25" Width="213" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65 27 0 0">
+                        <Grid Height="30" Width="230" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65 27 0 0">
                             <materialDesign:PackIcon Kind="CardAccountDetailsOutline" Height="25" Width="25"/>
-                            <TextBox x:Name="txbCCCD" MaxLength="12" Margin="30 0 0 0" materialDesign:HintAssist.Hint="Nhập CCCD"/>
+                            <TextBox x:Name="txbCCCD" FontSize="16" MaxLength="12" Margin="40 0 0 0" materialDesign:HintAssist.Hint="Nhập CCCD"/>
                         </Grid>
 
-                        <Grid Height="25" Width="213" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65 27 0 0">
+                        <Grid Height="30" Width="230" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65 27 0 0">
                             <materialDesign:PackIcon Kind="Phone" Height="25" Width="25"/>
-                            <TextBox x:Name="txbPhone" Margin="30 0 0 0" MaxLength="10" materialDesign:HintAssist.Hint="Nhập SDT"/>
+                            <TextBox x:Name="txbPhone" FontSize="16" Margin="40 0 0 0" MaxLength="10" materialDesign:HintAssist.Hint="Nhập SDT"/>
                         </Grid>
 
-                        <Grid Height="25" Width="213" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65 27 0 0">
+                        <Grid Height="30" Width="230" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65 27 0 0">
                             <materialDesign:PackIcon Kind="MapMarkerRadiusOutline" Height="25" Width="25"/>
-                            <TextBox x:Name="txbAddress" Margin="30 0 0 0" materialDesign:HintAssist.Hint="Nhập địa chỉ"/>
+                            <TextBox x:Name="txbAddress" FontSize="16" Margin="40 0 0 0" materialDesign:HintAssist.Hint="Nhập địa chỉ"/>
                         </Grid>
 
-                        <Grid Height="25" Width="213" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65 27 0 0">
+                        <Grid Height="30" Width="230" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65 27 0 0">
                             <materialDesign:PackIcon Kind="Earth" Height="25" Width="25"/>
-                            <TextBox x:Name="txbNationality" Margin="30 0 0 0" materialDesign:HintAssist.Hint="Nhập quốc tịch"/>
+                            <TextBox x:Name="txbNationality" FontSize="16" Margin="40 0 0 0" materialDesign:HintAssist.Hint="Nhập quốc tịch"/>
                         </Grid>
 
-                        <Grid Height="25" Width="213" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65 27 0 0">
+                        <Grid Height="30" Width="230" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65 27 0 0">
                             <materialDesign:PackIcon Kind="GenderTransgender" Height="25" Width="25"/>
-                            <ComboBox x:Name="cbSex" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="30 0 0 0"
+                            <ComboBox x:Name="cbSex" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="40 0 0 0"
                                     Style="{StaticResource MaterialDesignComboBox}"
                                     materialDesign:HintAssist.Hint="Giới tính"
-                                    Height="25" Padding="5" Width="180">
+                                    Height="30" Padding="5" Width="190">
                                 <ComboBoxItem Content="Nam" />
                                 <ComboBoxItem Content="Nữ" />
                             </ComboBox>
@@ -107,7 +107,7 @@
                     </StackPanel>
 
                     <Grid  Grid.Column="1">
-                        <Grid Height="300" Background="Black" Opacity="0.5"></Grid>
+                        <Grid Height="350" Background="Black" Opacity="0.5"></Grid>
                     </Grid>
 
                     <Grid Grid.Column="2">
@@ -116,7 +116,7 @@
                         <Grid Height="33" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left"
                         Margin="30 50 0 0">
                             <materialDesign:PackIcon Kind="CalendarToday" Height="25" Width="25" VerticalAlignment="Bottom"/>
-                            <DatePicker Margin="30 0 0 0" x:Name="dtStartDate"
+                            <DatePicker Margin="30 0 0 0" x:Name="dtStartDate" FontSize="14"
                                         
                             materialDesign:HintAssist.Hint="Ngày bắt đầu"
                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
@@ -134,7 +134,7 @@
                         <Grid Height="33" Width="150" VerticalAlignment="Top" HorizontalAlignment="Right"
                         Margin="0 50 170 0">
                             <materialDesign:PackIcon Kind="ClockOutline" Height="25" Width="25" VerticalAlignment="Bottom"/>
-                            <materialDesign:TimePicker x:Name="tpStartTime"
+                            <materialDesign:TimePicker x:Name="tpStartTime" FontSize="14"
                                       Margin="30 0 0 0"
                                       Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
                                       materialDesign:HintAssist.Hint="Giờ bắt đầu" >
@@ -152,7 +152,7 @@
                         <Grid Height="33" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left"
                         Margin="30 100 0 0">
                             <materialDesign:PackIcon Kind="CalendarToday" Height="25" Width="25" VerticalAlignment="Bottom"/>
-                            <DatePicker Margin="30 0 0 0" x:Name="dtpEndDate"
+                            <DatePicker Margin="30 0 0 0" x:Name="dtpEndDate" FontSize="14"
                             materialDesign:HintAssist.Hint="Ngày kết thúc"
                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" >
                                 <i:Interaction.Triggers>
@@ -169,7 +169,7 @@
                         <Grid Height="33" Width="150" VerticalAlignment="Top" HorizontalAlignment="Right"
                         Margin="0 100 170 0">
                             <materialDesign:PackIcon Kind="ClockOutline" Height="25" Width="25" VerticalAlignment="Bottom"/>
-                            <materialDesign:TimePicker x:Name="tpEndTime"
+                            <materialDesign:TimePicker x:Name="tpEndTime" FontSize="14"
                                       Margin="30 0 0 0"
                                       Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
                                       materialDesign:HintAssist.Hint="Giờ kết thúc">
@@ -187,15 +187,7 @@
                         <Grid Height="33" Width="120" VerticalAlignment="Top" HorizontalAlignment="Right"
                         Margin="0 50 20 0">
                             <materialDesign:PackIcon Kind="HumanMaleFemale" Height="25" Width="25" VerticalAlignment="Bottom"/>
-                            <TextBox x:Name="txbAmount" Margin="30 0 0 0" materialDesign:HintAssist.Hint="Nhập số người">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="SelectedChanged">
-                                        <i:InvokeCommandAction
-                                            Command="{Binding LoadListRoomCommand}"
-                                            CommandParameter="{Binding ElementName=wdAddReservation}"
-                                            ></i:InvokeCommandAction>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
+                            <TextBox x:Name="txbAmount" FontSize="14" Margin="30 5 0 0" materialDesign:HintAssist.Hint="Nhập số người">
                             </TextBox>
                         </Grid>
 
@@ -208,10 +200,10 @@
                         <!--Lisview Phòng Trống-->
                         <TextBlock Text="Danh sách phòng trống" FontSize="20" Foreground="#00A3FF"
                                Margin="12 160 0 0"/>
-                        <Grid Background="#FFFCFC" Height="172" Width="230" Margin="12 0  0 54"
+                        <Grid Background="#FFFCFC" Height="190" Width="230" Margin="12 0  0 64"
                         HorizontalAlignment="Left" VerticalAlignment="Bottom">
                             <Grid.Clip>
-                                <RectangleGeometry Rect="0,0,230,172" RadiusX="10" RadiusY="10"/>
+                                <RectangleGeometry Rect="0,0,230,190" RadiusX="10" RadiusY="10"/>
                             </Grid.Clip>
                             <DataGrid
                         ItemsSource="{Binding ListAvailableRoom}" 
@@ -271,16 +263,23 @@
                                 Command="{Binding AddCommand}"
                                 Style="{StaticResource AddButton}"
                                 CommandParameter="{Binding ElementName= wdAddReservation}"
-                        HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 290 8">
+                        HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 290 16">
                             
+                        </Button>
+                        <Button Width="89" Height="36" Content="Xóa"
+                                Command="{Binding RemoveCommand}"
+                                Style="{StaticResource DeleteButton}"
+                                CommandParameter="{Binding ElementName= wdAddReservation}"
+                        HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 20 16">
+
                         </Button>
                         <!--Lisview Phòng Đã Chọn-->
                         <TextBlock Text="Phòng đã chọn" FontSize="20" Foreground="#00A3FF"
                                Margin="0 160 111 0" HorizontalAlignment="Right"/>
-                        <Grid Background="#FFFCFC" Height="172" Width="230" Margin="0 0 19 54"
+                        <Grid Background="#FFFCFC" Height="190" Width="230" Margin="0 0 19 64"
                         HorizontalAlignment="Right" VerticalAlignment="Bottom">
                             <Grid.Clip>
-                                <RectangleGeometry Rect="0,0,230,172" RadiusX="10" RadiusY="10"/>
+                                <RectangleGeometry Rect="0,0,230,190" RadiusX="10" RadiusY="10"/>
                             </Grid.Clip>
                             <DataGrid
                         ItemsSource="{Binding ListSelectRoom}" 
@@ -340,16 +339,17 @@
                     </Grid>
 
                 </Grid>
-                <Button Width="89" Height="36" Background="#478C10" Content="Lưu"
+                <Button Width="120" Height="45" Background="#478C10" Content="Lưu"
                         Command="{Binding SaveCommand}"
                                 CommandParameter="{Binding ElementName= wdAddReservation}"
-                        HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 212 11">
+                        HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 220 12">
                     
                 </Button>
-                <Button Width="89" Height="36" Background="#9D9999" Content="Hủy"
+                <Button Width="120" Height="45" Background="#9D9999" Content="Hủy"
                         Command="{Binding CloseCommand}"
+                        BorderThickness="0"
                         CommandParameter="{Binding ElementName= wdAddReservation}"
-                        HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 80 12">
+                        HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 60 12">
                     
                 </Button>
             </Grid>

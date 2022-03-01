@@ -9,37 +9,37 @@
         TextElement.FontFamily="Roboto"
         AllowsTransparency="True"         
         WindowStartupLocation="CenterScreen" WindowStyle="None" 
-        Title="Them_SuaKhachHang" Height="550" Width="500">
+        Title="Them_SuaKhachHang" Height="650" Width="500">
     <Window.Clip>
-        <RectangleGeometry Rect="0,0,500,550" RadiusX="10" RadiusY="10"/>
+        <RectangleGeometry Rect="0,0,500,650" RadiusX="10" RadiusY="10"/>
     </Window.Clip>
 
     <Border BorderThickness="1" BorderBrush="#2C2A2A" CornerRadius="10">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition ></RowDefinition>
-                <RowDefinition Height="390" ></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="490" ></RowDefinition>
                 <RowDefinition  ></RowDefinition>
             </Grid.RowDefinitions>
 
             <!--Làm phần tiêu đề -->
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Background="#3d4751">
                 <TextBlock x:Name="txbTitle" Text="Nhập thông tin khách hàng"  
-                               HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
                                Height="40"
                                FontSize="30"
                                FontWeight="Bold" 
-                               Foreground="#00A3FF"
+                               Foreground="#FFFFFF"
                      />
 
             </Grid>
             <!--Làm phần phần nhập thông tin -->
-            <Grid Grid.Row="1" Width="350" Height="390" HorizontalAlignment="Center" Background="#F2F1F1" >
+            <Grid Grid.Row="1" Width="400" Height="490" HorizontalAlignment="Center" Background="#FFFFFF" >
                 <Grid.Clip>
-                    <RectangleGeometry Rect="0,0,350,390" RadiusX="10" RadiusY="10"/>
+                    <RectangleGeometry Rect="0,0,400,490" RadiusX="10" RadiusY="10"/>
                 </Grid.Clip>
 
-                <Grid Height="390" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid Height="490" Width="400" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
@@ -58,14 +58,16 @@
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition ></ColumnDefinition>
-                            <ColumnDefinition Width="200" ></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="300" ></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="Account" Width="25" Height="25" />
+                            <materialDesign:PackIcon Kind="Account" Width="40" Height="40" />
                         </Grid>
-                        <Grid Grid.Column="1"  VerticalAlignment="Center">
+                        <Grid Grid.Column="2"  VerticalAlignment="Center">
 
-                            <TextBox x:Name="txbName"                                                       
+                            <TextBox x:Name="txbName"
+                                     FontSize="20"
                                     materialDesign:HintAssist.Hint="Họ và tên khách hàng"                                                      
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"                                                      
                                     VerticalAlignment="Center" />
@@ -78,13 +80,15 @@
                     <Grid Grid.Row="1" Margin="0 0 0 0"  HorizontalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition ></ColumnDefinition>
-                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="300"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="CalendarRange" Width="25" Height="25" />
+                            <materialDesign:PackIcon Kind="CalendarRange" Width="40" Height="40" />
                         </Grid>
-                        <Grid Grid.Column="1" >
+                        <Grid Grid.Column="2" >
                             <DatePicker x:Name="dtBirth" Margin="0 0 0 0" Padding="0"
+                                        FontSize="20"
                                           materialDesign:HintAssist.Hint="Ngày tháng năm sinh"
                                           Style="{StaticResource MaterialDesignFloatingHintDatePicker}" DisplayDate="2021-10-01" />
                         </Grid>
@@ -94,13 +98,15 @@
                     <Grid Grid.Row="2" Margin="0 0 0 0"  HorizontalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition ></ColumnDefinition>
-                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="300"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="GenderMaleFemale" Width="25" Height="25" />
+                            <materialDesign:PackIcon Kind="GenderMaleFemale" Width="40" Height="40" />
                         </Grid>
-                        <Grid Grid.Column="1" >
+                        <Grid Grid.Column="2" >
                             <ComboBox Name="cbSex"
+                                      FontSize="20"
                                 VerticalAlignment="Center"                                                                      
                                 materialDesign:HintAssist.Hint="Giới tính">
                                 <ComboBoxItem                                        
@@ -116,13 +122,15 @@
                     <Grid Grid.Row="3"  HorizontalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition ></ColumnDefinition>
-                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="300"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="CardAccountDetails"  Width="25" Height="25" />
+                            <materialDesign:PackIcon Kind="CardAccountDetails"  Width="40" Height="40" />
                         </Grid>
-                        <Grid Grid.Column="1" VerticalAlignment="Center">
+                        <Grid Grid.Column="2" VerticalAlignment="Center">
                             <TextBox Name="txbCCCD"  Margin="3 0 0 0"
+                                     FontSize="20"
                                 materialDesign:HintAssist.Hint="Mã căn cước công dân"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"                      
                                 VerticalAlignment="Center"  />
@@ -133,13 +141,15 @@
                     <Grid Grid.Row="4"  HorizontalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="300"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="Phone" Width="25" Height="25" />
+                            <materialDesign:PackIcon Kind="Phone" Width="40" Height="40" />
                         </Grid>
-                        <Grid Grid.Column="1" VerticalAlignment="Center">
+                        <Grid Grid.Column="2" VerticalAlignment="Center">
                             <TextBox x:Name="txbPhone"
+                                     FontSize="20"
                         materialDesign:HintAssist.Hint="Số điện thoại"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         VerticalAlignment="Center" />
@@ -150,13 +160,15 @@
                     <Grid Grid.Row="5"  HorizontalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="300"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="MapMarker" Width="25" Height="25" />
+                            <materialDesign:PackIcon Kind="MapMarker" Width="40" Height="40" />
                         </Grid>
-                        <Grid Grid.Column="1"  VerticalAlignment="Center">
+                        <Grid Grid.Column="2"  VerticalAlignment="Center">
                             <TextBox x:Name="txbAddress"
+                                     FontSize="20"
                         materialDesign:HintAssist.Hint="Địa chỉ"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         VerticalAlignment="Center"  />
@@ -167,13 +179,15 @@
                     <Grid Grid.Row="6"  HorizontalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="300"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="Earth" Width="25" Height="25" />
+                            <materialDesign:PackIcon Kind="Earth" Width="40" Height="40" />
                         </Grid>
-                        <Grid Grid.Column="1" VerticalAlignment="Center">
+                        <Grid Grid.Column="2" VerticalAlignment="Center">
                             <TextBox x:Name="txbNationality"
+                                     FontSize="20"
                         materialDesign:HintAssist.Hint="Quốc tịch"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         VerticalAlignment="Center"   />
@@ -184,7 +198,7 @@
 
             <!--Làm nút nhập thêm hoặc hủy -->
             <Grid Grid.Row="2">
-                <Grid  Width="250" Margin="0 0 0 0">
+                <Grid  Width="320" Margin="0 0 0 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition ></ColumnDefinition>
                         <ColumnDefinition ></ColumnDefinition>
@@ -193,19 +207,7 @@
                     <Grid Grid.Column="0">
                         <Button Content="Thêm"
                                 Command="{Binding AddCommand}"
-                                FontWeight="Bold" Foreground="White"   Width="100" Height="40" Margin=" 4 4 20 0" Background="#478C10" >
-                             
-                               
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Visibility" Value="Hidden"></Setter>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=Text, ElementName=txbTitle }" Value="Nhập thông tin khách hàng">
-                                            <Setter Property="Visibility" Value="Visible"></Setter>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
+                                FontWeight="Bold" Foreground="White"   Width="120" Height="50" Margin=" 4 4 20 0" Background="#478C10" >
                         </Button>
 
                     </Grid>
@@ -215,7 +217,7 @@
                         <Button x:Name="btnHuy" 
                                 Command="{Binding CloseCommand}"
                                     Content="Hủy bỏ" 
-                                    Width="100" Height="40"                                    
+                                    Width="120" Height="50"                                    
                                     Margin=" 14 4 0 0" 
                                     Background="#9D9999" >
                         </Button>
