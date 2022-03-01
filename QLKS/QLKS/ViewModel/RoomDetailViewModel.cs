@@ -30,7 +30,7 @@ namespace QLKS.ViewModel
         {
 
         }
-        public RoomDetailViewModel(ListRoom listRoom,USER User)
+        public RoomDetailViewModel(ListRoom listRoom, USER User)
         {
             Load(listRoom);
 
@@ -51,7 +51,7 @@ namespace QLKS.ViewModel
 
                 if (MessageBox.Show("Bạn có chắc chắn muốn nhận phòng", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                   if(listRoom.Status=="Phòng đã đặt")
+                    if (listRoom.Status == "Phòng đã đặt")
                     {
                         var reservationDetail = DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdReservation == listRoom.Reservation.IdReservation && x.IdRoom == listRoom.Room.IdRoom).SingleOrDefault();
                         reservationDetail.Status = "Phòng đang thuê";
@@ -64,9 +64,9 @@ namespace QLKS.ViewModel
                         listRoom.Status = "Phòng đang thuê";
                         Load(listRoom);
                     }
-                   else
+                    else
                     {
-                        wd_AddNewReservation wdAddReservation = new wd_AddNewReservation(false,listRoom.Room.IdRoom);
+                        wd_AddNewReservation wdAddReservation = new wd_AddNewReservation(false, listRoom.Room.IdRoom);
 
                         wdAddReservation.ShowDialog();
 
@@ -92,7 +92,7 @@ namespace QLKS.ViewModel
                                 listRoom.IsDay = true;
 
                             }
-                            var rooms = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs.Where(x=>x.IdRoom==listRoom.Room.IdRoom)).SingleOrDefault();
+                            var rooms = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == listRoom.Room.IdRoom)).SingleOrDefault();
                             var categoryRoom = new ObservableCollection<CATEGORY_ROOM>(DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == listRoom.Room.IdCategoryRoom)).SingleOrDefault();
                             listRoom.TenKH = customer.Name;
                             listRoom.Status = reservation_detail.Status;
@@ -146,12 +146,12 @@ namespace QLKS.ViewModel
                             DataProvider.Ins.DB.SaveChanges();
                         }
                     }
-                    foreach(var item in ListService)
+                    foreach (var item in ListService)
                     {
                         var temp = new RENTALDETAIL();
                         temp.IdService = item.Service.IdService;
                         temp.Total = item.Total;
-                        temp.Amount=item.Amount;
+                        temp.Amount = item.Amount;
                         temp.IdRental = rental.IdRental;
                         DataProvider.Ins.DB.RENTALDETAILs.Add(temp);
                         DataProvider.Ins.DB.SaveChanges();
@@ -174,26 +174,26 @@ namespace QLKS.ViewModel
                 }
 
             });
-           PaymentCommand = new RelayCommand<RoomDetail>((p) =>
-            {
-                return true;
-            }, (p) =>
-            {
-                var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.IdReservation == listRoom.Reservation.IdReservation).SingleOrDefault();
-                Bill_Detail BillDetail = new Bill_Detail(ListService,rental.IdRental ,false,User);
-                BillDetail.ShowDialog();
+            PaymentCommand = new RelayCommand<RoomDetail>((p) =>
+             {
+                 return true;
+             }, (p) =>
+             {
+                 var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.IdReservation == listRoom.Reservation.IdReservation).SingleOrDefault();
+                 Bill_Detail BillDetail = new Bill_Detail(ListService, rental.IdRental, false, User);
+                 BillDetail.ShowDialog();
 
-                BillDetailViewModel temp = BillDetail.DataContext as BillDetailViewModel;
-                if (temp.IsSave)
-                {
-                    var reservationDetail = DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdReservation == listRoom.Reservation.IdReservation && x.IdRoom==listRoom.Room.IdRoom).SingleOrDefault();
-                    reservationDetail.Status = "Phòng đã thanh toán";
-                    DataProvider.Ins.DB.SaveChanges();
-                    p.Close();
-                }
+                 BillDetailViewModel temp = BillDetail.DataContext as BillDetailViewModel;
+                 if (temp.IsSave)
+                 {
+                     var reservationDetail = DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdReservation == listRoom.Reservation.IdReservation && x.IdRoom == listRoom.Room.IdRoom).SingleOrDefault();
+                     reservationDetail.Status = "Phòng đã thanh toán";
+                     DataProvider.Ins.DB.SaveChanges();
+                     p.Close();
+                 }
 
 
-            });
+             });
         }
         public void Load(ListRoom listRoom)
         {
@@ -224,7 +224,9 @@ namespace QLKS.ViewModel
                 }
             }
 
+
         }
+       
 
     }
 }

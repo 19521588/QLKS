@@ -284,7 +284,15 @@ namespace QLKS.ViewModel
                             temp.SoNgayO = reservation.Date.Value;
                             if (reservation.Date.Value == 0)
                             {
-                                temp.SoGio = reservation.End_Date.Hour - reservation.Start_Date.Hour;
+                                if(reservation.End_Date.Hour==0)
+                                {
+                                    temp.SoGio =24- reservation.Start_Date.Hour;
+                                }
+                                else
+                                {
+                                    temp.SoGio = reservation.End_Date.Hour - reservation.Start_Date.Hour;
+                                }
+                               
                                 temp.IsDay = false;
                             }
                             else

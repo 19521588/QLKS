@@ -14,8 +14,8 @@ namespace QLKS.ViewModel
 {
     public class StatisticalViewModel : BaseViewModel
     {
-      
-        
+
+
         public ICommand YearChangedCommand_Revenue { get; set; }
         public ICommand YearChangedCommand_Rental { get; set; }
         private int _SelectedYear_Revenue { get; set; }
@@ -141,7 +141,7 @@ namespace QLKS.ViewModel
                     SelectedYear_Rental = ItemSource_Year.First().Value;
 
                     LoadDataToChart_Revenue(SelectedYear_Revenue);
-                    LoadDataToChart_Rental (SelectedYear_Rental);
+                    LoadDataToChart_Rental(SelectedYear_Rental);
 
                 }
                 else
@@ -179,7 +179,7 @@ namespace QLKS.ViewModel
             DateTime time = DateTime.Now;
 
             ObservableCollection<Bill> receipts = new ObservableCollection<Bill>
-                (DataProvider.Ins.DB.Bills.OrderBy(x => x.Date_Bill));
+                (DataProvider.Ins.DB.Bills.OrderBy(x => x.Date_Bill).ToList());
 
             if (receipts.Count > 0)
             {
@@ -196,11 +196,8 @@ namespace QLKS.ViewModel
                 }
             }
 
-            foreach (var receipt in DataProvider.Ins.DB.Bills.Where(x => x.Date_Bill.Value.Month == time.Month && x.Date_Bill.Value.Year == time.Year))
-            {
-                Revenue += (long)receipt.Total;
-            }
-            var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.DateRental.Value.Month == time.Month && x.DateRental.Value.Year == time.Year);
+            Revenue=(long)receipts.Where(x => x.Date_Bill.Value.Month == time.Month && x.Date_Bill.Value.Year == time.Year).Sum(y=>y.Total);
+            var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.DateRental.Value.Month == time.Month && x.DateRental.Value.Year == time.Year).ToList();
             Rental_Room_Month = rental.Count();
             Rental_Room_Day = rental.Count(x => x.DateRental.Value.Day == time.Day);
 
@@ -208,7 +205,7 @@ namespace QLKS.ViewModel
         public void LoadDataToChart_Revenue(int year)
         {
             ObservableCollection<Bill> receipts = new ObservableCollection<Bill>
-                (DataProvider.Ins.DB.Bills.Where(x => x.Date_Bill.Value.Year == year).OrderBy(x => x.Date_Bill));
+                (DataProvider.Ins.DB.Bills.Where(x => x.Date_Bill.Value.Year == year).OrderBy(x => x.Date_Bill).ToList());
 
             Revenue_Labels.Clear();
             ChartValues<long> values_service = new ChartValues<long>();
@@ -279,7 +276,7 @@ namespace QLKS.ViewModel
         public void LoadDataToChart_Rental(int year)
         {
             ObservableCollection<Bill> bill = new ObservableCollection<Bill>
-                (DataProvider.Ins.DB.Bills.Where(x => x.Date_Bill.Value.Year == year).OrderBy(x => x.Date_Bill));
+                (DataProvider.Ins.DB.Bills.Where(x => x.Date_Bill.Value.Year == year).OrderBy(x => x.Date_Bill).ToList());
             Labels_Rental.Clear();
             ChartValues<long> values = new ChartValues<long>();
 

@@ -222,13 +222,27 @@ namespace QLKS.ViewModel
             BillDetail.Name = customer.Name;
             BillDetail.Phone = customer.Phone;
 
-            if((reservation.End_Date.Day - reservation.Start_Date.Day)!=0)
+            if(reservation.Date!=0)
             {
-                BillDetail.RoomCharge = int.Parse(roomCategory.Price_Day.ToString()) * (reservation.End_Date.Day - reservation.Start_Date.Day);
+                BillDetail.RoomCharge = int.Parse(roomCategory.Price_Day.ToString()) * reservation.Date.Value;
             }
             else
             {
-                BillDetail.RoomCharge = int.Parse(roomCategory.Price_Hour.ToString()) * (reservation.End_Date.Hour - reservation.Start_Date.Hour);
+               if(reservation.Start_Date.Day!=reservation.End_Date.Day)
+                {
+                    BillDetail.RoomCharge = int.Parse(roomCategory.Price_Hour.ToString()) * (24 + reservation.End_Date.Hour - reservation.Start_Date.Hour);
+                }
+               else
+                {
+                    if (reservation.End_Date.Hour == 0)
+                    {
+                        BillDetail.RoomCharge = int.Parse(roomCategory.Price_Hour.ToString()) * (24 - reservation.Start_Date.Hour);
+                    }
+                    else
+                    {
+                        BillDetail.RoomCharge = int.Parse(roomCategory.Price_Hour.ToString()) * (reservation.End_Date.Hour - reservation.Start_Date.Hour);
+                    }
+                }
 
             }
             TotalMoney = int.Parse((BillDetail.RoomCharge + BillDetail.ServiceCharge).ToString());

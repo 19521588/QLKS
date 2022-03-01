@@ -72,7 +72,7 @@ namespace QLKS.ViewModel
             }
             else
             {
-                Title = "Thuê phòng " + DataProvider.Ins.DB.ROOMs.Where(x=>x.IdRoom==IdRoom).SingleOrDefault().Name;
+                Title = "Thuê phòng " + DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == IdRoom).SingleOrDefault().Name;
                 VisGrid = false;
             }
             IsSave = false;
@@ -140,21 +140,25 @@ namespace QLKS.ViewModel
 
             SaveCommand = new RelayCommand<wd_AddNewReservation>(
             (p) =>
-            {   
+            {
                 if (IsReservation)
                 {
                     if (ListSelectRoom.Count == 0) return false;
                 }
                 if (p.dtStartDate.SelectedDate == null || p.dtpEndDate.SelectedDate == null || p.tpStartTime.SelectedTime == null || p.tpEndTime.SelectedTime == null) return false;
-                if (p.txbName.Text == "" || p.txbCCCD.Text == "" || p.txbAddress.Text == "" || p.txbPhone.Text == "" || p.txbNationality.Text == "" || p.cbSex.Text == "" || p.dtBirth.Text == ""||p.txbAmount.Text=="") return false;
+                if (p.txbName.Text == "" || p.txbCCCD.Text == "" || p.txbAddress.Text == "" || p.txbPhone.Text == "" || p.txbNationality.Text == "" || p.cbSex.Text == "" || p.dtBirth.Text == "" || p.txbAmount.Text == "") return false;
 
                 if (p.dtStartDate.SelectedDate.Value.Date > p.dtpEndDate.SelectedDate.Value.Date) return false;
-               
+
                 if (p.dtStartDate.SelectedDate.Value.Date == p.dtpEndDate.SelectedDate.Value.Date)
                 {
                     var zero = new TimeSpan(0, 0, 0);
-                    
-                   
+                    var twelve = new TimeSpan(12, 0, 0);
+                    if (p.tpEndTime.SelectedTime.Value.TimeOfDay == twelve)
+                    {
+                        if (p.tpStartTime.SelectedTime.Value.Hour > 12) return true;
+                    }
+
                     if (p.tpEndTime.SelectedTime.Value.TimeOfDay == zero)
                     {
                         if (p.tpStartTime.SelectedTime.Value.Hour > 12) return false;
@@ -180,7 +184,35 @@ namespace QLKS.ViewModel
                         TimeSpan datespan = (TimeSpan)(p.dtpEndDate.SelectedDate - p.dtStartDate.SelectedDate);
                         date = datespan.Days;
                     }
-                    reservation = new RESERVATION() { IdCustomer = customer.IdCustomer, Amount = Int32.Parse(p.txbAmount.Text), Start_Date = DateTime.Parse(p.dtStartDate.Text + " " + p.tpStartTime.Text), End_Date = DateTime.Parse(p.dtpEndDate.Text + " " + p.tpEndTime.Text), Date = date, IdEmployee = 1 };
+
+                    DateTime timeStart= DateTime.Parse(p.dtStartDate.Text + " " + p.tpStartTime.Text);
+                    DateTime timeEnd = DateTime.Parse(p.dtpEndDate.Text + " " + p.tpEndTime.Text);
+                    var timeStartFinal = timeStart;
+                    var timeEndFinal = timeEnd;
+                    var zero = new TimeSpan(0, 0, 0);
+                    var twelve = new TimeSpan(12, 0, 0);
+                    if (p.tpStartTime.SelectedTime.Value.TimeOfDay == zero)
+                    {
+                        timeStartFinal = new DateTime(timeStart.Year, timeStart.Month, timeStart.Day, 12, timeStart.Minute, timeStart.Second);
+                    }
+                    if (p.tpStartTime.SelectedTime.Value.TimeOfDay == twelve)
+                    {
+                        timeStartFinal = new DateTime(timeStart.Year, timeStart.Month, timeStart.Day+1, 0, timeStart.Minute, timeStart.Second);
+                    }
+                    if (p.tpEndTime.SelectedTime.Value.TimeOfDay == zero)
+                    {
+                        timeEndFinal = new DateTime(timeEnd.Year, timeEnd.Month, timeEnd.Day, 12, timeEnd.Minute, timeEnd.Second);
+                    }
+                    if (p.tpEndTime.SelectedTime.Value.TimeOfDay == twelve)
+                    {
+                        timeEndFinal = new DateTime(timeEnd.Year, timeEnd.Month, timeEnd.Day + 1, 0, timeEnd.Minute, timeEnd.Second);
+                    }
+
+
+                    reservation = new RESERVATION() { IdCustomer = customer.IdCustomer, Amount = Int32.Parse(p.txbAmount.Text), Start_Date = timeStartFinal, End_Date = timeEndFinal, Date = date, IdEmployee = 1 };
+
+                    
+
                     DataProvider.Ins.DB.RESERVATIONs.Add(reservation);
 
                     if (IsReservation)
@@ -277,5 +309,10 @@ namespace QLKS.ViewModel
             }
             );
         }
+       
+
     }
+
+  
 }
+
