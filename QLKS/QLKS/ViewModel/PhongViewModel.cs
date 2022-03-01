@@ -1,4 +1,5 @@
 ﻿using MaterialDesignThemes.Wpf;
+using QLKS.Convert;
 using QLKS.Model;
 using QLKS.UserControlss;
 using System;
@@ -27,6 +28,12 @@ namespace QLKS.ViewModel
         public ObservableCollection<ListRoom> TempDoubleRoom { get => _TempDoubleRoom; set { _TempDoubleRoom = value; OnPropertyChanged(); } }
         private ObservableCollection<ListRoom> _TempFamilyRoom { get; set; }
         public ObservableCollection<ListRoom> TempFamilyRoom { get => _TempFamilyRoom; set { _TempFamilyRoom = value; OnPropertyChanged(); } }
+        private CATEGORY_ROOM _SelectedCategory { get; set; }
+        public CATEGORY_ROOM SelectedCategory { get => _SelectedCategory; set { _SelectedCategory = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<CATEGORY_ROOM> _ListCategoryRoom { get; set; }
+        public ObservableCollection<CATEGORY_ROOM> ListCategoryRoom { get => _ListCategoryRoom; set { _ListCategoryRoom = value; OnPropertyChanged(); } }
+
         private DateTime _DateTimeNow { get; set; }
         public DateTime DateTimeNow { get => _DateTimeNow; set { _DateTimeNow = value; OnPropertyChanged(); } }
         private ListRoom _SelectedItem { get; set; }
@@ -37,8 +44,9 @@ namespace QLKS.ViewModel
         public ICommand RefreshCommand { get; set; }
         public ICommand LoadDatePickerCommand { get; set; }
         public ICommand LoadTimePickerCommand { get; set; }
+        
         public ICommand ItemClickCommand { get; set; }
-
+        public ICommand SelectionChangedCommand { get; set; }
         public PhongViewModel(USER User)
         {
             DateTimeNow = DateTime.Now;
@@ -50,40 +58,8 @@ namespace QLKS.ViewModel
             },
             (p) =>
             {
+                Selection(p);
 
-                RadioButton radioTinhTrang = new RadioButton();
-                radioTinhTrang.Content = "Tất cả phòng";
-                RadioButton radioDonDep = new RadioButton();
-                radioDonDep.Content = "Tất cả";
-                RadioButton radioLoaiPhong = new RadioButton();
-                radioLoaiPhong.Content = "Tất cả loại phòng";
-                foreach (RadioButton i in p.spTrangThai.Children)
-                {
-                    if (i.IsChecked.Value == true)
-                    {
-                        radioTinhTrang = i;
-                    }
-                }
-                foreach (RadioButton i in p.spDonDep.Children)
-                {
-                    if (i.IsChecked.Value == true)
-                    {
-                        radioDonDep = i;
-                    }
-                }
-                foreach (RadioButton i in p.spLoaiPhong.Children)
-                {
-                    if (i.IsChecked.Value == true)
-                    {
-                        radioLoaiPhong = i;
-                    }
-                }
-                DateTime dateTime = new DateTime();
-                DateTime.TryParse(p.dtpChonNgay.Text + " " + p.tpGio.Text, out dateTime);
-                LoadTemp(dateTime);
-                SingleRoom = new ObservableCollection<ListRoom>(LoadbyStatus(TempSingleRoom, radioTinhTrang.Content.ToString(), radioDonDep.Content.ToString(), radioLoaiPhong.Content.ToString(), ""));
-                DoubleRoom = new ObservableCollection<ListRoom>(LoadbyStatus(TempDoubleRoom, radioTinhTrang.Content.ToString(), radioDonDep.Content.ToString(), radioLoaiPhong.Content.ToString(), ""));
-                FamilyRoom = new ObservableCollection<ListRoom>(LoadbyStatus(TempFamilyRoom, radioTinhTrang.Content.ToString(), radioDonDep.Content.ToString(), radioLoaiPhong.Content.ToString(), ""));
             });
             SearchCommand = new RelayCommand<uc_Phong>((p) =>
             {
@@ -94,40 +70,7 @@ namespace QLKS.ViewModel
             },
             (p) =>
             {
-                RadioButton radioTinhTrang = new RadioButton();
-                radioTinhTrang.Content = "Tất cả phòng";
-                RadioButton radioDonDep = new RadioButton();
-                radioDonDep.Content = "Tất cả";
-                RadioButton radioLoaiPhong = new RadioButton();
-                radioLoaiPhong.Content = "Tất cả loại phòng";
-                foreach (RadioButton i in p.spTrangThai.Children)
-                {
-                    if (i.IsChecked.Value == true)
-                    {
-                        radioTinhTrang = i;
-                    }
-                }
-                foreach (RadioButton i in p.spDonDep.Children)
-                {
-                    if (i.IsChecked.Value == true)
-                    {
-                        radioDonDep = i;
-                    }
-                }
-                foreach (RadioButton i in p.spLoaiPhong.Children)
-                {
-                    if (i.IsChecked.Value == true)
-                    {
-                        radioLoaiPhong = i;
-                    }
-                }
-                DateTime dateTime = new DateTime();
-                DateTime.TryParse(p.dtpChonNgay.Text + " " + p.tpGio.Text, out dateTime);
-                LoadTemp(dateTime);
-                SingleRoom = new ObservableCollection<ListRoom>(LoadbyStatus(TempSingleRoom, radioTinhTrang.Content.ToString(), radioDonDep.Content.ToString(), radioLoaiPhong.Content.ToString(), p.txbTimKiem.Text));
-                DoubleRoom = new ObservableCollection<ListRoom>(LoadbyStatus(TempDoubleRoom, radioTinhTrang.Content.ToString(), radioDonDep.Content.ToString(), radioLoaiPhong.Content.ToString(), p.txbTimKiem.Text));
-                FamilyRoom = new ObservableCollection<ListRoom>(LoadbyStatus(TempFamilyRoom, radioTinhTrang.Content.ToString(), radioDonDep.Content.ToString(), radioLoaiPhong.Content.ToString(), p.txbTimKiem.Text));
-
+                Selection(p);
             });
             RefreshCommand = new RelayCommand<uc_Phong>((p) =>
             {
@@ -138,7 +81,7 @@ namespace QLKS.ViewModel
                p.txbTimKiem.Text = "";
                p.dtpChonNgay.SelectedDate = DateTime.Now;
                p.tpGio.SelectedTime = DateTime.Now;
-
+               p.cbCategoryRoom.SelectedItem = null;
                foreach (RadioButton i in p.spTrangThai.Children)
                {
                    if (i.IsChecked.Value == true)
@@ -153,13 +96,7 @@ namespace QLKS.ViewModel
                        i.IsChecked = false;
                    }
                }
-               foreach (RadioButton i in p.spLoaiPhong.Children)
-               {
-                   if (i.IsChecked.Value == true)
-                   {
-                       i.IsChecked = false;
-                   }
-               }
+              
                Load();
            });
             LoadDatePickerCommand = new RelayCommand<DatePicker>((p) =>
@@ -180,6 +117,14 @@ namespace QLKS.ViewModel
             {
                 p.SelectedTime = DateTime.Now;
 
+            });
+            SelectionChangedCommand = new RelayCommand<uc_Phong>((p) =>
+             {
+                 return true;
+             },
+            (p) =>
+            {
+                Selection(p);
             });
             ItemClickCommand = new RelayCommand<uc_Phong>
                 ((p) =>
@@ -210,31 +155,30 @@ namespace QLKS.ViewModel
                             i.IsChecked = false;
                         }
                     }
-                    foreach (RadioButton i in p.spLoaiPhong.Children)
-                    {
-                        if (i.IsChecked.Value == true)
-                        {
-                            i.IsChecked = false;
-                        }
-                    }
+                  
                     Load();
                 }
             );
         }
         public void Load()
         {
-            SingleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(1, DateTime.Now));
-            DoubleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(2, DateTime.Now));
-            FamilyRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(3, DateTime.Now));
+            ListCategoryRoom = new ObservableCollection<CATEGORY_ROOM>(DataProvider.Ins.DB.CATEGORY_ROOM);
+            var a = new CATEGORY_ROOM();
+            a.Name = "Tất cả loại phòng";
+            
+            ListCategoryRoom.Add(a);
+            SingleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom( DateTime.Now));
+            //DoubleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(2, DateTime.Now));
+            //FamilyRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(3, DateTime.Now));
 
         }
         public void LoadTemp(DateTime time)
         {
-            TempSingleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(1, time));
-            TempDoubleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(2, time));
-            TempFamilyRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(3, time));
+            TempSingleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom( time));
+            //TempDoubleRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(2, time));
+            //TempFamilyRoom = new ObservableCollection<ListRoom>(LoadbyCategoryRoom(3, time));
         }
-        public List<ListRoom> LoadbyCategoryRoom(int type, DateTime time)
+        public List<ListRoom> LoadbyCategoryRoom(DateTime time)
 
         {
             var list = new List<ListRoom>();
@@ -242,7 +186,7 @@ namespace QLKS.ViewModel
             foreach (var item in rooms)
             {
 
-                var category_rooms = DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == item.IdCategoryRoom && x.IdCategoryRoom == type).SingleOrDefault();
+                var category_rooms = DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == item.IdCategoryRoom ).SingleOrDefault();
                 if (category_rooms != null)
                 {
                     ListRoom temp = new ListRoom();
@@ -321,6 +265,7 @@ namespace QLKS.ViewModel
         }
         public List<ListRoom> LoadbyStatus(ObservableCollection<ListRoom> list, string status, string clean, string type, string code)
         {
+            
             if (code == "")
             {
                 if (status == "Tất cả phòng" && type == "Tất cả loại phòng" && clean != "Tất cả")
@@ -343,6 +288,8 @@ namespace QLKS.ViewModel
             }
             else
             {
+                UnicodeConvert uni = new UnicodeConvert();
+
                 if (status == "Tất cả phòng" && type == "Tất cả loại phòng" && clean != "Tất cả")
                     return list.Where(p => p.DonDep == clean && p.Room.Name == code).ToList();
                 if (status == "Tất cả phòng" && type != "Tất cả loại phòng" && clean == "Tất cả")
@@ -359,9 +306,46 @@ namespace QLKS.ViewModel
                 if (status != "Tất cả phòng" && type != "Tất cả loại phòng" && clean != "Tất cả")
                     return list.Where(p => p.CategoryRoom == type && p.DonDep == clean && p.Status == status && p.Room.Name == code).ToList();
 
-                return list.Where(p => p.Room.Name == code).ToList();
+                return list.Where(p => uni.RemoveUnicode(p.Room.Name).ToLower().Contains(uni.RemoveUnicode(code).ToLower())).ToList();
             }
 
+        }
+        public void Selection(uc_Phong p)
+        {
+            RadioButton radioTinhTrang = new RadioButton();
+            radioTinhTrang.Content = "Tất cả phòng";
+            RadioButton radioDonDep = new RadioButton();
+            radioDonDep.Content = "Tất cả";
+
+            foreach (RadioButton i in p.spTrangThai.Children)
+            {
+                if (i.IsChecked.Value == true)
+                {
+                    radioTinhTrang = i;
+                }
+            }
+            foreach (RadioButton i in p.spDonDep.Children)
+            {
+                if (i.IsChecked.Value == true)
+                {
+                    radioDonDep = i;
+                }
+            }
+
+            DateTime dateTime = new DateTime();
+            DateTime.TryParse(p.dtpChonNgay.Text + " " + p.tpGio.Text, out dateTime);
+            LoadTemp(dateTime);
+            if (p.cbCategoryRoom.SelectedItem == null)
+            {
+                SingleRoom = new ObservableCollection<ListRoom>(LoadbyStatus(TempSingleRoom, radioTinhTrang.Content.ToString(), radioDonDep.Content.ToString(), "Tất cả loại phòng", p.txbTimKiem.Text));
+
+            }
+            else
+            {
+                var temp = p.cbCategoryRoom.SelectedItem as CATEGORY_ROOM;
+                SingleRoom = new ObservableCollection<ListRoom>(LoadbyStatus(TempSingleRoom, radioTinhTrang.Content.ToString(), radioDonDep.Content.ToString(), temp.Name.ToString(), p.txbTimKiem.Text));
+
+            }
         }
     }
 }

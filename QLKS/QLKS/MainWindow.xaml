@@ -64,10 +64,10 @@
         </EventTrigger>
     </Window.Triggers>
     <!--Bo góc-->
-    <Window.Clip>
+    <!--<Window.Clip >
         <RectangleGeometry Rect="0,0,1300,700" RadiusX="10" RadiusY="10" x:Name="boGoc">
         </RectangleGeometry>
-    </Window.Clip>
+    </Window.Clip>-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="26"></RowDefinition>
