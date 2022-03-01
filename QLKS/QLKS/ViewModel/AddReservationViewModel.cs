@@ -17,7 +17,7 @@ namespace QLKS.ViewModel
         public ICommand CloseCommand { get; set; }
         public ICommand LoadListRoomCommand { get; set; }
         public ICommand LoadedWindowCommand { get; set; }
-        
+        public ICommand RemoveCommand { get; set; }
 
         private bool _check { get; set; }
         public bool check { get => _check; set { _check = value; OnPropertyChanged(); } }
@@ -112,6 +112,24 @@ namespace QLKS.ViewModel
                 //RESERVATION_DETAIL res_detail = new RESERVATION_DETAIL() {IdRoom = SelectedRoom.IdRoom};
                 ListSelectRoom.Add(SelectedRoom);
                 ListAvailableRoom.Remove(SelectedRoom);            
+                //ListReservation.Add(res_detail);
+                //p.Close();
+            }
+            );
+
+            RemoveCommand = new RelayCommand<wd_AddNewReservation>(
+            (p) =>
+            {
+                if (p.dtpEndDate.SelectedDate < p.dtStartDate.SelectedDate) return false;
+                if (p.dtStartDate.SelectedDate == p.dtpEndDate.SelectedDate && p.tpStartTime.SelectedTime > p.tpEndTime.SelectedTime) return false;
+                if (SelectedItem == null) return false;
+                return true;
+            },
+            (p) =>
+            {
+                //RESERVATION_DETAIL res_detail = new RESERVATION_DETAIL() {IdRoom = SelectedRoom.IdRoom};
+                ListAvailableRoom.Add(SelectedItem);
+                ListSelectRoom.Remove(SelectedItem);
                 //ListReservation.Add(res_detail);
                 //p.Close();
             }

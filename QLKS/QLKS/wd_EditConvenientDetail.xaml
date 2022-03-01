@@ -17,65 +17,67 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="200" ></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="240" ></RowDefinition>
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
 
         <!--Làm phần tiêu đề -->
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Background="#3d4751">
             <TextBlock Name="txbTitle" Text="Chi tiết tiện nghi"  
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                FontSize="29"
                                FontWeight="Bold" 
-                               Foreground="#00A3FF" />
+                               Foreground="#FFFFFF" />
 
         </Grid>
         <!--Làm phần phần nhập thông tin -->
-        <Grid Grid.Row="1" Width="250"  Height="200"                   
+        <Grid Grid.Row="1" Width="400"  Height="200"                   
                       HorizontalAlignment="Center"                       
-                      Background="#F2F1F1">
+                      Background="#FFFFFF">
             <Grid.Clip>
-                <RectangleGeometry Rect="0,0,250,250" RadiusX="10" RadiusY="10"/>
+                <RectangleGeometry Rect="0,0,400,250" RadiusX="10" RadiusY="10"/>
             </Grid.Clip>
 
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <!--Làm phần nhập tình trạng phòng -->
                 <Grid Grid.Row="0" HorizontalAlignment="Center" Margin="0 0 0 0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition Width="10"></ColumnDefinition>
+                        <ColumnDefinition Width="280"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        <materialDesign:PackIcon Kind="Home" HorizontalAlignment="Right" VerticalAlignment="Center" Width="25" Height="25" />
+                        <materialDesign:PackIcon Kind="Home" HorizontalAlignment="Right" VerticalAlignment="Center" Width="40" Height="40" />
                     </Grid>
-                    <Grid Grid.Column="1" Margin="2 0 0 0">
+                    <Grid Grid.Column="2" Margin="0 0 0 0">
                         <ComboBox Name="cmbSoPhong" MaxDropDownHeight="80"                                
-                                  Width="143"                                                                        
+                                  Width="270"  
+                                  FontSize="20"
                                   materialDesign:HintAssist.Hint="Số phòng"
                                   ItemsSource="{Binding ListRoom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                  DisplayMemberPath="Name"
-                                  Text="{Binding Room, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                  DisplayMemberPath="Name">
                         </ComboBox>
                     </Grid>
                 </Grid>
 
                 <Grid Grid.Row="1" HorizontalAlignment="Center" Margin="0 30 0 0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition Width="10"></ColumnDefinition>
+                        <ColumnDefinition Width="280"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
-                        <materialDesign:PackIcon Kind="FridgeOutline" HorizontalAlignment="Right" VerticalAlignment="Center" Width="25" Height="25" />
+                        <materialDesign:PackIcon Kind="FridgeOutline" HorizontalAlignment="Right" VerticalAlignment="Center" Width="40" Height="40" />
                     </Grid>
-                    <Grid Grid.Column="1" Margin="2 0 0 0">
+                    <Grid Grid.Column="2" Margin="0 0 0 0">
                         <ComboBox Name="cmbTienNghi" MaxDropDownHeight="80"                                 
-                                Width="143"                                                                        
+                                Width="270"    
+                                  FontSize="20"
                                 materialDesign:HintAssist.Hint="Tên tiện nghi"
                                   ItemsSource="{Binding ListConvenient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                  DisplayMemberPath="Name"
-                                  Text="{Binding Convinient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                  DisplayMemberPath="Name">
                         </ComboBox>
                     </Grid>
 
@@ -83,23 +85,20 @@
 
                 <Grid Grid.Row="2" HorizontalAlignment="Center" Margin="0 20 0 0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition Width="10"></ColumnDefinition>
+                        <ColumnDefinition Width="280"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
-                        <materialDesign:PackIcon Kind="Counter" HorizontalAlignment="Right" VerticalAlignment="Center" Width="25" Height="25" />
+                        <materialDesign:PackIcon Kind="Counter" HorizontalAlignment="Right" VerticalAlignment="Center" Width="40" Height="40" />
                     </Grid>
-                    <Grid Grid.Column="1" Margin="3 0 0 0">
-                        <TextBox  Width="140" Name="txtSoLuong"                     
+                    <Grid Grid.Column="2" Margin="0 0 0 0">
+                        <TextBox  Width="270" Name="txtSoLuong"  
+                                  FontSize="20"
                                 materialDesign:HintAssist.Hint="Số lượng"                        
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"                        
-                                VerticalAlignment="Center">
-                            <TextBox.Text>
-                                <Binding Path="Amount" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
+                                VerticalAlignment="Center"  />
 
                     </Grid>
 
@@ -112,7 +111,7 @@
 
         <!--Làm nút nhập sửa hoặc hủy -->
         <Grid Grid.Row="2">
-            <Grid Width="250" Margin="0 0 0 0">
+            <Grid Width="320" Margin="0 0 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
@@ -121,7 +120,7 @@
                 <Grid Grid.Column="0">
 
                     <Button Content="Sửa" Name="btnSua" 
-                            Width="120" Height="40"
+                            Width="120" Height="50"
                             Margin=" 4 4 20 0" 
                             Background="#478C10"
                             BorderBrush="Transparent"
@@ -136,7 +135,7 @@
                 <Grid Grid.Column="1" >
                     <Grid>
                         <Button x:Name="btnHuy" 
-                                Width="100" Height="40"                                    
+                                Width="120" Height="50"                                    
                                 Content="Hủy bỏ" 
                                 Margin=" 4 4 0 0" 
                                 Background="#9D9999" 

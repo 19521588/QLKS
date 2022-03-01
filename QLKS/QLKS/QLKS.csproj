@@ -104,6 +104,8 @@
       <DependentUpon>Bill_Detail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Convert\UnicodeConvert.cs" />
+    <Compile Include="DATA\AddModel.cs" />
+    <Compile Include="DATA\GetModel.cs" />
     <Compile Include="DetailRoom_AddService.xaml.cs">
       <DependentUpon>DetailRoom_AddService.xaml</DependentUpon>
     </Compile>
@@ -111,7 +113,7 @@
       <DependentUpon>EditInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\BillDetail.cs" />
-    <Compile Include="Model\DeleteModel.cs" />
+    <Compile Include="DATA\DeleteModel.cs" />
     <Compile Include="Model\ListBill.cs" />
     <Compile Include="Model\ListBillInfo.cs" />
     <Compile Include="Model\ListRoom.cs" />

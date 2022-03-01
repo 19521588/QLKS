@@ -21,33 +21,35 @@
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition Height="180" ></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="200" ></RowDefinition>
                 <RowDefinition ></RowDefinition>
             </Grid.RowDefinitions>
 
             <!--Làm phần tiêu đề -->
-            <Grid Grid.Row="0">
-                <TextBlock x:Name="txbTitle" Text="Nhập thông tin phòng"  
+            <Grid Grid.Row="0" Background="#3d4751">
+                <TextBlock x:Name="txbTitle" Text="Nhập thông tin phòng"
+                                
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                Height="40"
                                FontSize="30"
                                FontWeight="Bold" 
-                               Foreground="#00A3FF"
+                               Foreground="#FFFFFF"
                      />
 
             </Grid>
             <!--Làm phần phần nhập thông tin -->
-            <Grid Grid.Row="1" Width="280" Height="160"                     
+            <Grid Grid.Row="1" Width="400" Height="180"                     
                       HorizontalAlignment="Center"                       
-                      Background="#F2F1F1">
+                      Background="#FFFFFF">
                 <Grid.Clip>
-                    <RectangleGeometry Rect="0,0,280,160" RadiusX="10" RadiusY="10"/>
+                    <RectangleGeometry Rect="0,0,400,180" RadiusX="10" RadiusY="10"/>
                 </Grid.Clip>
 
-                <Grid Width="300" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid Width="360" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="70" ></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
                         <RowDefinition Height="70" ></RowDefinition>
                     </Grid.RowDefinitions>
 
@@ -57,39 +59,44 @@
                     <Grid Grid.Row="0" Margin="6 0 0 0" HorizontalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="160"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="270"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="0" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="Home" Width="25" Height="25" />
+                            <materialDesign:PackIcon Kind="Home" Width="40" Height="40" />
                         </Grid>
 
-                        <Grid Grid.Column="1" >
-                            <TextBox x:Name="txbName"                       
+                        <Grid Grid.Column="2">
+                            <TextBox x:Name="txbName"    
+                                     FontSize="20"
                                 materialDesign:HintAssist.Hint="Nhập số phòng (Ví dụ: P100)"                        
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"                        
-                                VerticalAlignment="Center"  />
+                                VerticalAlignment="Center"
+                                />
                         </Grid>
                     </Grid>
 
                     <!--Làm phần nhập loại phòng -->
-                    <Grid Grid.Row="2" Width="180" HorizontalAlignment="Center">
+                    <Grid Grid.Row="2" HorizontalAlignment="Center">
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="25"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition ></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="270" ></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="TableOfContents" Width="25" Height="25"/>
+                            <materialDesign:PackIcon Kind="TableOfContents" Width="40" Height="40"/>
                         </Grid>
-                        <Grid Grid.Column="1">
+                        <Grid Grid.Column="2">
                             <ComboBox Name="cbCategory"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Left"
                                 ItemsSource="{Binding ListCategory}"
                                       SelectedItem="{Binding SelectedCategory}"
                                 DisplayMemberPath="Name"
-                                Width="143"                                                                        
+                                Width="270"   
+                                FontSize="20"
                                 materialDesign:HintAssist.Hint="Loại phòng" RenderTransformOrigin="0.479,-4.084">
                             </ComboBox>
 
@@ -103,29 +110,19 @@
 
             <!--Làm nút nhập thêm hoặc hủy -->
             <Grid Grid.Row="2">
-                <Grid Width="250" Margin="0 0 0 0" HorizontalAlignment="Center">
+                <Grid Width="300" Margin="0 0 0 0" HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
-                        
+
                         <Button Content="Thêm"
                                 Command="{Binding AddCommand}"
+                                Style="{StaticResource AddButton}"
                                 CommandParameter="{Binding ElementName= wdAddNewRoom}"
-                                FontWeight="Bold" Foreground="White"   Width="100" Height="40" Margin=" 4 4 20 0" Background="#478C10" >
-                            
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Visibility" Value="Hidden"></Setter>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=Text, ElementName=txbTitle }" Value="Nhập thông tin phòng">
-                                            <Setter Property="Visibility" Value="Visible"></Setter>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
+                                FontWeight="Bold" Foreground="White"   Width="120" Height="50" Margin=" 4 4 20 0" Background="#478C10" >
                         </Button>
 
                     </Grid>
@@ -133,9 +130,10 @@
                     <Grid Grid.Column="1" >
                         <Grid>
                             <Button x:Name="btnHuy"
+                                    Style="{StaticResource CloseButton}"
                                     Command="{Binding CloseCommand}"
                                     CommandParameter="{Binding ElementName= wdAddNewRoom}"
-                                    Width="100" Height="40"                                    
+                                    Width="120" Height="50"                                    
                                     Content="Hủy bỏ" 
                                     Margin=" 20 4 0 0" 
                                     Background="#9D9999" >
