@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using QLKS.DATA;
 
 namespace QLKS.ViewModel
 {
@@ -26,6 +27,9 @@ namespace QLKS.ViewModel
         public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
         public AddEmployeeViewModel()
         {
+
+            AddModel add = new AddModel();
+
             AddCommand = new RelayCommand<wd_AddEmployee>(
                 (p) =>
                 {
@@ -41,8 +45,7 @@ namespace QLKS.ViewModel
                     if (MessageBox.Show("Bạn có chắc chắn muốn thêm nhân viên mới", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
                         employee = new EMPLOYEE() { Name = p.txbName.Text, Address = p.txbAddress.Text, BirthDay = DateTime.Parse( p.dtpBirth.SelectedDate.ToString()), Position = p.txbPosition.Text ,CCCD = p.txbCCCD.Text,Phone = p.txbPhone.Text, Salary = p.txbSalary.Text, Sex = p.cbSex.Text};
-                        DataProvider.Ins.DB.EMPLOYEEs.Add(employee);
-                        DataProvider.Ins.DB.SaveChanges();
+                        add.AddEmployee(employee);
                         check = true;
                         IsClose = false;
                         p.Close();

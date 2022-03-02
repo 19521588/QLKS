@@ -105,6 +105,7 @@
     </Compile>
     <Compile Include="Convert\UnicodeConvert.cs" />
     <Compile Include="DATA\AddModel.cs" />
+    <Compile Include="DATA\EditModel.cs" />
     <Compile Include="DATA\GetModel.cs" />
     <Compile Include="DetailRoom_AddService.xaml.cs">
       <DependentUpon>DetailRoom_AddService.xaml</DependentUpon>
@@ -246,6 +247,7 @@
     <Compile Include="ViewModel\RoomCategoryViewModel.cs" />
     <Compile Include="ViewModel\RoomViewModel.cs" />
     <Compile Include="ViewModel\CategoryServiceViewModel.cs" />
+    <Compile Include="ViewModel\SelectCustomerViewModel.cs" />
     <Compile Include="ViewModel\ServiceViewModel.cs" />
     <Compile Include="ViewModel\StatisticalViewModel.cs" />
     <Compile Include="wd_AddCategoryService.xaml.cs">
@@ -301,6 +303,9 @@
     </Compile>
     <Compile Include="wd_ReservationDetail.xaml.cs">
       <DependentUpon>wd_ReservationDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wd_SelectCustomer.xaml.cs">
+      <DependentUpon>wd_SelectCustomer.xaml</DependentUpon>
     </Compile>
     <Page Include="Bill_Detail.xaml">
       <SubType>Designer</SubType>
@@ -498,6 +503,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="wd_ReservationDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wd_SelectCustomer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
