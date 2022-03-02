@@ -15,5 +15,29 @@ namespace QLKS.DATA
             DataProvider.Ins.DB.EMPLOYEEs.Add(additem);
             DataProvider.Ins.DB.SaveChanges();
         }
+
+        public void AddService(SERVICE additem)
+        {
+            DataProvider.Ins.DB.SERVICEs.Add(additem);
+            DataProvider.Ins.DB.SaveChanges();
+        }
+
+        public void AddCategoryService(CATEGORY_SERVICE additem)
+        {
+            DataProvider.Ins.DB.CATEGORY_SERVICE.Add(additem);
+            DataProvider.Ins.DB.SaveChanges();
+        }
+
+        public void AddConvinient(CONVINIENT additem)
+        {
+            DataProvider.Ins.DB.CONVINIENTs.Add(additem);
+            DataProvider.Ins.DB.SaveChanges();
+        }
+
+        public void AddDetailConvinient(DETAIL_CONVINIENT additem)
+        {
+            DataProvider.Ins.DB.DETAIL_CONVINIENT.Add(additem);
+            DataProvider.Ins.DB.SaveChanges();
+        }
     }
 }

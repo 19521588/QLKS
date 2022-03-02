@@ -44,6 +44,7 @@ namespace QLKS.ViewModel
 
         public ServiceViewModel()
         {
+            DeleteModel delete = new DeleteModel();
             Load();
 
             ListCategory = new ObservableCollection<CATEGORY_SERVICE>(DataProvider.Ins.DB.CATEGORY_SERVICE);
@@ -123,8 +124,7 @@ namespace QLKS.ViewModel
                 if (MessageBox.Show("Bạn có chắc chắn muốn xóa dịch vụ này", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                 {
                     var in4 = DataProvider.Ins.DB.SERVICEs.Where(y => y.IdService == SelectedItem.IdService).SingleOrDefault();                  
-                    DataProvider.Ins.DB.SERVICEs.Remove(in4);
-                    DataProvider.Ins.DB.SaveChanges();
+                    delete.DeleteService(in4);
                     Load();
                     
                 }

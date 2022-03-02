@@ -1,4 +1,5 @@
-﻿using QLKS.Model;
+﻿using QLKS.DATA;
+using QLKS.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,6 +24,8 @@ namespace QLKS.ViewModel
         public ICommand AddCommand { get; set; }
         public AddConvenientDetailViewModel()
         {
+            AddModel add = new AddModel();
+
             //Load dữ liệu combobox
             ListRoom = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs);
             ListConvenient = new ObservableCollection<CONVINIENT>(DataProvider.Ins.DB.CONVINIENTs);
@@ -54,9 +57,7 @@ namespace QLKS.ViewModel
 
 
                     };
-                    DataProvider.Ins.DB.DETAIL_CONVINIENT.Add(new_convenient_detail);
-                    DataProvider.Ins.DB.SaveChanges();
-                    p.Close();
+                    add.AddDetailConvinient(new_convenient_detail);
                 }
                 
             });

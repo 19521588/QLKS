@@ -1,4 +1,5 @@
-﻿using QLKS.Model;
+﻿using QLKS.DATA;
+using QLKS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace QLKS.ViewModel
         public ICommand AddConvenientCommand { get; set; }
         public AddConvenientViewModel()
         {
+            AddModel add = new AddModel();
+
             //Đóng cửa số thêm dịch vụ
             CloseAddWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
 
@@ -40,8 +43,7 @@ namespace QLKS.ViewModel
                         Name = p.txtTenTN.Text,
 
                     };
-                    DataProvider.Ins.DB.CONVINIENTs.Add(new_convenient);
-                    DataProvider.Ins.DB.SaveChanges();
+                    add.AddConvinient(new_convenient);
                     p.Close();
                 }
 

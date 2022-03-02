@@ -40,6 +40,7 @@ namespace QLKS.ViewModel
 
         public CategoryServiceViewModel()
         {
+            DeleteModel delete = new DeleteModel();
             Load();
 
             //Mở cửa số để thêm loại dịch vụ
@@ -124,8 +125,7 @@ namespace QLKS.ViewModel
                     }   
                     else
                     {
-                        DataProvider.Ins.DB.CATEGORY_SERVICE.Remove(in4);
-                        DataProvider.Ins.DB.SaveChanges();
+                        delete.DeleteCategoryService(in4);
                         Load();
                     }                     
 

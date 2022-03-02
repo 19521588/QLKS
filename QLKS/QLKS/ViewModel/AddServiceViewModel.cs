@@ -1,4 +1,5 @@
-﻿using QLKS.Model;
+﻿using QLKS.DATA;
+using QLKS.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,6 +22,8 @@ namespace QLKS.ViewModel
 
         public AddServiceViewModel()
         {
+            AddModel add = new AddModel();
+
             //Khởi tạo List
             ListCategory = new ObservableCollection<CATEGORY_SERVICE>(DataProvider.Ins.DB.CATEGORY_SERVICE);
 
@@ -49,8 +52,7 @@ namespace QLKS.ViewModel
                         IdCategoryService = id_category,
                         Price = Int32.Parse(p.txtGia.Text)
                     };
-                    DataProvider.Ins.DB.SERVICEs.Add(new_service);
-                    DataProvider.Ins.DB.SaveChanges();
+                    add.AddService(new_service);
                     p.Close();
                 }
                 

@@ -40,6 +40,7 @@ namespace QLKS.ViewModel
 
         public ConvenientViewModel()
         {
+            DeleteModel delete = new DeleteModel();
             Load();
 
             //Mở cửa số để thêm tiện ích
@@ -124,8 +125,7 @@ namespace QLKS.ViewModel
                     }
                     else
                     {
-                        DataProvider.Ins.DB.CONVINIENTs.Remove(in4);
-                        DataProvider.Ins.DB.SaveChanges();
+                        delete.DeleteConvinient(in4);
                         Load();
                     }
 

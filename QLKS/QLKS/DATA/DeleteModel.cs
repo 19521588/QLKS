@@ -14,5 +14,29 @@ namespace QLKS.Model
             DataProvider.Ins.DB.EMPLOYEEs.Remove(itemDelete);
             DataProvider.Ins.DB.SaveChanges();
         }
+
+        public void DeleteService(SERVICE itemDelete)
+        {
+            DataProvider.Ins.DB.SERVICEs.Remove(itemDelete);
+            DataProvider.Ins.DB.SaveChanges();
+        }
+
+        public void DeleteCategoryService(CATEGORY_SERVICE itemDelete)
+        {
+            DataProvider.Ins.DB.CATEGORY_SERVICE.Remove(itemDelete);
+            DataProvider.Ins.DB.SaveChanges();
+        }
+
+        public void DeleteConvinient(CONVINIENT itemDelete)
+        {
+            DataProvider.Ins.DB.CONVINIENTs.Remove(itemDelete);
+            DataProvider.Ins.DB.SaveChanges();
+        }
+
+        public void DeleteDetailConvinient(DETAIL_CONVINIENT itemDelete)
+        {
+            DataProvider.Ins.DB.DETAIL_CONVINIENT.Remove(itemDelete);
+            DataProvider.Ins.DB.SaveChanges();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using QLKS.Model;
+﻿using QLKS.DATA;
+using QLKS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace QLKS.ViewModel
         public ICommand AddCategoryServiceCommand { get; set; }
         public AddCategoryServiceViewModel()
         {
+            AddModel add = new AddModel();
+
             //Đóng cửa số thêm loại dịch vụ
             CloseAddWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
 
@@ -39,8 +42,7 @@ namespace QLKS.ViewModel
                     {
                         Name = p.txtTenLoaiDV.Text,
                     };
-                    DataProvider.Ins.DB.CATEGORY_SERVICE.Add(new_category_service);
-                    DataProvider.Ins.DB.SaveChanges();
+                    add.AddCategoryService(new_category_service);
                     p.Close();
                 }
 

@@ -8,5 +8,6 @@ namespace QLKS.DATA
 {
     class EditModel
     {
+
     }
 }

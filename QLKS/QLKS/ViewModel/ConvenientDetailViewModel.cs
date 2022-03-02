@@ -44,6 +44,7 @@ namespace QLKS.ViewModel
         }
         public ConvenientDetailViewModel()
         {
+            DeleteModel delete = new DeleteModel();
             Load();
 
             //Mở cửa số để thêm dịch vụ
@@ -122,8 +123,7 @@ namespace QLKS.ViewModel
                 {
                     var in4 = DataProvider.Ins.DB.DETAIL_CONVINIENT.Where(y => y.IdConvinientDetail == SelectedItem.IdConvinientDetail).SingleOrDefault();
 
-                    DataProvider.Ins.DB.DETAIL_CONVINIENT.Remove(in4);
-                    DataProvider.Ins.DB.SaveChanges();
+                    delete.DeleteDetailConvinient(in4);
                     Load();
 
                 }
