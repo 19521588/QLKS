@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using QLKS.DATA;
 using QLKS.Model;
 
 namespace QLKS.ViewModel
@@ -48,11 +49,9 @@ namespace QLKS.ViewModel
                     {
 
                         var List = DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == cate.IdCategoryRoom).SingleOrDefault();
-                        List.Name = p.txbName.Text;
-                        List.Beds = Int32.Parse(p.txbBeds.Text);
-                        List.Price_Day = Int32.Parse(p.txbPriceDay.Text);
-                        List.Price_Hour = Int32.Parse(p.txbPriceHour.Text);
-                        DataProvider.Ins.DB.SaveChanges();
+             
+                        EditModel editModel=new EditModel();
+                        editModel.EditCategoryRoom(List,p.txbName.Text, p.txbBeds.Text, p.txbPriceHour.Text, p.txbPriceDay.Text);
                         OnPropertyChanged("List");
                         IsClose = false;
                         p.Close();
