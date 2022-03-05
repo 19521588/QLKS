@@ -1,4 +1,5 @@
-﻿using QLKS.Model;
+﻿using QLKS.DATA;
+using QLKS.Model;
 using QLKS.Template;
 using System;
 using System.Collections.Generic;
@@ -66,8 +67,8 @@ namespace QLKS.ViewModel
         {
             IsClose = true;
             IdUser = User.Users_Id;
-            
-            UserName =DataProvider.Ins.DB.EMPLOYEEs.Where(x=>x.IdEmployee==User.IdEmployee).SingleOrDefault().Name;
+            GetModel getModel = new GetModel();
+            UserName =getModel.GetEmployeeById(User.IdEmployee).Name;
 
             load_firstItem();
             LoadComboBox();
@@ -137,11 +138,11 @@ namespace QLKS.ViewModel
                     SalesReport = new SalesReport();
 
                     SalesReport.ReportDate = selectedMonth + "/" + selectedYear;
-                    var salesReport = DataProvider.Ins.DB.SALES_REPORT.Where(x => x.SalesReport_Date.Value.Year == selectedYear && x.SalesReport_Date.Value.Month == selectedMonth).SingleOrDefault();
+                    var salesReport = getModel.GetSaleReportByTime(selectedYear, selectedMonth);
                     SalesReport.IdReport = salesReport.SalesReport_Id;
                     SalesReport.UserName = salesReport.SalesReport_UserName;
                     SalesReport.TotalMoney = salesReport.SalesReport_Revenue;
-                    var SalesReportDetail = DataProvider.Ins.DB.SALES_REPORT_DETAIL.Where(x => x.IdSalesReport == salesReport.SalesReport_Id);
+                    var SalesReportDetail = getModel.GetListSalesReportDetailByIdSaleReport(salesReport.SalesReport_Id);
 
                     int i = 1;
                     SalesReport.ListSales = new ObservableCollection<ListSales>();
@@ -168,7 +169,8 @@ namespace QLKS.ViewModel
         }
         public void LoadComboBox()
         {
-            ObservableCollection<Bill> temp = new ObservableCollection<Bill>(DataProvider.Ins.DB.Bills.ToList());
+            GetModel getModel = new GetModel();
+            ObservableCollection<Bill> temp = new ObservableCollection<Bill>(getModel.GetListBillOrderByDateBill());
 
             foreach (var item in temp)
             {
@@ -213,12 +215,13 @@ namespace QLKS.ViewModel
 
         public void ReportSales_LoadToView(string selectedYear, string selectedMonth)
         {
+            GetModel getModel = new GetModel();
             ListSales = new ObservableCollection<ListSales>();
 
             int i = 1;
 
             TotalMoney = 0;
-            var bill = DataProvider.Ins.DB.Bills.Where(x => x.Date_Bill.Value.Year.ToString() == selectedYear && x.Date_Bill.Value.Month.ToString() == selectedMonth).ToList();
+            var bill = getModel.GetListBillByTime(selectedYear, selectedMonth);
             if (bill != null)
             {
                 foreach (var item in bill)
@@ -229,7 +232,7 @@ namespace QLKS.ViewModel
 
 
 
-            var CatagoryRoom = DataProvider.Ins.DB.CATEGORY_ROOM;
+            var CatagoryRoom = getModel.getListCategoryRoom();
 
             foreach (var item in CatagoryRoom)
             {
@@ -277,7 +280,8 @@ namespace QLKS.ViewModel
       
         public void Report_Sales(ReportWd p)
         {
-
+            AddModel addModel = new AddModel();
+            GetModel getModel = new GetModel();
             if (MessageBox.Show("Bạn có chắc chắn muốn lập báo cáo Doanh số", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
             {
                 string[] tmp = p.Rpcb_SelectYear.SelectedValue.ToString().Split(' ');
@@ -288,10 +292,9 @@ namespace QLKS.ViewModel
 
                 DateTime date = new DateTime(selectedYear, selectedMonth, 1);
 
-                DataProvider.Ins.DB.SALES_REPORT.Add(new SALES_REPORT { SalesReport_Date = date, SalesReport_Revenue = TotalMoney, SalesReport_UserName = UserName, IdUser = IdUser });
-                DataProvider.Ins.DB.SaveChanges();
+                addModel.AddSaleReport(new SALES_REPORT { SalesReport_Date = date, SalesReport_Revenue = TotalMoney, SalesReport_UserName = UserName, IdUser = IdUser });
                 int i = 0;
-                var salesReport = DataProvider.Ins.DB.SALES_REPORT;
+                var salesReport = getModel.getListSaleReport();
                 foreach (var item in salesReport)
                 {
                     if (item.SalesReport_Id > i)
@@ -306,9 +309,7 @@ namespace QLKS.ViewModel
                     salesReportDetail.TotalMoney = item.TotalMoney;
                     salesReportDetail.Rate = item.Rate;
 
-                    DataProvider.Ins.DB.SALES_REPORT_DETAIL.Add(salesReportDetail);
-                    DataProvider.Ins.DB.SaveChanges();
-
+                    addModel.AddSaleReportDetail(salesReportDetail);
                 }
 
                 MessageBox.Show("Lập báo cáo thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);

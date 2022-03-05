@@ -181,7 +181,7 @@ namespace QLKS.ViewModel
             GetModel getModel = new GetModel();
 
             ObservableCollection<Bill> receipts = new ObservableCollection<Bill>
-                (getModel.GetBillOrderByDateBill());
+                (getModel.GetListBillOrderByDateBill());
 
             if (receipts.Count > 0)
             {
@@ -199,7 +199,7 @@ namespace QLKS.ViewModel
             }
 
             Revenue=(long)receipts.Where(x => x.Date_Bill.Value.Month == time.Month && x.Date_Bill.Value.Year == time.Year).Sum(y=>y.Total);
-            var rental = getModel.GetRentalByTime(time);
+            var rental = getModel.GetListRentalByTime(time);
             Rental_Room_Month = rental.Count();
             Rental_Room_Day = rental.Count(x => x.DateRental.Value.Day == time.Day);
 
@@ -208,7 +208,7 @@ namespace QLKS.ViewModel
         {
             GetModel getModel = new GetModel();
             ObservableCollection<Bill> receipts = new ObservableCollection<Bill>
-                (getModel.GetBillByYearAndOrderByDateBill(year));
+                (getModel.GetListBillByYearAndOrderByDateBill(year));
 
             Revenue_Labels.Clear();
             ChartValues<long> values_service = new ChartValues<long>();
@@ -233,7 +233,7 @@ namespace QLKS.ViewModel
 
                 while (receipts.Count() > 0 && i == receipts.First().Date_Bill.Value.Month)
                 {
-                    var billinfo = getModel.GetBillInfo();
+                    var billinfo = getModel.GetListBillInfo();
                     if (billinfo.Count() > 0)
                     {
                         foreach (var item in billinfo)
@@ -280,7 +280,7 @@ namespace QLKS.ViewModel
         {
             GetModel getModel = new GetModel();
             ObservableCollection<Bill> bill = new ObservableCollection<Bill>
-                (getModel.GetBillByYearAndOrderByDateBill(year));
+                (getModel.GetListBillByYearAndOrderByDateBill(year));
             Labels_Rental.Clear();
             ChartValues<long> values = new ChartValues<long>();
 

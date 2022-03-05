@@ -1,4 +1,5 @@
-﻿using QLKS.Model;
+﻿using QLKS.DATA;
+using QLKS.Model;
 using QLKS.UserControlss;
 using System;
 using System.Collections.Generic;
@@ -129,6 +130,7 @@ namespace QLKS.ViewModel
 
         public void LoadLoginWindow(MainWindow p)
         {
+            GetModel getModel = new GetModel();
             IsLoaded = true;
 
             if (p == null)
@@ -147,7 +149,7 @@ namespace QLKS.ViewModel
                 mainWindow = p;
                 User = loginVM.User;
 
-                var employee = DataProvider.Ins.DB.EMPLOYEEs.Where(x => x.IdEmployee == User.IdEmployee).SingleOrDefault();
+                var employee =getModel.GetEmployeeById(User.IdEmployee);
                 (p.DataContext as MainViewModel).User = loginVM.User;
                 (p.DataContext as MainViewModel).Name = employee.Name;
                 (p.DataContext as MainViewModel).LoadRole(User.Type);

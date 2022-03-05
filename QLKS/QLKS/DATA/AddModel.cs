@@ -66,5 +66,16 @@ namespace QLKS.DATA
             DataProvider.Ins.DB.BILLINFOes.Add(additem);
             DataProvider.Ins.DB.SaveChanges();
         }
+        public void AddSaleReport(SALES_REPORT additem)
+        {
+            DataProvider.Ins.DB.SALES_REPORT.Add(additem);
+            DataProvider.Ins.DB.SaveChanges();
+        }
+        public void AddSaleReportDetail(SALES_REPORT_DETAIL additem)
+        {
+            DataProvider.Ins.DB.SALES_REPORT_DETAIL.Add(additem);
+            DataProvider.Ins.DB.SaveChanges();
+
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
 using QLKS.Convert;
+using QLKS.DATA;
 using QLKS.Model;
 using QLKS.UserControlss;
 using System;
@@ -162,7 +163,8 @@ namespace QLKS.ViewModel
         }
         public void Load()
         {
-            ListCategoryRoom = new ObservableCollection<CATEGORY_ROOM>(DataProvider.Ins.DB.CATEGORY_ROOM);
+            GetModel getModel = new GetModel();
+            ListCategoryRoom = getModel.getListCategoryRoom();
             var a = new CATEGORY_ROOM();
             a.Name = "Tất cả loại phòng";
             
@@ -181,17 +183,18 @@ namespace QLKS.ViewModel
         public List<ListRoom> LoadbyCategoryRoom(DateTime time)
 
         {
+            GetModel getModel = new GetModel();
             var list = new List<ListRoom>();
-            var rooms = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs).ToList();
+            var rooms = getModel.getListRoom();
             foreach (var item in rooms)
             {
 
-                var category_rooms = DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == item.IdCategoryRoom ).SingleOrDefault();
+                var category_rooms = getModel.GetCategoryRoomById(item.IdCategoryRoom);
                 if (category_rooms != null)
                 {
                     ListRoom temp = new ListRoom();
                     temp.Room = item;
-                    var reservation = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.End_Date >= time && x.Start_Date <= time && x.RESERVATION_DETAIL.FirstOrDefault().IdRoom == item.IdRoom && x.RESERVATION_DETAIL.FirstOrDefault().Status != "Phòng đã thanh toán").SingleOrDefault();
+                    var reservation = getModel.getReservationNotPaymentAtTime(time, item.IdRoom);
 
                     if (reservation == null)
                     {
@@ -207,8 +210,7 @@ namespace QLKS.ViewModel
                     else
                     {
 
-                        var reservation_detail = DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdRoom == item.IdRoom && x.IdReservation == reservation.IdReservation).SingleOrDefault();
-
+                        var reservation_detail = getModel.getReservationDetailByIdAndIdRoom(reservation.IdReservation,item.IdRoom);
 
 
                         if (reservation_detail == null)
@@ -224,7 +226,7 @@ namespace QLKS.ViewModel
                         else
                         {
 
-                            var customer = DataProvider.Ins.DB.CUSTOMERs.Where(x => x.IdCustomer == reservation.IdCustomer).SingleOrDefault();
+                            var customer = getModel.GetCustomerById(reservation.IdCustomer);
                             temp.SoNgayO = reservation.Date.Value;
                             if (reservation.Date.Value == 0)
                             {

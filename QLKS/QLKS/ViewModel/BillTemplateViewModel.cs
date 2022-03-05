@@ -27,7 +27,7 @@ namespace QLKS.ViewModel
             Bill = bill;
             BillInfo = new ObservableCollection<ListBillInfo>();
             GetModel getModel=new GetModel();
-            var billinfo = getModel.GetBillInfoByIdBill(bill.IdBill);
+            var billinfo = getModel.GetListBillInfoByIdBill(bill.IdBill);
             int i = 1;
 
             foreach (var item in billinfo)
@@ -43,13 +43,13 @@ namespace QLKS.ViewModel
 
             BillDetail = new BillDetail();
             var rental = getModel.GetRentalById(bill.IdRental);
-            var reservation = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.IdReservation == rental.IdReservation).SingleOrDefault();
+            var reservation = getModel.GetReservationById(rental.IdReservation);
           
 
-            var room = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == rental.IdRoom).SingleOrDefault();
-            var roomCategory = DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == room.IdCategoryRoom).SingleOrDefault();
+            var room = getModel.GetRoomById(rental.IdRoom);
+            var roomCategory = getModel.GetCategoryRoomById(room.IdCategoryRoom);
 
-            var customer = DataProvider.Ins.DB.CUSTOMERs.Where(x => x.IdCustomer == reservation.IdCustomer).SingleOrDefault();
+            var customer = getModel.GetCustomerById(reservation.IdCustomer);
 
             BillDetail.StartDate = reservation.Start_Date;
             BillDetail.EndDate = reservation.End_Date;

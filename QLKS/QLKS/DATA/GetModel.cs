@@ -10,6 +10,10 @@ namespace QLKS.DATA
 {
     public class GetModel
     {
+        public CUSTOMER GetCustomerById(int idCustomer)
+        {
+            return DataProvider.Ins.DB.CUSTOMERs.Where(x => x.IdCustomer == idCustomer).SingleOrDefault();
+        }
         public ObservableCollection<CUSTOMER> getListCustomer()
         {
             ObservableCollection<CUSTOMER> list = new ObservableCollection<CUSTOMER>(DataProvider.Ins.DB.CUSTOMERs);
@@ -17,6 +21,10 @@ namespace QLKS.DATA
         }
 
         //Danh sách phòng
+        public ROOM GetRoomById(int idRoom)
+        {
+            return DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == idRoom).SingleOrDefault();
+        }
         public ObservableCollection<ROOM> getListRoom()
         {
             ObservableCollection<ROOM> list = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs);
@@ -28,11 +36,19 @@ namespace QLKS.DATA
             ObservableCollection<ROOM> list = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs);
             return list;
         }
+        public CATEGORY_ROOM GetCategoryRoomById(int idCategoryRoom)
+        {
+            return DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == idCategoryRoom).SingleOrDefault();
+        }
 
         public ObservableCollection<CATEGORY_ROOM> getListCategoryRoom()
         {
             ObservableCollection<CATEGORY_ROOM> list = new ObservableCollection<CATEGORY_ROOM>(DataProvider.Ins.DB.CATEGORY_ROOM);
             return list;
+        }
+        public EMPLOYEE GetEmployeeById(int idEmployee)
+        {
+            return DataProvider.Ins.DB.EMPLOYEEs.Where(x => x.IdEmployee == idEmployee).SingleOrDefault();
         }
 
         public ObservableCollection<EMPLOYEE> getListEmployee()
@@ -40,35 +56,73 @@ namespace QLKS.DATA
             ObservableCollection<EMPLOYEE> list = new ObservableCollection<EMPLOYEE>(DataProvider.Ins.DB.EMPLOYEEs);
             return list;
         }
+        public RESERVATION GetReservationById(int idReservation)
+        {
+            return DataProvider.Ins.DB.RESERVATIONs.Where(x => x.IdReservation == idReservation).SingleOrDefault();
+        }
 
         public ObservableCollection<RESERVATION> getListReservation()
         {
             ObservableCollection<RESERVATION> list = new ObservableCollection<RESERVATION>(DataProvider.Ins.DB.RESERVATIONs);
             return list;
         }
+        public RESERVATION getReservationNotPaymentAtTime(DateTime time, int IdRoom)
+        {
+            return DataProvider.Ins.DB.RESERVATIONs.Where(x => x.End_Date >= time && x.Start_Date <= time && x.RESERVATION_DETAIL.FirstOrDefault().IdRoom == IdRoom && x.RESERVATION_DETAIL.FirstOrDefault().Status != "Phòng đã thanh toán").SingleOrDefault();
+        }
+        public RESERVATION_DETAIL getReservationDetailByIdAndIdRoom(int IdReservation, int IdRoom)
+        {
+            return DataProvider.Ins.DB.RESERVATION_DETAIL.Where(x => x.IdRoom == IdRoom && x.IdReservation == IdReservation).SingleOrDefault();
+
+        }
         public RENTAL GetRentalById(int idRental)
         {
             return DataProvider.Ins.DB.RENTALs.Where(x => x.IdRental == idRental).SingleOrDefault();
         }
-        public List<RENTAL> GetRentalByTime(DateTime time)
+        public List<RENTAL> GetListRentalByTime(DateTime time)
         {
             return DataProvider.Ins.DB.RENTALs.Where(x => x.DateRental.Value.Month == time.Month && x.DateRental.Value.Year == time.Year).ToList();
         }
-        public List<BILLINFO> GetBillInfo()
+        public List<BILLINFO> GetListBillInfo()
         {
             return DataProvider.Ins.DB.BILLINFOes.ToList();
         }
-        public List<BILLINFO> GetBillInfoByIdBill(int idBill)
+        public List<BILLINFO> GetListBillInfoByIdBill(int idBill)
         {
             return DataProvider.Ins.DB.BILLINFOes.Where(x => x.IdBill == idBill).ToList();
         }
-        public List<Bill> GetBillOrderByDateBill()
+        public List<Bill> GetListBillOrderByDateBill()
         {
             return DataProvider.Ins.DB.Bills.OrderBy(x => x.Date_Bill).ToList();
         }
-        public List<Bill> GetBillByYearAndOrderByDateBill(int year)
+        public Bill GetLastBill()
+        {
+            return DataProvider.Ins.DB.Bills.ToList().Last();
+        }
+        public List<Bill> GetListBillByYearAndOrderByDateBill(int year)
         {
             return DataProvider.Ins.DB.Bills.Where(x => x.Date_Bill.Value.Year == year).OrderBy(x => x.Date_Bill).ToList();
+        }
+        public List<Bill> GetListBillByTime(string year, string month)
+        {
+            return DataProvider.Ins.DB.Bills.Where(x => x.Date_Bill.Value.Year.ToString() == year && x.Date_Bill.Value.Month.ToString() == month).ToList();
+        }
+        public SALES_REPORT GetSaleReportByTime(int year,int month)
+        {
+            return DataProvider.Ins.DB.SALES_REPORT.Where(x => x.SalesReport_Date.Value.Year == year && x.SalesReport_Date.Value.Month == month).SingleOrDefault();
+        }
+        public ObservableCollection<SALES_REPORT> getListSaleReport()
+        {
+            ObservableCollection<SALES_REPORT> list = new ObservableCollection<SALES_REPORT>(DataProvider.Ins.DB.SALES_REPORT);
+            return list;
+        }
+        public List<SALES_REPORT_DETAIL> GetListSalesReportDetailByIdSaleReport(int idSaleReport)
+        {
+            return DataProvider.Ins.DB.SALES_REPORT_DETAIL.Where(x => x.IdSalesReport == idSaleReport).ToList();
+        }
+        public List<USER> GetUserByUserNameAndPassword(string UserName, string  password)
+        {
+            return DataProvider.Ins.DB.USERS.Where(x => x.UserName == UserName && x.Password == password).ToList();
         }
     }
 }

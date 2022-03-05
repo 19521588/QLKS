@@ -1,4 +1,5 @@
-﻿using QLKS.Model;
+﻿using QLKS.DATA;
+using QLKS.Model;
 using QLKS.ViewModel;
 using QuanLyGaraOto.Convert;
 using System;
@@ -50,17 +51,18 @@ namespace QLKS.ViewModel
         }
         void Login(Window p)
         {
+            GetModel getModel = new GetModel();
             if (p == null)
             {
                 return;
             }
             HashConvert hash = new HashConvert();
             string passEncode = hash.GetHash(Password);
-            var accCount = DataProvider.Ins.DB.USERS.Where(x => x.UserName == UserName && x.Password == passEncode).Count();
+            var accCount = getModel.GetUserByUserNameAndPassword(UserName, passEncode).Count();
 
             if (accCount > 0)
             {
-                User = DataProvider.Ins.DB.USERS.Where(x => x.UserName == UserName && x.Password == passEncode).SingleOrDefault();
+                User = getModel.GetUserByUserNameAndPassword(UserName, passEncode).SingleOrDefault();
                 IsLogin = true;
                 IsClose = false;
                 p.Close();
