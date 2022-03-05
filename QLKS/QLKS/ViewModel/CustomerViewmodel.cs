@@ -1,10 +1,14 @@
-﻿using QLKS.Model;
+﻿using QLKS.Convert;
+using QLKS.DATA;
+using QLKS.Model;
+using QLKS.UserControlss;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QLKS.ViewModel
@@ -12,9 +16,9 @@ namespace QLKS.ViewModel
     public class CustomerViewmodel : BaseViewModel
     {
         public ICommand OpenAddCommand { get; set; }
-
         public ICommand OpenEditCommand { get; set; }
-
+        public ICommand SearchCommand { get; set; }
+        public ICommand RefreshCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         private string _Name { get; set; }
 
@@ -40,6 +44,7 @@ namespace QLKS.ViewModel
         }
         public CustomerViewmodel()
         {
+            GetModel get = new GetModel();
             Load();
             OpenAddCommand = new RelayCommand<MainWindow>((p) => true, (p) =>
             {
@@ -53,6 +58,29 @@ namespace QLKS.ViewModel
                 if (add.check)
                     ListCustomer.Insert(0, add.customer);
             });
+
+            DeleteCommand = new RelayCommand<MainWindow>((p) => {
+                if (SelectedItem == null) return false;
+                return true;
+            }, (p) =>
+            {
+                var Temp = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.IdCustomer == SelectedItem.IdCustomer);
+                if (Temp.Count() == 0)
+                {
+                    if (MessageBox.Show("Bạn có chắc chắn muốn xóa nhân viên này?", "Xóa nhân viên", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        DeleteModel delete = new DeleteModel();
+                        delete.DeleteCustomer(SelectedItem);
+                        ListCustomer.Remove(SelectedItem);
+                    }
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Không thể xóa khách hàng này", "Thông báo", MessageBoxButton.OK);
+                }
+            });
+
             OpenEditCommand = new RelayCommand<MainWindow>((p) => {
                 if (SelectedItem == null) return false;
                 return true;
@@ -70,11 +98,40 @@ namespace QLKS.ViewModel
                 wdEditCustomer.ShowDialog();
                 Load();
             });
+            SearchCommand = new RelayCommand<uc_Customer>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                UnicodeConvert uni = new UnicodeConvert();
+
+                ObservableCollection<CUSTOMER> _ListTemp = new ObservableCollection<CUSTOMER>();
+                ObservableCollection<CUSTOMER> _ListNew = get.getListCustomer();
+
+                foreach (var item in _ListNew)
+                {
+                    if ((string.IsNullOrEmpty(p.txbNameSearch.Text) || (!string.IsNullOrEmpty(p.txbNameSearch.Text) && uni.RemoveUnicode(item.Name).ToLower().Contains(uni.RemoveUnicode(p.txbNameSearch.Text).ToLower())))
+                        && (string.IsNullOrEmpty(p.txbPhoneSearch.Text) || (!string.IsNullOrEmpty(p.txbPhoneSearch.Text) && uni.RemoveUnicode(item.Phone).ToLower().Contains(uni.RemoveUnicode(p.txbPhoneSearch.Text).ToLower()))))
+                    {
+                        _ListTemp.Add(item);
+                    }
+                }
+                ListCustomer = _ListTemp;
+            });
+            RefreshCommand = new RelayCommand<MainWindow>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                Load();
+            });
+
+            void Load()
+            {
+                ListCustomer = get.getListCustomer();
+            }
         }
 
-        void Load()
-        {
-            ListCustomer = new ObservableCollection<CUSTOMER>(DataProvider.Ins.DB.CUSTOMERs);
-        }
+        
     }
 }

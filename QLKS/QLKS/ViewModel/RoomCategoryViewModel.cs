@@ -1,4 +1,5 @@
 ﻿using QLKS.Convert;
+using QLKS.DATA;
 using QLKS.Model;
 using QLKS.UserControlss;
 using System;
@@ -52,7 +53,8 @@ namespace QLKS.ViewModel
 
         public RoomCategoryViewModel()
         {
-            ListCategory = new ObservableCollection<CATEGORY_ROOM>(DataProvider.Ins.DB.CATEGORY_ROOM);
+            GetModel get = new GetModel();
+            Load();
             OpenAddCommand = new RelayCommand<MainWindow>((p) => true, (p) =>
             {
 
@@ -80,13 +82,18 @@ namespace QLKS.ViewModel
                 wdAddRooms.ShowDialog();
                 Load();
             });
-            DeleteCommand = new RelayCommand<MainWindow>((p) =>
-            {
+            DeleteCommand = new RelayCommand<MainWindow>((p) => {
                 if (SelectedItem == null) return false;
                 return true;
             }, (p) =>
             {
-
+                var Temp = DataProvider.Ins.DB.ROOMs.Where(x => x.Name == SelectedItem.Name);
+                if (Temp.Count() == 0)
+                {
+                    DeleteModel delete = new DeleteModel();
+                    delete.DeleteCategoryRoom(SelectedItem);
+                    ListCategory.Remove(SelectedItem);
+                }
             });
             SearchCommand = new RelayCommand<uc_RoomCategoryManage>((p) =>
             {
@@ -96,7 +103,7 @@ namespace QLKS.ViewModel
                 UnicodeConvert uni = new UnicodeConvert();
 
                 ObservableCollection<CATEGORY_ROOM> _ListTemp = new ObservableCollection<CATEGORY_ROOM>();
-                ObservableCollection<CATEGORY_ROOM> _ListNew = new ObservableCollection<CATEGORY_ROOM>(DataProvider.Ins.DB.CATEGORY_ROOM);
+                ObservableCollection<CATEGORY_ROOM> _ListNew = get.getListCategoryRoom();
 
                 foreach (var item in _ListNew)
                 {
@@ -117,7 +124,8 @@ namespace QLKS.ViewModel
             });
             void Load()
             {
-                ListCategory = new ObservableCollection<CATEGORY_ROOM>(DataProvider.Ins.DB.CATEGORY_ROOM);
+                //GetModel get = new GetModel();
+                ListCategory = get.getListCategoryRoom();
             }
         }
     }

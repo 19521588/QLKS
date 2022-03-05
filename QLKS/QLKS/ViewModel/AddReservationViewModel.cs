@@ -19,6 +19,8 @@ namespace QLKS.ViewModel
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
 
+        public ICommand OpenSelectCustomerCommand { get; set; }
+
 
         private bool _check { get; set; }
         public bool check { get => _check; set { _check = value; OnPropertyChanged(); } }
@@ -259,6 +261,22 @@ namespace QLKS.ViewModel
             }
             );
 
+            OpenSelectCustomerCommand = new RelayCommand<wd_AddNewReservation>((p) => true, (p) =>
+            {
+
+                wd_SelectCustomer wdselect = new wd_SelectCustomer();
+
+                wdselect.ShowDialog();
+
+                SelectCustomerViewModel add = wdselect.DataContext as SelectCustomerViewModel;
+                p.txbName.Text = add.customer.Name;
+                p.txbCCCD.Text = add.customer.CCCD;
+                p.txbPhone.Text = add.customer.Phone;
+                p.cbSex.Text = add.customer.Sex;
+                p.txbAddress.Text = add.customer.Address;
+                p.txbNationality.Text = add.customer.Nationality;
+                p.dtBirth.SelectedDate = add.customer.BirthDay;
+            });
 
             CloseCommand = new RelayCommand<wd_AddNewReservation>(
             (p) =>

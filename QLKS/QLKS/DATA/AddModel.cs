@@ -15,5 +15,23 @@ namespace QLKS.DATA
             DataProvider.Ins.DB.EMPLOYEEs.Add(additem);
             DataProvider.Ins.DB.SaveChanges();
         }
+
+        public void AddCustomer(CUSTOMER additem)
+        {
+            DataProvider.Ins.DB.CUSTOMERs.Add(additem);
+            DataProvider.Ins.DB.SaveChanges();
+        }
+
+        public void AddRoom(ROOM additem)
+        {
+            DataProvider.Ins.DB.ROOMs.Add(additem);
+            DataProvider.Ins.DB.SaveChanges();
+        }
+
+        public void AddCategoryRoom(CATEGORY_ROOM additem)
+        {
+            DataProvider.Ins.DB.CATEGORY_ROOM.Add(additem);
+            DataProvider.Ins.DB.SaveChanges();
+        }
     }
 }

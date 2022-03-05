@@ -1,4 +1,5 @@
 ﻿using QLKS.Convert;
+using QLKS.DATA;
 using QLKS.Model;
 using QLKS.UserControlss;
 using System;
@@ -46,6 +47,7 @@ namespace QLKS.ViewModel
 
         public EmployeeViewModel()
         {
+            GetModel get = new GetModel();
             Load();
             OpenAddCommand = new RelayCommand<MainWindow>((p) => true, (p) =>
             {
@@ -84,7 +86,7 @@ namespace QLKS.ViewModel
             }, (p) =>
             {
                 ObservableCollection<RESERVATION> list = new ObservableCollection<RESERVATION>(DataProvider.Ins.DB.RESERVATIONs.Where(x => x.IdEmployee == SelectedItem.IdEmployee));
-                if(list.Count == 0)
+                if(list.Count != 0)
                 {
                     MessageBox.Show("Không thể xóa nhân viên này", "Thông báo", MessageBoxButton.OK);
                 }
@@ -93,7 +95,7 @@ namespace QLKS.ViewModel
                     if (MessageBox.Show("Bạn có chắc chắn muốn xóa nhân viên này?","Xóa nhân viên", MessageBoxButton.YesNo,MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
                         DeleteModel delete = new DeleteModel();
-                        delete.EMPLOYEE(SelectedItem);
+                        delete.DeleteEMPLOYEE(SelectedItem);
                         ListEmployee.Remove(SelectedItem);
                     }    
                 }    
@@ -106,7 +108,7 @@ namespace QLKS.ViewModel
                 UnicodeConvert uni = new UnicodeConvert();
 
                 ObservableCollection<EMPLOYEE> _ListTemp = new ObservableCollection<EMPLOYEE>();
-                ObservableCollection<EMPLOYEE> _ListNew = new ObservableCollection<EMPLOYEE>(DataProvider.Ins.DB.EMPLOYEEs);
+                ObservableCollection<EMPLOYEE> _ListNew = get.getListEmployee();
 
                 foreach (var item in _ListNew)
                 {
@@ -125,10 +127,12 @@ namespace QLKS.ViewModel
             {
                 Load();
             });
+
+            void Load()
+            {
+                ListEmployee = get.getListEmployee();
+            }
         }
-        void Load()
-        {
-            ListEmployee = new ObservableCollection<EMPLOYEE>(DataProvider.Ins.DB.EMPLOYEEs);
-        }
+        
     }
 }
