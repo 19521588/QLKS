@@ -18,7 +18,7 @@
                 <RowDefinition ></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Background="#3d4751">
-                <TextBlock x:Name="txbTitle" Text="Thêm thông tin loại dịch vụ"  
+                <TextBlock x:Name="txbTitle" Text="Chọn khách hàng"  
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         FontSize="25"
                         FontWeight="Bold" 
@@ -76,9 +76,9 @@
                             </DataGrid.ColumnHeaderStyle>
 
                             <DataGrid.Columns>
-                                <materialDesign:DataGridTextColumn Width="90" Header="Mã KH" Binding="{Binding IdRoom,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Width="90" Header="Mã KH" Binding="{Binding IdCustomer,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn Width="250" Header="Tên Khách hàng" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                                <materialDesign:DataGridTextColumn Width="100" Header="CCCD" Binding="{Binding CATEGOEY_ROOM ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Width="100" Header="CCCD" Binding="{Binding CCCD,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </materialDesign:Card>
@@ -91,14 +91,14 @@
                     <ColumnDefinition Width="200"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="1" >
-                    <Button Content="Thêm"                            
+                    <Button Content="Chọn"                            
                         Margin="40 0 0 0"   
                         Height="50"
                         Width="120"
                         Background="#478C10"
                         BorderBrush="#478C10"
-                        Command="{Binding AddCategoryServiceCommand}"
-                        CommandParameter="{Binding ElementName=wdAddCategoryService}">
+                        Command="{Binding AddCommand}"
+                        CommandParameter="{Binding ElementName=wdSelectCustomer}">
                     </Button>
                 </Grid>
                 <Grid Grid.Column="2" >
@@ -108,8 +108,8 @@
                         Width="120"
                         Background="#9D9999"  
                         BorderBrush="#9D9999"
-                        Command="{Binding CloseAddWindowCommand}"
-                        CommandParameter="{Binding ElementName=wdAddCategoryService}">
+                        Command="{Binding CloseCommand}"
+                        CommandParameter="{Binding ElementName=wdSelectCustomer}">
                     </Button>
                 </Grid>
             </Grid>

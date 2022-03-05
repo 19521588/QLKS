@@ -9,6 +9,7 @@ using QLKS.Model;
 using System.Windows.Input;
 using QLKS.Convert;
 using QLKS.UserControlss;
+using QLKS.DATA;
 
 namespace QLKS.ViewModel
 {
@@ -57,6 +58,7 @@ namespace QLKS.ViewModel
         }
         public RoomViewModel()
         {
+            GetModel get = new GetModel();
             LoadRoom();
             OpenAddCommand = new RelayCommand<MainWindow>((p) => true, (p) =>
             {
@@ -87,7 +89,13 @@ namespace QLKS.ViewModel
                 return true;
             }, (p) =>
             {
-
+                var Temp = DataProvider.Ins.DB.ROOMs.Where(x => x.Name == SelectedItem.Name);
+                if (Temp.Count() == 0)
+                {
+                    DeleteModel delete = new DeleteModel();
+                    delete.DeleteRoom(SelectedItem);
+                    ListRoom.Remove(SelectedItem);
+                }    
             });
             SearchCommand = new RelayCommand<uc_RoomManage>((p) =>
             {            
@@ -97,7 +105,7 @@ namespace QLKS.ViewModel
                 UnicodeConvert uni = new UnicodeConvert();
 
                 ObservableCollection<ROOM> _ListTemp = new ObservableCollection<ROOM>();
-                ObservableCollection<ROOM> _ListNew = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs);
+                ObservableCollection<ROOM> _ListNew = get.getListRoom();
 
                 foreach (var item in _ListNew)
                 {
@@ -113,16 +121,19 @@ namespace QLKS.ViewModel
             {
                 LoadRoom();
             });
-        }
 
-        void LoadRoom()
-        {
-            ListRoom = new ObservableCollection<ROOM>();
-            ObservableCollection<ROOM> temp = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs);
-            for (int i = temp.Count() - 1; i >= 0; i--)
+            void LoadRoom()
             {
-                ListRoom.Add(temp[i]);
+
+                ListRoom = new ObservableCollection<ROOM>();
+                ObservableCollection<ROOM> temp = get.getListRoom();
+                for (int i = temp.Count() - 1; i >= 0; i--)
+                {
+                    ListRoom.Add(temp[i]);
+                }
             }
         }
+
+        
     }
 }

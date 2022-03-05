@@ -29,5 +29,9 @@ namespace QLKS.DATA
             }
             DataProvider.Ins.DB.SaveChanges();
         }
+        public void EditRoom(ROOM room)
+        {
+
+        }
     }
 }
