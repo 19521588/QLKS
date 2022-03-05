@@ -1,4 +1,5 @@
 ﻿using QLKS.Convert;
+using QLKS.DATA;
 using QLKS.Model;
 using QLKS.UserControlss;
 using System;
@@ -182,8 +183,8 @@ namespace QLKS.ViewModel
             foreach (var item in ListReception)
             {
                 ListBill temp = new ListBill();
-
-                var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.IdRental == item.IdRental).SingleOrDefault();
+                GetModel getModel = new GetModel();
+                var rental = getModel.GetRentalById(item.IdRental);
 
                 var room = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == rental.IdRoom).SingleOrDefault();
 
@@ -212,8 +213,9 @@ namespace QLKS.ViewModel
                       && item.Date_Bill.Value.Date.Year == DateTime.Now.Date.Year)
                 {
                     ListBill temp = new ListBill();
+                    GetModel getModel = new GetModel();
 
-                    var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.IdRental == item.IdRental).SingleOrDefault();
+                    var rental =getModel.GetRentalById(item.IdRental);
 
                     var room = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == rental.IdRoom).SingleOrDefault();
 

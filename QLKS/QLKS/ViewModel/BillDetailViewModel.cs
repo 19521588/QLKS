@@ -1,4 +1,5 @@
-﻿using QLKS.Model;
+﻿using QLKS.DATA;
+using QLKS.Model;
 using QLKS.Template;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace QLKS.ViewModel
         {
             IsSave = false;
         }
-        public BillDetailViewModel(ObservableCollection<SelectService> detailPayment, int IdRental, bool IsPrint,USER User)
+        public BillDetailViewModel(ObservableCollection<SelectService> detailPayment, int IdRental, bool IsPrint, USER User)
         {
             IsSave = false;
             Init(detailPayment, IdRental, IsPrint);
@@ -48,16 +49,17 @@ namespace QLKS.ViewModel
                 {
                     if (MessageBox.Show("Bạn có chắc chắn muốn thanh toán", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
+                        GetModel getModel = new GetModel();
+                        AddModel addModel = new AddModel();
                         var bill = new Bill();
-                        var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.IdRental ==IdRental).SingleOrDefault();
+                        var rental = getModel.GetRentalById(IdRental);
                         var room = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == rental.IdRoom).SingleOrDefault();
-                        bill.Name = DataProvider.Ins.DB.EMPLOYEEs.Where(x=>x.IdEmployee==User.IdEmployee).SingleOrDefault().Name;
+                        bill.Name = DataProvider.Ins.DB.EMPLOYEEs.Where(x => x.IdEmployee == User.IdEmployee).SingleOrDefault().Name;
                         bill.Total = TotalMoney;
                         bill.Date_Bill = DateTime.Now;
                         bill.IdRental = IdRental;
-                        bill.CategoryRoom= DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == room.IdCategoryRoom).SingleOrDefault().Name;
-                        DataProvider.Ins.DB.Bills.Add(bill);
-                        DataProvider.Ins.DB.SaveChanges();
+                        bill.CategoryRoom = DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == room.IdCategoryRoom).SingleOrDefault().Name;
+                        addModel.AddBill(bill);
                         foreach (var item in detailPayment)
                         {
                             var billInfo = new BILLINFO();
@@ -65,8 +67,7 @@ namespace QLKS.ViewModel
                             billInfo.Service = item.Service.Name;
                             billInfo.Price = item.Service.Price;
                             billInfo.Amount = item.Amount;
-                            DataProvider.Ins.DB.BILLINFOes.Add(billInfo);
-                            DataProvider.Ins.DB.SaveChanges();
+                            addModel.AddBillInfo(billInfo);
                         }
                         IsPrint = !IsPrint;
                         IsSave = true;
@@ -135,7 +136,8 @@ namespace QLKS.ViewModel
             }
             TotalMoney = bill.Total.Value;
             BillInfo = new ObservableCollection<ListBillInfo>();
-            var billinfo = DataProvider.Ins.DB.BILLINFOes.Where(x => x.IdBill == bill.IdBill);
+            GetModel getModel = new GetModel();
+            var billinfo = getModel.GetBillInfoByIdBill(bill.IdBill);
             int i = 1;
 
             foreach (var item in billinfo)
@@ -150,7 +152,7 @@ namespace QLKS.ViewModel
             }
 
             BillDetail = new BillDetail();
-            var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.IdRental == bill.IdRental).SingleOrDefault();
+            var rental = getModel.GetRentalById(bill.IdRental);
             var reservation = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.IdReservation == rental.IdReservation).SingleOrDefault();
 
 
@@ -181,9 +183,9 @@ namespace QLKS.ViewModel
             {
                 btText = "Thanh toán";
             }
-         
+
             BillInfo = new ObservableCollection<ListBillInfo>();
-            
+
             int i = 1;
 
             foreach (var item in detailPayment)
@@ -194,7 +196,7 @@ namespace QLKS.ViewModel
                 billInfo.IdBill = i;
                 billInfo.Service = item.Service.Name;
                 billInfo.Price = item.Service.Price;
-   
+
                 ListBillInfo temp = new ListBillInfo();
                 temp.BillInfo = billInfo;
                 temp.STT = i;
@@ -205,7 +207,9 @@ namespace QLKS.ViewModel
             }
 
             BillDetail = new BillDetail();
-            var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.IdRental == IdRental).SingleOrDefault();
+            GetModel getModel = new GetModel();
+
+            var rental = getModel.GetRentalById(IdRental);
             var reservation = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.IdReservation == rental.IdReservation).SingleOrDefault();
 
 
@@ -222,17 +226,17 @@ namespace QLKS.ViewModel
             BillDetail.Name = customer.Name;
             BillDetail.Phone = customer.Phone;
 
-            if(reservation.Date!=0)
+            if (reservation.Date != 0)
             {
                 BillDetail.RoomCharge = int.Parse(roomCategory.Price_Day.ToString()) * reservation.Date.Value;
             }
             else
             {
-               if(reservation.Start_Date.Day!=reservation.End_Date.Day)
+                if (reservation.Start_Date.Day != reservation.End_Date.Day)
                 {
                     BillDetail.RoomCharge = int.Parse(roomCategory.Price_Hour.ToString()) * (24 + reservation.End_Date.Hour - reservation.Start_Date.Hour);
                 }
-               else
+                else
                 {
                     if (reservation.End_Date.Hour == 0)
                     {

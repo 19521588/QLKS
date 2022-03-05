@@ -1,4 +1,5 @@
-﻿using QLKS.Model;
+﻿using QLKS.DATA;
+using QLKS.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,7 +26,8 @@ namespace QLKS.ViewModel
         {
             Bill = bill;
             BillInfo = new ObservableCollection<ListBillInfo>();
-            var billinfo = DataProvider.Ins.DB.BILLINFOes.Where(x => x.IdBill == bill.IdBill);
+            GetModel getModel=new GetModel();
+            var billinfo = getModel.GetBillInfoByIdBill(bill.IdBill);
             int i = 1;
 
             foreach (var item in billinfo)
@@ -40,7 +42,7 @@ namespace QLKS.ViewModel
             }
 
             BillDetail = new BillDetail();
-            var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.IdRental == bill.IdRental).SingleOrDefault();
+            var rental = getModel.GetRentalById(bill.IdRental);
             var reservation = DataProvider.Ins.DB.RESERVATIONs.Where(x => x.IdReservation == rental.IdReservation).SingleOrDefault();
           
 
