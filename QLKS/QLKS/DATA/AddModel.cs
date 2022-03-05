@@ -39,5 +39,15 @@ namespace QLKS.DATA
             DataProvider.Ins.DB.DETAIL_CONVINIENT.Add(additem);
             DataProvider.Ins.DB.SaveChanges();
         }
+        public void AddBill(Bill additem)
+        {
+            DataProvider.Ins.DB.Bills.Add(additem);
+            DataProvider.Ins.DB.SaveChanges();
+        }
+        public void AddBillInfo(BILLINFO additem)
+        {
+            DataProvider.Ins.DB.BILLINFOes.Add(additem);
+            DataProvider.Ins.DB.SaveChanges();
+        }
     }
 }

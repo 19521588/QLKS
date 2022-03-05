@@ -1,5 +1,6 @@
 ﻿using LiveCharts;
 using LiveCharts.Wpf;
+using QLKS.DATA;
 using QLKS.Model;
 using QLKS.UserControlss;
 using System;
@@ -177,9 +178,10 @@ namespace QLKS.ViewModel
             Revenue = 0;
 
             DateTime time = DateTime.Now;
+            GetModel getModel = new GetModel();
 
             ObservableCollection<Bill> receipts = new ObservableCollection<Bill>
-                (DataProvider.Ins.DB.Bills.OrderBy(x => x.Date_Bill).ToList());
+                (getModel.GetBillOrderByDateBill());
 
             if (receipts.Count > 0)
             {
@@ -197,15 +199,16 @@ namespace QLKS.ViewModel
             }
 
             Revenue=(long)receipts.Where(x => x.Date_Bill.Value.Month == time.Month && x.Date_Bill.Value.Year == time.Year).Sum(y=>y.Total);
-            var rental = DataProvider.Ins.DB.RENTALs.Where(x => x.DateRental.Value.Month == time.Month && x.DateRental.Value.Year == time.Year).ToList();
+            var rental = getModel.GetRentalByTime(time);
             Rental_Room_Month = rental.Count();
             Rental_Room_Day = rental.Count(x => x.DateRental.Value.Day == time.Day);
 
         }
         public void LoadDataToChart_Revenue(int year)
         {
+            GetModel getModel = new GetModel();
             ObservableCollection<Bill> receipts = new ObservableCollection<Bill>
-                (DataProvider.Ins.DB.Bills.Where(x => x.Date_Bill.Value.Year == year).OrderBy(x => x.Date_Bill).ToList());
+                (getModel.GetBillByYearAndOrderByDateBill(year));
 
             Revenue_Labels.Clear();
             ChartValues<long> values_service = new ChartValues<long>();
@@ -230,7 +233,7 @@ namespace QLKS.ViewModel
 
                 while (receipts.Count() > 0 && i == receipts.First().Date_Bill.Value.Month)
                 {
-                    var billinfo = DataProvider.Ins.DB.BILLINFOes;
+                    var billinfo = getModel.GetBillInfo();
                     if (billinfo.Count() > 0)
                     {
                         foreach (var item in billinfo)
@@ -275,8 +278,9 @@ namespace QLKS.ViewModel
         }
         public void LoadDataToChart_Rental(int year)
         {
+            GetModel getModel = new GetModel();
             ObservableCollection<Bill> bill = new ObservableCollection<Bill>
-                (DataProvider.Ins.DB.Bills.Where(x => x.Date_Bill.Value.Year == year).OrderBy(x => x.Date_Bill).ToList());
+                (getModel.GetBillByYearAndOrderByDateBill(year));
             Labels_Rental.Clear();
             ChartValues<long> values = new ChartValues<long>();
 
