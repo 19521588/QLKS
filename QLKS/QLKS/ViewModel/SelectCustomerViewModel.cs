@@ -39,7 +39,7 @@ namespace QLKS.ViewModel
                 },
                 (p) =>
                 {
-                    if (MessageBox.Show("Bạn có chắc chắn muốn thêm phòng mới", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    if (MessageBox.Show("Bạn có chắc chắn muốn chọn khách hàng này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
                         customer = SelectedItem;
                         p.Close();

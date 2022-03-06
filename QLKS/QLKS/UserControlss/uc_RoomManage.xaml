@@ -93,6 +93,7 @@
                       materialDesign:HintAssist.Hint="Tên phòng"
                       Style="{StaticResource txbSearch}"
                       Text="{Binding IdHD,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        PreviewTextInput="NumberValidationTextBox"
                       VerticalAlignment="Center">
 
                     </TextBox>

@@ -35,6 +35,46 @@ namespace QLKS.DATA
             return list;
         }
 
+        public ROOM getRoom(int idRoom)
+        {
+            return DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == idRoom).SingleOrDefault();
+        }
+
+        public CATEGORY_ROOM getCategoryRoom(int idcategory)
+        {
+            return DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == idcategory).SingleOrDefault();
+        }
+
+        public EMPLOYEE getEmployee(int idEmployee)
+        {
+            return DataProvider.Ins.DB.EMPLOYEEs.Where(x => x.IdEmployee == idEmployee).SingleOrDefault();
+        }
+
+        public CUSTOMER getCustomer(int idCustomer)
+        {
+            return DataProvider.Ins.DB.CUSTOMERs.Where(x => x.IdCustomer == idCustomer).SingleOrDefault();
+        }
+
+        public SERVICE getService(int idService)
+        {
+            return DataProvider.Ins.DB.SERVICEs.Where(x => x.IdService == idService).SingleOrDefault();
+        }
+
+        public CATEGORY_SERVICE getCategoryService(int idCategoryService)
+        {
+            return DataProvider.Ins.DB.CATEGORY_SERVICE.Where(x => x.IdCategoryService == idCategoryService).SingleOrDefault();
+        }
+
+        public CONVINIENT getConvinient(int idConvinient)
+        {
+            return DataProvider.Ins.DB.CONVINIENTs.Where(x => x.IdConvinient == idConvinient).SingleOrDefault();
+        }    
+
+        public DETAIL_CONVINIENT getDetailConvinient(int idDetail)
+        {
+            return DataProvider.Ins.DB.DETAIL_CONVINIENT.Where(x => x.IdConvinientDetail == idDetail).SingleOrDefault();
+        }    
+
         public ObservableCollection<EMPLOYEE> getListEmployee()
         {
             ObservableCollection<EMPLOYEE> list = new ObservableCollection<EMPLOYEE>(DataProvider.Ins.DB.EMPLOYEEs);

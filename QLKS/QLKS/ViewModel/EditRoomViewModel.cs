@@ -1,4 +1,5 @@
-﻿using QLKS.Model;
+﻿using QLKS.DATA;
+using QLKS.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,8 +37,9 @@ namespace QLKS.ViewModel
 
         public EditRoomViewModel(ROOM room)
         {
-            ListCategory = new ObservableCollection<CATEGORY_ROOM>(DataProvider.Ins.DB.CATEGORY_ROOM);
-            var Cate = DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == room.IdCategoryRoom).SingleOrDefault();
+            GetModel get = new GetModel();
+            ListCategory = get.getListCategoryRoom();
+            var Cate = get.getCategoryRoom(room.IdCategoryRoom);
             SelectedCategory = room.CATEGORY_ROOM;
 
             EditCommand = new RelayCommand<wd_EditRoom>(
@@ -59,7 +61,7 @@ namespace QLKS.ViewModel
                     if (MessageBox.Show("Bạn có chắc chắn muốn sửa thông tin phòng", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
 
-                        var List = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == room.IdRoom).SingleOrDefault();
+                        var List = get.getRoom(room.IdRoom);
                         List.Name = p.txbName.Text;
                         List.IdCategoryRoom = SelectedCategory.IdCategoryRoom;
                         DataProvider.Ins.DB.SaveChanges();
@@ -69,6 +71,14 @@ namespace QLKS.ViewModel
                     }
                 }
                 );
+            CloseCommand = new RelayCommand<wd_EditRoom>(
+            (p) =>
+            { return true; },
+            (p) =>
+            {
+                p.Close();
+            }
+            );
         }
 
     }

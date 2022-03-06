@@ -1,4 +1,5 @@
-﻿using QLKS.Model;
+﻿using QLKS.DATA;
+using QLKS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,8 +32,9 @@ namespace QLKS.ViewModel
         public String SelectedCategory { get => _SelectedCategory; set { _SelectedCategory = value; OnPropertyChanged(); } }
         public EditEmployeeViewModel(EMPLOYEE employee)
         {
+            GetModel get = new GetModel();
+            EditModel edit = new EditModel();
             SelectedCategory = employee.Sex;
-
             EditCommand = new RelayCommand<wd_EditEmployee>(
                 (p) =>
                 {
@@ -52,16 +54,17 @@ namespace QLKS.ViewModel
                     if (MessageBox.Show("Bạn có chắc chắn muốn sửa thông tin nhân viên", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
 
-                        var List = DataProvider.Ins.DB.EMPLOYEEs.Where(x => x.IdEmployee == employee.IdEmployee).SingleOrDefault();
-                        List.Name = p.txbName.Text;
-                        List.Address = p.txbAddress.Text;
-                        List.CCCD = p.txbCCCD.Text;
-                        List.Phone = p.txbPhone.Text;
-                        List.BirthDay = p.dtpBirth.SelectedDate;
-                        List.Position = p.txbPosition.Text;
-                        List.Salary = p.txbSalary.Text;
-                        List.Sex = p.cbSex.Text;
-                        DataProvider.Ins.DB.SaveChanges();
+                        var List = get.getEmployee(employee.IdEmployee);
+                        edit.EditEmployee(List, p.txbName.Text, p.txbAddress.Text, p.dtpBirth.SelectedDate.Value, p.txbPhone.Text, p.txbCCCD.Text, p.cbSex.Text, p.txbPosition.Text, p.txbSalary.Text);
+                        //List.Name = p.txbName.Text;
+                        //List.Address = p.txbAddress.Text;
+                        //List.CCCD = p.txbCCCD.Text;
+                        //List.Phone = p.txbPhone.Text;
+                        //List.BirthDay = p.dtpBirth.SelectedDate;
+                        //List.Position = p.txbPosition.Text;
+                        //List.Salary = p.txbSalary.Text;
+                        //List.Sex = p.cbSex.Text;
+                        //DataProvider.Ins.DB.SaveChanges();
                         OnPropertyChanged("List");
                         IsClose = false;
                         p.Close();
@@ -74,7 +77,6 @@ namespace QLKS.ViewModel
             { return true; },
             (p) =>
             {
-
                 p.Close();
             }
             );

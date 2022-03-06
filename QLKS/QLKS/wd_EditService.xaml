@@ -93,7 +93,8 @@
                     <TextBox  Grid.Column="2"  Name="txtGia"   
                               FontSize="20"
                                         materialDesign:HintAssist.Hint="Giá dịch vụ"                        
-                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"                        
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"   
+                              PreviewTextInput="NumberValidationTextBox"
                                         VerticalAlignment="Center" Width="270" >
                         <TextBox.Text>
                             <Binding Path="Price" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">

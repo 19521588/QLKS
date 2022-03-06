@@ -66,5 +66,17 @@ namespace QLKS.DATA
             DataProvider.Ins.DB.BILLINFOes.Add(additem);
             DataProvider.Ins.DB.SaveChanges();
         }
+
+        public void AddReservation(RESERVATION additem)
+        {
+            DataProvider.Ins.DB.RESERVATIONs.Add(additem);
+            DataProvider.Ins.DB.SaveChanges();
+        }
+
+        public void AddReservationDetail(RESERVATION_DETAIL additem)
+        {
+            DataProvider.Ins.DB.RESERVATION_DETAIL.Add(additem);
+            DataProvider.Ins.DB.SaveChanges();
+        }
     }
 }

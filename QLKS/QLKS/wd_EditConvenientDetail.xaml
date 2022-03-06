@@ -97,7 +97,8 @@
                         <TextBox  Width="270" Name="txtSoLuong"  
                                   FontSize="20"
                                 materialDesign:HintAssist.Hint="Số lượng"                        
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"                        
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                                  PreviewTextInput="NumberValidationTextBox"
                                 VerticalAlignment="Center"  />
 
                     </Grid>
