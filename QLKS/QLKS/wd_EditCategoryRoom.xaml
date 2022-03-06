@@ -92,7 +92,8 @@
                             <TextBox  Width="300" Name="txbBeds" 
                                       FontSize="20"
                                 materialDesign:HintAssist.Hint="Nhập số giường"                        
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"                        
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"     
+                                      PreviewTextInput="NumberValidationTextBox"
                                 VerticalAlignment="Center"  />
 
                         </Grid>
@@ -114,7 +115,8 @@
                             <TextBox  Width="300" Name="txbPriceDay"
                                       FontSize="20"
                                 materialDesign:HintAssist.Hint="Nhập giá ngày"                        
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"                        
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                      PreviewTextInput="NumberValidationTextBox"
                                 VerticalAlignment="Center"  />
 
                         </Grid>
@@ -135,7 +137,8 @@
                             <TextBox  Width="300" Name="txbPriceHour"
                                       FontSize="20"
                                 materialDesign:HintAssist.Hint="Nhập giá giờ"                        
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"                        
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                      PreviewTextInput="NumberValidationTextBox"
                                 VerticalAlignment="Center"  />
 
                         </Grid>

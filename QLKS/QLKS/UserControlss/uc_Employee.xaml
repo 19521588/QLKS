@@ -100,6 +100,7 @@
                       materialDesign:HintAssist.Hint="Số điện thoại"
                       Style="{StaticResource txbSearch}"
                       Text="{Binding IdHD,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        PreviewTextInput="NumberValidationTextBox"
                       VerticalAlignment="Center">
 
                     </TextBox>

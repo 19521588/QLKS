@@ -127,9 +127,9 @@
                     <Grid Grid.Column="2">
                         <TextBlock FontSize="30" FontWeight="Bold" Text="Thông tin phòng" Margin="0 10 0 0"
                         Foreground="#00A3FF" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-                        <Grid Height="33" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left"
+                        <Grid Height="40" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left"
                         Margin="30 50 0 0">
-                            <materialDesign:PackIcon Kind="CalendarToday" Height="25" Width="25" VerticalAlignment="Bottom"/>
+                            <materialDesign:PackIcon Kind="CalendarToday" Height="30" Width="25" VerticalAlignment="Bottom"/>
                             <DatePicker Margin="30 0 0 0" x:Name="dtStartDate" FontSize="14"
                                         
                             materialDesign:HintAssist.Hint="Ngày bắt đầu"
@@ -145,7 +145,7 @@
                             </DatePicker>
                         </Grid>
 
-                        <Grid Height="33" Width="150" VerticalAlignment="Top" HorizontalAlignment="Right"
+                        <Grid Height="40" Width="150" VerticalAlignment="Top" HorizontalAlignment="Right"
                         Margin="0 50 170 0">
                             <materialDesign:PackIcon Kind="ClockOutline" Height="25" Width="25" VerticalAlignment="Bottom"/>
                             <materialDesign:TimePicker x:Name="tpStartTime" FontSize="14"
@@ -163,7 +163,7 @@
                             </materialDesign:TimePicker>
                         </Grid>
 
-                        <Grid Height="33" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left"
+                        <Grid Height="40" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left"
                         Margin="30 100 0 0">
                             <materialDesign:PackIcon Kind="CalendarToday" Height="25" Width="25" VerticalAlignment="Bottom"/>
                             <DatePicker Margin="30 0 0 0" x:Name="dtpEndDate" FontSize="14"
@@ -180,7 +180,7 @@
                             </DatePicker>
                         </Grid>
 
-                        <Grid Height="33" Width="150" VerticalAlignment="Top" HorizontalAlignment="Right"
+                        <Grid Height="40" Width="150" VerticalAlignment="Top" HorizontalAlignment="Right"
                         Margin="0 100 170 0">
                             <materialDesign:PackIcon Kind="ClockOutline" Height="25" Width="25" VerticalAlignment="Bottom"/>
                             <materialDesign:TimePicker x:Name="tpEndTime" FontSize="14"
@@ -198,8 +198,8 @@
                             </materialDesign:TimePicker>
                         </Grid>
 
-                        <Grid Height="33" Width="120" VerticalAlignment="Top" HorizontalAlignment="Right"
-                        Margin="0 50 20 0">
+                        <Grid Height="30" Width="125" VerticalAlignment="Top" HorizontalAlignment="Right"
+                        Margin="0 58 20 0">
                             <materialDesign:PackIcon Kind="HumanMaleFemale" Height="25" Width="25" VerticalAlignment="Bottom"/>
                             <TextBox x:Name="txbAmount" FontSize="14" Margin="30 5 0 0" materialDesign:HintAssist.Hint="Nhập số người">
                             </TextBox>
@@ -209,7 +209,7 @@
                                 Command="{Binding LoadListRoomCommand}"
                                 Visibility="{Binding VisGrid, Converter={StaticResource BooleanToVisibilityConverter}}"
                                 CommandParameter="{Binding ElementName= wdAddReservation}"
-                        HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 100 20 8"/>
+                        HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 110 20 8"/>
 
                         <Grid
                               Visibility="{Binding VisGrid, Converter={StaticResource BooleanToVisibilityConverter}}"

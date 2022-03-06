@@ -78,7 +78,7 @@
                             <DataGrid.Columns>
                                 <materialDesign:DataGridTextColumn Width="90" Header="Mã KH" Binding="{Binding IdCustomer,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn Width="250" Header="Tên Khách hàng" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                                <materialDesign:DataGridTextColumn Width="100" Header="CCCD" Binding="{Binding CCCD,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Width="150" Header="CCCD" Binding="{Binding CCCD,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </materialDesign:Card>

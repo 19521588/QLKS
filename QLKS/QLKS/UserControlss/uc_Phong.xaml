@@ -81,7 +81,7 @@
                                 materialDesign:HintAssist.Hint="Tìm phòng"
                                 materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                                 BorderThickness="0"
-                               
+                                PreviewTextInput="NumberValidationTextBox"
                                 MinWidth="60" 
                                 VerticalAlignment="Center" />
                     </Grid>

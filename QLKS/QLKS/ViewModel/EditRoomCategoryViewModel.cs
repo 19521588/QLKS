@@ -28,7 +28,7 @@ namespace QLKS.ViewModel
         public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
         public EditRoomCategoryViewModel(CATEGORY_ROOM cate)
         {
-
+            GetModel get = new GetModel();
             EditCommand = new RelayCommand<wd_EditCategoryRoom>(
                 (p) =>
                 {
@@ -48,8 +48,7 @@ namespace QLKS.ViewModel
                     if (MessageBox.Show("Bạn có chắc chắn muốn sửa thông tin loại phòng", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
 
-                        var List = DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == cate.IdCategoryRoom).SingleOrDefault();
-             
+                        var List = get.getCategoryRoom(cate.IdCategoryRoom);
                         EditModel editModel=new EditModel();
                         editModel.EditCategoryRoom(List,p.txbName.Text, p.txbBeds.Text, p.txbPriceHour.Text, p.txbPriceDay.Text);
                         OnPropertyChanged("List");

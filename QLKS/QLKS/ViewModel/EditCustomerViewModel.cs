@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using QLKS.DATA;
 using QLKS.Model;
 using QLKS.ViewModel;
 
@@ -31,6 +32,8 @@ namespace QLKS.ViewModel
         public String SelectedCategory { get => _SelectedCategory; set { _SelectedCategory = value; OnPropertyChanged(); } }
         public EditCustomerViewModel(CUSTOMER customer)
         {
+            GetModel get = new GetModel();
+            EditModel edit = new EditModel();
             SelectedCategory = customer.Sex;
             EditCommand = new RelayCommand<wd_EditCustomer>(
                 (p) =>
@@ -51,15 +54,16 @@ namespace QLKS.ViewModel
                     if (MessageBox.Show("Bạn có chắc chắn muốn sửa thông tin nhân viên", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
 
-                        var List = DataProvider.Ins.DB.CUSTOMERs.Where(x => x.IdCustomer == customer.IdCustomer).SingleOrDefault();
-                        List.Name = p.txbName.Text;
-                        List.Address = p.txbAddress.Text;
-                        List.CCCD = p.txbCCCD.Text;
-                        List.Phone = p.txbPhone.Text;
-                        List.BirthDay = p.dtBirth.SelectedDate;
-                        List.Nationality = p.txbNationality.Text;
-                        List.Sex = p.cbSex.Text;
-                        DataProvider.Ins.DB.SaveChanges();
+                        var List = get.getCustomer(customer.IdCustomer);
+                        edit.EditCustomer(List, p.txbName.Text, p.txbAddress.Text, p.dtBirth.SelectedDate.Value, p.txbPhone.Text, p.txbCCCD.Text, p.cbSex.Text,p.txbNationality.Text);
+                        //List.Name = p.txbName.Text;
+                        //List.Address = p.txbAddress.Text;
+                        //List.CCCD = p.txbCCCD.Text;
+                        //List.Phone = p.txbPhone.Text;
+                        //List.BirthDay = p.dtBirth.SelectedDate;
+                        //List.Nationality = p.txbNationality.Text;
+                        //List.Sex = p.cbSex.Text;
+                        //DataProvider.Ins.DB.SaveChanges();
                         OnPropertyChanged("List");
                         IsClose = false;
                         p.Close();

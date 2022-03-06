@@ -67,6 +67,7 @@
                             <TextBox  x:Name="txbCCCD" Margin="50 0 10 0" Padding="0" MaxLength="12"
                                       FontSize="20"
                                       materialDesign:HintAssist.Hint="Nhập căn cước công dân"
+                                      PreviewTextInput="NumberValidationTextBox"
                                       Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         </Grid>
                         <Grid Height="40" Width="270" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="40 40 0 0">
@@ -74,6 +75,7 @@
                             <TextBox  x:Name="txbSalary" Margin="50 0 10 0" Padding="0"
                                       FontSize="20"
                                       materialDesign:HintAssist.Hint="Nhập lương"
+                                      PreviewTextInput="NumberValidationTextBox"
                                       Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
 
                         </Grid>
@@ -98,6 +100,7 @@
                             <TextBox  x:Name="txbPhone" 
                                       FontSize="20"  Margin="50 0 0 0" Padding="0" MaxLength="10"
                                       materialDesign:HintAssist.Hint="Nhập số điện thoại"
+                                      PreviewTextInput="NumberValidationTextBox"
                                       Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         </Grid>
                         <Grid Height="40" Width="270" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="40 40 0 0">

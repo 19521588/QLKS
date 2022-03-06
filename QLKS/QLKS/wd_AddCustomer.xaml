@@ -132,7 +132,8 @@
                             <TextBox Name="txbCCCD"  Margin="3 0 0 0"
                                      FontSize="20"
                                 materialDesign:HintAssist.Hint="Mã căn cước công dân"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"                      
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"    
+                                     PreviewTextInput="NumberValidationTextBox"
                                 VerticalAlignment="Center"  />
                         </Grid>
                     </Grid>
@@ -152,6 +153,7 @@
                                      FontSize="20"
                         materialDesign:HintAssist.Hint="Số điện thoại"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     PreviewTextInput="NumberValidationTextBox"
                         VerticalAlignment="Center" />
                         </Grid>
                     </Grid>

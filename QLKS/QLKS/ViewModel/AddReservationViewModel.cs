@@ -1,4 +1,5 @@
-﻿using QLKS.Model;
+﻿using QLKS.DATA;
+using QLKS.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -68,6 +69,8 @@ namespace QLKS.ViewModel
 
         public AddReservationViewModel(bool IsReservation, int IdRoom)
         {
+            GetModel get = new GetModel();
+            AddModel addmodel = new AddModel();
             if (IsReservation)
             {
                 Title = "Đặt phòng";
@@ -82,15 +85,14 @@ namespace QLKS.ViewModel
             ListRoom = new ObservableCollection<ROOM>();
             ListSelectRoom = new ObservableCollection<ROOM>();
             ListReservation = new ObservableCollection<RESERVATION_DETAIL>();
-            ObservableCollection<ROOM> temp = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs.Where(x => x.Name != "Phòng trống"));
-            for (int i = temp.Count() - 1; i >= 0; i--)
-            {
-                ListRoom.Add(temp[i]);
-            }
+            //ObservableCollection<ROOM> temp = new ObservableCollection<ROOM>(DataProvider.Ins.DB.ROOMs.Where(x => x.Name != "Phòng trống"));
+            //for (int i = temp.Count() - 1; i >= 0; i--)
+            //{
+            //    ListRoom.Add(temp[i]);
+            //}
             LoadedWindowCommand = new RelayCommand<wd_AddNewReservation>(
             (p) =>
             {
-
                 return true;
             },
             (p) =>
@@ -196,7 +198,7 @@ namespace QLKS.ViewModel
                 if (MessageBox.Show("Bạn có chắc chắn muốn " + Title.ToLower(), "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     CUSTOMER customer = new CUSTOMER() { Name = p.txbName.Text, BirthDay = DateTime.Parse(p.dtBirth.SelectedDate.ToString()), Address = p.txbAddress.Text, Phone = p.txbPhone.Text, Nationality = p.txbNationality.Text, CCCD = p.txbCCCD.Text, Sex = p.cbSex.Text };
-                    DataProvider.Ins.DB.CUSTOMERs.Add(customer);
+                    addmodel.AddCustomer(customer);
 
 
                     if (p.dtStartDate.SelectedDate == p.dtpEndDate.SelectedDate) date = 0;
@@ -231,10 +233,7 @@ namespace QLKS.ViewModel
 
 
                     reservation = new RESERVATION() { IdCustomer = customer.IdCustomer, Amount = Int32.Parse(p.txbAmount.Text), Start_Date = timeStartFinal, End_Date = timeEndFinal, Date = date, IdEmployee = 1 };
-
-                    
-
-                    DataProvider.Ins.DB.RESERVATIONs.Add(reservation);
+                    addmodel.AddReservation(reservation);
 
                     if (IsReservation)
                     {
@@ -244,14 +243,14 @@ namespace QLKS.ViewModel
                             //List.Status = "Đang đặt";
 
                             reservation_detail = new RESERVATION_DETAIL() { IdReservation = reservation.IdReservation, Status = "Phòng đã đặt", IdRoom = item.IdRoom };
-                            DataProvider.Ins.DB.RESERVATION_DETAIL.Add(reservation_detail);
+                            addmodel.AddReservationDetail(reservation_detail);
                         }
                     }
                     else
                     {
 
                         reservation_detail = new RESERVATION_DETAIL() { IdReservation = reservation.IdReservation, Status = "Phòng đã đặt", IdRoom = IdRoom };
-                        DataProvider.Ins.DB.RESERVATION_DETAIL.Add(reservation_detail);
+                        addmodel.AddReservationDetail(reservation_detail);
                     }
                     DataProvider.Ins.DB.SaveChanges();
                     IsSave = true;

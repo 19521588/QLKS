@@ -219,22 +219,49 @@ GO
 --Thêm CUSTOMER
 SET IDENTITY_INSERT [dbo].[CUSTOMER] ON 
 INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (1, N'Trương hưng', N'Đăk Lăk', CAST(N'2001-04-20' AS Date), N'0822904906', N'123456789', N'Nam', N'Việt Nam')
-INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (2, N'Trương hưng', N'Đăk Lăk', CAST(N'2001-04-20' AS Date), N'0822904906', N'123456789', N'Nam', N'Việt Nam')
-INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (3, N'Trương hưng', N'Đăk Lăk', CAST(N'2001-04-20' AS Date), N'0822904906', N'123456789', N'Nam', N'Việt Nam')
-INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (4, N'Trương hưng', N'Đăk Lăk', CAST(N'2001-04-20' AS Date), N'0822904906', N'123456789', N'Nam', N'Việt Nam')
-INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (5, N'Trương hưng', N'Đăk Lăk', CAST(N'2001-04-20' AS Date), N'0822904906', N'123456789', N'Nam', N'Việt Nam')
-INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (6, N'Trương hưng', N'Đăk Lăk', CAST(N'2001-04-20' AS Date), N'0822904906', N'123456789', N'Nam', N'Việt Nam')
-INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (7, N'Trương hưng', N'Đăk Lăk', CAST(N'2001-04-20' AS Date), N'0822904906', N'123456789', N'Nam', N'Việt Nam')
-INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (8, N'Trương hưng', N'Đăk Lăk', CAST(N'2001-04-20' AS Date), N'0822904906', N'123456789', N'Nam', N'Việt Nam')
-INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (9, N'Trương hưng', N'Đăk Lăk', CAST(N'2001-04-20' AS Date), N'0822904906', N'123456789', N'Nam', N'Việt Nam')
-INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (10, N'Trương hưng', N'Đăk Lăk', CAST(N'2001-04-20' AS Date), N'0822904906', N'123456789', N'Nam', N'Việt Nam')
+INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (2, N'Huy Hoàng', N'Bình Định', CAST(N'2001-06-05' AS Date), N'0384237411', N'123456788', N'Nam', N'Việt Nam')
+INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (3, N'Hoàng Phúc', N'Tiền Giang', CAST(N'2001-12-10' AS Date), N'0821989126', N'123456787', N'Nam', N'Việt Nam')
+INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (4, N'Lê Phúc', N'Tiền Giang', CAST(N'2001-04-21' AS Date), N'0123466231', N'123456786', N'Nam', N'Việt Nam')
+INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (5, N'Trần Bảo Hoàng', N'Bình Định', CAST(N'2001-04-22' AS Date), N'0822904906', N'123456785', N'Nữ', N'Việt Nam')
+INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (6, N'Nguyễn Văn cự', N'Bình Định', CAST(N'2001-04-23' AS Date), N'0345876781', N'123456784', N'Nam', N'Việt Nam')
+INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (7, N'Trương Công Hưng', N'Phú Yên', CAST(N'2001-04-24' AS Date), N'0346106812', N'123456783', N'Nam', N'Việt Nam')
+INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (8, N'Bùi Khắc Lam', N'Quảng Ngãi', CAST(N'2001-04-25' AS Date), N'0987165465', N'123456782', N'Nam', N'Việt Nam')
+INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (9, N'Trần Văn Hậu', N'Bến Tre', CAST(N'2001-04-26' AS Date), N'0985190944', N'123456781', N'Nam', N'Việt Nam')
+INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (10, N'Lê Văn Nhất', N'Vũng Tàu', CAST(N'2001-04-10' AS Date), N'0822846522', N'123456780', N'Nam', N'Việt Nam')
 SET IDENTITY_INSERT [dbo].[CUSTOMER] OFF
 GO
 
 -- Thêm RESERVATION
 SET IDENTITY_INSERT [dbo].[RESERVATION] ON 
-INSERT [dbo].[RESERVATION] ([IdReservation], [IdEmployee], [IdCustomer], [Date], [Start_Date], [End_Date], [Amount]) VALUES (1, 1, 1, 5, CAST(N'2022-02-20T00:00:00.000' AS DateTime), CAST(N'2022-02-25T00:00:00.000' AS DateTime), 1)
+INSERT [dbo].[RESERVATION] ([IdReservation], [IdEmployee], [IdCustomer], [Date], [Start_Date], [End_Date], [Amount]) VALUES (1, 1, 1, 1, CAST(N'2021-08-20T00:00:00.000' AS DateTime), CAST(N'2021-08-21T00:00:00.000' AS DateTime), 1)
+INSERT [dbo].[RESERVATION] ([IdReservation], [IdEmployee], [IdCustomer], [Date], [Start_Date], [End_Date], [Amount]) VALUES (2, 1, 2, 5, CAST(N'2021-08-22T00:00:00.000' AS DateTime), CAST(N'2021-08-27T00:00:00.000' AS DateTime), 1)
+INSERT [dbo].[RESERVATION] ([IdReservation], [IdEmployee], [IdCustomer], [Date], [Start_Date], [End_Date], [Amount]) VALUES (3, 1, 3, 5, CAST(N'2021-09-24T00:00:00.000' AS DateTime), CAST(N'2021-09-29T00:00:00.000' AS DateTime), 2)
+INSERT [dbo].[RESERVATION] ([IdReservation], [IdEmployee], [IdCustomer], [Date], [Start_Date], [End_Date], [Amount]) VALUES (4, 1, 4, 1, CAST(N'2021-10-21T00:00:00.000' AS DateTime), CAST(N'2021-10-22T00:00:00.000' AS DateTime), 2)
+INSERT [dbo].[RESERVATION] ([IdReservation], [IdEmployee], [IdCustomer], [Date], [Start_Date], [End_Date], [Amount]) VALUES (5, 2, 5, 1, CAST(N'2021-10-25T00:00:00.000' AS DateTime), CAST(N'2021-10-26T00:00:00.000' AS DateTime), 1)
+INSERT [dbo].[RESERVATION] ([IdReservation], [IdEmployee], [IdCustomer], [Date], [Start_Date], [End_Date], [Amount]) VALUES (6, 1, 6, 2, CAST(N'2021-10-27T00:00:00.000' AS DateTime), CAST(N'2021-10-29T00:00:00.000' AS DateTime), 2)
+INSERT [dbo].[RESERVATION] ([IdReservation], [IdEmployee], [IdCustomer], [Date], [Start_Date], [End_Date], [Amount]) VALUES (7, 1, 7, 3, CAST(N'2021-11-20T00:00:00.000' AS DateTime), CAST(N'2021-11-23T00:00:00.000' AS DateTime), 1)
+INSERT [dbo].[RESERVATION] ([IdReservation], [IdEmployee], [IdCustomer], [Date], [Start_Date], [End_Date], [Amount]) VALUES (8, 1, 8, 2, CAST(N'2021-12-26T00:00:00.000' AS DateTime), CAST(N'2021-12-28T00:00:00.000' AS DateTime), 1)
+INSERT [dbo].[RESERVATION] ([IdReservation], [IdEmployee], [IdCustomer], [Date], [Start_Date], [End_Date], [Amount]) VALUES (9, 3, 9, 0, CAST(N'2022-01-20T00:00:00.000' AS DateTime), CAST(N'2022-01-20T00:07:00.000' AS DateTime), 1)
+INSERT [dbo].[RESERVATION] ([IdReservation], [IdEmployee], [IdCustomer], [Date], [Start_Date], [End_Date], [Amount]) VALUES (10, 1, 10, 1, CAST(N'2022-02-20T00:00:00.000' AS DateTime), CAST(N'2022-02-25T00:00:00.000' AS DateTime), 1)
 SET IDENTITY_INSERT [dbo].[RESERVATION] OFF
+GO
+
+--Thêm RESERVATION_DETAIL
+SET IDENTITY_INSERT [dbo].[RESERVATION_DETAIL] ON
+INSERT [dbo].[RESERVATION_DETAIL] ([IdReservationDetail],[IdReservation],[IdRoom],[Status]) VALUES (1,1,1,N'Đã Thanh Toán')
+INSERT [dbo].[RESERVATION_DETAIL] ([IdReservationDetail],[IdReservation],[IdRoom],[Status]) VALUES (2,2,2,N'Đã Thanh Toán')
+INSERT [dbo].[RESERVATION_DETAIL] ([IdReservationDetail],[IdReservation],[IdRoom],[Status]) VALUES (3,3,3,N'Đã Thanh Toán')
+INSERT [dbo].[RESERVATION_DETAIL] ([IdReservationDetail],[IdReservation],[IdRoom],[Status]) VALUES (4,3,1,N'Đã Thanh Toán')
+INSERT [dbo].[RESERVATION_DETAIL] ([IdReservationDetail],[IdReservation],[IdRoom],[Status]) VALUES (5,4,1,N'Đã Thanh Toán')
+INSERT [dbo].[RESERVATION_DETAIL] ([IdReservationDetail],[IdReservation],[IdRoom],[Status]) VALUES (6,4,2,N'Đã Thanh Toán')
+INSERT [dbo].[RESERVATION_DETAIL] ([IdReservationDetail],[IdReservation],[IdRoom],[Status]) VALUES (7,5,3,N'Đã Thanh Toán')
+INSERT [dbo].[RESERVATION_DETAIL] ([IdReservationDetail],[IdReservation],[IdRoom],[Status]) VALUES (8,6,2,N'Đã Thanh Toán')
+INSERT [dbo].[RESERVATION_DETAIL] ([IdReservationDetail],[IdReservation],[IdRoom],[Status]) VALUES (9,6,3,N'Đã Thanh Toán')
+INSERT [dbo].[RESERVATION_DETAIL] ([IdReservationDetail],[IdReservation],[IdRoom],[Status]) VALUES (10,7,1,N'Đã Thanh Toán')
+INSERT [dbo].[RESERVATION_DETAIL] ([IdReservationDetail],[IdReservation],[IdRoom],[Status]) VALUES (11,8,2,N'Đã Thanh Toán')
+INSERT [dbo].[RESERVATION_DETAIL] ([IdReservationDetail],[IdReservation],[IdRoom],[Status]) VALUES (12,9,1,N'Đã Thanh Toán')
+INSERT [dbo].[RESERVATION_DETAIL] ([IdReservationDetail],[IdReservation],[IdRoom],[Status]) VALUES (13,10,1,N'Đã Thanh Toán')
+SET IDENTITY_INSERT [dbo].[RESERVATION_DETAIL] OFF
 GO
 
 

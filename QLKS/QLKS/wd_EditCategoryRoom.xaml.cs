@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using QLKS.ViewModel;
 using QLKS.Model;
+using System.Text.RegularExpressions;
 
 namespace QLKS
 {
@@ -26,6 +27,12 @@ namespace QLKS
         {
             InitializeComponent();
             this.DataContext = (editRoomCategoryViewModel = new EditRoomCategoryViewModel(category));
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }
