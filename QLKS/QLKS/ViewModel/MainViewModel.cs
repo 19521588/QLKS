@@ -62,6 +62,8 @@ namespace QLKS.ViewModel
 
         public ICommand ChangePasswordCommand { get; set; }
 
+        public ICommand SettingCommand { get; set; }
+
         public ICommand LogOutCommand { get; set; }
         public ICommand CloseSideBarCommand { get; set; }
 

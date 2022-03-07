@@ -249,6 +249,7 @@
     <Compile Include="ViewModel\CategoryServiceViewModel.cs" />
     <Compile Include="ViewModel\SelectCustomerViewModel.cs" />
     <Compile Include="ViewModel\ServiceViewModel.cs" />
+    <Compile Include="ViewModel\SettingViewModel.cs" />
     <Compile Include="ViewModel\StatisticalViewModel.cs" />
     <Compile Include="wd_AddCategoryService.xaml.cs">
       <DependentUpon>wd_AddCategoryService.xaml</DependentUpon>
@@ -306,6 +307,9 @@
     </Compile>
     <Compile Include="wd_SelectCustomer.xaml.cs">
       <DependentUpon>wd_SelectCustomer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wd_Setting.xaml.cs">
+      <DependentUpon>wd_Setting.xaml</DependentUpon>
     </Compile>
     <Page Include="Bill_Detail.xaml">
       <SubType>Designer</SubType>
@@ -507,6 +511,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="wd_SelectCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wd_Setting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
