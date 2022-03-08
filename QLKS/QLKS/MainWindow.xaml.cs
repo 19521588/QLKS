@@ -23,6 +23,7 @@ namespace QLKS
     public partial class MainWindow : Window
     {
         public MainViewModel mainViewModel { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();

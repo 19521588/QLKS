@@ -64,10 +64,10 @@
         </EventTrigger>
     </Window.Triggers>
     <!--Bo góc-->
-    <!--<Window.Clip >
-        <RectangleGeometry Rect="0,0,1300,700" RadiusX="10" RadiusY="10" x:Name="boGoc">
+    <Window.Clip >
+        <RectangleGeometry Rect="{Binding Rect}" RadiusX="10" RadiusY="10" x:Name="boGoc" >
         </RectangleGeometry>
-    </Window.Clip>-->
+    </Window.Clip>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="26"></RowDefinition>
@@ -128,7 +128,9 @@
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </ListBoxItem>
-                                    <ListBoxItem Content="Cài đặt" >
+                                    <ListBoxItem Content="Cài đặt"                        
+                                                 Visibility="{Binding VisSetting, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="MouseLeftButtonUp">
                                                 <i:InvokeCommandAction Command="{Binding Path=SettingCommand}"/>

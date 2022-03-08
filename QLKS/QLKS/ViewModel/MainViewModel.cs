@@ -54,6 +54,10 @@ namespace QLKS.ViewModel
         }
         private string _Title_Main { get; set; }
         public string Title_Main { get => _Title_Main; set { _Title_Main = value; OnPropertyChanged(); } }
+        private bool _VisSetting { get; set; }
+        public bool VisSetting { get => _VisSetting; set { _VisSetting = value; OnPropertyChanged(); } }
+        private Rect _Rect { get; set; }
+        public Rect Rect { get => _Rect; set { _Rect = value; OnPropertyChanged(); } }
 
         public bool IsLoaded = false;
         public ICommand LoadedWindowCommand { get; set; }
@@ -77,10 +81,11 @@ namespace QLKS.ViewModel
                 OnPropertyChanged("CurrentView");
             }
         }
-
+      
         #endregion
         public MainViewModel()
         {
+            Rect = new Rect(0, 0, 1300, 700);
             initListViewMenu();
             LoadedWindowCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
@@ -107,6 +112,16 @@ namespace QLKS.ViewModel
                 //ditInfo editInfoWd = new EditInfo(User);
                 //editInfoWd.ShowDialog();
                 wd_ChangePassword wd = new wd_ChangePassword(User);
+
+                wd.ShowDialog();
+
+            });
+            SettingCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
+            {
+
+                //ditInfo editInfoWd = new EditInfo(User);
+                //editInfoWd.ShowDialog();
+                wd_Setting wd = new wd_Setting();
 
                 wd.ShowDialog();
 
@@ -156,6 +171,15 @@ namespace QLKS.ViewModel
                 (p.DataContext as MainViewModel).Name = employee.Name;
                 (p.DataContext as MainViewModel).LoadRole(User.Type);
                 (p.DataContext as MainViewModel).IsClose = true;
+               
+                if (User.Type==1)
+                {
+                    (p.DataContext as MainViewModel).VisSetting = true;
+                }
+                else
+                {
+                    (p.DataContext as MainViewModel).VisSetting = false;
+                }
             }
             else
             {

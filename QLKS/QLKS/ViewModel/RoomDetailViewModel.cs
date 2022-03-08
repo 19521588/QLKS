@@ -19,7 +19,9 @@ namespace QLKS.ViewModel
         public ICommand PaymentCommand { get; set; }
         public ICommand CheckInCommand { get; set; }
         public ICommand LoadCbCommand { get; set; }
-
+        
+        private bool _VisPayment { get; set; }
+        public bool VisPayment { get => _VisPayment; set { _VisPayment = value; OnPropertyChanged(); } }
         private ListRoom _RoomDetail { get; set; }
         public ListRoom RoomDetail { get => _RoomDetail; set { _RoomDetail = value; OnPropertyChanged(); } }
         private ObservableCollection<SelectService> _ListService { get; set; }
@@ -32,6 +34,7 @@ namespace QLKS.ViewModel
         }
         public RoomDetailViewModel(ListRoom listRoom, USER User)
         {
+            VisPayment = false;
             Load(listRoom);
 
             CloseCommand = new RelayCommand<Window>((p) =>
@@ -200,7 +203,11 @@ namespace QLKS.ViewModel
             RoomDetail = listRoom;
             if (listRoom.Status == "Phòng trống")
                 RoomDetail.TenKH = "";
-            if (listRoom.Status == "Phòng đang thuê") LoadService(listRoom);
+            if (listRoom.Status == "Phòng đang thuê")
+            {
+                VisPayment = true;
+                LoadService(listRoom);
+            }
         }
         public void LoadService(ListRoom listRoom)
         {

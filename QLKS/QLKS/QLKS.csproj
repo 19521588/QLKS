@@ -130,6 +130,9 @@
     </Compile>
     <Compile Include="Model\SelectService.cs" />
     <Compile Include="Model\ServiceCt.cs" />
+    <Compile Include="Model\SETTING.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="ReportWd.xaml.cs">
       <DependentUpon>ReportWd.xaml</DependentUpon>
     </Compile>

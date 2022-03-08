@@ -22,8 +22,17 @@ namespace QLKS.ViewModel
 
         private int _TotalMoney { get; set; }
         public int TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
+     
         private string _btText { get; set; }
         public string btText { get => _btText; set { _btText = value; OnPropertyChanged(); } }
+        private string _SurChargeText { get; set; }
+        public string SurChargeText { get => _SurChargeText; set { _SurChargeText = value; OnPropertyChanged(); } }
+        private string _DiscountText { get; set; }
+        public string DiscountText { get => _DiscountText; set { _DiscountText = value; OnPropertyChanged(); } }
+        private int _SurCharge { get; set; }
+        public int SurCharge { get => _SurCharge; set { _SurCharge = value; OnPropertyChanged(); } }
+        private int _Discount { get; set; }
+        public int Discount { get => _Discount; set { _Discount = value; OnPropertyChanged(); } }
         private bool _IsSave { get; set; }
         public bool IsSave { get => _IsSave; set { _IsSave = value; OnPropertyChanged(); } }
         private BillDetail _BillDetail { get; set; }
@@ -61,6 +70,10 @@ namespace QLKS.ViewModel
                         bill.Date_Bill = DateTime.Now;
                         bill.IdRental = IdRental;
                         bill.CategoryRoom = getModel.GetCategoryRoomById(room.IdCategoryRoom).Name;
+                        bill.Surcharge = int.Parse((BillDetail.RoomCharge * getModel.GetSetting().Surcharge / 100).ToString());
+                        bill.Discount = int.Parse((TotalMoney * getModel.GetSetting().Discount / 100).ToString());
+                        bill.SurchargePercent = getModel.GetSetting().Surcharge;
+                        bill.DiscountPercent = getModel.GetSetting().Discount;
                         addModel.AddBill(bill);
                         foreach (var item in detailPayment)
                         {
@@ -170,7 +183,28 @@ namespace QLKS.ViewModel
             BillDetail.CCCD = customer.CCCD;
             BillDetail.Name = customer.Name;
             BillDetail.Phone = customer.Phone;
-            BillDetail.RoomCharge = TotalMoney - BillDetail.ServiceCharge;
+            BillDetail.RoomCharge = TotalMoney - BillDetail.ServiceCharge-int.Parse(bill.Surcharge.ToString())+ int.Parse(bill.Discount.ToString());
+
+            if (bill.Surcharge == 0)
+            {
+                SurChargeText = "Phụ thu(0%)";
+
+            }
+            else
+            {
+                SurChargeText = "Phụ thu(" + bill.SurchargePercent + "%)";
+            }
+            if (bill.Discount == 0)
+            {
+                DiscountText = "Giảm giá(0%)";
+
+            }
+            else
+            {
+                DiscountText = "Giảm giá(" + bill.DiscountPercent + "%)";
+            }
+            Discount = int.Parse(bill.Discount.ToString());
+            SurCharge = int.Parse(bill.Surcharge.ToString());
 
 
         }
@@ -252,6 +286,26 @@ namespace QLKS.ViewModel
 
             }
             TotalMoney = int.Parse((BillDetail.RoomCharge + BillDetail.ServiceCharge).ToString());
+            if (getModel.GetSetting().Surcharge == 0)
+            {
+                SurChargeText = "Phụ thu(0%)";
+
+            }
+            else
+            {
+                SurChargeText = "Phụ thu(" + getModel.GetSetting().Surcharge + "%)";
+            }
+            if (getModel.GetSetting().Discount == 0)
+            {
+                DiscountText = "Giảm giá(0%)";
+
+            }
+            else
+            {
+                DiscountText = "Giảm giá(" +getModel.GetSetting().Discount+"%)";
+            }
+            Discount = getModel.GetSetting().Discount*TotalMoney/100;
+            SurCharge = getModel.GetSetting().Surcharge* int.Parse(BillDetail.RoomCharge.ToString())/100;
 
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)

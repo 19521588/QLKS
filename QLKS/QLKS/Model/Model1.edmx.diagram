@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="21ebf786e5c64eaabd475181090a2731" Name="Diagram1">
-        <EntityTypeShape EntityType="QLKSModel.Bill" Width="1.5" PointX="10.5" PointY="9.5" />
+        <EntityTypeShape EntityType="QLKSModel.Bill" Width="1.5" PointX="10.5" PointY="9.25" />
         <EntityTypeShape EntityType="QLKSModel.BILLINFO" Width="1.5" PointX="12.75" PointY="9.875" />
         <EntityTypeShape EntityType="QLKSModel.CATEGORY_ROOM" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="QLKSModel.CATEGORY_SERVICE" Width="1.5" PointX="6" PointY="1.125" />
+        <EntityTypeShape EntityType="QLKSModel.CATEGORY_SERVICE" Width="1.5" PointX="6" PointY="1" />
         <EntityTypeShape EntityType="QLKSModel.CATEGORY_USER" Width="1.5" PointX="3.75" PointY="18.75" />
         <EntityTypeShape EntityType="QLKSModel.CONVINIENT" Width="1.5" PointX="3" PointY="4" />
         <EntityTypeShape EntityType="QLKSModel.CUSTOMER" Width="1.5" PointX="3.75" PointY="10.5" />
@@ -22,23 +22,24 @@
         <EntityTypeShape EntityType="QLKSModel.SALES_REPORT" Width="1.5" PointX="8.25" PointY="16.375" />
         <EntityTypeShape EntityType="QLKSModel.SALES_REPORT_DETAIL" Width="1.5" PointX="10.5" PointY="16.5" />
         <EntityTypeShape EntityType="QLKSModel.SERVICE" Width="1.5" PointX="8.25" PointY="0.75" />
+        <EntityTypeShape EntityType="QLKSModel.SETTING" Width="1.5" PointX="0.75" PointY="1" />
         <EntityTypeShape EntityType="QLKSModel.USER" Width="1.5" PointX="6" PointY="16.25" />
-        <AssociationConnector Association="QLKSModel.FK__Bill__IdRental__46E78A0C" />
-        <AssociationConnector Association="QLKSModel.FK__BILLINFO__IdBill__47DBAE45" />
-        <AssociationConnector Association="QLKSModel.FK__ROOM__IdCategory__52593CB8" />
-        <AssociationConnector Association="QLKSModel.FK__SERVICE__IdCateg__5535A963" />
-        <AssociationConnector Association="QLKSModel.FK__USERS__Type__571DF1D5" />
-        <AssociationConnector Association="QLKSModel.FK__DETAIL_CO__IdCon__48CFD27E" />
-        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdCus__4E88ABD4" />
-        <AssociationConnector Association="QLKSModel.FK__DETAIL_CO__IdRoo__49C3F6B7" />
-        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdEmp__4F7CD00D" />
-        <AssociationConnector Association="QLKSModel.FK__USERS__IdEmploye__5629CD9C" />
-        <AssociationConnector Association="QLKSModel.FK__RENTAL__IdReserv__4AB81AF0" />
-        <AssociationConnector Association="QLKSModel.FK__RENTAL__IdRoom__4BAC3F29" />
-        <AssociationConnector Association="QLKSModel.FK__RENTALDET__IdRen__4CA06362" />
-        <AssociationConnector Association="QLKSModel.FK__RENTALDET__IdSer__4D94879B" />
-        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdRes__5070F446" />
-        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdRoo__5165187F" />
+        <AssociationConnector Association="QLKSModel.FK__Bill__IdRental__47DBAE45" />
+        <AssociationConnector Association="QLKSModel.FK__BILLINFO__IdBill__48CFD27E" />
+        <AssociationConnector Association="QLKSModel.FK__ROOM__IdCategory__534D60F1" />
+        <AssociationConnector Association="QLKSModel.FK__SERVICE__IdCateg__5629CD9C" />
+        <AssociationConnector Association="QLKSModel.FK__USERS__Type__5812160E" />
+        <AssociationConnector Association="QLKSModel.FK__DETAIL_CO__IdCon__49C3F6B7" />
+        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdCus__4F7CD00D" />
+        <AssociationConnector Association="QLKSModel.FK__DETAIL_CO__IdRoo__4AB81AF0" />
+        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdEmp__5070F446" />
+        <AssociationConnector Association="QLKSModel.FK__USERS__IdEmploye__571DF1D5" />
+        <AssociationConnector Association="QLKSModel.FK__RENTAL__IdReserv__4BAC3F29" />
+        <AssociationConnector Association="QLKSModel.FK__RENTAL__IdRoom__4CA06362" />
+        <AssociationConnector Association="QLKSModel.FK__RENTALDET__IdRen__4D94879B" />
+        <AssociationConnector Association="QLKSModel.FK__RENTALDET__IdSer__4E88ABD4" />
+        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdRes__5165187F" />
+        <AssociationConnector Association="QLKSModel.FK__RESERVATI__IdRoo__52593CB8" />
         <AssociationConnector Association="QLKSModel.FK_SALESREPORT_USERS" />
         <AssociationConnector Association="QLKSModel.FK_SALESREPORTDETAIL_SALESREPORT" />
       </Diagram>

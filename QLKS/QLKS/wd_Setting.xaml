@@ -51,12 +51,13 @@
                         <materialDesign:PackIcon Kind="CalculatorVariant" VerticalAlignment="Center" Width="40" Height="40" />
                     </Grid>
                     <TextBox Grid.Column="2"   Name="txtTenDichVu" 
+                             
                              FontSize="20"
                             materialDesign:HintAssist.Hint="Phụ thu(%)"                        
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"                        
                             VerticalAlignment="Center" Width="320">
                         <TextBox.Text>
-                            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding Path="SurCharge" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
@@ -80,7 +81,7 @@
                                         PreviewTextInput="NumberValidationTextBox"
                                         VerticalAlignment="Center" Width="320" >
                         <TextBox.Text>
-                            <Binding Path="Price" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding Path="Discount" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                             </Binding>
                         </TextBox.Text>
                     </TextBox>

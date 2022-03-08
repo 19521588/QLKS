@@ -45,10 +45,13 @@ namespace QLKS.ViewModel
                        if (w.WindowState != WindowState.Maximized)
                        {
                            w.WindowState = WindowState.Maximized;
+                           (w.DataContext as MainViewModel).Rect = new Rect(0, 0, SystemParameters.MaximizedPrimaryScreenWidth, SystemParameters.MaximizedPrimaryScreenHeight); ;
                        }
                        else
                        {
                            w.WindowState = WindowState.Normal;
+                           (w.DataContext as MainViewModel).Rect = new Rect(0, 0, 1300, 700);
+
                        }
                    }
                }

@@ -11,6 +11,14 @@ namespace QLKS.ViewModel
 {
     public class BillTemplateViewModel:BaseViewModel
     {
+        private string _SurChargeText { get; set; }
+        public string SurChargeText { get => _SurChargeText; set { _SurChargeText = value; OnPropertyChanged(); } }
+        private string _DiscountText { get; set; }
+        public string DiscountText { get => _DiscountText; set { _DiscountText = value; OnPropertyChanged(); } }
+        private int _SurCharge { get; set; }
+        public int SurCharge { get => _SurCharge; set { _SurCharge = value; OnPropertyChanged(); } }
+        private int _Discount { get; set; }
+        public int Discount { get => _Discount; set { _Discount = value; OnPropertyChanged(); } }
         private BillDetail _BillDetail { get; set; }
         public BillDetail BillDetail { get => _BillDetail; set { _BillDetail = value; OnPropertyChanged(); } }
         private Bill _Bill { get; set; }
@@ -60,7 +68,26 @@ namespace QLKS.ViewModel
             BillDetail.Phone = customer.Phone;
             BillDetail.RoomCharge = bill.Total.Value - BillDetail.ServiceCharge;
 
+            if (bill.Surcharge == 0)
+            {
+                SurChargeText = "Phụ thu(0%):";
 
+            }
+            else
+            {
+                SurChargeText = "Phụ thu(" +bill.SurchargePercent + "%)";
+            }
+            if (bill.Discount == 0)
+            {
+                DiscountText = "Giảm giá(0%):";
+
+            }
+            else
+            {
+                DiscountText = "Giảm giá(" + bill.DiscountPercent + "%)";
+            }
+            Discount = int.Parse(bill.Discount.ToString());
+            SurCharge = int.Parse(bill.Surcharge.ToString());
         }
     }
 }

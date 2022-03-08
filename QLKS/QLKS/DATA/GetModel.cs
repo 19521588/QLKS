@@ -164,5 +164,9 @@ namespace QLKS.DATA
         {
             return DataProvider.Ins.DB.USERS.Where(x => x.UserName == UserName && x.Password == password).ToList();
         }
+        public SETTING GetSetting()
+        {
+            return DataProvider.Ins.DB.SETTINGs.First();
+        }
     }
 }

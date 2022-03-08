@@ -192,6 +192,8 @@
 
                 <Button Width="130" Height="40" Content="Thanh toán" Foreground="White" BorderThickness="0"
                         Command="{Binding PaymentCommand}"
+                        Visibility="{Binding VisPayment, Converter={StaticResource BooleanToVisibilityConverter}}"
+
                         Style="{StaticResource AddButton}"
                         CommandParameter="{Binding ElementName=wd_RoomDetail}"
                         HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 470 0"  >

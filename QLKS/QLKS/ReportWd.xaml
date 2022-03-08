@@ -213,7 +213,7 @@
                         
                         FontSize="24"
                         Content="In báo cáo"
-                        Margin="10 0 40 0"
+                        Margin="20 0 40 0"
                         VerticalAlignment="Center"
                         Style="{StaticResource MainButton}"
                         HorizontalAlignment="Left"

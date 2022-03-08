@@ -153,5 +153,12 @@ namespace QLKS.DATA
             detail.IdRoom = idroom;
             DataProvider.Ins.DB.SaveChanges();
         }
+        public void EditSetting(int Surcharge , int Discount)
+        {
+            var setting= DataProvider.Ins.DB.SETTINGs.First();
+            setting.Discount = Discount;
+            setting.Surcharge = Surcharge;
+            DataProvider.Ins.DB.SaveChanges();
+        }
     }
 }

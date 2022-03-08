@@ -24,6 +24,8 @@ namespace QLKS.Model
         public Nullable<int> Total { get; set; }
         public Nullable<int> Surcharge { get; set; }
         public Nullable<int> Discount { get; set; }
+        public Nullable<int> SurchargePercent { get; set; }
+        public Nullable<int> DiscountPercent { get; set; }
         public string Name { get; set; }
         public int IdRental { get; set; }
         public Nullable<System.DateTime> Date_Bill { get; set; }
