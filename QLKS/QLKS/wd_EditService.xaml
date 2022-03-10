@@ -122,7 +122,7 @@
                 </Button>
             </Grid>
             <Grid Grid.Column="1" >
-                <Button Content="Hủy bỏ"   
+                <Button Content="Đóng"   
                         Width="120"
                         Height="50"
                         Margin="0 0 40 0"                                         

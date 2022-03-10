@@ -158,7 +158,7 @@
                     
                 </Button>
 
-                <Button Width="120" Height="50" Background="#9D9999" Content="Hủy"
+                <Button Width="120" Height="50" Background="#9D9999" Content="Đóng"
                         Command="{Binding CloseCommand}"
                                 CommandParameter="{Binding ElementName=wdAddEmployee}"
                         HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 60 0"   >

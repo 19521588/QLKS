@@ -218,7 +218,7 @@ SET IDENTITY_INSERT [dbo].[DETAIL_CONVINIENT] OFF
 GO
 --Thêm CUSTOMER
 SET IDENTITY_INSERT [dbo].[CUSTOMER] ON 
-INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (1, N'Trương hưng', N'Đăk Lăk', CAST(N'2001-04-20' AS Date), N'0822904906', N'123456789', N'Nam', N'Việt Nam')
+INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (1, N'Trương Hưng', N'Đăk Lăk', CAST(N'2001-04-20' AS Date), N'0822904906', N'123456789', N'Nam', N'Việt Nam')
 INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (2, N'Huy Hoàng', N'Bình Định', CAST(N'2001-06-05' AS Date), N'0384237411', N'123456788', N'Nam', N'Việt Nam')
 INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (3, N'Hoàng Phúc', N'Tiền Giang', CAST(N'2001-12-10' AS Date), N'0821989126', N'123456787', N'Nam', N'Việt Nam')
 INSERT [dbo].[CUSTOMER] ([IdCustomer], [Name], [Address], [BirthDay], [Phone], [CCCD], [Sex], [Nationality]) VALUES (4, N'Lê Phúc', N'Tiền Giang', CAST(N'2001-04-21' AS Date), N'0123466231', N'123456786', N'Nam', N'Việt Nam')
@@ -264,7 +264,21 @@ INSERT [dbo].[RESERVATION_DETAIL] ([IdReservationDetail],[IdReservation],[IdRoom
 SET IDENTITY_INSERT [dbo].[RESERVATION_DETAIL] OFF
 GO
 
+SET IDENTITY_INSERT [dbo].[RENTAL] ON 
+INSERT [dbo].[RENTAL] ([IdRental], [IdReservation], [IdRoom], [DateRental]) VALUES (1, 1, 1, CAST(N'2021-08-20' AS Date))
+SET IDENTITY_INSERT [dbo].[RENTAL] OFF
+GO
 
+SET IDENTITY_INSERT [dbo].[Bill] ON 
+INSERT [dbo].[Bill] ([IdBill], [Total], [Name], [IdRental], [Date_Bill], [CategoryRoom]) VALUES (1, 2500000, N'Trương Hưng', 1, CAST(N'2022-02-24' AS Date), N'Phòng đơn')
+SET IDENTITY_INSERT [dbo].[Bill] OFF
+GO
 
+SET IDENTITY_INSERT [dbo].[BILLINFO] ON 
+INSERT [dbo].[BILLINFO] ([IdBillInfo], [IdBill], [Service], [Amount], [Price]) VALUES (1, 1, N'Mỳ trộn', 1, 20000)
+INSERT [dbo].[BILLINFO] ([IdBillInfo], [IdBill], [Service], [Amount], [Price]) VALUES (2, 1, N'Mì xào', 2, 20000)
+INSERT [dbo].[BILLINFO] ([IdBillInfo], [IdBill], [Service], [Amount], [Price]) VALUES (3, 1, N'Cơm chiên', 1, 20000)
+SET IDENTITY_INSERT [dbo].[BILLINFO] OFF
+GO
 
 

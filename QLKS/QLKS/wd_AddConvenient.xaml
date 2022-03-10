@@ -83,7 +83,7 @@
                 <Grid Grid.Column="1"  >
                     <Button x:Name="btnHuy" 
                             Width="120" Height="50" 
-                            Content="Hủy bỏ" 
+                            Content="Đóng" 
                             Margin=" 14 4 0 0"                                             
                             Background="#9D9999"  
                             Command="{Binding CloseAddWindowCommand}"

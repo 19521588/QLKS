@@ -177,7 +177,7 @@
                                     CommandParameter="{Binding ElementName=wdEditCategoryRoom}"
                                     Width="120" Height="50"  
                                     Margin="14 4 0 0"
-                                    Content="Hủy bỏ" 
+                                    Content="Đóng" 
                                     Background="#9D9999" >
 
                             </Button>

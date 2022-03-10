@@ -364,7 +364,7 @@
                         HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 220 12">
                     
                 </Button>
-                <Button Width="120" Height="45" Background="#9D9999" Content="Hủy"
+                <Button Width="120" Height="45" Background="#9D9999" Content="Đóng"
                         Command="{Binding CloseCommand}"
                         BorderThickness="0"
                         CommandParameter="{Binding ElementName= wdAddReservation}"
