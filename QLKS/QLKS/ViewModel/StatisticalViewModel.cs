@@ -132,8 +132,23 @@ namespace QLKS.ViewModel
             Revenue_Labels = new List<string>();
             Labels_Rental = new List<string>();
             ItemSource_Year = new Dictionary<string, int>();
-            LoadData();
+            LoadData_Cb_Label();
+            LoadData_Chart();
 
+
+
+            YearChangedCommand_Revenue = new RelayCommand<uc_Home>((p) => { return true; }, (p) =>
+            {
+                LoadDataToChart_Revenue(SelectedYear_Revenue);
+            });
+            YearChangedCommand_Rental = new RelayCommand<uc_Home>((p) => { return true; }, (p) =>
+            {
+                LoadDataToChart_Rental(SelectedYear_Rental);
+            });
+
+        }
+        public void LoadData_Chart()
+        {
             if (ItemSource_Year.Count > 0)
             {
                 if (ItemSource_Year.Last().Value < DateTime.Now.Year)
@@ -161,19 +176,8 @@ namespace QLKS.ViewModel
             Formatter_Rental = value => value.ToString();
             PointLabel_Rental = ChartPoint =>
                     string.Format("{0} ({1:P})", ChartPoint.Y, ChartPoint.Participation);
-
-
-            YearChangedCommand_Revenue = new RelayCommand<uc_Home>((p) => { return true; }, (p) =>
-            {
-                LoadDataToChart_Revenue(SelectedYear_Revenue);
-            });
-            YearChangedCommand_Rental = new RelayCommand<uc_Home>((p) => { return true; }, (p) =>
-            {
-                LoadDataToChart_Rental(SelectedYear_Rental);
-            });
-
         }
-        public void LoadData()
+        public void LoadData_Cb_Label()
         {
             Revenue = 0;
 
@@ -198,10 +202,13 @@ namespace QLKS.ViewModel
                 }
             }
 
-            Revenue=(long)receipts.Where(x => x.Date_Bill.Value.Month == time.Month && x.Date_Bill.Value.Year == time.Year).Sum(y=>y.Total);
+            Revenue = (long)receipts.Where(x => x.Date_Bill.Value.Month == time.Month && x.Date_Bill.Value.Year == time.Year).Sum(y => y.Total);
             var rental = getModel.GetListRentalByTime(time);
             Rental_Room_Month = rental.Count();
             Rental_Room_Day = rental.Count(x => x.DateRental.Value.Day == time.Day);
+
+
+
 
         }
         public void LoadDataToChart_Revenue(int year)

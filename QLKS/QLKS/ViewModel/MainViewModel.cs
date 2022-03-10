@@ -203,7 +203,11 @@ namespace QLKS.ViewModel
                         }
 
                         CurrentView = Home_UC;
-                        (Home_UC.DataContext as StatisticalViewModel).LoadData();
+                        
+                        (Home_UC.DataContext as StatisticalViewModel).LoadData_Cb_Label();
+                        (Home_UC.DataContext as StatisticalViewModel).LoadData_Chart();
+                        (Home_UC.DataContext as StatisticalViewModel).LoadDataToChart_Rental((Home_UC.DataContext as StatisticalViewModel).SelectedYear_Rental);
+                        (Home_UC.DataContext as StatisticalViewModel).LoadDataToChart_Revenue((Home_UC.DataContext as StatisticalViewModel).SelectedYear_Revenue);
                         break;
                     case "Phòng":
                         if (Phong_UC == null)
