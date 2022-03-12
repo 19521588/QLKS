@@ -186,9 +186,9 @@ namespace QLKS.ViewModel
                 GetModel getModel = new GetModel();
                 var rental = getModel.GetRentalById(item.IdRental);
 
-                var room = DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == rental.IdRoom).SingleOrDefault();
+                var room = getModel.GetRoomById(rental.IdRoom);
 
-                var category_room = DataProvider.Ins.DB.CATEGORY_ROOM.Where(x => x.IdCategoryRoom == room.IdCategoryRoom).SingleOrDefault();
+                var category_room =getModel.GetCategoryRoomById(room.IdCategoryRoom);
 
                 temp.Bill = item;
                 temp.CategoryRoom = category_room.Name;
