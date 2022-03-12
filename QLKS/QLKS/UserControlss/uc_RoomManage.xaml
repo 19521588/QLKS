@@ -168,7 +168,7 @@
                 <DataGrid.Columns>
                     <materialDesign:DataGridTextColumn Width="200" Header="Mã phòng" Binding="{Binding IdRoom,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="400" Header="Tên phòng" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="300" Header="Loại phòng" Binding="{Binding CATEGOEY_ROOM ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="300" Header="Loại phòng" Binding="{Binding CATEGOEY_ROOM.Name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
 

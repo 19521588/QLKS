@@ -7,6 +7,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              Background="White"
+             x:Name="ucDatphong"
              d:DesignHeight="641" d:DesignWidth="1300"
      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -43,7 +44,8 @@
                             VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                             Margin="20 20 20 12"
-                            Command="{Binding OpenAddCommand}"
+                            Command="{Binding SearchCommand}"
+                        CommandParameter="{Binding ElementName=ucDatphong}"
                             >
                 </Button>
                 <Button Content="Làm mới"
@@ -51,7 +53,7 @@
                             VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                             Margin="160 20 180 12"
-                            Command="{Binding DetailCommand}"
+                            Command="{Binding RefreshCommand}"
                             >
                 </Button>
                 <Button Content="Đặt phòng"
