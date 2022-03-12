@@ -44,7 +44,7 @@
                 <RowDefinition Height="60"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" FontSize="30" FontWeight="Bold" Text="ĐẶT PHÒNG" Margin="0 12 0 0"
+            <TextBlock Grid.Row="0" FontSize="30" FontWeight="Bold" Text="{Binding Title}" Margin="0 12 0 0"
                    Foreground="#00A3FF" VerticalAlignment="Top" HorizontalAlignment="Center"/>
             <Grid Grid.Row="1">
                 <Grid  Width="900" Height="450" Background="#F2F1F1"

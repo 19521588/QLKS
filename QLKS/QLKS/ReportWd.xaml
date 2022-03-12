@@ -159,7 +159,7 @@
 
                         <DataGrid.Columns>
                             <materialDesign:DataGridTextColumn Width="100" Header="STT" Binding="{Binding STT}"></materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Width="200" Header="Loại phòng" Binding="{Binding CarBrand_Name}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="200" Header="Loại phòng" Binding="{Binding CategoryRoom}"></materialDesign:DataGridTextColumn>
                             <materialDesign:DataGridTextColumn Width="150" Header="Doanh thu" Binding="{Binding TotalMoney}"></materialDesign:DataGridTextColumn>
                             <materialDesign:DataGridTextColumn Width="150" Header="Tỉ lệ" Binding="{Binding Rate}"></materialDesign:DataGridTextColumn>
                         </DataGrid.Columns>

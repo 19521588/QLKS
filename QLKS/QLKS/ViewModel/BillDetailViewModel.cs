@@ -305,7 +305,7 @@ namespace QLKS.ViewModel
                 DiscountText = "Giảm giá(" +getModel.GetSetting().Discount+"%)";
             }
             Discount = getModel.GetSetting().Discount*TotalMoney/100;
-            SurCharge = getModel.GetSetting().Surcharge* int.Parse(BillDetail.RoomCharge.ToString())/100;
+            SurCharge = int.Parse((reservation.Amount - roomCategory.Beds).ToString()) * getModel.GetSetting().Surcharge* int.Parse(BillDetail.RoomCharge.ToString())/100;
 
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)

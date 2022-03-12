@@ -73,12 +73,12 @@ namespace QLKS.ViewModel
             AddModel addmodel = new AddModel();
             if (IsReservation)
             {
-                Title = "Đặt phòng";
+                Title = "ĐẶT PHÒNG";
                 VisGrid = true;
             }
             else
             {
-                Title = "Thuê phòng " + DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == IdRoom).SingleOrDefault().Name;
+                Title = "THUÊ PHÒNG " + DataProvider.Ins.DB.ROOMs.Where(x => x.IdRoom == IdRoom).SingleOrDefault().Name;
                 VisGrid = false;
             }
             IsSave = false;
